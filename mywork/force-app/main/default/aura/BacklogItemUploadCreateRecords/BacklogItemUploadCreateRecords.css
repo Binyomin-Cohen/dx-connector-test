@@ -1,0 +1,100 @@
+.THIS * {
+  font-family: Arial;
+  color: #000;
+}
+
+.THIS .progress-summary {
+  text-align: center;
+}
+
+.THIS .progress-summary .waiting-to-complete .info-msg {
+  padding-bottom: 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.THIS .progress-summary.load-complete .waiting-to-complete {
+  display: none;
+}
+
+.THIS .progress-summary .complete-results {
+  display: none;
+}
+
+.THIS .progress-summary.load-complete .complete-results {
+  display: block;
+}
+
+.THIS .download-results {
+  color: #a6a6a6;
+  font-size: 12px;
+  vertical-align: middle;
+  margin-right: 10px;
+  font-weight: normal;
+}
+
+.THIS .complete-results a .slds-icon {
+  fill: #009DDC;
+}
+
+.THIS .success-icon,
+.THIS .error-icon-large {
+  margin-right: 10px;
+}
+
+.THIS .error-icon-large {
+  width: 30px;
+}
+
+.THIS .success-icon svg {
+  fill: #7ca906;
+}
+
+
+.THIS .two-cell-card {
+  border: solid 1px #D4D7DA;
+  border-radius: 3px;
+  width: 626px;
+  height: 76px;
+  margin: 0 auto;
+  display: table;
+}
+
+.THIS .two-cell-card > div {
+  display: table-cell;
+  width: 50%;
+  font-weight: bold;
+  font-size: 14px;
+  vertical-align: middle;
+  text-align: left;
+  padding-left: 55px;
+}
+
+.THIS .two-cell-card div.result-detail {
+  display: inline-block;
+  width:initial;
+  text-align: left;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.THIS .two-cell-card div.download-detail {
+  display: block;
+  padding-left: 42px;
+  padding-top: 10px;
+  width: initial;
+}
+
+.THIS .result-count {
+  display: block;
+  font-size: 18px;
+}
+
+.THIS .two-cell-card .vline {
+  width: 1px;
+  height: 86px;
+  border-left: solid 1px #d4d7da;
+  margin: 9px 0;
+  padding: 0;
+  display: block;
+}

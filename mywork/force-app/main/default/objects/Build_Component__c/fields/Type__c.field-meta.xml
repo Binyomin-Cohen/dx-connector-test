@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Removed</fullName>
+                <default>false</default>
+                <label>Removed</label>
+            </value>
+            <value>
+                <fullName>Documented</fullName>
+                <default>false</default>
+                <label>Documented</label>
+            </value>
+            <value>
+                <fullName>Undocumented</fullName>
+                <default>false</default>
+                <label>Undocumented</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,14 @@
+<apex:component layout="none" >
+<apex:attribute name="sectionTitle" description="The title" type="String" required="true"/>
+<apex:attribute name="sectionInfoData" description="Data attribute on the section header" type="String" required="false"/>
+
+<div class="page-block-panel-section">
+  <div class="page-block-panel-section-header" data-info="{!sectionInfoData}">
+    <a class="section-title"><span data-title="{!sectionTitle}">{!sectionTitle}</span> <img src="/s.gif"></img></a>
+    <span class="section-close-btn-container"><a class="section-close-btn"><img src="/s.gif"></img></a></span>
+  </div>
+  <div class="page-block-panel-section-body" >
+      <apex:componentBody />
+  </div>
+</div>
+</apex:component>

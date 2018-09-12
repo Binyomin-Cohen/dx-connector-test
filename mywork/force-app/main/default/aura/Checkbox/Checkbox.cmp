@@ -1,0 +1,21 @@
+<aura:component>
+  <ltng:require styles="{!join(',', $Resource.zip_alm_pm + '/css/alm_common.css' )}"/>
+
+  <aura:attribute name="checked" type="Boolean" default="false"/>
+
+  <aura:method name="isChecked" action="{!c.isChecked}" access="PUBLIC"></aura:method>
+  <aura:method name="setChecked" action="{!c.setChecked}" access="PUBLIC">
+    <aura:attribute name="isChecked" type="Boolean" />
+  </aura:method>
+
+  <aura:registerEvent name="CheckboxChangeEvent" type="c:CheckboxChangeEvent"/>
+
+  <div class="checkbox-container">
+    <input id="{!concat('select-cb-' + globalId)}" type="checkbox" class="fancy-checkbox"
+           checked="{!v.checked}" aura:id="displayed-checkbox" />
+    <label for="{!concat('select-cb-' + globalId)}" class="checkbox" onclick="{!c.handleCheckboxClick}">
+      <span></span >
+    </label>
+  </div>
+
+</aura:component>

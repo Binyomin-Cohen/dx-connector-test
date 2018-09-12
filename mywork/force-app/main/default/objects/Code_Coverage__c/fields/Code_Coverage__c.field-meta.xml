@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Code_Coverage__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Total_Lines__c  != 0 ,   Lines_Covered__c  /   Total_Lines__c , NULL)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Total code coverage of all Apex classes and triggers.  75% is needed to pass.</inlineHelpText>
+    <label>Apex Code Coverage</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

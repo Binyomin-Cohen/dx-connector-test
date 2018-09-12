@@ -1,0 +1,2 @@
+<apex:page standardController="Custom_Backlog__c" extensions="CustomBacklogViewExt" action="{!doRedirect}">
+</apex:page>

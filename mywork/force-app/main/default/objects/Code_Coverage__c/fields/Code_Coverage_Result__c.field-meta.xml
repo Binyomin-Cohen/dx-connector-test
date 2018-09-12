@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Code_Coverage_Result__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF (Total_Lines__c = 0 &amp;&amp; Lines_Covered__c = 0, "N/A",
+IF (Total_Lines__c > 0 &amp;&amp; Code_Coverage__c >= 0.75, "Pass", "Warning"
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>The result of the code coverage.  Must be 75% or higher to pass.</inlineHelpText>
+    <label>Code Coverage Result</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

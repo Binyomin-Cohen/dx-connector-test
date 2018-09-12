@@ -1,0 +1,86 @@
+.THIS .hidden {
+  display: none;
+}
+
+.THIS a.section-title {
+  padding-right: 0px;
+}
+
+.THIS .header-section {
+  padding-left: 5px;
+  display: inline-block
+}
+
+.THIS .header-message-button-container {
+  text-align: right;
+  padding-left: 0px;
+  width: 200px;
+}
+
+.THIS .filter-applied .header-section {
+  display: block;
+}
+
+.THIS .search-button-inactive {
+  color: grey;
+}
+
+.THIS .paging-button {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  width: 24px;
+  height: 21px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: #F9F9F9;
+}
+
+.THIS .paging-navigation-message {
+  display: inline-block;
+  margin-right: 10px;
+  text-align: right;
+  color: #000;
+}
+
+.THIS .paging-button.prev {
+  background-position: -1429px -135px;
+  border-radius: 3px 0px 0px 3px;
+}
+
+.THIS .paging-button.next {
+  background-position: -1429px -196px;
+  border-radius: 0px 3px 3px 0px;
+}
+
+.THIS .paging-button.active {
+  border-color: #7e7e7e;
+  cursor: pointer;
+}
+
+.THIS .paging-button.inactive {
+  border-color: #caced1;
+}
+
+.THIS .right-button-container {
+  display: inline-block;
+  float: right;
+  margin-right: 3px;
+}
+
+.THIS .page-block-panel-section-header button.header-right-button {
+  background: #009DDC;
+  border: none;
+  color: #FFF;
+  font-size: 12px;
+  font-family: arial;
+  text-shadow: 0px 0px;
+  height: 30px;
+  padding: 0px 20px 1px 20px;
+  margin-bottom: 0px;
+  margin-top: 3px;
+}
+
+.THIS .page-block-panel-section-header button.inactive-btn {
+  opacity: 0.4;
+}

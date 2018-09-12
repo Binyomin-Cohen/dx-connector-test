@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to send when a Sightline job fails</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Sightline Job Failure</name>
+    <style>none</style>
+    <subject>A scheduled Sightline job has failed - {!ALM_Application_Result__c.ALM_JobId__c}</subject>
+    <textOnly>Hello Bluewolf Sightline Administrator,
+
+A scheduled job failed to run. Please review the details below:
+
+Job: {!ALM_Application_Result__c.Tool__c}
+Result: {!ALM_Application_Result__c.Result__c}
+Instance: {!ALM_Application_Result__c.Instance__c}
+Start Date/Time: {!ALM_Application_Result__c.Start_Time__c}
+End Date/Time: {!ALM_Application_Result__c.Run_Time__c}
+Error Code: {!ALM_Application_Result__c.Error_Code__c}
+Job Result Link: {!ALM_Application_Result__c.Link}
+
+
+Error Details:
+{!ALM_Application_Result__c.Error_Message__c}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

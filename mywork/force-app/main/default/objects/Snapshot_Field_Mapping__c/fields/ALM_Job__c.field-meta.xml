@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ALM_Job__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>ALM Job</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>ALM_Job__c.Tool__c</field>
+            <operation>equals</operation>
+            <value>Snapshot</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>ALM_Job__c</referenceTo>
+    <relationshipLabel>Snapshot Field Mappings</relationshipLabel>
+    <relationshipName>Snapshot_Field_Mappings</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

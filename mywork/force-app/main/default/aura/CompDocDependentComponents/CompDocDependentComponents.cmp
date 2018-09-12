@@ -1,0 +1,58 @@
+<aura:component controller="ComponentDocController">
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/alm_common.css'
+     )}"
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery.block-ui.js',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js'
+       )}"
+    />
+
+  <aura:attribute name="backlogItemId" type="String" />
+  <!-- Pagination Attributes -->
+  <aura:attribute name="enableActionButton" type="Boolean" default="false" />
+  <aura:attribute name="enablePagination" type="Boolean" default="true" />
+  <aura:attribute name="pageSize" type="Integer" default="25" />
+  <aura:attribute name="currentPageNumber" type="Integer" default="1" />
+
+  <aura:attribute name="currentSortKey" type="String" default="componentName" />
+  <aura:attribute name="currentSortKeyType" type="String" default="string" />
+  <aura:attribute name="currentSortDirection" type="String" default="asc" />
+
+  <aura:attribute name="showActionButton" type="Boolean" default="true" />
+  <aura:attribute name="selectedBacklogComponentIds" type="List" default="[]" />
+  <aura:attribute name="allDocumentedComponents" type="ComponentSearchWrapper[]" />
+  <aura:attribute name="allDependentDocumentedComponents" type="DependentComponentWrapper[]" />
+  <aura:attribute name="selectAllComponentsOnInit" type="Boolean" default="false" />
+  <aura:attribute name="firstResultSetProcessed" type="Boolean" default="false" />
+
+  <aura:handler name="change" value="{!v.currentPageNumber}" action="{!c.handleNewPageRequest}"/>
+  <aura:handler name="change" value="{!v.currentSortKey}" action="{!c.handleSortKeyChange}"/>
+  <aura:handler name="change" value="{!v.currentSortDirection}" action="{!c.handleSortKeyChange}"/>
+  <aura:handler event="c:findDependentComponentsEvent" action="{!c.refreshComponents}" includeFacets="true" />
+  <aura:handler event="c:pagingRequestEvent" name="pagingRequestEvent" action="{!c.handlePagingRequest}"/>
+  <aura:handler event="c:componentSaveEvent" name="componentSaveEvent" action="{!c.handleAddComponentsEvent}"/>
+  <aura:handler event="c:rowSelectEvent" name="rowSelectEvent" action="{!c.handleRowSelect}"/>
+
+  <div class="added-components">
+    <c:pageBlockPanelSection aura:id="pageBlockPanelSection"
+        sectionTitle="Related Components" isExpanded="true" showPagination="{!v.enablePagination}"
+        showActionButton="{!v.showActionButton}" enableActionButton="{!v.enableActionButton}" actionButtonText="ADD"
+        applyRelatedComponentsFilter="true">
+      <aura:if isTrue="{!v.allDependentDocumentedComponents.length > 0}">
+          <c:CompDocDependentComponentsTable aura:id="CompDocDependentComponentsTable"
+                                              currentSortKey="{!v.currentSortKey}"
+                                              currentSortKeyType="{!v.currentSortKeyType}"
+                                              currentSortDirection="{!v.currentSortDirection}"/>
+          <aura:set attribute="else">
+              <c:emptyStateContainer >
+                There are no related components.
+              </c:emptyStateContainer>
+          </aura:set>
+      </aura:if>
+    </c:pageBlockPanelSection>
+  </div>
+</aura:component>

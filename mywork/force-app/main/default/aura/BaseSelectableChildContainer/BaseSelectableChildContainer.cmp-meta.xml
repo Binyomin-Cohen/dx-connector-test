@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuraDefinitionBundle xmlns="urn:metadata.tooling.soap.sforce.com" fqn="BaseSelectableChildContainer">
+    <apiVersion>42.0</apiVersion>
+    <description>
+      Base component to provide common interactions with a parent component (ie. components that extend BaseSelectableChildContainer).
+      See BaseSelectableChildContainer Auradoc for details.
+    </description>
+</AuraDefinitionBundle>

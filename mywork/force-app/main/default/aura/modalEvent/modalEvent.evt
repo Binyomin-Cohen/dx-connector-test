@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Event that gets fired off when user closes the modal">
+    <aura:attribute name="modalType" type="String" description="The type of modal."/>
+    <aura:attribute name="action" type="String" description="The name of action taken on the modal."/>
+    <aura:attribute name="payload" type="Object" description="The object associated with the action taken."/>
+</aura:event>

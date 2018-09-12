@@ -1,0 +1,15 @@
+table.THIS {
+  table-layout: fixed;
+}
+
+table.THIS thead .select-all {
+  width: 3%;
+}
+
+table.THIS tbody td.select-cb {
+  text-align: center;
+}
+
+table.THIS thead th.sorting img {
+  margin-right: 5px;
+}

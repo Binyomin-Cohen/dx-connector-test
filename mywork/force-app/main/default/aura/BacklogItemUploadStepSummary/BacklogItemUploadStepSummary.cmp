@@ -1,0 +1,34 @@
+<aura:component>
+  <aura:attribute name="stepHeaderInstructions" type="String"
+                  description="Header text for the instructions of the step." />
+  <aura:attribute name="stepSubheaderInstructions" type="String"
+                  description="Sub Header text for the instructions of the step." />
+  <aura:attribute name="stepSummaryTopRow" type="String"
+                  description="Summary info row 1" />
+  <aura:attribute name="stepSummaryBottomRow" type="String"
+                  description="Summary info row 2" />
+
+  <div class="step-instructions">
+    <div class="step-instructions-header">
+      {!v.stepHeaderInstructions}
+    </div>
+    <div class="step-instructions-subheader">
+      {!v.stepSubheaderInstructions}
+    </div>
+  </div>
+
+  <div class="icon-step-summary">
+    <span class="icon">
+      <lightning:icon iconName="utility:paste" size="medium" />
+                 <!-- Todo: Use record_create -->
+    </span>
+    <span class="step-summary">
+      <div class="step-summary-top-row">
+        {!v.stepSummaryTopRow}
+      </div>
+      <div class="step-summary-bottom-row">
+        {!v.stepSummaryBottomRow}
+      </div>
+    </span>
+  </div>
+</aura:component>

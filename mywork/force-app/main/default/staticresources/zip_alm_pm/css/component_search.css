@@ -1,0 +1,539 @@
+@import url("common/profiles.css");
+@import url("common/banner.css");
+
+/*** BEGIN reset - TODO: move to alm common **/
+body {
+  margin: 0;
+}
+
+/*SFDC override padding*/
+.noSidebarCell, .sidebarCell .fixed {
+  padding: 0px 0px 10px 0px;
+}
+/*** END reset **/
+
+#alm-container input[type="text"],
+#alm-container textarea,
+#notes-modal textarea {
+  background-color: #FFFFFF;
+  border: 1px solid #cccccc;
+
+/*    -moz-box-shadow:   inset 1px 1px 3px rgba(221,219,219,1);
+    -webkit-box-shadow:  inset 1px 1px 3px rgba(221,219,219,1);
+
+    box-shadow: inset 1px 1px 3px rgba(221,219,219,1);
+*/
+  color: #000;
+  margin:0 0; /*edit as needed*/
+  padding:7px;
+  width: 100%;
+  height: 30px;
+}
+
+@media (min-width: 1281px) {
+  #alm-container .page-block-content-component-search {
+      overflow: visible;
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 1px) {
+  #alm-container .page-block-content-component-search {
+    overflow: visible;
+    height:115px;
+  }
+}
+
+#alm-container {
+  background-color: #FFF;
+}
+
+.alm-container-body {
+  margin: 0;
+}
+
+#alm-container textarea {
+  width: 340px;
+  height: 42px;
+  margin: 0;
+}
+
+#notes-modal textarea {
+  width: 96.8%;
+  height: 280px;
+  padding: 5px 10px;
+  resize: none;
+}
+
+#notes-modal button.apply {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+#notes-modal .page-block-content {
+  padding: 10px;
+  overflow-x: hidden;
+}
+
+#search-form {
+  min-height: 65px;
+}
+
+span.pagination-options {
+  padding-left: 25px;
+  color: #939598;
+}
+span.pagination-options .display-count {
+  color: #000;
+}
+
+span.pagination-options span,
+span.pagination-options a {
+padding-left: 6px;
+}
+
+/***  BUTTONS  ***/
+
+.banner-action-container {
+  position: absolute;
+}
+
+#alm-container .help-btn {
+  display: block;
+  background-color: #009DDC;
+  color: #FFFFFF;
+  font-family: Arial,sans-serif;
+  font-size: 12px;
+  margin: 0px 0px 0 5px;
+  padding: 3px 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  height: 15px;
+  width: 54px;
+  float: left;
+}
+
+#alm-container img.help {
+  position: static;
+  background: url("../img/png_alm_sprite1.png") no-repeat top left;
+  background-position: -1098px -657px;
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
+  margin-left: 5px;
+  margin-top: -2px;
+}
+
+#alm-container .search-btn {
+  float: right;
+  padding: 7px 15px 6px 15px;
+  margin-top: 15px;
+}
+
+#alm-container .search-icon {
+  bottom: 1px;
+  padding: 0;
+  position: relative;
+}
+
+#banner-sub-menu span.action.search {
+  display: none;
+}
+
+.is_stuck #banner-sub-menu span.action.search {
+  display: inline-block;
+}
+
+
+.add-btn {
+  float:right;
+}
+
+div.added-components .delete-btn {
+  float:right;
+  margin: 20px 0;
+}
+
+.alm-table tr:hover .component-note {
+  background-color: #EFCDCC;
+}
+
+.alm-table tr:hover .component-note:hover  {
+  cursor: pointer;
+}
+
+.alm-table .component-note {
+  min-width: 150px;
+}
+
+.alm-table .component-note .icon {
+  float: right;
+  width: 10%;
+  min-width: 21px;
+}
+.alm-table .component-note .content {
+  float: left;
+  width: 85%;
+  min-width: 80px;
+}
+
+.alm-table .component-note img {
+  width: 21px; height: 21px;
+}
+
+.notes-output {
+  width: 135px;
+  display: inline-block;
+}
+
+.alm-table tr:hover .component-note img {
+  background: url("../img/png_list_edit_icon.png") no-repeat;
+  background-position: 0 0;
+}
+
+.alm-table tr:hover .component-note:hover img {
+  background-position: 0 -142px;
+}
+
+table .profile-select {
+  padding-left: 5px;
+}
+
+/***  END BUTTONS ***/
+
+span.normal-component {
+  color:black;
+}
+
+span.deleted-component {
+  color:red;
+}
+
+.manual-component {
+  color:orange;
+}
+
+#alm-container div.added-components {
+  overflow: auto;
+}
+
+.tooltip {
+  padding: 8px;
+  position: absolute;
+  z-index: 9999;
+  max-width: 300px;
+  -webkit-box-shadow: 0 0 5px #aaa;
+  box-shadow: 0 0 5px #aaa;
+  background-color: #FFF;
+  overflow-wrap: break-word;
+  /*IE / firefox*/
+  word-wrap: break-word;
+  color: #000;
+  font-size: 12px;
+  letter-spacing: normal;
+}
+
+body .tooltip {
+  border-width: 2px;
+}
+
+.btn-group > .btn {
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 0;
+  float: left;
+  padding: 0px 0px 0px 8px;
+  position: relative;
+  color: #999999;
+  font-family: Arial;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.btn-group > .btn:active {
+  border: 1px solid #cccccc;
+}
+
+/******* profile styles ****/
+div[id$='profile-display'] .page-block-content .default-drag-helper {
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  padding: 25px 25px;
+  margin: 0;
+}
+
+.profile-tile {
+  background-color: #F1F1F1;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  padding: 10px 15px 5px 20px;
+  margin: 0px 20px 20px 0px;
+  width: 140px;
+  height: 33px;
+  float: left;
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-tile .name {
+  font-size: 14px;
+  width: 140px;
+  display: inline-block;
+}
+
+.profile-tile .instance {
+  color: #7ca906;
+  font-size: 10px;
+  width: 140px;
+  overflow:hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.delete-all {
+  float: right;
+  margin: 10px;
+  cursor: pointer;
+  color: #019cea;
+}
+
+.delete-all:hover {
+  text-decoration: underline;
+}
+
+.profile-tile:hover img {
+  cursor: pointer;
+  visibility: visible;
+}
+
+/***** end profile styles ***/
+
+.btn-group.open > .dropdown-toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.open > .dropdown-menu {
+  border-radius: 0px;
+  border: 1px solid #cccccc;
+  display: table;
+  margin-top: -2px;
+}
+
+.dropdown-menu > li {
+  margin: 0px;
+  height: 30px;
+  display: table-row-group;
+}
+
+.dropdown-menu > li:hover > a {
+  background-color: #dfecf9;
+}
+
+.dropdown-menu > li:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.dropdown-menu > li:nth-child(even) {
+  background-color: #e8e9eb;
+}
+
+.dropdown-menu > li > a {
+  height: 22px;
+  padding: 4px;
+  display: table-row;
+  text-decoration: none;
+}
+
+.dropdown-menu .border-padding {
+  margin: 7px 0 7px 0;
+  border-right: 1px dotted #cccccc;
+}
+
+.dropdown-menu > li > a > div > label.checkbox {
+  color: #333333;
+  min-width: 75px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  display: table-cell
+}
+
+.dropdown-menu > li > a > span {
+  display: table-cell;
+  color: #333333;
+  padding: 0px 10px;
+}
+
+.dropdown-menu .tool-name {
+  color: #019cea;
+}
+
+.dropdown-menu .date {
+  color: #77a600;
+}
+
+.dropdown-menu > li.active > a,
+.dropdown-menu > li.active > a:hover {
+  background-color: inherit;
+}
+
+.caret {
+  background: url("../img/png_alm_sprite1.png");
+  background-position: 0 -1522px;
+  width: 26px;
+  height: 29px;
+  border-style: none;
+  margin-left: 0px;
+  right: 0;
+  top: 0;
+  position: absolute;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+@-moz-document url-prefix() {
+  #alm-container select {
+    background: none;
+  }
+}
+
+/** Override styles from common to display the permissions error modal **/
+div.alm-modal .page-block {
+  margin: 0 auto;
+}
+
+div.alm-modal {
+  text-align: center;
+}
+
+#cancel-modal,
+#delete-modal {
+  margin: auto;
+}
+
+#cancel-modal div.page-block,
+#delete-modal div.page-block {
+  padding: 20px;
+  background-color: #feae1b;
+  border: 1px solid #e66c09;
+}
+
+#delete-modal .subtle-btn {
+  text-transform: uppercase;
+}
+
+.alm-combobox a {
+  right: 0;
+  height: 30px;
+}
+
+.alm-combobox input {
+  width: 218px;
+  height: 13px;
+}
+
+.alm-settings-label {
+  font-size: 12px;
+  font-family: Arial;
+  color: rgb(85,85,85);
+  padding: 10px 0;
+}
+
+#search-container * {
+  box-sizing: border-box;
+}
+
+#search-container {
+  padding-bottom: 10px;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+.btn-group > button.btn{
+  width: 100%;
+  height: 30px;
+  text-align: left;
+  position: relative;
+}
+
+.alm-combobox a.expander {
+  border: 1px solid #CCCCCC;
+}
+
+/* Calendar Styles */
+.start-date-container, .end-date-container, .date-to-container {
+  display: inline-block;
+}
+
+.start-date-container, .end-date-container {
+  width: 45%;
+}
+
+.end-date-container {
+  float: right;
+}
+
+.date-to-container {
+  width: 8%;
+  text-align: center;
+}
+
+/*
+ Header for the Calendar
+ Need to overwrite the default H2 style since it has
+ a blue background, with white text, and large font
+*/
+.slds h2 {
+  background-color: #FFFFFF;
+  color: #000000;
+  font-size: 14px;
+}
+/* End Calendar Styles */
+
+#alm-container input[type="text"].calendar-input {
+  padding-left: 25px;
+}
+
+
+#last-modified-by-section {
+  z-index: 2;
+}
+
+#last-modified-by-section .section-title {
+  padding: 8px;
+}
+
+#last-modified-by-section .page-block-panel-section {
+  position: absolute;
+  width: 90%;
+}
+
+#last-modified-by-section .page-block-panel-section-body {
+  max-height: 180px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.page-block-panel-section-header.filter-applied a.section-close-btn {
+  display: inline-block;
+  position: absolute;
+  padding: 0px;
+  right: 10px;
+  top: -25px;
+}
+
+.page-block-panel-section-header.filter-applied a.section-title {
+  width: 77%;
+  display: inline-block;
+}
+

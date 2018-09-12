@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Main_Backlog_Deselection_Prevention</fullName>
+    <active>true</active>
+    <description>Restricts the user from deselecting what is the main backlog</description>
+    <errorConditionFormula>AND(NOT(ISNEW()), AND( PRIORVALUE(Universal__c) = true, Universal__c = false))</errorConditionFormula>
+    <errorMessage>You cannot manually deselect which backlog is the main backlog</errorMessage>
+</ValidationRule>

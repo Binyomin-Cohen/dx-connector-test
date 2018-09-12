@@ -1,0 +1,48 @@
+<aura:component extensible="true" abstract="true">
+
+  <aura:attribute name="tableId" type="String" required="true" />
+  <aura:attribute name="tableSelectAllCheckboxId" type="String" required="true" />
+  <aura:attribute name="tableBodyClass" type="String" required="false" />
+  <aura:attribute name="columns" type="Object[]" default="{}" />
+  <aura:attribute name="selectAllChecked" type="Boolean" default="false" />
+
+  <aura:attribute name="currentSortKey" type="String" default="" />
+  <aura:attribute name="currentSortKeyType" type="String" default="string" />
+  <aura:attribute name="currentSortDirection" type="String" default="desc" />
+
+  <aura:attribute name="currentPageDependentComponents" type="Object[]"/>
+  <aura:attribute name="mostRecentlyToggledRowId" type="String" default="" />
+
+  <aura:method name="changeSelectAll" action="{!c.handleSelectAllChange}" access="PUBLIC">
+    <aura:attribute name="selectAll" type="Boolean" />
+  </aura:method>
+
+  <aura:handler event="c:rowSelectEvent" name="rowSelectEvent" action="{!c.handleRowSelect}"/>
+  <aura:registerEvent name="rowSelectEvent" type="c:rowSelectEvent"/>
+
+  <ltng:require scripts="{!join(',', $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js')}" />
+
+  <table id="{!v.tableId}" class="alm-table zebra">
+    <thead>
+      <tr>
+        <th class="select-all" data-sort="selected">
+          <input class="fancy-checkbox result-select select-all-checkbox" id="{!v.tableSelectAllCheckboxId}"
+                 type="checkbox" onclick="{!c.handleSelectAllClick}" checked="{!v.selectAllChecked}"/>
+          <label class="checkbox" for="{!v.tableSelectAllCheckboxId}"><span></span></label>
+        </th>
+        <aura:iteration items="{!v.columns}" var="col">
+          <th data-sort="{!col.sortKey}" onclick="{!c.handleSortClick}" data-sort-data-type="{!col.dataType}"
+              class="{!col.sortKey == v.currentSortKey ? col.styleClass + ' ' + col.styleClass+'-'+v.currentSortDirection : col.styleClass }">
+            <img src="/s.gif" alt="sort" />{!col.label}
+            <aura:if isTrue="{! !empty(col.infoText)}">
+                <img src="/s.gif" class="info-icon" title="{!col.infoText}" />
+            </aura:if>
+          </th>
+       </aura:iteration>
+      </tr>
+    </thead>
+    <tbody class="{!v.tableBodyClass}">
+      {!v.body}
+    </tbody>
+  </table>
+</aura:component>

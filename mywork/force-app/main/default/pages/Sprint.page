@@ -1,0 +1,330 @@
+<apex:page standardController="Sprint__c" title="Sprint Detail - {!Sprint__c.Name}" extensions="SprintDetailControllerExt" sidebar="false" docType="html-5.0">
+  <c:Tracking title="Sprint Detail" appName="PM - Sprint Detail"/>
+
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+  <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.zip_alm_pm, 'css/alm_common.css')}"/>
+  <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.zip_alm_pm, 'css/sprint.css')}" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script src="{!$Resource.js_hogan}"></script>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'js/js_alm_common.js')}" ></script>
+  <script src="{!$Resource.js_jquery_blockui}" ></script>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'js/templates.js')}" ></script>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'js/alm_autocomplete.js')}" ></script>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'js/user_search.js')}" ></script>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'js/sprint/sprint.js')}" ></script>
+
+  <script type="text/javascript">
+    function searchReleases( searchTerm, callback ) {
+      Visualforce.remoting.Manager.invokeAction(
+        '{!$RemoteAction.SprintDetailControllerExt.getReleases}',
+        searchTerm,
+        callback,
+        {escape: true}
+      );
+    }
+
+    function updateSprintItemStatus(id, status, callback) {
+      Visualforce.remoting.Manager.invokeAction(
+        '{!$RemoteAction.SprintDetailControllerExt.updateSprintItemStatus}',
+        id,
+        status,
+        callback,
+        {escape: true}
+      );
+    }
+
+    function deleteSprintItem(id, callback) {
+      Visualforce.remoting.Manager.invokeAction(
+        '{!$RemoteAction.SprintDetailControllerExt.deleteSprintItem}',
+        id,
+        callback,
+        {escape: true}
+      );
+    }
+
+    function deleteSprintItemUser(sprintId, bklgUserId, sprintItemId, callback) {
+      Visualforce.remoting.Manager.invokeAction(
+        '{!$RemoteAction.SprintDetailControllerExt.deleteSprintItemUser}',
+        sprintId,
+        bklgUserId,
+        sprintItemId,
+        callback,
+        {escape: true}
+      );
+    }
+
+    function getUsers(callback) {
+      Visualforce.remoting.Manager.invokeAction(
+        '{!$RemoteAction.SprintDetailControllerExt.getALMUsers}',
+        callback,
+        {escape: true}
+      );
+    }
+
+    function getRoles(callback) {
+      Visualforce.remoting.Manager.invokeAction(
+        '{!$RemoteAction.SprintDetailControllerExt.getUserRoles}',
+        callback,
+        {escape: true}
+      );
+    }
+
+    function assignUser(sprintItemId, userId, role, callback) {
+      Visualforce.remoting.Manager.invokeAction(
+        '{!$RemoteAction.SprintDetailControllerExt.assignUser}',
+        sprintItemId,
+        userId,
+        role,
+        callback,
+        {escape: true}
+      );
+    }
+  </script>
+
+  <div id="alm-container">
+    <apex:outputpanel id="msgs" styleClass="msg-panel">
+      <apex:pageMessages escape="false"/>
+    </apex:outputpanel>
+    <c:HeaderRibbon title="{!Sprint__c.Name}" homeUrl="/apex/SprintHome"
+         homeLinkTitle="{!$ObjectType.Sprint__c.LabelPlural}" settingsUrl="/apex/AdminSprintColumns">
+    </c:HeaderRibbon>
+
+    <c:UserVoice ></c:UserVoice>
+
+    <apex:outputPanel styleClass="alm-container-body" layout="block" rendered="{!hasPermissions}">
+      <apex:outputPanel rendered="{!model.isChatterEnabled}" styleClass="chatter-div">
+        <img class="chatter-icon" src="/s.gif"></img>
+        <span class="chatter-feed-label">Show Feed</span>
+      </apex:outputPanel>
+
+      <div id="chatter-feed-container">
+        <chatter:feed entityId="{!Sprint__c.Id}" />
+      </div>
+
+
+      <apex:form >
+        <apex:actionFunction name="updateSprint" action="{!updateSprint}" rerender="msgs,start-date-panel,end-date-panel" />
+        <apex:actionFunction name="addUser" action="{!addUser}" rerender="msgs,user-list"
+            oncomplete="BW.sprint.initAutoCompleteRoles()">
+            <apex:param name="almUserIdToAdd" value="" assignTo="{!selectedAlmUserId}"/>
+        </apex:actionFunction>
+        <apex:actionFunction name="save" action="{!save}" rerender="msgs, user-list" oncomplete="BW.sprint.finishSave()"/>
+        <apex:actionFunction name="deleteUser" action="{!deleteUser}" rerender="msgs,user-list"
+          oncomplete="BW.sprint.initAutoCompleteRoles()">
+          <apex:param name="selectedAlmUserId" value="" assignTo="{!selectedAlmUserId}"/>
+        </apex:actionFunction>
+
+        <apex:inputHidden value="{!model.status}" id="sprint-status"/>
+        <apex:inputHidden value="{!sprintStatuses}" id="sprint-statuses" html-data-status-map="{!sprintStatusValueMap}"/>
+        <apex:inputHidden value="{!model.sprintId}" id="sprint-id"/>
+        <apex:inputHidden value="{!releaseId}" id="release-id"/>
+        <apex:inputHidden value="{!releaseName}" id="release-name"/>
+
+        <div id="sprint-attributes">
+          <apex:outputpanel id="start-date-panel" layout="block" styleClass="start-date-panel-style">
+            <apex:inputHidden value="{!sprintStartDate}" id="sprint-start-date"/>
+            <apex:outputText styleClass="start-date sp-card-date-default" value="Set Start Date"
+                             rendered="{!IF(model.startDate == null, true, false)}"/>
+
+            <apex:outputText styleClass="start-date sp-card-date-entered" value="{!model.startDateDisplay}"
+                             rendered="{!IF(model.startDate == null, false, true)}" />
+
+            <a><img id="start-date-caret" class="date-caret" src="/s.gif"></img></a>
+
+            <div class="start-date-picker-div" />
+          </apex:outputpanel>
+
+          <div class="slider-container">
+            <div id="slider" class="slider"></div>
+          </div>
+
+          <apex:outputpanel id="end-date-panel" layout="block" styleClass="end-date-panel-style">
+            <apex:inputHidden value="{!sprintEndDate}" id="sprint-end-date"/>
+            <apex:outputText styleClass="end-date sp-card-date-default" value="Set End Date"
+                    rendered="{!IF(model.endDate == null, true, false)}" />
+
+            <apex:outputText styleClass="end-date sp-card-date-entered" value="{!model.endDateDisplay}"
+                    rendered="{!IF(model.endDate == null, false, true)}" />
+
+            <a><img id="end-date-caret" class="date-caret" src="/s.gif"></img></a>
+
+            <div class="end-date-picker-div" />
+          </apex:outputpanel>
+
+          <div id="business-value-container">
+            <apex:outputLabel for="business-value" value="Business Value" styleClass="business-dev-text"/><br/>
+            <apex:outputText id="business-value" value="{!totalBusinessValue}" styleClass="business-dev-metric-value"/>
+          </div>
+
+          <div id="dev-effort-container">
+            <apex:outputLabel for="dev-effort" value="Dev Effort" styleClass="business-dev-text"/><br/>
+            <apex:outputText id="dev-effort" value="{!totalDevEffort}" styleClass="business-dev-metric-value"/>
+          </div>
+
+          <div id="release-container">
+            <div class="release-panel">
+
+              <div class="release-btn-container">
+                <button type="button" class="subtle-btn release-btn" >
+                  Select a Release
+                </button>
+              </div>
+
+              <div class="release-input-container">
+                <input type="text" class="release-input"  placeholder="Type your release name here" />
+              </div>
+
+              <div class="release-card-container">
+                <div class="release-card-edit" />
+                <p class="release-name" />
+                <div class="release-card-close" />
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- sprint-attributes -->
+
+        <div id="sprint-body">
+          <div id="user-pane-handle" class="tray-handle">
+            <img src="/s.gif" class="users-icon" alt="show user assignments" title="user assignments"/>
+          </div>
+
+          <div id="user-pane">
+            <div class="page-block">
+              <div class="tray-title">Sprint Members</div>
+              <div class="page-block-content">
+                <div class="user-edit-container">
+                  <div class="user-btn-container">
+                    <button type="button" class="really-important-btn alm-btn user-btn" >
+                      Edit Assignments
+                    </button>
+                  </div>
+                  <div class="user-input-container">
+                    <input type="text" class="user-input"  placeholder="Type to find users" />
+                  </div>
+                </div> <!-- user-edit-container -->
+
+                <div class="user-list-container">
+                  <apex:outputPanel id="user-list" layout="block">
+                    <apex:repeat value="{!sprintUsers}" var="user">
+
+                      <div class="user-tile clearfix" data-userid="{!user.almUserId}">
+                        <img src="/s.gif" class="delete-icon"></img>
+                        <div class="handle"></div>
+
+                        <div class="icon-section">
+                          <img src="{!user.photoURL}" />
+                        </div>
+
+                        <div class="user-section" >
+                          <a target="_blank" href="/{!user.almUserId}">{!user.name}</a>
+                        </div>
+
+                        <div class="role-section">
+                          <input type="text" class="user-search-roles" placeholder="Assign Role" value="{!user.roleName}"/>
+                          <a class="assign-role">
+                            <img class="edit-icon" src="/s.gif"></img>
+                            <span class="role-label {!IF(AND(hasErrors,user.role == ''), 'error', '')}">
+                              {!user.roleDisplay}
+                            </span>
+                            <apex:inputHidden id="role-val" value="{!user.role}" />
+                            <apex:inputHidden id="role-label" value="{!user.roleDisplay}"/>
+                          </a>
+
+                          <a class="clear-invalid-role-icon">
+                            <img src="/s.gif"></img>
+                          </a>
+                        </div>
+
+                      </div> <!-- user-tile -->
+
+                    </apex:repeat>
+                  </apex:outputPanel> <!-- user-list -->
+                </div> <!-- user-list-container -->
+
+                <div class="user-save-container">
+                  <div class="action-panel">
+                    <div class="cancel-btn-container">
+                      <apex:commandLink value="Cancel" action="{!cancel}" rerender="msgs"/>
+                    </div>
+                    <button type="button" class="important-btn save-btn alm-btn" >Save Assignments</button>
+                  </div>
+                </div> <!-- user-save-container -->
+
+              </div> <!-- page-block-content -->
+            </div> <!-- page-block -->
+          </div> <!-- user-pane -->
+
+          <div id="sprint-layout">
+            <apex:repeat var="sprintLane" value="{!sprintLanes}">
+              <div class="sprint-lane" data-status-label="{!sprintLane.statusLabel}" data-status-api="{!sprintLane.status}">
+                <div class="droppable-hover-placeholder">
+                  <div class="page-block">
+                    <div class="title">{!sprintLane.statusLabel}
+                      <span class="item-count">
+                        <span class="item-total">{!sprintLane.totalItems}</span>
+                      </span>
+                      <div class="effort">Effort:&nbsp;
+                        <span class="effort-total">{!sprintLane.totalEffort}</span>
+                      </div>
+                    </div>
+                    <div class="page-block-content">
+                      <apex:repeat var="sprintItem" value="{!sprintLane.sprintItems}">
+                        <div class="sprint-item-card-wrap clearfix {!IF(sprintItem.hasUsers,'','no-users')}"
+                                  data-sprint-item-id="{!sprintItem.id}"
+                                  data-value="{!sprintItem.backlogItem.value}"
+                                  data-effort="{!sprintItem.backlogItem.effort}"
+                                  data-priority="{!sprintItem.backlogItem.priority}">
+                          <div class="card-close"></div>
+                          <div class="title-key">
+                            <h3 title="{!sprintItem.backlogItem.title}">{!sprintItem.backlogItem.title}</h3>
+                            <span class="key">
+                              <a href="/{!sprintItem.backlogItem.id}" target="_blank">{!sprintItem.backlogItem.name}</a>
+                            </span>
+                            <span class="item-status">{!sprintItem.backlogItem.statusLabel}</span>
+                          </div>
+                          <div class="sprint-item-user {!sprintItem.cardClass}">
+                            <apex:outputPanel layout="block" rendered="{!NOT(sprintItem.hasUsers)}">
+                              Assign a user
+                            </apex:outputPanel>
+                            <apex:repeat var="user" value="{!sprintItem.users}">
+                            <div title="{!user.name}" class="mini-user-card"
+                                 data-userid="{!user.almUserId}"
+                                 data-bklg-userid="{!user.record.Id}">
+                                <img src="/s.gif" class="delete-icon"></img>
+                                <img src="{!user.photoURL}" class="user-icon"/>
+                                <div class="sprint-item-user-name">{!user.name}</div>
+                              </div>
+                            </apex:repeat>
+                          </div>
+                          <div class="sprint-item-details">
+                            <span class="metric">Value:</span>
+                            <span class="mvalue">{!sprintItem.backlogItem.value}</span>
+                            <span class="metric">Effort:</span>
+                            <span class="mvalue">{!sprintItem.backlogItem.effort}</span>
+                          </div>
+                          <div class="sprint-item-handle"></div>
+                        </div> <!-- sprint-item-card-wrap -->
+                      </apex:repeat>
+                    </div>
+                  </div> <!-- end pageblock -->
+                </div><!-- end spacer -->
+              </div>
+            </apex:repeat>
+            <apex:outputPanel rendered="{!showPlaceholder}" styleClass="default-drag-helper">
+                <span>
+                  No sprint columns have been configured.
+                  <br />
+                  <br />
+                  Access the <apex:outputLink value="/apex/AdminSprintColumns">Sightline Admin Console</apex:outputLink> to configure
+                  the columns needed for the sprint life cycle.
+                </span>
+            </apex:outputPanel>
+          </div> <!-- sprint-layout -->
+        </div> <!-- sprint-body -->
+      </apex:form>
+    </apex:outputPanel> <!-- alm-container-body -->
+  </div> <!-- alm-container -->
+</apex:page>

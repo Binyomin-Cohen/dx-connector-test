@@ -1,0 +1,24 @@
+<aura:component extends="c:pageBlockTable">
+  <ltng:require
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+          )}"
+    afterScriptsLoaded="{!c.doInit}" />
+  <aura:attribute name="backlogItemId" type="String" />
+  <aura:set attribute="tableId" value="component-search-table" />
+  <aura:set attribute="tableSelectAllCheckboxId" value="select-all-checkbox" />
+  <aura:set attribute="tableBodyClass" value="search-components-table-content" />
+  <aura:attribute name="currentPageResults" type="ComponentSearchWrapper[]" description=""/>
+  <aura:attribute name="selectAll" type="Boolean" description="" default="false" />
+
+  <aura:registerEvent name="asyncLoadEvent" type="c:asyncLoadEvent"/>
+  <aura:handler name="change" value="{!v.selectAll}" action="{!c.handleSelectAllChange}"/>
+
+  <!-- table attr is contained on super (extended) component -->
+  <aura:iteration items="{!v.currentPageResults}" var="componentRecord">
+    <tr style="display: none;"></tr><tr style="display: none;"></tr>
+    <c:CompDocSearchResultsTableRow componentRecord="{!componentRecord}" />
+  </aura:iteration>
+</aura:component>

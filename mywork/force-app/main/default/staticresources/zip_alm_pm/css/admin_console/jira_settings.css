@@ -1,0 +1,33 @@
+#project-sync > button.project-sync-btn {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+#project-sync > *,
+#project-sync.syncing > span.sync {
+  display: none;
+}
+
+#project-sync.syncing {
+  background: transparent;
+  background-color: #0b6196;
+  border-top: 2px solid transparent;
+  cursor: initial;
+  opacity: 0.5;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#project-sync > span.sync {
+  display: inline;
+}
+
+#project-sync.syncing > span.running {
+  display: block;
+}
+
+#project-sync.syncing > span.running span.running-text {
+  float:right;
+  margin-top: 2px;
+  margin-left: 5px;
+}

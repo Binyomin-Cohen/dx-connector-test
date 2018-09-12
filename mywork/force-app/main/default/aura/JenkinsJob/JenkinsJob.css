@@ -1,0 +1,41 @@
+.THIS .body {
+  padding: 10px;
+  width: 50%;
+  min-width: 496px;
+  margin: 0 auto;
+  color: black;
+}
+
+.THIS#alm-container ul.combobox-selection li {
+  color : #000;
+}
+
+.THIS#alm-container .important-btn2[disabled] {
+  opacity: .5;
+  cursor: default;
+}
+
+.THIS li img {
+  float: right;
+}
+
+.THIS img.green-check {
+  margin-top: 4px;
+}
+
+.THIS .successful-build-container {
+  padding: 35px 0 35px 0;
+}
+
+.THIS .successful-build-container .combobox-wrapper {
+  margin: 15px 26px 0 0;
+}
+
+.THIS .successful-build-container .combobox-wrapper input {
+  width: 100%;
+}
+
+.THIS .no-rules-msg {
+  font-weight: bold;
+  padding-top: 10px;
+}

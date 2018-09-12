@@ -1,0 +1,28 @@
+.THIS.icon-step-summary {
+  display: table;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+.THIS.icon-step-summary .icon {
+  display: table-cell;
+  vertical-align: top;
+  padding-left: 15px;
+  padding-right: 10px;
+}
+
+.THIS.icon-step-summary .icon .slds-icon {
+  fill: #7CA906;
+}
+
+.THIS .step-instructions-header {
+  font-size: 14px;
+  line-height: 1;
+}
+.THIS.step-instructions {
+  padding-bottom: 8px;
+}
+.THIS .step-instructions-header,
+.THIS .step-instructions-subheader {
+  padding-left: 15px;
+}

@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="An event fired when a selection is removed from a multiselect combobox" >
+  <aura:attribute name="comboboxId" type="String" />
+  <aura:attribute name="value" type="String" />
+</aura:event>

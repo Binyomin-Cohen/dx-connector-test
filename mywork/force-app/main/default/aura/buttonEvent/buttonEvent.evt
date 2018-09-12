@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Event that gets fired off when user clicks on the button component">
+  <aura:attribute name="actionType" type="String" description="The type of action or function."/>
+</aura:event>

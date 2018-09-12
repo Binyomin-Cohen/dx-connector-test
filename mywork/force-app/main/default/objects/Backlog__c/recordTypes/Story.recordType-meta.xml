@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Story</fullName>
+    <active>true</active>
+    <description>A short, simple description of a feature told from the perspective of the person who desires the new capability.</description>
+    <label>Story</label>
+    <picklistValues>
+        <picklist>Business_Priority__c</picklist>
+        <values>
+            <fullName>Critical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Found_in__c</picklist>
+        <values>
+            <fullName>Production</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Release_Priority__c</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Root_Cause__c</picklist>
+        <values>
+            <fullName>3rd Party Software Fix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Code Fix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Configuration Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Code Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Data Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deployment Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enhancement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Environmental</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Severity__c</picklist>
+        <values>
+            <fullName>Blocker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Critical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Build Ready</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defect Resolution</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dev Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dev Ready</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In-Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Needs Requirements</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Needs Solution</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>QA Accepted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Ready</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Released</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UAT Accepted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

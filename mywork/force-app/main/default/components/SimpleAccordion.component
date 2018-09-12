@@ -1,0 +1,14 @@
+<apex:component layout="none" >
+<apex:attribute name="sectionTitle" description="The title" type="String" required="true"/>
+<apex:attribute name="sectionId" description="Id used on the container of the accordion " type="String" required="false"/>
+
+<div class="simple-accordion expanded" id="{!sectionId}">
+  <div class="simple-accordion-header" >
+    <h3><img class="expand" src="/s.gif"></img><span><apex:outputText escape="false" value="{!sectionTitle}" /></span></h3>
+  </div>
+  <div class="simple-accordion-body " >
+      <apex:componentBody />
+  </div>
+</div>
+
+</apex:component>

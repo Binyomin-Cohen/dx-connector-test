@@ -1,0 +1,62 @@
+.THIS .page-block {
+  height:600px;
+  border-radius: 3px 3px 5px 5px;
+  background: #FFF;
+}
+
+.THIS .results-modal-header {
+  background: #e8e9eb;
+  height: 50px;  
+}
+
+.THIS h2.results-modal-header-text {
+  background: #e8e9eb;
+  display: inline-block;
+  margin-top: 5px;
+  padding-left: 15px;
+}
+
+.THIS .results-error .header-warning,
+.THIS .results-warning .header-error {
+  display: none;
+}
+
+.THIS .header-error {
+  color: #BF3121;
+}
+
+.THIS .header-warning {
+  color: #009DDC;
+}
+
+.THIS .alm-table-container {
+  overflow-y: auto;
+  height: 550px;
+}
+
+.THIS .alm-table {
+  border: none;
+}
+
+.THIS div.results-modal-header button.apply {
+  margin: 10px 10px;
+  width: 60px;
+}
+
+.THIS td.lookup-value {
+  height: 25px;
+  font-size: 13px;
+  padding-left: 15px;
+  padding-bottom: 0px;
+}
+
+.THIS .close-modal-btn {
+    position: absolute;
+    top: -20px;
+    right: -33px;
+}
+
+.THIS a.close-modal-btn img,
+.THIS a.close-modal-btn img:hover {
+    background-position: -759px -981px;
+}

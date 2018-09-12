@@ -1,0 +1,99 @@
+<div class="row deployment-item {{rowClass}}" data-deployment-id="{{record.Id}}">
+  <div class="container-fluid">
+    <div class="row header">
+      <div class="col-md-4 col-sm-6 col-xs-8 deployment-name overflow-ellipses">
+        <span>{{record.Name}}</span>
+      </div>
+      <div class="col-md-1 col-sm-2 col-xs-4 manual-upload-img">
+        <img src="/s.gif"/>
+      </div>
+      <div class="col-md-3 col-sm-4 col-xs-12 pull-right deployment-date">
+        <span>Last Modified: {{lastModifiedDate}}</span>
+      </div>
+    </div>
+    <div class="row details">
+      <div class="col-md-4 col-sm-4 col-xs-12 status-instances-wrapper">
+        <div class="deploy-status">
+          <img src="/s.gif"/>
+        </div>
+        <div class="instance-wrapper">
+          <img src="/s.gif"/>
+          <span class="instance-name source">{{sourceInstanceName}}</span>
+          <span class="instance-name target">{{targetInstanceName}}</span>
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="row">
+          <div class="col-md-10 deployment-counts">
+            <span class="normal-count">
+              {{deploymentAttempt.numberComponentsTotal}}&nbsp;Components
+            </span>
+            <span class="status-icon">
+              <img src="/s.gif"/>
+            </span>
+            <span class="status-text">
+              {{deploymentStatus}}
+            </span>
+            <div class="errors">
+              <div class="error-icon">
+                <img src="/s.gif"/>
+              </div>
+              <span class="error-text">
+                {{totalBuildErrors}} Build {{buildErrorText}}
+              </span>
+            </div>
+            <div class="errors">
+              <div class="error-icon">
+                <img src="/s.gif"/>
+              </div>
+              <span class="error-text">
+                {{deploymentAttempt.numberComponentsErrors}} Component {{compErrorText}}
+              </span>
+            </div>
+            <div class="errors">
+              <div class="error-icon">
+                <img src="/s.gif"/>
+              </div>
+              <span class="error-text">
+                {{deploymentAttempt.numberTestsErrors}} Unit Test {{testErrorText}}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-2 details-right-col">
+            <span class="dl-build-opener">
+              <img src="/s.gif"/>
+            </span>
+            <span class="upload-section">
+              <img class="update-build-package" title="Update the build package" src="/s.gif"/>
+            </span>
+            <div class="flyout-menu">
+              <ul>
+                <li class="no-hover parent top-item"><span>Download <img class="nav-arrow-down" src="/s.gif"/></span></li>
+                  {{#buildPackageUrl}}
+                    <li class="child"><a id="build-package-download-button" href="{{buildPackageUrl}}" target="_blank" download="">Build Package</a></li>
+                  {{/buildPackageUrl}}
+                  {{^buildPackageUrl}}
+                    <li class="child disabled">Build Package</li>
+                  {{/buildPackageUrl}}
+                  {{#backupPackageUrl}}
+                    <li class="child"><a id="target-backup-download-button" href="{{backupPackageUrl}}" target="_blank" download="">Target Backup</a></li>
+                  {{/backupPackageUrl}}
+                  {{^backupPackageUrl}}
+                    <li class="child disabled">Target Backup</li>
+                  {{/backupPackageUrl}}
+                </ul>
+              </div>
+            <span class="total-coverage {{testCoverageClass}}">
+              {{#deploymentAttempt.totalLines}}
+                {{codeCoverage}}%
+              {{/deploymentAttempt.totalLines}}
+              {{^deploymentAttempt.totalLines}}
+                N/A
+              {{/deploymentAttempt.totalLines}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+.THIS {
+  font-family: Arial, sans-serif;
+  color: #333333;
+  padding-top: 9px;
+}
+
+.THIS .table-cell {
+  display: inline-block;
+  height: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+}
+
+.THIS .instance-name-container {
+  width: 55%;
+  border-collapse: separate;
+  border-right-color: #cccccc;
+  border-right-style: dotted;
+  border-right-width: 1px;
+}
+
+.THIS .instance-scan-time-container {
+  width: 40%;
+}
+
+.THIS .instance-scan-time-container .date {
+  color: #77a600;;
+}
+
+.THIS .tool-name {
+  text-transform: uppercase;
+  color: #019cea;
+}

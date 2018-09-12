@@ -1,0 +1,129 @@
+/*** BEGIN reset - TODO: move to alm common **/
+body {
+  margin: 0;
+}
+
+/*SFDC override padding*/
+.noSidebarCell, .sidebarCell .fixed {
+  padding: 0px 0px 10px 0px;
+}
+/*** END reset **/
+
+#alm-container {
+  background-color: #FFF;
+}
+
+@-moz-document url-prefix() {
+  #alm-container select {
+    background: none;
+  }
+}
+
+/*TODO: figure out how to include in search panel css*/
+#alm-container .caret {
+  background: url("../img/png_alm_sprite1.png");
+  background-position: 0 -1522px;
+  width: 26px;
+  height: 29px;
+  border-style: none;
+  margin-left: 0px;
+  right: 0;
+  top: 0;
+  position: absolute;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+#alm-container input[type="text"],
+#alm-container textarea,
+#alm-container #notes-modal textarea {
+  background-color: #FFFFFF;
+  border: 1px solid #cccccc;
+
+/*    -moz-box-shadow:   inset 1px 1px 3px rgba(221,219,219,1);
+    -webkit-box-shadow:  inset 1px 1px 3px rgba(221,219,219,1);
+
+    box-shadow: inset 1px 1px 3px rgba(221,219,219,1);
+*/
+  color: #000;
+  margin:0 0; /*edit as needed*/
+  padding:7px;
+  width: 100%;
+  height: 30px;
+}
+
+#notes-modal textarea {
+  width: 96.8%;
+  height: 280px;
+  padding: 5px 10px;
+  resize: none;
+}
+
+#notes-modal button.apply {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+#notes-modal .page-block-content {
+  padding: 10px;
+  overflow-x: hidden;
+}
+
+#component-search-table tbody tr .component-deleted-icon img,
+#documented-components-table tbody tr.saved-component td.component-name .component-deleted-icon img {
+  background: url("../img/png_alm_sprite1.png") no-repeat;
+  background-position: -1098px -1737px;
+  width: 20px;
+  height: 20px;
+}
+
+.alm-table tr:hover .component-note img {
+  background: url("../img/png_alm_sprite1.png") no-repeat;
+  background-position: -1098px -1604px;
+}
+
+
+#alm-container div.added-components {
+  overflow: auto;
+}
+
+.tooltip {
+  padding: 8px;
+  position: absolute;
+  z-index: 9999;
+  max-width: 300px;
+  -webkit-box-shadow: 0 0 5px #aaa;
+  box-shadow: 0 0 5px #aaa;
+  background-color: #FFF;
+  overflow-wrap: break-word;
+  /*IE / firefox*/
+  word-wrap: break-word;
+  color: #000;
+  font-size: 12px;
+  letter-spacing: normal;
+}
+
+body .tooltip {
+  border-width: 2px;
+}
+
+#cancel-modal,
+#delete-modal {
+  margin: auto;
+  text-align: center;
+}
+
+#cancel-modal div.page-block,
+#delete-modal div.page-block {
+  padding: 20px;
+  background-color: #feae1b;
+  border: 1px solid #e66c09;
+}
+
+#delete-modal .subtle-btn {
+  text-transform: uppercase;
+}
+
+#alm-container .alm-combobox .ctype {
+  padding-right: 32px;
+}

@@ -1,0 +1,41 @@
+<apex:page docType="html-5.0" title="Build Rule Configuration" standardController="Jenkins_Job__c" extensions="BuildRuleExt" sidebar="false">
+  <apex:stylesheet value="{!URLFOR($Resource.zip_alm_pm, 'css/common/lightning-vf.css')}" />
+  <apex:includeLightning />
+  <apex:slds />
+
+    <!--
+    1. Consider dynamically getting the namespace or local development
+     -->
+
+  <div id="loader" class="dark-background"><c:MessageSpinner size="large" /> </div>
+  <div id="lightning-container" >
+    <div id="lightning"></div>
+  </div>
+
+  <script>
+    (function() {
+      var SFDC_CONTAINER_HEIGHT = 90,
+          APP_HEIGHT = (window.innerHeight - SFDC_CONTAINER_HEIGHT) + "px",
+          APP_ELEMENT = 'lightning-container',
+          SPINNER_ELEMENT = 'loader';
+
+      $Lightning.use("c:JenkinsBuildConfigApp", function() {
+        $Lightning.createComponent("c:JenkinsBuildConfig", {
+          jenkinsJobId : "{!Jenkins_Job__c.Id}",
+        },
+        "lightning",
+        function(cmp) {
+          window.setTimeout(function() {
+            document.getElementById(SPINNER_ELEMENT).style.display = 'none';
+            document.getElementById(APP_ELEMENT).style.height = "auto";
+          }, 1500);
+        });
+      });
+
+      document.getElementById(SPINNER_ELEMENT).style.height = APP_HEIGHT;
+      document.getElementById(APP_ELEMENT).style.height = APP_HEIGHT;
+    })();
+  </script>
+
+  <c:Tracking title="Jenkins-Build_Rules" appName="Jenkins-Build_Rules" />
+</apex:page>

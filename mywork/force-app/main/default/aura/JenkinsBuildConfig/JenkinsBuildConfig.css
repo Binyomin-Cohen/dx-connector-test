@@ -1,0 +1,28 @@
+.THIS {
+}
+
+.THIS #criteria-container {
+  width: 50%;
+  min-width: 496px;
+  margin: 0 auto;
+}
+
+.THIS #criteria-container > div {
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: white;
+}
+
+.THIS #criteria-container .field-prompt {
+  font-weight: bold;
+}
+
+.THIS .combobox-wrapper {
+  width: 472px;
+}
+
+.THIS .combobox-wrapper input {
+  width: 448px;
+}

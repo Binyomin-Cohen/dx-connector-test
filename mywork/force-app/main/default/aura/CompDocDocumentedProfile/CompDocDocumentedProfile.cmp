@@ -1,0 +1,14 @@
+<aura:component controller="ComponentDocController">
+   <aura:attribute name="profile" description="the documented profile" type="ComponentDocProfile" required="true"/>
+   <aura:attribute name="index" type="Integer" required="true"/>
+  <div class="profile-tile" data-id="{!v.profile.backlogComponentId}" data-key="{!v.profile.key}" onclick="{!c.displayProfilePermissions}">
+    <img class="delete-icon" src="/s.gif" onclick="{!c.deleteProfile}"></img>
+    <span class="name overflow-ellipses" title="{!v.profile.profileName}">{!v.profile.profileName}</span>
+    <span class="instance">{!v.profile.instanceName}</span>
+    
+    <input type="hidden" value="{!v.profile.selectedPermissions}" id="{!v.index + '-selected-permissions'}"/>
+    <input type="hidden" value="{!v.profile.includeOnlyDocumentedComponents}" id="{!v.index +'-include-only-documented-components'}"/>
+    <input type="hidden" value="{!v.profile.includeEntireProfile}" id="{!v.index +'-include-entire-profile'}"/>
+    
+  </div>
+</aura:component>

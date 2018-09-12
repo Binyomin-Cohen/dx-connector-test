@@ -1,0 +1,6 @@
+<aura:component controller="AnchorController" extends="ui:outputURL" description="Handles namespacing of URLs. Beware of bi-directional data binding of any input attributes to this component that are themselves bound bi-directionally to other components. If those attributes are modified by this component (e.g. the 'value' attribute as it becomes fully-qualified), those modifications may fail to be applied.">
+    
+  <aura:handler name="init" value="{!this}" action="{!c.populateVisualForceURLNamespace}"/>
+  <aura:method name="updateValue" action="{!c.populateVisualForceURLNamespace}"/>
+
+</aura:component>

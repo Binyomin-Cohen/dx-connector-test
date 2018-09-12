@@ -1,0 +1,6 @@
+<aura:component extends="c:Header">
+	<aura:registerEvent name="buttonEvent" type="c:buttonEvent"/>
+	<div id="save-btn-container">
+	  <button class="important-btn2 save-btn inactive" type="button" disabled="" onclick="{!c.fireButtonEvent}">Save</button>
+	</div>
+</aura:component>

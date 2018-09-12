@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Instance_Lookup_Required</fullName>
+    <active>false</active>
+    <description>Require the user to select an Instance record if the field modified data is empty</description>
+    <errorConditionFormula>AND(
+ ISBLANK(Field_Modified_Data__c),
+ !ISPICKVAL(Type__c, 'Apex Unit Test'),
+ !ISPICKVAL(Type__c, 'Apex Class'),
+ !ISPICKVAL(Type__c, 'Apex Trigger'))</errorConditionFormula>
+    <errorDisplayField>Instance__c</errorDisplayField>
+    <errorMessage>You must tie this component record to an Instance.</errorMessage>
+</ValidationRule>

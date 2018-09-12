@@ -1,0 +1,36 @@
+.THIS .prompt {
+  margin-right: 10px;
+}
+
+.THIS .option-label {
+  color: #7E7E7E;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.THIS input[type="radio"] {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.THIS input[type="radio"] {
+  display: none;
+}
+
+.THIS input[type="radio"] + label {
+  cursor: pointer;
+}
+
+.THIS input[type="radio"] + label span {
+  display: inline-block;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  background-position: -1098px -1807px;
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+}
+
+.THIS input[type="radio"]:checked + label span {
+  background-position: -1437px 0; width: 13px; height: 13px;
+}

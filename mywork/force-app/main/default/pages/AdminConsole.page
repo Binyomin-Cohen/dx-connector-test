@@ -1,0 +1,27 @@
+<apex:page docType="html-5.0" title="Admin Console" sidebar="false">
+  <c:Tracking title="Admin Console" appName="PM - Admin Console"/>
+  <apex:composition template="AdminTemplate">
+
+    <apex:define name="includes">
+    </apex:define>
+
+    <apex:define name="content">
+      <div id="landing-page">
+        <div id="titles">
+          <h1 id="title"></h1>
+          <h2 id="subtitle">{!$Label.Admin_Console_Subtitle}</h2>
+        </div>
+
+        <div id="description">{!$Label.Admin_Console_Description}</div>
+
+        <div id="gear-icon">
+          <div></div>
+          <span>{!$Label.Admin_Console_Gear_Icon}</span>
+        </div>
+        <div id="gear-description">{!$Label.Admin_Console_Gear_Description}</div>
+
+      </div>
+    </apex:define>
+
+  </apex:composition>
+</apex:page>

@@ -1,0 +1,48 @@
+<aura:component controller="ComponentDocController">
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/alm_common.css'
+     )}"
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery.block-ui.js',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js'
+       )}" />
+
+  <aura:attribute name="backlogComponentId" type="String" default="" />
+  <aura:attribute name="enableApply" type="Boolean" default="false" />
+  <aura:attribute name="modalType" type="String" default="notes" access="private" />
+  <aura:attribute name="noteLengthNotification" type="Boolean" default="false" access="private" />
+  <aura:attribute name="noteMaxLength" type="Integer" default="32768" access="private" />
+  <aura:attribute name="noteName" type="String" default="" />
+  <aura:attribute name="noteText" type="String" default="" />
+
+  <aura:handler name="change" value="{! v.noteText }" action="{!c.handleNoteValueChange}"/>
+
+  <div style="display:none;" id="notes-modal" class="alm-modal">
+    <div class="page-block clearfix">
+      <a class="close-modal-btn" onclick="{! c.handleCloseModalEvent }">
+        <img src="/s.gif" />
+      </a>
+      <button type="button"
+              id="note-apply"
+              class="{! 'important-btn2 apply ' + ((v.enableApply) ? '' : 'inactive') }"
+              onclick="{! c.handleApplyNotesEvent }">apply</button>
+      <div id="notes-modal-header">
+        <h2 id="notes-modal-header-text"><span id="note-name">{! v.noteName }</span> Note</h2>
+      </div>
+      <div class="page-block-content">
+        <lightning:textarea aura:id="noteValue"
+                            onchange="{!c.handleNoteValueChange}"
+                            value="{!v.noteText}"
+                            placeholder="Add your notes here"
+                            maxlength="{! v.noteMaxLength }"
+                            class="note-value" />
+      </div>
+      <div id="note-length-notification" class="{! (v.noteLengthNotification) ? '' : 'invisible' }">
+          0 Characters left
+      </div>
+    </div>
+  </div>
+</aura:component>

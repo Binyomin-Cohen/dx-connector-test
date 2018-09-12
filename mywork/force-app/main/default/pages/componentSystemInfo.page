@@ -1,0 +1,75 @@
+<apex:page sidebar="false" showHeader="false"
+           standardController="Component__c"
+           extensions="ComponentSystemInfoExt">
+
+    <c:Tracking title="Component Detail" appName="PM - Component Detail" />
+
+    <apex:styleSheet value="{!URLFOR($Resource.zip_alm_pm, 'css/alm_common.css')}" />
+    <apex:styleSheet value="{!URLFOR($Resource.zip_alm_pm, 'css_audit_history.css')}" />
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
+    <apex:includeScript value="{!$Resource.js_jquery_tablesorter}" />
+    <apex:includeScript value="{!$Resource.js_jquery_tablesorter_widgets}" />
+    <apex:includeScript value="{!$Resource.js_audit_history}" />
+
+    <apex:form >
+        <apex:inputHidden value="{!Component__c.Field_Modified_Data__c}"/>
+    </apex:form>
+    <div id="alm-container" class="page-block page-layout-scroll">
+	        <apex:dataTable value="{!environments}" var="fmd" id="history-table"
+	                        styleClass="alm-table tablesorter" headerClass="audit-table-head">
+	
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <img class="sortable" src="/s.gif"></img> Instance
+	                </apex:facet>
+	                <apex:outputText value="{!fmd.environmentName}"/>
+	            </apex:column>
+	
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <img class="sortable" src="/s.gif"></img> Last Modified Date
+	                </apex:facet>
+	                
+	                <!-- Leave leading space in the value. Months will display in single digits and ensures dates are displayed properly -->
+	                <apex:outputText value=" {!fmd.lastModifiedDate}" rendered="{!NOT(ISBLANK(fmd.lastModifiedDate))}"/>
+	                <apex:outputText value="{!$Label.Component_Field_Unavailable}" rendered="{!ISBLANK(fmd.lastModifiedDate)}" styleClass="blank"/>
+	            </apex:column>
+	
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <img class="sortable" src="/s.gif"></img> Last Modified By
+	                </apex:facet>
+	
+	                <apex:outputText value="{!fmd.lastModifiedByName}" rendered="{!NOT(ISBLANK(fmd.lastModifiedByName))}"/>
+	                <apex:outputText value="{!$Label.Component_Field_Unavailable}" rendered="{!ISBLANK(fmd.lastModifiedByName)}" styleClass="blank"/>
+	            </apex:column>
+	
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <img class="sortable" src="/s.gif"></img> Created Date
+	                </apex:facet>
+	
+	                <!-- Leave leading space in the value. Months will display in single digits and ensures dates are displayed properly -->
+	                <apex:outputText value=" {!fmd.createdDate}" rendered="{!NOT(ISBLANK(fmd.createdDate))}"/>
+	                <apex:outputText value="{!$Label.Component_Field_Unavailable}" rendered="{!ISBLANK(fmd.createdDate)}" styleClass="blank"/>
+	            </apex:column>
+	
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <img class="sortable" src="/s.gif"></img> Created By
+	                </apex:facet>
+	
+	                <apex:outputText value="{!fmd.createdByName}" rendered="{!NOT(ISBLANK(fmd.createdByName))}"/>
+	                <apex:outputText value="{!$Label.Component_Field_Unavailable}" rendered="{!ISBLANK(fmd.createdByName)}" styleClass="blank"/>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <img class="sortable" src="/s.gif"></img> Deleted
+	                </apex:facet>
+	
+	                <apex:outputText value="{!fmd.deleted}"/>
+	            </apex:column>
+	        </apex:dataTable>
+    </div>
+</apex:page>

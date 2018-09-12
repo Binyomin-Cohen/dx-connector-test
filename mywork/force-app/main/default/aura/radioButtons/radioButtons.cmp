@@ -1,0 +1,20 @@
+<aura:component >
+  <aura:attribute name="prompt" type="String" />
+  <aura:attribute name="options" type="String[]" />
+  <aura:attribute name="radioButtonsSelectedValue" type="String" />
+
+  <div class="radio-buttons-container">
+    <span class="prompt">{!v.prompt}</span>
+    <aura:iteration items="{!v.options}" var="option">
+      <div class="option-label">
+        <input type="radio" name="{!globalId}" value="{!option}"
+               onchange="{!c.handleRadioButtonsValueChange}" id="{!globalId + option}"
+               checked="{!v.radioButtonsSelectedValue == option ? 'checked' : ''}" />
+        <label for="{!globalId + option}" value="{!option}"><span></span></label>
+        {!option}
+      </div>
+    </aura:iteration>
+
+  </div>
+
+</aura:component>

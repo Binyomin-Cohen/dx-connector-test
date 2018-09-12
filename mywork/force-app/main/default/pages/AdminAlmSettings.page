@@ -1,0 +1,113 @@
+<apex:page docType="html-5.0" title="Admin Console - Sightline Settings" sidebar="false" controller="AdminAlmSettingsController" action="{!handleOAuthRedirect}">
+  <c:Tracking title="Admin Console - ALM Settings" appName="PM - Admin Console - ALM Settings"/>
+
+  <apex:composition template="AdminTemplate">
+
+    <apex:define name="includes">
+      <apex:stylesheet value="{!URLFOR($Resource.zip_alm_pm, 'external/css/jquery-ui.css')}" />
+      <apex:stylesheet value="{!URLFOR($Resource.zip_alm_pm, 'css/bootstrap.css')}"/>
+      <apex:stylesheet value="{!URLFOR($Resource.zip_alm_pm, 'css/oauth.css')}"/>
+      <!-- This cannot be apex:stylesheet since those ignore the loading order -->
+      <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'css/admin_console/almsettings.css')}"/>
+
+      <c:RequireJS initScript="admin_console/alm_settings_main.js" />
+      <script src="{!$Resource.js_hogan}"></script>
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/templates.js')}" ></script>
+    </apex:define>
+
+    <apex:define name="content">
+      <apex:form id="form">
+        <apex:actionFunction name="afSave" action="{!save}" rerender="almsettings-msgs, instance-details" oncomplete="BW.adminAlmSettings.finishSave()"></apex:actionFunction>
+        <apex:actionFunction name="afSavePageState" action="{!savePageState}" rerender="almsettings-msgs"></apex:actionFunction>
+        <apex:actionFunction name="afExpirePageState" action="{!expirePageState}" rerender="almsettings-msgs" oncomplete="BW.adminAlmSettings.finishExpire()"></apex:actionFunction>
+        <apex:actionFunction name="afCheckAuthUser" action="{!checkAuthUser}" rerender="almsettings-msgs" oncomplete="BW.adminAlmSettings.finishCheckAuthUser()"/>
+
+        <apex:inputHidden id="is-page-restored" value="{!isPageRestored}"/>
+
+        <apex:outputpanel id="almsettings-msgs" styleClass="msg-panel">
+          <c:PageMessages messages="{!pageMessages}" />
+          <apex:inputHidden value="{!hasSaveErrors}" id="has-save-errors" />
+        </apex:outputpanel>
+
+        <apex:outputPanel id="instance-details" layout="block" rendered="{!hasPermissions}">
+          <div class="container-fluid alm-settings">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <div id="alm-settings-title">
+                    Sightline
+                    <span id="alm-settings-title-highlight"> Settings</span>
+                  </div>
+
+                  <div id="alm-settings-description">
+                    Managing Bluewolf Sightline is easy. Use this section to configure universal settings.
+                  </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="alm-settings-label">Instance Name</div>
+                <apex:inputText id="alm-settings-name-input" styleClass="alm-input full-width custom-domain-input watch-changes" html-data-page-persistence="input" html-placeholder="Instance Name" value="{!almInstanceModel.record.Name}"/>
+              </div>
+              <div id="instance-type-container" class="col-md-4">
+                <div class="alm-settings-label">Instance Type</div>
+                <apex:inputHidden id="alm-settings-types-filter" html-data-page-persistence="input" value="{!almInstanceModel.record.Type__c}"/>
+                <select id="alm-settings-type-select" class="filter-values" multiselect="false">
+                  <apex:repeat value="{!almInstanceModel.instanceTypes}" var="type">
+                    <option value="{!type}">{!type}</option>
+                  </apex:repeat>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <div class="alm-settings-label">Custom Domain</div>
+                <apex:inputText id="alm-settings-custom-domain-input" styleClass="alm-input full-width custom-domain-input watch-changes" html-data-page-persistence="input" html-placeholder="Enter a custom domain" value="{!almInstanceModel.record.Custom_Domain__c}"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <c:OAuthWidget authorizeText="Authorize this Sightline instance" instanceId="{!almInstanceModel.record.id}" disable="{!NOT(almInstanceModel.instanceCreated)}"/>
+              </div>
+            </div>
+
+            <div id="action-panel">
+              <button type="button" class="important-btn alm-btn save-btn inactive">Save</button>
+            </div>
+          </div> <!-- End container -->
+        </apex:outputPanel>
+      </apex:form>
+    </apex:define>
+  </apex:composition>
+
+  <script>
+    function remoteGetAuthStatus( instanceId, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminAlmSettingsController.getAuthStatus}',
+            instanceId,
+            callback,
+            {escape: true}
+        );
+    }
+
+    function remoteAuthorizeInstance( instanceId, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminAlmSettingsController.remoteAuthorizeInstanceForTools}',
+            instanceId,
+            callback,
+            {escape: false}
+        );
+    }
+
+    function remoteGetOAuthInProgressStatus( instanceId, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminAlmSettingsController.getOAuthInProgressStatusFromCache}',
+            instanceId,
+            callback,
+            {escape: false}
+        );
+    }
+
+    
+  </script>
+
+</apex:page>

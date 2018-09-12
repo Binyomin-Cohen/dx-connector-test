@@ -1,0 +1,7 @@
+<aura:component extensible="true" abstract="true">
+  <aura:attribute name="componentRecord" type="Map" />
+  <aura:registerEvent name="rowSelectEvent" type="c:rowSelectEvent"/>
+
+  {!v.body}
+
+</aura:component>

@@ -1,0 +1,352 @@
+<apex:page docType="html-5.0" title="Admin Console - Instance Management" sidebar="false" controller="AdminInstanceManagementController" action="{!handleOAuthRedirect}">
+  <c:Tracking title="Admin Console - Instance Management" appName="PM - Admin Console - Instance Management"/>
+
+  <apex:composition template="AdminTemplate">
+    <apex:define name="includes">
+      <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'external/css/jquery-ui.css')}" />
+      <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'css/bootstrap.css')}" />
+      <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'css/admin_console/instances.css')}" />
+      <apex:stylesheet value="{!URLFOR($Resource.zip_alm_pm, 'css/oauth.css')}"/>
+      <apex:slds />
+
+      <c:RequireJS initScript="admin_console/instances_main.js" />
+      <script src="{!$Resource.js_hogan}"></script>
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/templates.js')}" ></script>
+    </apex:define>
+
+    <apex:define name="content">
+      <apex:form id="instanceForm">
+        <apex:actionFunction name="afUpdateInstance" action="{!save}" rerender="instance-msgs, instance-details-panel, instance-list-item" onbeforedomupdate="BW.adminInstances.restoreErrorPanels()" oncomplete="BW.adminInstances.finishInstanceSave()" />
+
+        <apex:actionFunction name="afUpdateAuthMessages" action="{!updateAuthMessages}" rerender="instance-msgs" />
+
+        <apex:actionFunction name="afScanInstance" action="{!createOnDemandScanRequest}" rerender="instance-msgs" oncomplete="BW.onDemandScan.onRequestInstanceScanComplete()"/>
+
+        <apex:actionFunction name="afButrInstance" action="{!createOnDemandButrRequest}" rerender="instance-msgs" oncomplete="BW.onDemandScan.onRequestInstanceButrComplete()"/>
+
+        <apex:actionFunction name="afAddNewInstance" action="{!addNewInstance}" rerender="instance-msgs, instance-panel" oncomplete="BW.adminInstances.finishAddNewInstance()" />
+
+        <apex:actionFunction name="afUnDeleteInstance" action="{!undeleteInstance}" rerender="instance-msgs, instance-panel" oncomplete="BW.adminInstances.finishInstanceUndelete()" />
+
+        <apex:actionFunction name="afDeleteInstance" action="{!deleteInstance}" rerender="instance-msgs" onbeforedomupdate="BW.adminInstances.restoreErrorPanels()" oncomplete="BW.adminInstances.finishInstanceDelete()" />
+
+        <apex:actionFunction name="afGetAllScanResults" action="{!getAllScanResults}" rerender="instance-msgs, scan-results-overview" oncomplete="BW.adminInstances.finishGetAllScanResults()" />
+
+        <apex:actionFunction name="afPollScanJob" action="{!pollScanJob}" rerender="instance-msgs, {!$Component.instanceForm.scanDetailsContainer.toolConfiguration.resultsContainer}, {!$Component.instanceForm.scanDetailsContainer.toolConfiguration.jobStatus}" oncomplete="BW.onDemandScan.pollScanJobStatus()" />
+
+        <apex:actionFunction name="afGetButrResults" action="{!getButrResults}" rerender="instance-msgs, butr-details-container" oncomplete="BW.adminInstances.loadInstanceUI()" />
+
+        <apex:actionFunction name="afSavePageState" action="{!savePageState}" rerender="instance-msgs"></apex:actionFunction>
+        <apex:actionFunction name="afExpirePageState" action="{!expirePageState}" rerender="instance-msgs" oncomplete="BW.adminInstances.finishExpirePageState();"></apex:actionFunction>
+
+        <input id="user-timezone" type="hidden" value="{!userTimeZone}"/>
+        <input id="namespace" type="hidden" value="{!namespace}"/>
+        <apex:inputHidden id="is-page-restored" value="{!isPageRestored}"/>
+
+        <!-- Error panels container. -->
+        <div id="instance-error">
+          <!-- Server-side page messages. -->
+          <apex:outputPanel id="instance-msgs" styleClass="instance-error-panel">
+            <c:PageMessages messages="{!pageMessages}" />
+            <apex:inputHidden value="{!hasSaveErrors}" id="has-save-errors" />
+          </apex:outputPanel>
+
+          <!-- General instances error panel. -->
+          <div id="instance-error-panel" class="instance-error-panel">
+            <div class="error-text"></div>
+          </div>
+
+          <!-- Instance-adding error panel. -->
+          <div id="instance-add-error-panel" class="instance-error-panel">
+            <div class="error-text"></div>
+          </div>
+        </div>
+
+        <apex:outputPanel id="instance-panel" styleClass="instance-panel {!IF(ISNULL(currentInstance),'','details-open')}" rendered="{!hasPermissions}">
+          <apex:inputHidden id="is-deleted-instance-value" value="{!isInstanceDeleted}"/>
+          <apex:outputPanel id="instance-overview-panel" rendered="{!ISNULL(currentInstance)}">
+            <div class="container-fluid">
+              <div class="row-fluid">
+
+                <div id="instance-name-col" class="col-fixed-265">
+
+                  <div class="row-fluid">
+                    <div class="col-md-12">
+                      <apex:actionRegion >
+                        <!-- Adding a new instance. -->
+                        <div id="instance-add">
+                          <!-- The "New Instance" button is the default view. -->
+                          <div id="instance-add-btn-container" class="instance-add-container">
+                              <button type="button" id="instance-add-btn" class="really-important-btn alm-btn">
+                                  <span class="new-icon"></span>
+                                  New Instance
+                              </button>
+                          </div>
+                          <!-- The instance name field allows users to give the new instance a name. -->
+                          <div id="instance-add-name-container" class="instance-add-container-hidden">
+                            <apex:inputText id="instance-add-name-input" styleClass="instance-add-name-input" html-placeholder="Name your instance" value="{!newInstance.record.Name}"/>
+                            <button type="button" id="instance-add-name-btn" class="important-btn alm-btn">OK</button>
+                          </div>
+                          <!-- The instance type list allows users to give the new instance a type. -->
+                          <div id="instance-add-type-container" class="instance-add-container-hidden">
+                            <apex:inputHidden id="instance-add-types-filter" value="{!newInstance.record.Type__c}"/>
+                            <select id="instance-add-type-select" class="filter-values" multiselect="false">
+                              <apex:repeat value="{!newInstance.instanceTypes}" var="instanceType">
+                                <option value="{!instanceType}">{!instanceType}</option>
+                              </apex:repeat>
+                            </select>
+                            <button type="button" id="instance-add-type-btn" class="instance-add-type-btn really-important-btn alm-btn">
+                                <span class="new-icon"></span>
+                            </button>
+                          </div>
+                        </div>
+                      </apex:actionRegion>
+                    </div>
+                  </div>
+                  <apex:repeat value="{!allInstances}" var="model">
+                    <div class="row-fluid">
+                      <div class="col-md-12">
+                        <div id='instance-list-item' class='instance-card'>
+                          <apex:outputLink value="/apex/AdminInstanceManagement?id={!model.id}" styleClass="instance-name-text overflow-ellipses">{!model.name}</apex:outputLink>
+                        </div>
+                      </div>
+                    </div>
+                  </apex:repeat>
+                </div>
+
+                <div id="scan-info-header" class="col-offset-265 scan-info-col">
+                  <div class="scan-header-panel">
+                    <div class="row-fluid">
+                      <div class="col-md-12">
+                        <div class="scan-header-top">
+                          <div class="row-fluid">
+                            <div class="col-md-12">
+                              <span class="scan-header-top-title vertical-center">SCAN</span>
+                            </div>
+                          </div>
+
+                          <div class="row-fluid">
+                            <div class="col-md-6 scan-header-top-left">
+                              <div class="scan-header-top-text">Last Ran On</div>
+                            </div>
+
+                            <div class="col-md-6 scan-header-top-right">
+                              <div class="scan-header-top-text">Result</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <apex:outputPanel layout="block" rendered="{!allInstances.empty}" styleClass="scan-results-default">
+                      <span class="scan-results-default-text">Create an instance<br />to get started</span>
+                    </apex:outputPanel>
+
+                    <div id='scan-results-overview-container'>
+                      <div id="scan-results-overview-block-container" class="slds slds-spinner_container">
+                        <div class="slds-spinner--inverse slds-spinner slds-spinner--medium" aria-hidden="false" role="alert">
+                          <div class="slds-spinner__dot-a"></div>
+                          <div class="slds-spinner__dot-b"></div>
+                        </div>
+                      </div>
+
+                      <apex:outputPanel id="scan-results-overview">
+                        <apex:repeat value="{!allInstances}" var="model">
+                          <div class="row-fluid">
+                            <div class="col-md-6">
+                              <div class="scan-card">
+                                <apex:outputText value="{!model.lastScanResult.lastRunTime}" styleClass="scan-card-text {!IF(model.lastScanResult.hasScanRan,'','not-ran')}" />
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="scan-card">
+                                <apex:image title="{!model.lastScanResult.result}"
+                                            rendered="{!model.lastScanResult.hasScanRan}"
+                                            url="/s.gif"
+                                            styleClass="{!IF(model.lastScanResult.isSuccess,'results-success-icon',
+                                                              IF(model.lastScanResult.isWarnings,'results-warnings-icon',
+                                                                  IF(model.lastScanResult.isFailure,'results-failure-icon','')))} vertical-center horizontal-center" />
+
+
+
+                                <apex:outputText value="-" rendered="{!!model.lastScanResult.hasScanRan}" styleClass="scan-card-text not-ran" />
+                              </div>
+                            </div>
+                          </div>
+                        </apex:repeat>
+                      </apex:outputPanel>
+                    </div>
+                  </div><!-- end .scan-header-panel -->
+                </div> <!-- End #scan-info-header -->
+
+              </div> <!-- End row fluid -->
+            </div> <!-- End container fluid -->
+          </apex:outputPanel>
+
+          <apex:outputPanel id="instance-details-panel" layout="block" styleClass="instance-details-panel" rendered="{!NOT(ISNULL(currentInstance))}"
+           html-data-id="{!currentInstance.id}"
+           html-data-name="{!currentInstance.name}"
+           html-data-custom-domain="{!currentInstance.customDomain}"
+           html-data-type="{!currentInstance.instanceType}">
+
+            <apex:inputHidden id="was-instance-save-triggered" value="{!wasSaveTriggered}"/>
+
+            <div class="panel-content">
+
+              <!-- Instance deletion modal. -->
+              <div style="display:none;" id="delete-modal" class="alm-modal vertical-center">
+                <div class="page-block clearfix vertical-center">
+                  <img class="warning-sign" src="/s.gif" ></img><b>Warning:</b> <br/><br/>
+                  <div class="modal-body">
+                    <div id="modal-text"></div>
+                    <div class="warning-buttons">
+                      <button type="button" class="subtle-btn continue-btn">Yes</button>
+                      <button type="button" class="alm-btn important-btn cancel-btn">No</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+               <!-- Instance rename modal. -->
+              <div style="display:none;" id="rename-modal" class="alm-modal vertical-center">
+                <div class="page-block clearfix vertical-center">
+                  <img class="warning-sign" src="/s.gif" ></img><b>Warning:</b> <br/><br/>
+                  <div class="modal-body">
+                    <div id="modal-text">This will impact multiple areas where the name is used. It may take several minutes to update.</div>
+                    <div class="warning-buttons">
+                      <button type="button" class="subtle-btn continue-btn">OK</button>
+                      <button type="button" class="alm-btn important-btn cancel-btn">CANCEL</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="instance-detail-header-panel">
+                <div id="instance-actions-container">
+                  <span id="instance-delete-btn"></span>
+
+                  <apex:inputHidden id="is-instance-rename-pending" value="{!currentInstance.isInstanceRenamePending}"/>
+                  <apex:inputHidden id="is-instance-rename-locked" value="{!currentInstance.isInstanceRenameLocked}"/>
+
+                  <div id="instance-rename">
+                    <div id="instance-name" data-original-name="{!currentInstance.name}">
+                      <span id="instance-name-text"><apex:outputText value="{!currentInstance.name}" /></span>
+                      <div id="instance-name-edit-icon" class="blue-edit-icon"></div>
+                    </div>
+                    <div id="instance-rename-container" >
+                      <apex:inputText id="instance-rename-input" styleClass="instance-rename-input" html-placeholder="Name your instance" value="{!currentInstance.Name}"/>
+                      <button type="button" id="instance-rename-apply-btn" class="important-btn2" data-page-persistence="click">Apply</button>
+                    </div>
+                  </div>
+
+                  <span id="instances-home-link">&lt;&lt; Back to: <apex:outputLink value="/apex/AdminInstanceManagement" styleClass="home-link">Instances</apex:outputLink></span>
+
+                  <div id="save-btn-container">
+                    <button type="button" class="important-btn2 save-btn">Save</button>
+                  </div>
+                </div>
+              </div>
+
+              <div id="instance-details-panel-body">
+                <div id="instance-container" class="row-fluid">
+                  <div class="col1 col-md-4">
+                    <div class="control-label">Instance Type</div>
+                    <apex:inputHidden id="instance-details-types-filter" html-data-page-persistence="input" value="{!currentInstance.record.Type__c}"/>
+                    <select id="active-instance-select" class="filter-values" multiselect="false">
+                      <apex:repeat value="{!currentInstance.instanceTypes}" var="type">
+                        <option value="{!type}">{!type}</option>
+                      </apex:repeat>
+                    </select>
+                  </div>
+
+                  <div class="col2 col-md-4">
+                    <div class="control-label">Custom Domain</div>
+                    <apex:inputText id="custom-domain-input" styleClass="alm-input custom-domain-input" html-data-page-persistence="input" html-placeholder="Enter a custom domain" value="{!currentInstance.record.Custom_Domain__c}"/>
+                  </div>
+
+                  <div class="col3 col-md-4">
+                    <div class="control-label">Authorized User</div>
+                    <c:OAuthWidget instanceId="{!currentInstance.id}" />
+                  </div>
+                </div>
+
+                <apex:inputHidden id="is-scan-restored" value="{!isScanRestored}"/>
+                <c:ToolConfiguration id="scanDetailsContainer" label="SCAN" job="{!currentInstance.scanJob}" isActivated="{!isScanActivated}" isDeactivationPending="{!currentInstance.isScanDeactivationPending}" scheduledStartTime="{!currentInstance.scanStartTime}" scheduledEndTime="{!currentInstance.scanEndTime}" applicationResults="{!currentInstance.scanResults}"/>
+
+                <apex:inputHidden id="is-butr-restored" value="{!isButrRestored}"/>
+                <apex:inputHidden id="is-butr-activated" value="{!isButrActivated}"/>
+                <c:ToolConfiguration id="butr-details-container" label="Automated Testing" job="{!currentInstance.butrJob}" isActivated="{!isButrActivated}" isDeactivationPending="{!currentInstance.isButrDeactivationPending}" scheduledStartTime="{!currentInstance.butrStartTime}" scheduledEndTime="{!currentInstance.butrEndTime}" applicationResults="{!currentInstance.butrResults}"/>
+
+              </div>
+
+            </div> <!-- End panel-content -->
+
+          </apex:outputPanel><!-- instance-details-panel -->
+        </apex:outputPanel> <!-- End instance panel -->
+
+
+      </apex:form>
+    </apex:define>
+  </apex:composition>
+
+  <script>
+    function remoteGetScanJobStatus( instanceId, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminInstanceManagementController.getJobStatus}',
+            instanceId,
+            BW.AlmCommon.JOB_TYPE.SCAN,
+            callback,
+            {escape: true}
+        );
+    }
+
+    function remoteGetButrJobStatus( instanceId, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminInstanceManagementController.getJobStatus}',
+            instanceId,
+            BW.AlmCommon.JOB_TYPE.BUTR,
+            callback,
+            {escape: true}
+        );
+    }
+
+    function remoteGetAuthStatus( instanceId, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminInstanceManagementController.getAuthStatus}',
+            instanceId,
+            callback,
+            {escape: true}
+        );
+    }
+
+    function remoteAuthorizeInstance( instanceId, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminInstanceManagementController.remoteAuthorizeInstanceForTools}',
+            instanceId,
+            callback,
+            {escape: false}
+        );
+    }
+
+    function remoteGetOAuthInProgressStatus( instanceId, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminInstanceManagementController.getOAuthInProgressStatusFromCache}',
+            instanceId,
+            callback,
+            {escape: false}
+        );
+    }
+
+    function remoteCheckRemoteSiteSettingExists( instanceId, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminInstanceManagementController.calloutTest}',
+            instanceId,
+            callback,
+            {escape: false}
+        );
+    }
+
+  </script>
+
+</apex:page>

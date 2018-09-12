@@ -1,0 +1,95 @@
+<aura:component>
+
+  <aura:attribute name="message" type="Object"
+                  description="message to be displayed. Has 'type', 'message', 'url' and 'urlText' properties."/>
+  <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+  <aura:registerEvent name="pageMessageDelete" type="c:pageMessageDelete"/>
+
+  <!-- ERROR -->
+  <aura:if isTrue="{!v.message.type == 'error'}">
+    <div class="message errorM3">
+
+      <img alt="error" class="msgIcon message-icon error-icon" src="/s.gif" title="ERROR" />
+
+      <span class="message-text">
+          <span class="subject">Error: </span>
+          <span>{!v.message.message}</span>
+      </span>
+
+      <div class="close-btn-container">
+        <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel" onclick="{!c.handleRemoveMessageRequest}">
+          <img alt="close" class="error-close" src="/s.gif" title="close"/>
+        </a>
+      </div>
+
+    </div>
+  </aura:if>
+
+  <!-- SUCCESS -->
+  <aura:if isTrue="{!v.message.type == 'success'}">
+    <div class="message successM3">
+
+      <img alt="success" class="message-icon success-icon" src="/s.gif" title="SUCCESS" />
+
+      <span class="message-text">
+          <span class="subject">Success: </span>
+          <span>{!v.message.message}</span>
+          <aura:if isTrue="{! !empty(v.message.urlValue)}">
+              <div class="output-url-container">
+                  <ui:outputURL value="{!v.message.urlValue}" title="{!v.message.urlTitle}"
+                    label="{!v.message.urlLabel}" />
+                        {!v.message.urlAdditionalText}
+              </div>
+          </aura:if>
+      </span>
+
+      <div class="close-btn-container">
+        <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel" onclick="{!c.handleRemoveMessageRequest}">
+          <img alt="close" class="success-close" src="/s.gif" title="close" />
+        </a>
+      </div>
+
+    </div>
+  </aura:if>
+
+  <!-- INFO -->
+  <aura:if isTrue="{!v.message.type == 'info'}">
+    <div class="message infoM3">
+
+      <img alt="info" class="message-icon info-icon" src="/s.gif" title="INFO" />
+
+      <span class="message-text">
+          <span class="subject">Information: </span>
+          <span>{!v.message.message}</span>
+      </span>
+
+      <div class="close-btn-container">
+        <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel" onclick="{!c.handleRemoveMessageRequest}">
+          <img alt="close" class="info-close" src="/s.gif" title="close" />
+        </a>
+      </div>
+
+    </div>
+  </aura:if>
+
+  <!-- WARNING -->
+  <aura:if isTrue="{!v.message.type == 'warning'}">
+    <div class="message warningM3">
+
+      <img alt="warning" class="warning-sign message-icon warning-icon" src="/s.gif" title="WARNING" />
+
+      <span class="message-text">
+          <span class="subject">Warning: </span>
+          <span>{!v.message.message}</span>
+      </span>
+
+      <div class="close-btn-container">
+        <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel" onclick="{!c.handleRemoveMessageRequest}">
+          <img alt="close" class="warning-close" src="/s.gif" title="close" />
+        </a>
+      </div>
+
+    </div>
+  </aura:if>
+
+</aura:component>

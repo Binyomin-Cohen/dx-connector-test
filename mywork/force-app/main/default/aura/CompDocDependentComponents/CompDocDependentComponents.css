@@ -1,0 +1,12 @@
+.THIS {
+  margin-bottom: 30px;
+}
+
+.THIS.added-components .delete-btn {
+  float:right;
+  margin: 20px;
+}
+
+.THIS div.page-block-panel-section {
+  margin-bottom: 0px;
+}

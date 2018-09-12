@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email template for workflow rule email alert when a Component is modified.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Components Modified Alert</name>
+    <style>none</style>
+    <subject>{!Organization.Name} Component Modification Alert: "{!Component__c.Name}"</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

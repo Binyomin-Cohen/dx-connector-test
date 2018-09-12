@@ -1,0 +1,24 @@
+<aura:component extends="c:BaseSelectableChildContainer">
+  <aura:attribute name="instances" type="Object[]"/>
+  <aura:attribute name="selectedInstancesText" type="String" default="Select Instance(s)"/>
+  <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+  <aura:handler event="c:rowSelectEvent" name="rowSelectEvent" action="{!c.handleChildSelect}"/>
+
+  <aura:method name="getSelectedInstanceNames" action="{!c.getSelectedInstanceNames}" access="PUBLIC"/>
+  <aura:method name="setInstances" action="{!c.setInstances}" access="PUBLIC">
+    <aura:attribute name="instances" type="Object[]" />
+  </aura:method>
+
+  <div class="multi-select-container">
+    <c:DropdownContainer inputDisplayText="{!v.selectedInstancesText}" userTextInputDisabled="true">
+      <div class="combobox-body-container" onkeydown="{!c.handleKeydown}">
+        <div class="multiselect-container dropdown-menu" multiple="true" >
+          <aura:iteration items="{!v.children}" var="child">
+            {!child}
+          </aura:iteration>
+        </div>
+      </div>
+    </c:DropdownContainer>
+  </div>
+
+</aura:component>

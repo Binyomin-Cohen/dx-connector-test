@@ -1,0 +1,91 @@
+<aura:component extensible="true">
+  <aura:attribute name="title" description="The title of the header" type="String" required="false"/>
+  <aura:attribute name="subtitle" description="The subtitle of the header" type="String" required="false"/>
+  <aura:attribute name="showTitleSection" description="Display title section" type="Boolean" default="true" required="false"/>
+  <aura:attribute name="settingsUrl" description="The url for the settings page" type="String" required="false"/>
+  <aura:attribute name="showCancelLink"
+                  description="Show the cancel link in the banner sub menu" type="Boolean" required="false" default="false"/>
+  <aura:attribute name="showHelpLink"
+                  description="Show the help link in the banner sub menu" type="Boolean" required="false" default="false"/>
+  <aura:attribute name="showSearchLink"
+                  description="Show the search link in the banner sub menu" type="Boolean" required="false" default="false"/>
+  <aura:attribute name="cancelUrl"
+                  description="The url for the cancel link" type="String" required="false" default="{!v.homeUrl}"/>
+  <aura:attribute name="helpUrl"
+                  description="The url for the help link" type="String" required="false"/>
+  <aura:attribute name="homeUrl"
+                  description="The url to take you back to where you came from" type="String" required="false"/>
+  <aura:attribute name="homeLinkTitle"
+                  description="The name of the link to display to take the user back to the home url"
+                  type="String" required="false"/>
+  <aura:attribute name="useHomeIcon"
+                  description="Display an icon to link user back to home page" type="Boolean" required="false" default="false"/>
+  <aura:attribute name="useBackToLink"
+                  description="Display the back to link regardless of useHomeIcon value" type="Boolean" required="false" default="false"/>
+  <aura:attribute name="customBackToLink"
+                  description="The url for the back to link shown under the title" type="String" required="false"/>
+
+  <aura:attribute name="showSavingState"
+                  description="used to show saving in progress" type="Boolean" required="false"/>
+  <aura:attribute name="backToLink"
+                  description="The processed url for the back to link shown under the title" type="String" required="false" access="private"/>
+
+  <!--TODO: figure out namespace -->
+  <aura:handler event="c:asyncSaveEvent" action="{!c.handleSaveEvent}"/>
+
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/common/banner.css',
+        $Resource.zip_alm_pm + '/css/alm_common.css'
+       )}"
+      scripts="{!join(',',
+        $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js'
+       )}"
+      afterScriptsLoaded="{!c.init}"
+    />
+  <div class="banner-wrap">
+    <div class="banner">
+      <div class="banner-body">
+        <c:pageMessages />
+        <aura:if isTrue="{!v.showTitleSection &amp;&amp; not(empty(v.subtitle) &amp;&amp; empty(v.title))}">
+          <div class="title-section">
+            <h3 class="page-type">{!v.subtitle}</h3>
+            <span>{!v.title}</span>
+            <aura:if isTrue="{!not(empty(v.homeUrl)) &amp;&amp; (not(v.useHomeIcon) || v.useBackToLink)}">
+              <div class="home-url">
+                &lt;&lt; Back to: <c:anchor aura:id="backToAnchor" value="{!v.backToLink}" title="{#v.homeLinkTitle}" label="{#v.homeLinkTitle}" />
+              </div>
+          </aura:if>
+          </div>
+        </aura:if>
+        <div class="banner-action-container">
+          <div class="button-container">
+            {!v.body}
+            <div id="saving-container" class="{!(v.showSavingState) ? 'saving' : ''}">
+              <div>Saving</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="banner-sub-menu" class="clearfix">
+        <aura:if isTrue="{!v.showHelpLink}">
+          <a class="help-btn" href="{!v.helpUrl}" target="_blank">help <img class="help" src="/s.gif"></img></a>
+        </aura:if>
+        <aura:if isTrue="{!v.showCancelLink}">
+          <c:anchor class="action cancel-btn cancel-icon" iconClass="cancel-icon" value="{#v.homeUrl}" title="Cancel" />
+        </aura:if>
+        <aura:if isTrue="{!not(empty(v.settingsUrl))}">
+          <c:anchor class="action" iconClass="settings2" value="{#v.settingsUrl}" title="Settings" />
+        </aura:if>
+        <aura:if isTrue="{!v.showSearchLink}">
+          <span class="action search" title="search">
+            <img class="banner-search" src="/s.gif"/>
+          </span>
+        </aura:if>
+        <aura:if isTrue="{!v.useHomeIcon}">
+          <c:anchor class="action home-icon" iconClass="home-icon" value="{#v.homeUrl}" title="Go to List Views" />
+        </aura:if>
+      </div>
+    </div>
+ </div>
+
+</aura:component>

@@ -1,0 +1,20 @@
+<aura:component extends="c:BaseSelectableChild">
+  <aura:attribute name="instance" type="Object"/>
+
+  <aura:handler event="c:CheckboxChangeEvent" name="CheckboxChangeEvent" action="{!c.handleCheckboxChangeEvent}"/>
+
+  <div aura:id="body" tabindex="-1" onkeydown="{!c.handleKeydown}" onclick="{!c.focus}">
+    <span class="table-cell">
+      <c:Checkbox checked="false" aura:id="selected-checkbox"/>
+    </span>
+    <span class="instance-name-container table-cell">
+      <span>{#v.instance.name}</span>
+    </span>
+    <span class="instance-scan-time-container table-cell">
+      last
+      <span class="tool-name">{! empty(v.instance.tool) ? 'SCAN' : v.instance.tool}</span>
+      <span>: </span>
+      <span class="date">{! v.instance.lastRunTime != null ? v.instance.lastRunTime : 'NEVER'}</span>
+    </span>
+  </div>
+</aura:component>

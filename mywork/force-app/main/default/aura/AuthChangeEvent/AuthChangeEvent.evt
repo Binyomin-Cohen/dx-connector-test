@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="indicates a changing authorization" >
+  <aura:attribute name="instanceId" type="String" />
+  <aura:attribute name="isAuthorized" type="Boolean" />
+</aura:event>

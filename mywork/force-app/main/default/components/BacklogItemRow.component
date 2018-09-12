@@ -1,0 +1,42 @@
+<apex:component layout="none">
+  <apex:attribute name="bklg" description="The backlog item to display" type="BacklogItemRow" />
+  <apex:attribute name="columns" description="The columns to display" type="Column[]" />
+  <apex:attribute name="rowClass" description="class to add to the row" type="String" />
+  <apex:attribute name="isPrioritized" description="Is the row prioritized?" type="Boolean" />
+
+  <tr class="{!rowClass}" data-backlog-id="{!bklg.record.Id}" data-priority="{!bklg.priority}" data-old-priority="{!bklg.priority}">
+    <td class="handle"><div></div></td>
+    <td class="select">
+      <input type="checkbox" id="row-select-{!bklg.record.Id}" class="fancy-checkbox row-select" />
+       <label class="checkbox" for="row-select-{!bklg.record.Id}">
+         <span></span>
+       </label>
+    </td>
+    <td class="priority">
+      <div>
+        <span class="view-priority">
+            <apex:outputText value="{!bklg.priority}"/>
+        </span>
+        <span class="edit-priority">
+            <apex:inputText value="{!bklg.priority}"/>
+        </span>
+        <apex:outputPanel layout="block" rendered="{!NOT(isPrioritized)}">
+          <img title="These items are un-priortized.  Click or drag and drop to assign them a priority" class="unprioritized-warning-sign" src="/s.gif" />
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" rendered="{!isPrioritized}">
+          <div class="bklg-conflict"><img title="There are multiple users grooming this backlog. Another user has edited this record." class="warning-sign" src="/s.gif" /></div>
+        </apex:outputPanel>
+      </div>
+     </td>
+    <apex:repeat value="{!columns}" var="column" >
+      <td class="{!column.apiName}" data-local-field="{!column.localName}" data-field="{!column.apiName}" data-fieldvalue="{!IF(column.linkName == null, bklg.record[column.apiName], bklg.record[column.relationshipName])}">
+        <apex:outputField rendered="{!column.linkName == null || column.ignoreLink}" value="{!bklg.record[column.apiName]}" />
+        <apex:outputPanel layout="none" rendered="{!(column.linkName != null && !column.ignoreLink)}">
+          <a href="/{!bklg.record[column.linkName]}" target="_blank">
+            {!bklg.record[column.relationshipName]}
+          </a>
+        </apex:outputPanel>
+      </td>
+    </apex:repeat>
+  </tr>
+</apex:component>

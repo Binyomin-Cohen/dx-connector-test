@@ -1,0 +1,53 @@
+.sorting {
+    background-image:none;
+}
+#comp-search-res-wrapper .componentPaging > ul {
+  list-style: none;
+  display: table;
+  margin: auto;
+}
+#comp-search-res-wrapper .componentPaging > ul > li {
+  display: table-cell;
+  cursor: pointer;
+  padding: 0 5px;
+}
+#comp-search-res-wrapper .componentPaging > ul > li.active {
+  text-decoration: underline;
+}
+#comp-search-res-wrapper .componentPaging > ul > li:nth-child(-n+2),
+#comp-search-res-wrapper .componentPaging > ul > li:nth-last-child(-n+2) {
+  text-decoration: none;
+}
+#comp-search-res-wrapper .componentPaging.top-paging {
+  margin-bottom: 10px;
+}
+#comp-search-res-wrapper .componentPaging.bottom-paging {
+  margin-top: 10px;
+}
+#comp-search-res-wrapper .selected-options > span {
+  line-height: 25px;
+}
+
+#comp-search-res-wrapper #component-search-table th {
+  width: 16%;
+}
+
+#comp-search-res-wrapper #component-search-table th.select-all {
+  width: 3%;
+  padding-left: 8px;
+}
+
+#comp-search-res-wrapper #component-search-table th img {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+div.selected-options {
+  padding-top: 20px;
+}
+div.selected-options .valign {
+  margin-top: 12px;
+}
+div.selected-options .componentPaging {
+  height: 10px;
+}

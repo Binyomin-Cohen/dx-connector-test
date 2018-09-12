@@ -1,0 +1,122 @@
+<aura:component implements="force:appHostable" controller="DXController">
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/alm_common.css'
+     )}"
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+       )}"
+    afterScriptsLoaded="{!c.init}" />
+
+  <aura:attribute name="backlogItemId" type="String" />
+  <aura:attribute name="backlogItemName" type="String" />
+  <aura:attribute name="instances" type="Object[]" />
+  <aura:attribute name="isAuthorized" type="Boolean" default="false" access="private"/>
+  <aura:attribute name="selectedInstanceId" type="String" access="private"/>
+  <aura:attribute name="selectedScratchOrgId" type="String" access="private" />
+  <aura:attribute name="isInstanceAuthorized" type="Boolean"  default="false" access="private"/>
+  <aura:attribute name="createNewBranch" type="Boolean"  default="false" access="private"/>
+  <aura:attribute name="newBranchName" type="String" access="private"/>
+  <aura:attribute name="newScratchOrgName" type="String" access="private"/>
+  <aura:attribute name="durationDays" type="Integer" default="7" access="private" />
+  <aura:attribute name="scratchOrgs" type="Object[]" />
+  <aura:attribute name="newBranchInvalid" type="Boolean"  default="false" access="private"/>
+
+  <aura:attribute name="SCRATCH_ORG_EVENT_NAME" type="String" default="Scratch_Org_Event__e"/>
+  <aura:attribute name="SCRATCH_ORG_EVENT_SUBS" type="String[]" default="['Scratch_Org_Event__e']"/>
+
+  <aura:handler name="comboboxChangeEvent" event="c:comboboxChangeEvent" action="{!c.handleComboBoxChanges}" />
+  <aura:handler name="authChangeEvent" event="c:AuthChangeEvent" action="{!c.handleAuthChanges}" />
+  <aura:handler name="change" value="{!v.newBranchName}" action="{!c.handleNewBranchNameChange}"/>
+
+  <aura:handler event="c:PlatformEventStreamUpdate" action="{!c.handlePlatformEvents}"/>
+  <aura:registerEvent name="pageMessageAdd" type="c:pageMessageAdd" />
+  <aura:registerEvent name="pageMessagesClear" type="c:pageMessagesClear" />
+
+  <c:pageLayout >
+    <aura:set attribute="header">
+      <c:Header title="Scratch Org Management" homeUrl="{#'/' + v.backlogItemId}"
+        homeLinkTitle="{# v.backlogItemName}"
+        showCancelLink="true" />
+    </aura:set>
+    
+    <div id="container-body" data-current-page="create-scratch-org">
+      
+      <c:PlatformEventStream aura:id="scratch-org-event-stream"
+                            initialSubscriptionEventTypes="{!v.SCRATCH_ORG_EVENT_SUBS}"
+                            handleNamespacing="true" />
+
+      <div id="create-scratch-org-container">
+        <lightning:card title="Dev Hub Org">
+          <div class="slds-grid slds-wrap">
+            <div class="available-instances slds-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium">
+              <div class="instance-select-label">Instances Available</div>
+                <c:combobox aura:id="instance-select" inputId="instance-select"
+                      comboboxId="instance-select-combobox"
+                      selectedValue="{!v.selectedInstanceId}"
+                      isRequired="true"
+                      options="{!v.instances}" />
+            </div>
+  
+              <div class="instance-oauth slds-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium">
+                <div class="instance-oauth-label authorization">Authorization</div>
+                <c:OAuthWidget aura:id="instance-authorization"
+                      instanceId="{!v.selectedInstanceId}"
+                      isForTools="false"
+                      disable="{! not(v.selectedInstanceId) }"
+                      isAuthorized="{!v.isAuthorized}"
+                      isRequired="true"/>
+              </div>
+          </div>
+        </lightning:card>
+        <lightning:card title="Scratch Orgs">
+          <div id="create-scratch-org">
+            <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium">
+              <lightning:input label="Name" class="required" required="true" name="newScratchName" value="{!v.newScratchOrgName}"/>
+            </div>
+
+            <c:ScratchOrgDefinitionSelection aura:id="scratch-org-def-select" showTemplateLink="true" />
+
+            <div class="duration-days slds-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium"> 
+              <lightning:input type="number" name="durationDays" min="1" max="30" label="Duration in Days" value="{!v.durationDays}"/>
+            </div>
+
+            <c:GitCommitRepoSelect aura:id="repo-select" commitInProgress="false"/>
+
+            <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium"> 
+              <lightning:input type="checkbox" label="Create New Git Branch For This Backlog Item?" name="create-new-branch" checked="{! v.createNewBranch}" />
+            </div>
+
+            <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium"> 
+              <lightning:input aura:id="new-branch-name" label="New branch name" name="new-branch-name" value="{! v.newBranchName}" disabled="{! !v.createNewBranch}" />
+            </div>
+            
+            <lightning:button label="New scratch org" onclick="{! c.createScratch }" disabled="{!v.newBranchInvalid}" />
+
+          </div>
+          <div id="scratch-org-list">
+            <h2>Your scratch orgs</h2>
+            <table class="alm-table zebra">
+              <tr>
+                <th>Org Name</th>
+                <th></th>
+                <th></th>
+              </tr>
+              <aura:iteration items="{!v.scratchOrgs}" var="scratchOrg">
+                <tr>
+                  <td>{!scratchOrg.name}</td>
+                  <td><lightning:button value="{!scratchOrg.id}" onclick="{!c.logIntoScratch}" label="Log In To Org" disabled="{! !scratchOrg.isLoginable}"/></td>
+                  <td><a id="{!'commit-' + scratchOrg.id}" href="#" onclick="{!c.commitChanges}">View/Commit Changes</a></td>
+                </tr>
+              </aura:iteration>
+            </table>
+          </div>
+        </lightning:card>
+      </div>
+      <div id="scratch-org-commit-container">
+        <c:ScratchOrgCommitChanges recordId="{!v.selectedScratchOrgId}" />
+      </div>
+    </div>
+  </c:pageLayout>
+
+</aura:component>

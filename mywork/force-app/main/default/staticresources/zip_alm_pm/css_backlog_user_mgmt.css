@@ -1,0 +1,215 @@
+input.user-search {
+    width: 210px;
+    color: #000;
+    margin: 10px;
+    padding: 10px;
+}
+
+input.user-search-roles {
+    width: 152px;
+    height: 24px;
+    color: #000;
+    margin: 0;
+    padding: 10px;
+    border-radius: 0px 3px 3px 0px;
+    border-bottom: none;
+    border-right: none;
+    display: none;
+}
+
+.user-tile ul.ui-autocomplete {
+    width: 369px;
+}
+
+#control-panel {
+    display: inline-block;
+    width: 100%;
+    height: 64px;
+}
+
+#edit-input-container .ui-autocomplete {
+    width: 210px;
+}
+
+#edit-input-container {
+    display: none;
+}
+
+#action-panel {
+    display: none;
+    padding: 15px 20px;
+    float: right;
+}
+
+#action-panel a {
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+#edit-panel {
+    position: relative;
+    height: 57px;
+    display: inline-block;
+    width: 390px;
+}
+
+.user-panel {
+    padding: 20px 15px;
+    position: relative;
+}
+
+#edit-btn-container {
+    position: absolute;
+    z-index: 100;
+    top: 9px;
+    left: 0;
+    padding-bottom: 20px;
+    background-color: #ffffff;
+}
+
+.user-tile {
+    border: 1px solid #dddddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width: 369px;
+    background-color: #f1f1f1;
+    height: 46px;
+    float: left;
+    margin: 10px;
+    position: relative;
+    display: none;
+}
+
+.user-tile>div {
+    float: left;
+}
+
+.user-tile .user-section {
+    padding: 7px;
+    width: 180px;
+    height: 32px;
+}
+
+.user-tile a {
+    text-decoration: none;
+    margin-left: 7px;
+}
+
+
+.user-tile .role-section {
+    height: 46px;
+    float: left;
+    width: 174px;
+}
+
+.user-tile .role-section img.edit-icon {
+    height: 45px;
+    float: left;
+}
+
+.user-tile .assign-role {
+    float: right;
+    padding-top: 16px;
+    display: block;
+    height: 100%;
+    width: 174px;
+}
+
+.user-tile .assign-role:hover img.edit-icon {
+    background: url("img/png_list_edit_icon.png") no-repeat;
+    background-position: 0 0;
+    width: 21px;
+    height: 21px;
+    float: right;
+    vertical-align: middle;
+}
+
+.edit-mode .user-tile .assign-role {
+    cursor: pointer;
+}
+
+.user-tile .assign-role img.edit-icon {
+    background-position: 0 0;
+    width: 21px;
+    height: 21px;
+    float: right;
+    margin-top: -3px;
+    vertical-align: middle;
+    visibility: hidden;
+}
+
+.edit-mode .user-tile:hover .delete-icon {
+    background: url("img/png_alm_sprite1.png") no-repeat top left;
+    background-position: -84px -292px;
+    width: 18px;
+    height: 18px;
+    display: inline;
+}
+
+.edit-mode .user-tile .role-section:hover {
+    background-color: #E5E3E4;
+}
+
+.edit-mode .user-tile .assign-role:hover img.edit-icon {
+    visibility: visible;
+}
+
+.user-tile .assign-role span {
+    padding-right: 5px;
+    float: right;
+}
+
+.user-tile .user-section img,.user-photo {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.user-tile .delete-icon {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+    display: none;
+}
+
+.user-tile .delete-icon:hover {
+    cursor: pointer;
+}
+
+.user-photo {
+    margin-right: 10px;
+}
+
+.role-section .clear-invalid-role-icon {
+  position: absolute;
+  right: 10px;
+  top: 17px;
+}
+
+#detail-body {
+    position: relative;
+    height: 245px;
+    overflow-y: auto;
+}
+
+.error {
+    color: #D01415;
+}
+
+#alm-container img.help {
+    background: url("img/png_alm_sprite1.png") no-repeat top left;
+    background-position: 0 -688px;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 10;
+    display: none;
+}
+
+#alm-container img.help:hover {
+    background-position: 0 -754px;
+}

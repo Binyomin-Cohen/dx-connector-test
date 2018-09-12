@@ -1,0 +1,78 @@
+<aura:component controller="GitController">
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/alm_common.css'
+     )}"
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery.block-ui.js',
+          $Resource.zip_alm_pm + '/external/jquery.sticky-kit.js',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js'
+       )}"
+    afterScriptsLoaded="{!c.init}" />
+  <!--  TODO: use GitController.CommitRequest -->
+  <aura:attribute name="commitRequest" type="Map" default="{}"/>
+
+  <aura:attribute name="instances" type="Object[]" />
+  <aura:attribute name="isAuthorized" type="Boolean" default="false"/>
+  <aura:attribute name="selectedInstanceId" type="String" />
+  <aura:attribute name="isInstanceAuthorized" type="Boolean"  default="false"/>
+  <aura:attribute name="recordId" type="String" />
+  <aura:attribute name="recordName" type="String" />
+  <aura:attribute name="disableComponents" type="Boolean" default="false"/>
+  <aura:attribute name="state" type="String" />
+
+  <aura:handler name="comboboxChangeEvent" event="c:comboboxChangeEvent" action="{!c.handleComboBoxChanges}" />
+  <aura:handler name="authChangeEvent" event="c:AuthChangeEvent" action="{!c.handleAuthChanges}" />
+  <aura:handler name="unsavedPageEvent" event="c:unsavedPageEvent" action="{!c.handleUnsavedPageChangeEvent}"/>
+
+  <aura:handler name="authInitEvent" event="c:AuthInitEvent" action="{!c.handleAuthInitEvent}" />
+
+  <aura:registerEvent name="unsavedPageEvent" type="c:unsavedPageEvent"/>
+
+  <c:pageLayout >
+    <aura:set attribute="header">
+      <c:Header title="{! 'Commit for ' + v.recordName }"
+        homeLinkTitle="{! v.recordName }"
+        homeUrl="{! '/' + v.recordId }"
+        showCancelLink="true"
+        settingsUrl="{! '/apex/VC?backlogId=' + v.recordId}"
+      />
+    </aura:set>
+
+    <div id="git-container">
+      <div id="git-options-container" class="slds-grid slds-wrap slds-grid_pull-padded-medium">
+
+        <div class="available-instances slds-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium">
+          <div class="git-option-label">Instances Available</div>
+          <c:combobox aura:id="instance-select" inputId="instance-select"
+                      comboboxId="instance-select-combobox"
+                      isRequired="true"
+                      disabled="{!v.disableComponents}"
+                      options="{!v.instances}" />
+        </div>
+
+        <div class="instance-oauth slds-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium">
+          <div class="git-option-label authorization">Authorization</div>
+          <c:OAuthWidget aura:id="instance-authorization"
+                         instanceId="{!v.selectedInstanceId}"
+                         isForTools="false"
+                         disable="{! or(v.disableComponents, not(v.selectedInstanceId))}"
+                         isAuthorized="{!v.isAuthorized}"
+                         isRequired="true"/>
+        </div>
+
+        <c:GitCommitRepoSelect aura:id="repo-select" commitInProgress="{!v.disableComponents}"/>
+      </div>
+
+      <c:GitCommitChanges aura:id="changes"
+                          commitRequest="{!v.commitRequest}"
+                          backlogItemId="{!v.recordId}"
+                          commitInProgress="{!v.disableComponents}"
+                          isAuthorized="{!v.isAuthorized}"/>
+    </div>
+
+  </c:pageLayout>
+  <c:GoogleAnalyticsTracker pageTitle="VC-Commit_Management" applicationName="PM - VC-Commit_Management"/>
+</aura:component>

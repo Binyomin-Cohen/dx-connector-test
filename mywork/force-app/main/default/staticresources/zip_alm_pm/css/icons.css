@@ -1,0 +1,9 @@
+.new-icon {
+  background: url("../img/png_alm_sprite1.png") no-repeat top-left;
+  background-position: 0 -1741px;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 7px;
+}

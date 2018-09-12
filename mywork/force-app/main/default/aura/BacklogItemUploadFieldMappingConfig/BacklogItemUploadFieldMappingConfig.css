@@ -1,0 +1,115 @@
+.THIS {
+  background: transparent;
+  border-bottom: 1px solid #dadada;
+}
+
+.THIS .notification-icon {
+  text-align: right;
+}
+
+.THIS .warning-icon-white {
+  cursor: pointer;
+}
+
+.THIS .alm-combobox a.expander {
+  height: 30px;
+  position: absolute;
+  right: 0;
+}
+
+.THIS td .is-required {
+  border-left: 4px solid red;
+  padding-left: 5px;
+}
+
+.THIS td.sample-data-cell {
+  padding-left: 20px;
+}
+
+.THIS td.sample-data-cell .sample-data {
+  font-size: 12px;
+  font-weight: bold;
+  color: #555555;
+  width: 180px;
+}
+
+.THIS td.lookup-results {
+  height: 50px;
+  width: 430px;
+  position: relative;
+}
+
+.THIS td.lookup-results .slds-spinner {
+  display: none;
+}
+
+.THIS td.lookup-results.processing .slds-spinner {
+  display: block;
+}
+
+.THIS td.lookup-results.processing .lookup-summary {
+  display: none;
+}
+
+.THIS td.lookup-results .lookup-summary .success-msg,
+.THIS td.lookup-results .lookup-summary .warning-msg {
+  display: none;
+}
+
+.THIS td.lookup-results .lookup-summary.success .success-msg {
+  display: inline-block;
+  color: #7CA906;
+}
+
+.THIS td.lookup-results .lookup-summary.warning .warning-msg {
+  display: inline-block;
+  color: #FF9210;
+}
+
+.THIS td.lookup-results .lookup-summary.warning .error-msg {
+  display: inline-block;
+  color: #FF0000;
+  width: 290px;
+  vertical-align: middle;
+}
+
+.THIS td.lookup-results .info-icon {
+  padding-left: 30px;
+}
+
+.THIS td.lookup-results .error-icon-medium {
+  margin-right: 5px;
+}
+
+.THIS td.lookup-results .lookup-summary svg {
+  padding-right: 10px;
+}
+
+.THIS td.lookup-results .lookup-summary.success svg {
+  fill: #7CA906;
+}
+
+.THIS td.lookup-results .lookup-summary.warning svg {
+  fill: #FF9210;
+}
+
+.THIS td.lookup-results .lookup-summary.success .warning-options {
+  display: none;
+}
+
+.THIS td.lookup-results .warning {
+  font-weight: normal;
+  color: #000;
+}
+
+.THIS .lookup-result-options {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+
+/*.THIS .lookup-result-options uiInput--radio {
+  display: inline-block;
+}*/
+

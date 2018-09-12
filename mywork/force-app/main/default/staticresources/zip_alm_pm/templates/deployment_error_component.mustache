@@ -1,0 +1,39 @@
+  <tr class="deployment-errors">
+    <td><a href="/{{Id}}"><span>{{Name}}</span></a></td>
+    <td><span>{{Component_Name__c}}</span></td>
+    <td><span>{{Component_Type__c}}</span></td>
+    
+    {{#Description__c}}
+      <td><span>{{Description__c}}</span></td>
+    {{/Description__c}}
+    
+    {{^Description__c}}
+      <td><span>{{Error_Message__c}}</span></td>
+    {{/Description__c}}
+    
+    <td><span>{{Type__c}}</span></td>
+    <td>
+      {{#Changed__c}}
+        <input type="checkbox" id="changed-checkbox" class="fancy-checkbox" checked disabled/>
+      {{/Changed__c}}
+      
+      {{^Changed__c}}
+        <input type="checkbox" id="changed-checkbox" class="fancy-checkbox" disabled/>
+      {{/Changed__c}}
+      <label class="checkbox" for="changed-checkbox">
+        <span></span>
+      </label>
+    <td>
+      {{#Deleted__c}}
+        <input type="checkbox" id="deleted-checkbox" class="fancy-checkbox" checked disabled/>
+      {{/Deleted__c}}
+      
+      {{^Deleted__c}}
+        <input type="checkbox" id="deleted-checkbox" class="fancy-checkbox" disabled/>
+      {{/Deleted__c}}
+      <label class="checkbox" for="deleted-checkbox">
+        <span></span>
+      </label>
+    </td>
+    <td><span>{{Error_Location__c}}</span></td>
+  </tr>

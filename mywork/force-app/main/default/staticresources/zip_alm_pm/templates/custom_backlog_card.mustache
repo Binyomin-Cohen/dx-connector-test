@@ -1,0 +1,41 @@
+<div data-custom-backlog-id="{{customBacklogId}}" data-custom-backlog-name="{{name}}" class="cbklg-card-wrap-hotspot card-wrap-hotspot ui-sortable-handle">
+  <div class="cbklg-card-wrap card-wrap">
+
+    {{#isUniversal}}
+      <div class="universal-bar"></div><div class="universal-handle-wrapper"><div class="handle"></div></div>
+    {{/isUniversal}}
+    {{^isUniversal}}
+      <div class="handle-wrapper"><div class="handle"></div></div>
+    {{/isUniversal}}
+
+    <div class="custom-backlog-name overflow-ellipses">
+      <div class="edit-container">
+        <input class="edit-input" placeholder="Name Your Backlog" type="text" value="{{name}}" maxlength="80" />
+        <button class="important-btn2 save-btn" type="button">Save</button>
+      </div>
+        <a href="/apex/{{namespace}}BacklogManagement?backlogid={{customBacklogId}}" title="{{name}}" class="overflow-ellipses">{{name}}</a>
+      <img class="edit-card-icon" src="/s.gif" />
+    </div>
+    <div class="backlog-options-container">
+      <img class="vertical-ellipsis" src="/s.gif" />
+      <div class="flyout-menu">
+        <ul>
+          <li class="option-default child" title="Enable / Disable this custom backlog as default.">Default</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="item-count-container">
+    <div class="numbers-container">
+      <div class="total-count-container">
+        <span class="total-count">{{totalItems}} </span>
+      </div>
+      <div class="unprioritized-count-container">
+        <span class="unprioritized-count" title="The number of un-prioritized items in this backlog">{{unprioritizedItems}}</span>
+      </div>
+    </div>
+    <div class="total-text-container">
+      <span class="total-text">Total Items</span>
+    </div>
+  </div>
+</div>

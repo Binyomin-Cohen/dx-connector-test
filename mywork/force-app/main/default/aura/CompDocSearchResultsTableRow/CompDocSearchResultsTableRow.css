@@ -1,0 +1,34 @@
+.THIS .alm-table th {
+  padding-left: 0px;
+}
+
+.THIS .name-container {
+  position: relative;
+  padding-right: 20px;
+}
+
+.THIS .component-deleted-icon {
+  position: absolute;
+  right: 0px;
+  top: -3px;
+}
+
+.THIS[data-is-deleted="true"] td,
+.THIS[data-is-deleted="true"] a {
+  color: #FF0000;
+}
+
+.THIS[data-is-unsupported="true"] td,
+.THIS[data-is-unsupported="true"] a {
+  color: #FF9210;
+}
+
+.THIS[data-is-deleted="true"] .component-deleted-icon  {
+  visibility: visible;
+}
+.THIS .component-deleted-icon {
+  display: inline-block;
+  margin-left: 3px;
+  cursor: pointer;
+  visibility: hidden;
+}

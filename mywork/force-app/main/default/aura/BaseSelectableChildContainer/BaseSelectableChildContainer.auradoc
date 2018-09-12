@@ -1,0 +1,32 @@
+<aura:documentation>
+	<aura:description>
+    <p>Base functionality for managing child components that can be selected by the user, including multi-select functionality. Use with BaseSelectableChild.</p>
+    <p>Specifically, this component handles:</p>
+      <ul>
+        <li>Responding to select events from children</li>
+        <li>Calling select on ranges of children (e.g. from a multi-select input)</li>
+        <li>Handling keyboard input to cycle through components with arrow keys</li>
+        <li>Focusing previous or next children components</li>
+      </ul>
+    <p>See InstancesMultiSelect and InstancesMultiSelectRow for an example of how to implement</p>
+
+    <h5>Implementation details:</h5>
+    <h6>Extending BaseSelectableChildContainer:</h6>
+    Methods to override:
+    <ul>
+      <li>handleChildSelect: Define additional actions to perform when a child is selected. The base component will handle multi-selecting of children</li>
+    </ul>
+
+    <h6>Extending BaseSelectableChild:</h6>
+    Methods to override
+    <ul>
+      <li>isSelected()</li>
+      <li>setSelected()</li>
+    </ul>
+    Optional overrides
+    <ul>
+      <li>getId(): Defaults to returning the Aura GlobalId of the component, which is fine in most cases.</li>
+    </ul>
+
+  </aura:description>
+</aura:documentation>

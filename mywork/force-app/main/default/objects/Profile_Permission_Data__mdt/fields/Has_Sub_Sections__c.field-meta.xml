@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Has_Sub_Sections__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Controls if this Category is has sub sections. Sub sections are broken down by Standard / Custom (only applies for categories)</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Controls if this Category is has sub sections. Sub sections are broken down by Standard / Custom (only applies for categories)</inlineHelpText>
+    <label>Has Sub Sections</label>
+    <type>Checkbox</type>
+</CustomField>

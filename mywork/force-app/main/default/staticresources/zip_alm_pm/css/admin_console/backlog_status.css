@@ -1,0 +1,48 @@
+#inactive-statuses-content .item-tile {
+  float: left;
+  margin-right: 13px;
+  padding-left: 10px;
+  cursor: auto;
+  background: none;
+  background-color: #f1f1f1;
+  width: 158px;
+  font-weight: normal;
+}
+
+#inactive-statuses-content .item-tile span {
+  width: 130px;
+}
+
+#inactive-statuses-content .item-tile:hover .remove {
+  background: url("../../img/png_alm_sprite1.png") no-repeat top left;
+  display: inline;
+  opacity: .5;
+  background-position: -84px -1838px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: auto;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+}
+
+#inactive-statuses-content .item-tile .remove:hover {
+  opacity: 1;
+  cursor:pointer;
+}
+
+#inactive-statuses-content .item-tile .handle {
+  display: none;
+}
+
+#main-content {
+  padding-right: 20px;
+}
+
+#backlog-status-config .save-btn {
+  float: right;
+  position: relative;
+  top: 20px;
+  right: 0px;
+}

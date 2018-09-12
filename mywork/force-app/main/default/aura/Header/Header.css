@@ -1,0 +1,26 @@
+/* TODO: update the common css so the sizes are based on border-box */
+.THIS * {
+  box-sizing: content-box;
+  font-family: Arial, sans-serif;
+}
+
+.THIS #saving-container {
+  overflow-y: hidden;
+  max-height: 0px; /* set height to 0 to enable animation */
+  transition-duration: .75s;
+  transition-property: all;  
+  transition-timing-function: ease-in-out;
+  display: block;
+  opacity: 1;
+  top: 51px;
+  right: 65px;
+  width: 80px;
+}
+
+.THIS #saving-container.saving {
+  max-height: 35px;
+}
+
+.THIS .banner-body *, .THIS  #banner-sub-menu * {
+  line-height: normal;
+}

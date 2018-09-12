@@ -1,0 +1,50 @@
+<apex:component layout="none">
+  <apex:attribute name="columnConfig" description="The object that stores the column settings" type="ColumnConfig" />
+  <apex:attribute name="primaryColumnTitle" description="The title of the section containing the unused columns" type="String" />
+  <apex:attribute name="secondaryColumnTitle" description="The title of the section containing the selected columns" type="String" />
+  <apex:attribute name="placeholderText" description="Text displayed on secondary column placeholder" type="String" />
+
+  <div id="backlog-columns-config" class="two-col-layout">
+    <div class="col1">
+      <div class="primary-column">
+        <div class="title">{!primaryColumnTitle}</div>
+        <div id="unused-columns-content" class="primary-column-content">
+          <apex:repeat var="column" value="{!columnConfig.unusedColumns}">
+            <div class="item-tile" data-name="{!column.apiName}">
+              <div class="handle"></div>
+              <span title="{!column.label}">{!column.label}</span> <img
+                class="remove" src="/s.gif"
+                title="Remove inactive status" />
+            </div>
+          </apex:repeat>
+        </div>
+      </div>
+    </div>
+    <div class="col2">
+      <div id="active-columns" class="secondary-column">
+        <div class="title clearfix">
+          {!secondaryColumnTitle}<img id="admin-page-help" src="/s.gif" class="hover-help" />
+        </div>
+        <div id="active-columns-content" class="secondary-column-content clearfix">
+          <apex:repeat var="column" value="{!columnConfig.activeColumns}">
+            <div class="{!IF(column.isStatic, 'static-column', 'draggable-column')} {!IF(column.isDefault, 'default', '')}">
+              <div class="item-tile" data-name="{!column.apiName}">
+                <div class="handle"></div>
+                <span title="{!column.label}">{!column.label}</span>
+                <img class="remove" src="/s.gif" title="Remove column" />
+              </div>
+            </div>
+          </apex:repeat>
+          <div class="default-drag-helper">
+            <span>{!placeholderText}</span>
+          </div>
+        </div>
+      </div>
+      <div id="action-panel">
+        <a id="reset-columns">Reset Columns</a>
+        <button type="button" class="important-btn alm-btn save-btn">Save</button>
+      </div>
+    </div>
+  </div>
+  <!-- backlog-columns-config -->
+</apex:component>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Backlog_Component__c.Source_Sandbox__c</field>
+    </columns>
+    <columns>
+        <field>CUST_RECORDTYPE</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_$Component__c.Type__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Component__c.Parent_Component__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Component__c.Deleted__c</field>
+    </columns>
+    <columns>
+        <field>Backlog_Component__c.Notes__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Component__c.Pre_Deployment_Steps__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Component__c.Post_Deployment_Steps__c</field>
+    </columns>
+    <description>A list of components by release and build package</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Backlog__c.Release__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Build Package Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntityCustomEntity$Backlog__c$Backlog_Component__c@Backlog_Component__c.Component__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <sortColumn>FK_$Component__c.Deleted__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Backlog__c.Closed_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

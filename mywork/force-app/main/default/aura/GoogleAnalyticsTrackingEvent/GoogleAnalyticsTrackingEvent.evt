@@ -1,0 +1,6 @@
+<aura:event type="APPLICATION" description="fire this event to get the GA component to log an event metric" >
+  <aura:attribute name="category" type="String" />
+  <aura:attribute name="action" type="String" />
+  <aura:attribute name="label" type="String" description="an optional label describing the event"/>
+  <aura:attribute name="value" type="Integer" description="an optional integer value to store with the event data"/>
+</aura:event>

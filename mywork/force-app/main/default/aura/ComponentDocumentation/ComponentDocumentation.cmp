@@ -1,0 +1,42 @@
+<aura:component >
+
+  <ltng:require styles="{!join(',',
+      $Resource.zip_alm_pm + '/css/component_search2.css'
+    )}"
+    scripts="{!join(',',
+      $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+      $Resource.zip_alm_pm + '/external/jquery.sticky-kit.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+    )}"
+  />
+
+  <aura:attribute name="recordId"
+                  description="Id of the related record" type="String" required="false"/>
+  <aura:attribute name="recordName"
+                  description="Name of the related record" type="String" required="false"/>
+  <aura:attribute name="namespace"
+                  description="Namespace of managed package" type="String" required="false"/>
+
+  <aura:registerEvent name="asyncSaveEvent" type="c:asyncSaveEvent"/>
+
+  <c:pageLayout >
+    <aura:set attribute="header">
+      <c:Header title="{!v.recordName}"
+        homeUrl="{!'/' + v.recordId}"
+        homeLinkTitle="{!v.recordName}"
+        showCancelLink="true"
+        showHelpLink="false"
+        helpUrl="https://s3.amazonaws.com/bw-alm/docs/component-tracking/v2/ALM_Tipsheet_Backlog_Components_Documentation.pdf"
+        showSearchLink="true">
+      </c:Header>
+    </aura:set>
+    <c:CompDocSearchPanel />
+    <div id="alm-container-body">
+      <c:CompDocSearchResults backlogItemId="{!v.recordId}" namespace="{!v.namespace}"/>
+      <c:CompDocDocumentedComponents backlogItemId="{!v.recordId}" />
+      <c:CompDocDependentComponents backlogItemId="{!v.recordId}" />
+      <c:CompDocDocumentedProfiles backlogItemId="{!v.recordId}" />
+    </div>
+  </c:pageLayout>
+  <c:GoogleAnalyticsTracker pageTitle="Component Doc Lightning" applicationName="PM - Component Doc"/>
+</aura:component>

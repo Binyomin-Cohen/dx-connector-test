@@ -1,0 +1,9 @@
+<aura:component >
+  <aura:attribute name="sectionTitle" description="The title" type="String" required="true"/>
+  <div class="page-block-panel">
+    <h3 class="section-title">{!v.sectionTitle}</h3>
+    <div class="page-block-panel-body" >
+      {!v.body}
+    </div>
+  </div>
+</aura:component>

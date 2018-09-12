@@ -1,0 +1,1023 @@
+/* ----- Sprint Attributes ----- */
+#sprint-attributes {
+  height: 36px;
+  padding: 20px 10px 0px 0px;
+  margin-left: 16px;
+}
+
+#sprint-attributes>div {
+  float: left;
+}
+
+.start-date-panel-style,.end-date-panel-style {
+  text-align: left;
+  width: auto;
+  margin: 0 20px 0 0;
+}
+
+#business-value-container {
+  width: 72px;
+  text-align: center;
+  margin: 0 20px 0 0;
+}
+
+#dev-effort-container {
+  width: 70px;
+  text-align: center;
+  margin: 0 20px 0 0;
+}
+
+.business-dev-text {
+  font-family: Arial;
+  font-size: 10px;
+  color: #019cea;
+}
+
+.business-dev-metric-value {
+  font-family: Arial;
+  font-size: 14px;
+  color: #000;
+}
+
+.date-caret {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px -1653px;
+  width: 18px;
+  height: 6px;
+  cursor: pointer;
+}
+
+.date-caret:hover {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px -1708px;
+}
+
+.start-date,.end-date {
+  cursor: pointer;
+  margin: 0 10px 0 0;
+}
+
+/** Hide datepicker on page load **/
+.start-date-picker-div,.end-date-picker-div {
+  display: none;
+}
+
+.start-date-picker-div>div,.end-date-picker-div>div {
+  position: absolute;
+  z-index: 102;
+}
+
+.sp-card-date-default {
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.sp-card-date-entered {
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: bold;
+  color: #0b6196;
+}
+
+/* ----- End Sprint Attributes ----- */
+
+/* ----- Slider ----- */
+.slider-container  {
+  width: 235px;
+  height: 30px;
+  cursor: pointer;
+  margin: 0 20px 0 0;
+  position: relative;
+}
+
+#slider  {
+  background: #9a9a9a;
+  height: 5px;
+  width: 235px;
+  -webkit-box-shadow: inset -2px 3px 3px #5f5f5f;
+  -moz-box-shadow: inset -2px 3px 3px #5f5f5f;
+  box-shadow: inset -2px 3px 3px #5f5f5f;
+}
+
+#slider .ui-slider-range  {
+  background:#0082c4;
+}
+
+#slider .ui-slider-track {
+  border-radius:0px;
+}
+
+.ui-corner-all {
+  border-radius: 0px;
+}
+
+.ui-slider-legend {
+  position: absolute;
+  max-width: 235px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ui-slider-legend p {
+    display: inline-block;
+    font-size: 8px;
+}
+/* ----- End Slider ----- */
+
+#sprint-body {
+  position: relative;
+  height: 415px;
+}
+
+#user-pane-handle {
+  position: absolute;
+  top: 23px;
+  left: -11px;
+  z-index: 10;
+}
+#user-pane-handle.glow img {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -309px -482px;
+  opacity: 1;
+  width: 28px;
+}
+
+#user-pane-handle img {
+  opacity: .5;
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -309px -482px;
+  width: 18px;
+  height: 16px;
+
+}
+
+#user-pane-handle:hover img {
+  opacity: 1;
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -309px -482px;
+  width: 28px;
+}
+
+#user-pane-handle.close:hover img {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -309px -548px;
+  width: 27px;
+}
+
+#sprint-layout {
+    width: 100%;
+    padding-top: 10px;
+    white-space: nowrap;
+    overflow-x: auto;
+    position: absolute;
+    left: 16px;
+    /* left: 285px; when user pane is expanded */
+}
+
+#sprint-layout > div  {
+  display: inline-block;
+  padding: 10px 20px 10px 0px;
+  vertical-align: top;
+  }
+
+#sprint-layout .page-block {
+  width: 280px;
+  margin: 0;
+}
+
+#sprint-layout .sprint-lane:first-child .title {
+  background-color: #F1F1F1;
+  color: #019cea;
+}
+
+.sprint-lane .droppable-hover-placeholder {
+  width: 282px;
+  margin: 0 auto;
+  border: 3px solid #fff;
+}
+
+.sprint-lane .title {
+  background-color: #0b6196;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 10px 0 10px 30px;
+  position: relative;
+}
+
+.sprint-lane .page-block-content {
+  padding: 10px;
+}
+
+#user-pane {
+  position: absolute;
+  top: 3px;
+  left: -14px;
+  display: none;
+  z-index: 11;
+  width: 282px;
+  margin: 0 auto;
+}
+
+#user-pane .page-block {
+  margin: 20px 0px 0 0;
+}
+
+#user-pane .page-block-content {
+  padding: 0;
+}
+
+.clear-invalid-role-icon {
+  position: absolute;
+  right: 5px;
+  top: 44px;
+  z-index: 2;
+}
+
+.clear-invalid-role-icon {
+  position: absolute;
+  right: 5px;
+  top: 44px;
+  z-index: 2;
+}
+
+#user-pane .page-block-content {
+  background-color: #FFF;
+}
+
+.sprint-lane .effort {
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 59px;
+  height: 14px;
+  padding: 10px 5px;
+  font-size: 12px;
+  text-align: center;
+  border-top: 2px solid #49c2ff;
+  background: #0081c2;
+  background: -webkit-gradient(linear, left top, left bottom, from(#01a4f5), to(#0081c2));
+  background: -webkit-linear-gradient(top, #01a4f5, #0081c2);
+  background: -moz-linear-gradient(top, #01a4f5, #0081c2);
+  background: -ms-linear-gradient(top, #01a4f5, #0081c2);
+  background: -o-linear-gradient(top, #01a4f5, #0081c2);
+  color: #FFF;
+}
+
+.sprint-lane .item-count {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 14px;
+  padding: 11px 5px;
+  font-size: 12px;
+  background: #7CA2B9;
+}
+
+.sprint-lane .item-count .item-total {
+  text-align: center;
+  vertical-align: middle;
+  display: block;
+  color: #FFF;
+}
+
+/* SPRINT ITEM CARDS */
+.drag-hover {
+    opacity: .8;
+}
+
+.drag-src-placeholder  {
+  background-color: #CCC;
+  width: 235px;
+  height: 71px;
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.user-drag-src-placeholder {
+  background-color: #CCC;
+  width: 260px;
+  height: 65px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.sprint-item-card-wrap {
+  width: 233px;
+  height: 69px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #d1d1d1;
+  -webkit-box-shadow: 3px 4px 7px rgba(0, 0, 0, .18);
+  -moz-box-shadow: 3px 4px 7px rgba(0, 0, 0, .18);
+  box-shadow: 3px 4px 7px rgba(0, 0, 0, .18);
+  border: solid 1px #fff;
+  padding: 5px;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: move;
+}
+
+.card-close {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -1115px;
+  height: 20px;
+  position: absolute;
+  width: 20px;
+  z-index: 101;
+  cursor: pointer;
+  display: none;
+  top: 2px;
+  left: 0;
+}
+
+.sprint-item-card-wrap:hover .card-close {
+  display: block;
+}
+
+.sprint-item-card-wrap:hover .card-close:hover  {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px -1183px;
+}
+
+.sprint-item-card-wrap h3 {
+  color: #333;
+  float: left;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 0 0 16px;
+  height: 13px;
+  width: 175px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sprint-item-card-wrap hr {
+  background-color: #afafaf;
+  border: 0 none;
+  float: left;
+  margin: 10px 0 0 7px;
+  width: 42%;
+}
+
+.sprint-item-card-wrap hr::after {
+  background-color: #ffffff;
+  content: "";
+  display: block;
+  height: 1px;
+}
+
+.sprint-item-handle {
+  background: url("../img/png_handle_tiny.png") repeat-y top left;
+  height: 80%;
+  margin: 4px 0 0;
+  width: 6px;
+  opacity: 0.5;
+  position: absolute;
+  top:5px;
+}
+
+.sprint-item-handle:hover {
+  opacity: 1;
+}
+
+.sprint-item-details {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-left: 1px solid #afafaf;
+  height: 77px;
+  text-align: center;
+  width: 40px;
+}
+
+.sprint-item-card-wrap span {
+  float: left;
+  margin: 0px 4px;
+}
+
+.sprint-item-user {
+  background: none;
+  float: left;
+  height: 34px;
+  margin: 0 0 0 14px;
+  width: 176px;
+}
+
+.mini-user-card {
+  position: relative;
+  background-color: #f1f1f1;
+  float: left;
+  height: 25px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: solid 1px #ccc;
+  padding: 3px;
+}
+
+.mini-user-card .sprint-item-user-name {
+  font-family: Arial;
+  font-size: 14px;
+  color: #4c4c4c;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 24px;
+}
+
+.mini-user-card .user-icon {
+  display: block;
+  height: 23px;
+  width: 23px;
+  margin: 0 9px 0 0;
+  float: left;
+  border: solid 1px #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.x0-users {
+  background: url("../img/png_alm_sprite1.png") repeat-y scroll -84px -1431px rgba(0, 0, 0, 0);
+}
+
+.x0-users div {
+  color: #b8b8b8;
+  padding-left: 47px;
+  font-family: Arial;
+  font-size: 14px;
+  line-height: 34px;
+}
+
+.x1-users .mini-user-card {
+  width: 170px;
+}
+
+.x2-users .mini-user-card {
+  width: 78px;
+  margin: 0 2px 0 0;
+}
+
+.x3-users .mini-user-card {
+  width: 48px;
+  margin: 0 2px 0 0;
+}
+
+.x1-users .mini-user-card .sprint-item-user-name {
+  width: 132px;
+}
+
+.x2-users .mini-user-card .sprint-item-user-name {
+  width: 43px;
+}
+
+.x3-users .mini-user-card .sprint-item-user-name {
+  width: 13px;
+}
+
+.sprint-item-card-wrap .metric {
+  color: #333;
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.sprint-item-card-wrap .key {
+  color: #019cea;
+  float: left;
+  font-size: 12px;
+  margin: 4px 0 4px 16px;
+}
+
+.sprint-item-card-wrap .type {
+  font-size: 12px;
+  color: #333;
+  width: 54px;
+}
+
+.sprint-item-card-wrap .item-status {
+  font-size: 10px;
+  margin: 7px 0px 4px 4px;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100px;
+}
+
+.title-key {
+  overflow: hidden;
+}
+
+.sprint-item-card-wrap .mvalue {
+  background-color: transparent;
+  color: #0b6196;
+  font-size: 14px;
+  font-weight: bold;
+  height: 16px;
+  padding-top: 1px;
+  text-align: center;
+  width: 29px;
+}
+
+.sprint-item-card-confirm {
+  position: absolute;
+  z-index: 102;
+  display: none;
+  width: 233px;
+  height: 69px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #feae1b;
+  border: solid 1px #e66c09;
+  padding: 5px;
+  top: 0;
+  left: 0;
+  cursor: default;
+  white-space: normal;
+}
+
+.sprint-item-card-confirm p {
+  width: 108px;
+  float: left;
+  margin: 5px 0;
+}
+
+.warning-buttons {
+  padding: 12px 0 0;
+  text-align: center;
+}
+
+/* RELEASE PANEL */
+.release-panel {
+    position: relative;
+    line-height: 10px;
+}
+
+/* override from alm common class to set z-index so
+   that matching results appear on top of
+   Edit Assignments button
+*/
+ul.ui-autocomplete {
+  position: absolute;
+  z-index: 99999;
+}
+
+.release-card-container {
+  width: 275px;
+  height: 34px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #dde9f7;
+  border: solid 1px #50b0ec;
+  position: absolute;
+  font-size: 13px;
+  color: #019cea;
+  text-align: center;
+  display: none;
+}
+
+.release-card-close {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -1513px rgba(0, 0, 0, 0);
+  float: right;
+  height: 20px;
+  margin: 8px 0 0 5px;
+  position: absolute;
+  vertical-align: middle;
+  width: 20px;
+  display: none;
+  cursor: pointer;
+}
+
+.release-card-container:hover .release-card-close {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -1513px rgba(0, 0, 0, 0);
+  cursor: pointer;
+  display: block;
+}
+
+.release-card-container:hover .release-card-close:hover {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -1583px rgba(0, 0, 0, 0);
+  cursor: pointer;
+  display: block;
+}
+
+.release-card-edit {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -989px rgba(0, 0, 0, 0);
+  float: right;
+  height: 20px;
+  margin: 11px 3px 0 251px;
+  vertical-align: middle;
+  width: 20px;
+  display: none;
+  position: absolute;
+  cursor: pointer;
+}
+
+.release-btn-container {
+  position: absolute;
+  z-index: 100;
+  top: -1px;
+  left: -1px;
+  display: none;
+}
+
+.release-btn {
+  height: 36px;
+  width: 275px;
+}
+
+.release-input-container {
+  position: absolute;
+  display: none;
+}
+
+.release-input {
+  height: 22px;
+  width: 271px;
+  padding: 5px 10px;
+}
+
+.release-card-container:hover .release-card-edit {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -989px rgba(0, 0, 0, 0);
+  display: block;
+}
+
+.release-card-container:hover .release-card-edit:hover {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -1052px rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+
+.user-edit-container {
+  position: relative;
+  height: 38px;
+  padding: 10px;
+}
+
+.user-btn-container {
+  position: absolute;
+  z-index: 100;
+}
+
+.user-btn {
+  height: 36px;
+  width: 258px;
+}
+
+.user-input-container {
+  display: none;
+}
+
+.user-input {
+  height: 22px;
+  padding: 5px 10px;
+  width: 236px;
+}
+
+.user-list-container {
+  overflow: auto;
+  padding: 0 10px;
+}
+
+.user-save-container {
+  display: none;
+  padding: 10px;
+  height: 38px;
+  position: relative;
+}
+
+.sprint-item-warning {
+  width: 233px;
+  height: 69px;
+  padding: 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #dde9f7;
+  -webkit-box-shadow: 3px 4px 7px rgba(0, 0, 0, .18);
+  -moz-box-shadow: 3px 4px 7px rgba(0, 0, 0, .18);
+  box-shadow: 3px 4px 7px rgba(0, 0, 0, .18);
+  border: solid 1px #50b0ec;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 102;
+  white-space: normal;
+  display: none;
+}
+
+.sprint-item-warning>div {
+  text-align: center;
+  margin: 5px 0 -8px 0;
+}
+
+.sprint-item-warning>div>strong {
+  vertical-align: middle;
+}
+
+.sprint-item-warning p {
+  text-align: center;
+  line-height: 18px;
+}
+
+.sprint-item-warning:hover {
+  cursor: pointer;
+}
+
+img.oops-close {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -1513px rgba(0, 0, 0, 0);
+  cursor: pointer;
+  float: right;
+  height: 20px;
+  margin: 0;
+  width: 20px;
+}
+
+img.oops-close:hover {
+  background: url("../img/png_alm_sprite1.png") no-repeat;
+  background-position: -84px -1583px;
+}
+
+img.info {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -919px rgba(0, 0, 0, 0);
+  height: 20px;
+  margin: 0 4px 0 0;
+  width: 20px;
+  vertical-align: middle;
+}
+
+.user-tile {
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  background-color: #f1f1f1;
+  height: 65px;
+  width: 243px;
+  float: left;
+  position: relative;
+  margin-bottom: 10px;
+  cursor: move;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.user-tile .error {
+  color: #D01415;
+}
+
+#alm-container .user-tile ul.ui-autocomplete {
+  width: 242px;
+}
+
+.user-tile>div {
+  float: left;
+}
+
+.user-tile .user-section {
+  padding: 12px 7px 7px 7px;
+}
+
+.user-tile a,.user-tile span {
+  text-decoration: none;
+}
+
+.user-tile .role-section {
+  padding: 7px;
+  height: 18px;
+}
+
+.edit-mode .role-section {
+  width: 164px;
+  cursor: pointer;
+}
+
+.user-tile .role-section img.edit-icon {
+  height: 45px;
+  float: left;
+}
+
+.user-tile .assign-role:hover img.edit-icon {
+  background: url("../img/png_list_edit_icon.png") no-repeat;
+  background-position: 0 0;
+  width: 21px;
+  height: 21px;
+  float: right;
+  vertical-align: middle;
+}
+
+.edit-mode .user-tile .assign-role {
+  cursor: pointer;
+}
+
+.user-tile .assign-role img.edit-icon {
+  background-position: 0 0;
+  width: 21px;
+  height: 21px;
+  float: right;
+  margin-top: -3px;
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+.edit-mode .user-tile {
+  cursor: default;
+}
+
+.edit-mode .user-tile:hover .delete-icon,.mini-user-card:hover .delete-icon {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px -1115px;
+  width: 18px;
+  height: 18px;
+  display: inline;
+}
+
+.edit-mode .user-tile .role-section:hover {
+  background-color: #E5E3E4;
+}
+
+.edit-mode .user-tile .assign-role:hover img {
+  visibility: visible;
+}
+
+.edit-mode .user-tile .assign-role span {
+  width: 126px;
+}
+
+.user-tile .assign-role span {
+  float: left;
+  width: 119px;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.user-tile .icon-section {
+  padding: 10px;
+}
+
+.user-tile .icon-section img {
+  width: 45px;
+  height: 45px;
+}
+
+.user-tile .delete-icon,.mini-user-card .delete-icon {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 10;
+  display: none;
+}
+
+#alm-container .delete-icon:hover {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px -1183px;
+  cursor: pointer;
+}
+
+.user-photo {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+input.user-search-roles {
+  width: 165px;
+  height: 28px;
+  color: #000;
+  margin: 0;
+  padding-left: 10px;
+  border-radius: 0px 0px 3px 0px;
+  border-bottom: none;
+  border-right: none;
+  display: none;
+  position: absolute;
+  top: 34px;
+  left: 66px;
+}
+
+#user-pane .action-panel {
+  display: none;
+  float: right;
+}
+
+#alm-container .edit-mode .action-panel {
+  display: block;
+}
+
+#alm-container .edit-mode .cancel-btn-container {
+  display: inline;
+  padding-right: 20px;
+}
+
+.action-panel a {
+  text-decoration: none;
+}
+
+.read-only #sprint-layout div {
+  opacity: .90;
+}
+
+.ui-menu {
+  width: 260px;
+}
+
+.edit-mode .handle {
+  display: none;
+}
+
+.handle {
+  background: url("../img/png_handle_tiny.png") repeat-y top left;
+  background-position: 0 0;
+  width: 6px;
+  opacity: .5;
+  height: 55px;
+  margin: 4px 0px 0px 4px;
+}
+
+.user-tile:hover .handle {
+  opacity: 1;
+}
+
+.ui-autocomplete-loading {
+  background: url("../img/gif_alm_loader_16x16.gif") right center no-repeat white;
+}
+
+#alm-container .chatter-div {
+  background-color: #019CEA;
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  margin: 0px 0px 10px 15px;
+  padding: 8px 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 85px;
+  height: 15px;
+  cursor: pointer;
+}
+
+#alm-container img.chatter-icon {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -309px -276px;
+  float: left;
+  width: 16px;
+  height: 15px;
+}
+
+#chatter-feed-container {
+  margin-left: 30px;
+  display: none;
+}
+
+.chatter-feed-label {
+  float: left;
+  margin: 3px 0px 0px 5px;
+}
+
+.default-drag-helper {
+  width: 200px;
+  margin-top: 15px;
+  padding: 0 40px;
+}
+
+.default-drag-helper span {
+  width: 200px;
+  height: 65px;
+}
+
+.no-matching-role-container {
+  width: 95%;
+  margin-top: -2px;
+}
+
+/**Specific combobox CSS until we can upgrade this page to use require.js and the latest jquery*/
+ul.ui-autocomplete .ui-menu-item.ui-state-focus {
+  border: none;
+}
+
+#alm-container ul.ui-autocomplete .ui-menu-item a.ui-state-focus,
+#alm-container ul.ui-autocomplete .ui-menu-item.ui-state-focus a,
+#alm-container ul.ui-autocomplete li.ui-menu-item.ui-state-focus {
+  background: none;
+  background-color: #0C7FBE;
+  border: none;
+  color: #FFF;
+  border-radius: 0px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+

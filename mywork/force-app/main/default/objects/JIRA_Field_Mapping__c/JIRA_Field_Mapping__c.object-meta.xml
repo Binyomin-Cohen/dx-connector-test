@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Stores field mapping for JIRA integration.  Mapping is from source field name to target field name.</description>
+    <enableFeeds>false</enableFeeds>
+    <label>JIRA Field Mapping</label>
+    <visibility>Public</visibility>
+</CustomObject>

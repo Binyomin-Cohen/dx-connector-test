@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Custom_Domain_Length</fullName>
+    <active>true</active>
+    <description>Prevents the entering of long custom domain names</description>
+    <errorConditionFormula>LEN(Custom_Domain__c) > 199</errorConditionFormula>
+    <errorDisplayField>Custom_Domain__c</errorDisplayField>
+    <errorMessage>Custom domain URLs must less be less than 200 characters.</errorMessage>
+</ValidationRule>

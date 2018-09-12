@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reused_Build__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Reused Build</label>
+    <referenceTo>Jenkins_Build__c</referenceTo>
+    <relationshipLabel>Copied Jenkins Builds</relationshipLabel>
+    <relationshipName>Reused_Build</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

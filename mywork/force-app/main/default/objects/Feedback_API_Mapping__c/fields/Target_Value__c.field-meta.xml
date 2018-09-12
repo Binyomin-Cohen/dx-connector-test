@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Target_Value__c</fullName>
+    <description>Value to populate target field with if comparison evaluates to true - This can be in the form of a merge field on the source object e.g. {!SourceFieldName}. Otherwise, the value will be copied as is.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Value to populate target field with if comparison evaluates to true - This can be in the form of a merge field on the source object e.g. {!SourceFieldName}. Otherwise, the value will be copied as is. (only necessary if this is a complex mapping)</inlineHelpText>
+    <label>Target Value</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

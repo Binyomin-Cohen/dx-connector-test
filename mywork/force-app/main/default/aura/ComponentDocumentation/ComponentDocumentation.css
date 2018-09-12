@@ -1,0 +1,24 @@
+.THIS *, .THIS h2, .THIS td, .THIS th {
+  font-family: Arial, sans-serif;
+}
+
+.THIS * {
+  line-height: normal;
+}
+
+.THIS #alm-container-body {
+  padding: 0 15px;
+}
+
+.THIS a:focus {
+  text-decoration: none;
+}
+
+.THIS #alm-container-body .page-block-panel-section,
+.THIS #alm-container-body .page-block-panel-section-body {
+  padding: 0px;
+}
+
+.THIS #alm-container-body .page-block-panel-section .alm-table {
+  border: none;
+}

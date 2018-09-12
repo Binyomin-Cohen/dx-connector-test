@@ -1,0 +1,56 @@
+.THIS.alm-table tr:hover .component-note {
+  background-color: #EFCDCC;
+}
+
+.THIS.alm-table tr:hover .component-note:hover  {
+  cursor: pointer;
+}
+
+.THIS.alm-table .component-note {
+  min-width: 150px;
+}
+
+.THIS.alm-table th.notes {
+  width: 195px;
+}
+
+.THIS.alm-table .component-note .icon {
+  float: right;
+  width: 10%;
+  min-width: 21px;
+}
+
+.THIS.alm-table .component-note .content {
+  float: left;
+  width: 85%;
+  min-width: 80px;
+}
+
+.THIS.alm-table .component-note img {
+  width: 21px; height: 21px;
+}
+
+.THIS .notes-output {
+  width: 160px;
+  display: inline-block;
+}
+
+.THIS.alm-table tr:hover .component-note img {
+  opacity: 0.5;
+}
+
+.THIS.alm-table tr:hover .component-note:hover img {
+  opacity: 1.0;
+}
+
+.THIS span.normal-component {
+  color:black;
+}
+
+.THIS span.deleted-component {
+  color:red;
+}
+
+.THIS .manual-component {
+  color:orange;
+}

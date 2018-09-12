@@ -1,0 +1,59 @@
+<aura:component controller="ComponentDocController">
+  <ltng:require styles="{!join(',',
+      $Resource.zip_alm_pm + '/css/alm_common.css'
+    )}"
+
+    scripts="{!join(',',
+      $Resource.zip_alm_pm + '/external/moment/moment.js',
+      $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+      $Resource.zip_alm_pm + '/js/api_builder.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+      $Resource.zip_alm_pm + '/js/js_alm_common.js'
+    )}"
+    afterScriptsLoaded="{!c.init}"
+  />
+
+  <aura:handler event="c:asyncSaveEvent" action="{!c.refreshProfiles}" includeFacets="true" />
+  <aura:handler name="CompDocProfileApply" event="c:CompDocProfileApply" action="{!c.saveProfile}" />
+
+  <aura:attribute name="backlogItemId" description="Id of the related backlog item" type="String" required="false"/>
+  <aura:attribute name="profiles" description="the documented profiles" type="ComponentDocProfile[]" required="false"/>
+
+  <aura:attribute name="documentedComponents" description="the documented components JSON" type="Object" required="false"/>
+
+  <aura:if isTrue="{!not(empty(v.profiles))}">
+    <div class="delete-all" onclick="{!c.deleteAllProfiles}">Remove All Profiles &gt;</div>
+  </aura:if>
+
+  <c:pageBlockPanelSection sectionTitle="Profile Settings for Backlog Item" isExpanded="true" showPagination="false">
+    <!-- <span class="default-drag-helper">There are no profiles documented</span> -->
+    <aura:if isTrue="{!empty(v.profiles)}">
+        <c:emptyStateContainer>
+          To document profiles, add them from the available components section
+        </c:emptyStateContainer>
+
+        <aura:set attribute="else">
+          <div class="page-block-content profile-permissions saved-panel" data-documented-components="{!v.documentedComponents}">
+            <!--workaround to get around lightning issue:  Cannot read property 'childNodes' of null-->
+            <span>
+              <aura:iteration items="{!v.profiles}" var="profile" indexVar="index">
+                <c:CompDocDocumentedProfile profile="{!profile}" index="{!index}"/>
+              </aura:iteration>
+            </span>
+          </div>
+        </aura:set>
+    </aura:if>
+    <c:ProfileModal />
+    <div style="display:none;" id="delete-modal" class="alm-modal vertical-center">
+      <div class="page-block clearfix vertical-center">
+        <img class="warning-sign" src="/s.gif" ></img><b>Warning:</b> <br/><br/>
+        <div class="modal-body">
+          <div id="modal-text"></div>
+          <br/><br/>
+          <button type="button" class="subtle-btn" >Yes</button>
+          <button type="button" class="important-btn alm-btn continue-btn" >No</button>
+        </div>
+      </div>
+    </div>
+  </c:pageBlockPanelSection>
+</aura:component>

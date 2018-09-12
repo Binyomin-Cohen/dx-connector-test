@@ -1,0 +1,76 @@
+<div data-sprint-id="{{sprintId}}" data-sprint-name="{{name}}" data-has-ra-items="{{hasItemsForReassignment}}" class="sp-card-wrap-hotspot card-wrap-hotspot">
+ <div class="sp-card-wrap card-wrap">
+  <div class="sprint-name">
+    <div class="edit-container">
+      <input class="edit-input" placeholder="Name Your Sprint" type="text" value="{{name}}" />
+      <button class="important-btn alm-btn save-btn" type="button">Save</button>
+    </div>
+    <a href="/{{sprintId}}" title="{{name}}">{{name}}</a>
+    <img class="edit-card-icon" src="/s.gif" />
+    <img class="close-card-icon" src="/s.gif" />
+  </div>
+  <div class="sp-card-third">
+   {{#startDate}}
+     <span class="sp-card-date-entered">
+      {{startDateDisplay}}
+     </span>
+   {{/startDate}}
+   {{^startDate}}
+     <span class="sp-card-date-default">
+      Set Start Date
+     </span>
+   {{/startDate}}
+   <span class="sp-card-date-default-middle">to</span>
+   {{#endDate}}
+    <span class="sp-card-date-entered">
+      {{endDateDisplay}}
+    </span>
+   {{/endDate}}
+   {{^endDate}}
+     <span class="sp-card-date-default">
+      Set End Date
+     </span>
+   {{/endDate}}
+  </div>
+  <!-- sp-card-third -->
+  <div class="sp-card-third-progress {{statusClass}}">
+   <div class="slider-container">
+     <div class="slider"></div>
+     <div class="ui-slider-legend" data-status-value="{{status}}">{{statusLabel}}</div>
+   </div>
+  </div>
+  <!-- sp-card-third-progress -->
+  <div class="sp-card-third-metrics">
+   <div class="sp-card-metrics first">
+    <p>Total</p>
+    <p>Items</p>
+    <p>
+     <span class="total-items">{{totalItems}}</span>
+    </p>
+   </div>
+   <!-- sp-card-metrics -->
+
+   <div class="sp-card-metrics incomplete">
+    <div class='sp-card-metrics-handle' />
+    <p>Incomplete</p>
+    <p>Items</p>
+    <p>
+     <span class="incomplete-items">{{incompleteItems}}</span>
+     <div class='sp-card-metrics-undo' title='Send all incomplete items back to the Backlog'></div>
+    </p>
+   </div>
+   <!-- sp-card-metrics -->
+   <div class="sp-card-metrics last">
+    <p>Total</p>
+    <p>Effort</p>
+    <p>
+     <span class="total-effort">{{totalEffort}}</span>
+     {{#unestimatedItems}}
+        <div title="There are {{unestimatedItems}} un-estimated items in this sprint" class="unestimated-total">{{unestimatedItems}}</div>
+     {{/unestimatedItems}}
+    </p>
+   </div>
+   <!-- sp-card-metrics -->
+  </div>
+ </div>
+</div>

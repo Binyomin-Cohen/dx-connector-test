@@ -1,0 +1,52 @@
+.THIS.object-tile {
+	background-color: #F1F1F1;
+	border: 1px solid #dddddd;
+	border-radius: 3px;
+	padding: 10px 15px 5px 20px;
+	margin: 0px 20px 20px 0px;
+	width: 283px;
+	height: 88px;
+	float: left;
+	position: relative;
+}
+
+.THIS.object-tile .name {
+	font-size: 20px;
+	font-family: Arial;
+	color: #000000;
+	line-height: 1px;
+}
+
+.THIS.object-tile .api-name {
+	font-size: 13px;
+	font-family: Arial;
+	color: #7CA906;
+	line-height: 1px;
+}
+
+.THIS.object-tile .count {
+	font-size: 22px;
+	font-family: Arial;
+	color: #000000;
+	line-height: 1px;
+}
+
+.THIS.object-tile .br-first-break {
+	display: block;
+	content: "";
+	margin-top: 1px;
+}
+
+.THIS.object-tile .br-second-break {
+	display: block;
+	content: "";
+	margin-top: 10px;
+}
+.THIS.object-tile .overflow-ellipses {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.THIS.card-margins {
+  margin: 0 15px 30px 15px;
+}

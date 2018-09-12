@@ -1,0 +1,333 @@
+#contentWrapper .slds-scope {
+  padding: 10px 10px 30px 10px;
+}
+
+#contentWrapper .slds-scope .ribbon {
+  padding: 1px 0 9px 0;
+}
+
+#contentWrapper .slds-scope .ribbon h1 {
+  font-family: Arial,Helvetica,sans-serif;
+  height: 26px;
+}
+
+#alm-container .alm-container-body {
+  background-color: #0b6196;
+  margin: 0;
+  overflow: hidden;
+}
+
+.admin-console {
+  background-color: #0b6196;
+  border-bottom: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  margin: 0 0 0 8px;
+  overflow: auto;
+  padding: 10px;
+  width: auto;
+  display: table;
+}
+
+
+#main-content {
+  background-color: #FFFFFF;
+  display: table-cell;
+  width: 100%;
+  vertical-align: top;
+  padding: 20px 0px 20px 20px;
+  position: relative;
+}
+
+#sidebar {
+  float: left;
+  width: 180px;
+  margin: 0;
+  display: table-cell;
+}
+
+#sidebar:hover li,#sidebar.child-focus li{
+  opacity: 1.0;
+  -webkit-transition: all linear .25s;
+  transition: all linear .25s;
+}
+
+#sidebar nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#sidebar nav>ul >li {
+  border-top: 1px dashed rgba(255, 255, 255, 0.2);
+  margin-left: 0;
+  padding: 0 0 0 0;
+  line-height: 18px;
+}
+#sidebar nav ul > li {
+  opacity: .5;
+  -webkit-transition: all linear .25s;
+  transition: all linear .25s;
+}
+
+#sidebar nav>ul ul li {
+  margin: 0;
+  padding-left: 15px;
+}
+
+#sidebar nav>ul>li.firstLi {
+  border-top: None;
+  margin-left: 0;
+  padding: 0 0 0 0;
+  line-height: 18px;
+}
+
+#sidebar nav ul > li a {
+  font-family: "proxima-nova", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 14px;
+  width: 140px;
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  padding: 11px 0 11px 15px;
+}
+
+#sidebar nav>ul li:hover {
+  background-color: #033b5d;
+}
+
+#sidebar nav>ul>li a:hover {
+  text-decoration: underline;
+}
+
+#sidebar nav>ul li.active {
+  background-color: #033b5d;
+  opacity: 1.0;
+  position: relative;
+}
+
+#sidebar nav>ul li.active a {
+  font-weight: 700;
+}
+
+#sidebar nav li.parent {
+  position: relative;
+}
+
+#sidebar nav li.parent ul {
+  display:none;
+}
+#sidebar nav li.parent a img {
+  width: 17px;
+  height: 9px;
+  background: url("../../img/png_alm_sprite1.png") no-repeat -84px -1908px;
+  position: absolute;
+  right: 10px;
+  top: 16px;
+}
+
+#sidebar nav li.parent.selected {
+    background-color: #005683;
+}
+
+.primary-column {
+  width: 180px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
+
+.primary-column .title {
+  background-color: #0b6196;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 10px 0 10px 10px;
+  position: relative;
+}
+
+.primary-column-content {
+    padding: 10px;
+    overflow: auto;
+}
+
+.secondary-column-content {
+    padding: 20px;
+    overflow: auto;
+    background-color: #FFF;
+}
+
+.secondary-column {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  margin: 0;
+  padding: 0;
+}
+
+.secondary-column .title {
+  background-color: #F1F1F1;
+  color: #019cea;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 10px 0 10px 10px;
+  position: relative;
+}
+
+.two-col-layout {
+    display: table;
+    width: 100%;
+}
+
+.two-col-layout .col1 {
+  display: table-cell;
+  width: 180px;
+  vertical-align: top;
+}
+
+.two-col-layout .col2 {
+  display: table-cell;
+  width: 100%;
+  vertical-align: top;
+  padding-left: 20px;
+}
+
+.save-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+}
+
+.item-tile {
+  position: relative;
+  width: 130px;
+  height: 13px;
+  padding: 10px 10px 10px 5px;
+  margin-bottom: 10px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f7f4f4),
+        to(#dddbdb));
+  background: -webkit-linear-gradient(top, #f7f4f4, #dddbdb);
+  background: -moz-linear-gradient(top, #f7f4f4, #dddbdb);
+  background: -ms-linear-gradient(top, #f7f4f4, #dddbdb);
+  background: -o-linear-gradient(top, #f7f4f4, #dddbdb);
+  border: 1px solid #cccccc;;
+  border-radius: 3px;
+  cursor: move;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.item-tile.restored {
+  background: none;
+  background-color: #d3e1ef;
+  border: solid 1px #ccc;
+}
+
+.item-tile .remove {
+  display: none;
+}
+
+.item-tile span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 110px;
+}
+
+.drag-src-placeholder {
+  background-color: #CCC;
+  width: 147px;
+  height: 35px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.handle {
+  margin-right: 10px;
+  background: url("../../img/png_handle_tiny.png") repeat-y top left;
+  height: 115%;
+  width: 6px;
+  opacity: 0.5;
+  display: inline-block;
+}
+
+.handle:hover {
+  opacity: 1;
+}
+
+img.hover-help {
+  background: url("../../img/png_alm_sprite1.png") no-repeat -309px -66px;
+  width: 12px;
+  height: 12px;
+  float: right;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Landing page styles */
+#landing-page {
+  text-align: center;
+}
+
+#titles {
+  background-position: center 68px;
+  position: relative;
+  width: auto;
+}
+
+h1#title {
+  background: url("../../img/BW-Sightline_lockup_360x97.png") no-repeat top left;
+  height: 97px;
+  width: 360px;
+  margin: 100px auto 0 auto;
+}
+
+#subtitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #3599d8;
+}
+
+#description {
+  font-size: 12px;
+  width: 475px;
+  margin-top: 45px;
+  margin-bottom: 70px;
+}
+
+#gear-icon > span{
+  font-size: 12px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+#gear-description {
+  font-size: 10px;
+  width: 420px;
+}
+
+#landing-page div {
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
+}
+
+#gear-icon > div {
+  display: inline-block;
+  background: url("../../img/png_alm_sprite1.png") repeat-y top left;
+  background-position: -309px 0;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}

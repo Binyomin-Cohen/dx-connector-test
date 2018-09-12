@@ -1,0 +1,65 @@
+<apex:page docType="html-5.0" sidebar="false">
+
+  <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'css/alm_common.css')}" />
+  <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'css/admin_console/admin_console.css')}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'js/admin_console/admin_console.js')}" ></script>
+  <apex:insert name="includes" />
+
+  <div id="alm-container">
+
+    <apex:outputpanel id="msgs" styleClass="msg-panel">
+      <apex:pageMessages escape="false"/>
+    </apex:outputpanel>
+
+    <c:HeaderRibbon title="Administrator Console" ></c:HeaderRibbon>
+
+    <c:UserVoice ></c:UserVoice>
+
+    <div class="alm-container-body admin-console">
+      <div id="sidebar">
+        <nav>
+          <ul>
+            <li class="firstLi">
+              <apex:outputLink html-data-url="/apex/AdminAlmSettings" value="/apex/AdminAlmSettings">Sightline Settings</apex:outputLink>
+            </li>
+            <li>
+              <apex:outputLink html-data-url="/apex/AdminRoles" value="/apex/AdminRoles">User Management</apex:outputLink>
+            </li>
+            <li class="parent">
+              <a href="#">Backlog <img src="/s.gif" /></a>
+              <ul>
+                <li>
+                  <apex:outputLink html-data-url="/apex/AdminBacklogStatus" value="/apex/AdminBacklogStatus">Inactive Statuses</apex:outputLink>
+                </li>
+                <li>
+                  <apex:outputLink html-data-url="/apex/AdminBacklogPrioritizeColumns" value="/apex/AdminBacklogPrioritizeColumns">Column Headers</apex:outputLink>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <apex:outputLink html-data-url="/apex/AdminSprintColumns" value="/apex/AdminSprintColumns">Sprint Columns</apex:outputLink>
+            </li>
+            <li>
+              <apex:outputLink html-data-url="/apex/AdminInstanceManagement" value="/apex/AdminInstanceManagement">Instances</apex:outputLink>
+            </li>
+            <li>
+              <apex:outputPanel layout="none" rendered="{!$Setup.ALMSettings__c.VCS_Integration_Enabled__c}">
+                <apex:outputLink html-data-url="/apex/AdminVersionControl" value="/apex/AdminVersionControl">VERSION CONTROL</apex:outputLink>
+              </apex:outputPanel>
+            </li>
+            <li>
+              <apex:outputPanel layout="none" rendered="{!$Setup.ALMSettings__c.JIRA_Sync_Enabled__c}">
+                <apex:outputLink html-data-url="/apex/AdminJiraSettings" value="/apex/AdminJiraSettings">JIRA Settings</apex:outputLink>
+              </apex:outputPanel>
+            </li>
+          </ul>
+        </nav>
+      </div><!-- sidebar -->
+      <div id="main-content">
+        <apex:insert name="content" />
+      </div><!-- main-content -->
+    </div> <!-- alm-container-body -->
+  </div> <!-- alm-container -->
+</apex:page>

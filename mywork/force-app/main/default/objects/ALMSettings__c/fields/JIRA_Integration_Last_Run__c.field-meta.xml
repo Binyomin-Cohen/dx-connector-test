@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>JIRA_Integration_Last_Run__c</fullName>
+    <description>Stores the time the integration pulling from JIRA has run</description>
+    <externalId>false</externalId>
+    <label>JIRA Integration Last Run Time</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

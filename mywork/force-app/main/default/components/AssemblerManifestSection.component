@@ -1,0 +1,45 @@
+<apex:component layout="none">
+
+  <apex:attribute name="manifestRecords" description="A collection of component records to be displayed." type="AssemblerManifestRecord[]" required="true" />
+
+  <apex:repeat value="{!manifestRecords}" var="manifestRecord">
+    <tr class="{!IF(manifestRecord.isDocumented, '', 'undocumented-component')} {!IF(manifestRecord.isDeletion, 'deletion', '')} {!IF(manifestRecord.deployManually, 'manual-deploy', '')} {!IF(manifestRecord.isRemoved, 'disabled', '')} {!IF(manifestRecord.isDocumented && ISBLANK(manifestRecord.backlogName), 'deleted-bc', '')} {!IF(manifestRecord.isRemoved != manifestRecord.savedIsRemovedValue, 'changed-is-removed', '')}" data-key="{!manifestRecord.key}">
+      <td class="select">
+        <div class="select-inner-container">
+          <apex:inputHidden id="documented-select" value="{!manifestRecord.isRemoved}" rendered="{!manifestRecord.isDocumented}" />
+          <apex:inputHidden id="undocumented-select" value="{!manifestRecord.isRemoved}" rendered="{!NOT(manifestRecord.isDocumented)}" />
+          <apex:inputHidden id="saved-isRemoved-value" value="{!manifestRecord.savedIsRemovedValue}" />
+          <div class="changed-indicator"></div>
+          <div class="select-button-wrapper">
+            <img src="/s.gif" class="{!IF(AND(manifestRecord.isDocumented, manifestRecord.isRemoved),'add','')}" data-remove-title="{!IF(manifestRecord.isDocumented, 'Remove this documented component from the manifest', '')}" data-add-title="{!IF(manifestRecord.isDocumented, 'Reapply this removed item', '')}" title="{!IF(manifestRecord.isDocumented, IF(manifestRecord.isRemoved, 'Reapply this removed item', 'Remove this documented component from the manifest'), 'Remove this undocumented component from the manifest')}" />    
+          </div>
+        </div>
+      </td>
+      <td class="key">
+       <a href="/{!manifestRecord.backlogId}" target="_blank">{!manifestRecord.backlogName}</a>
+        <img src="/s.gif" class="manifest-record-warning undocumented" title="Newly added components are undocumented!" />
+        <img src="/s.gif" class="manifest-record-warning deleted-bc" title="The component was removed from the backlog item. Please sync the manifest to get the latest changes." />
+      </td>
+      <td><apex:outputText value="{!manifestRecord.backlogStatus}" rendered="{!manifestRecord.isDocumented}" /></td>
+      <td><apex:outputText value="{!manifestRecord.instance}" /></td>
+      <td><apex:outputText value="{!manifestRecord.name}" /></td>
+      <td><apex:outputText value="{!manifestRecord.type}" /></td>
+      <td><apex:outputText value="{!manifestRecord.parent}" /></td>
+      <td>
+        <div class="component-overflow overflow-ellipses" style="{!IF(manifestRecord.isDocumented, '', 'display: none;')}">
+          <apex:outputText title="{!manifestRecord.notes}" value="{!manifestRecord.notes}" rendered="{!manifestRecord.isDocumented}" />
+        </div>
+      </td>
+      <td>
+        <div style="{!IF(manifestRecord.deployManually, '', 'display: none;')}">
+          <input type="checkbox" checked="checked" class="fancy-checkbox disabled" />
+          <label class="checkbox">
+            <span></span>
+            <span class="sort-value">true</span>
+          </label>
+        </div>
+      </td>
+    </tr>
+  </apex:repeat>
+
+</apex:component>

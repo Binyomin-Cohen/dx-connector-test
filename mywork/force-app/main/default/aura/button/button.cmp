@@ -1,0 +1,38 @@
+<aura:component >
+
+  <ltng:require styles="{!join(',', $Resource.zip_alm_pm + '/css/icons.css')}"/>
+
+  <aura:attribute name="actionType" description="Identifier for the parent to handle the onclick" type="String" />
+  <aura:attribute name="buttonId" description="Id that the parent can pass to this button as an identifier" type="String" />
+  <aura:attribute name="buttonStyle" description="Default styling that the button will have" type="String" required="true" />
+  <aura:attribute name="disabled" description="If true, disable this button's handlers" type="Boolean" />
+  <aura:attribute name="icon" description="Type of icon that's in css/icons.css" type="String" />
+  <aura:attribute name="iconPosition" description="Position icon either left or right of the text" type="String" />
+  <aura:attribute name="label" description="If no text is passed, this label will be shown to user" type="String" />
+  <aura:attribute name="onclick" description="Function object will be called onclick" type="Object" />
+  <aura:attribute name="styleClass" description="Any additional styling classes that the parent can pass in" type="String" />
+  <aura:attribute name="text" description="Text that is displayed to the user" type="String" />
+
+  <aura:registerEvent name="buttonEvent" type="c:buttonEvent"/>
+
+  <aura:method name="focusButton" description="Sets focus on the button" />
+
+  <lightning:button aura:id="button"
+                    class="{! join(' ', v.buttonStyle, v.styleClass)}"
+                    label="{!v.label}"
+                    onclick="{!c.handleOnClick}"
+                    disabled="{!v.disabled}">
+
+    <aura:if isTrue="{!equals(v.iconPosition, 'left')}">
+      <span class="{!v.icon}"></span>
+    </aura:if>
+
+    <span class="button-text">{!v.text}</span>
+
+    <aura:if isTrue="{!equals(v.iconPosition, 'right')}">
+      <span class="{!v.icon}"></span>
+    </aura:if>
+
+  </lightning:button>
+
+</aura:component>

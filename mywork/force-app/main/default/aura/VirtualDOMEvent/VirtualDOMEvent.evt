@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="">
+  <aura:attribute name="component" type="Aura.Component" description="The component that emitted the event"/>
+  <aura:attribute name="type" type="String" description="The type of the event (click, keydown, etc.)"/>
+</aura:event>

@@ -1,0 +1,8 @@
+.THIS .combobox-wrapper {
+  display: inline-block;
+}
+.THIS .open-template-col {
+  align-items: center;
+  display: flex;
+  height: 59px;
+}

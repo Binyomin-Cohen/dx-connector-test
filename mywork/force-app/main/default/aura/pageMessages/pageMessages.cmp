@@ -1,0 +1,18 @@
+<aura:component >
+  <aura:attribute name="messages" type="Object[]" />
+
+  <aura:handler event="c:pageMessageAdd" action="{!c.handlePageMessageAddEvent}" includeFacets="true"/>
+  <aura:handler event="c:pageMessagesClear" action="{!c.handlePageMessagesClearEvent}" includeFacets="true"/>
+  <aura:handler name="pageMessageDelete" event="c:pageMessageDelete" action="{!c.handlePageMessageRemoveEvent}"/>
+
+  <div id="pageMessageContainer">
+    <div class="page-messages">
+      <div id="custom-messages" class="msg-panel">        
+        <aura:iteration items="{!v.messages}" var="pageMessage">
+          <c:pageMessage message="{!pageMessage}"/>
+        </aura:iteration>        
+      </div>
+    </div>
+  </div>
+
+</aura:component>

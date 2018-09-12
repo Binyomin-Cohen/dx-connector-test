@@ -1,0 +1,64 @@
+<aura:component >
+  <ltng:require scripts="{!join(',',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/external/moment/moment.js',
+          $Resource.zip_alm_pm + '/external/hogan/hogan.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-ui.js',
+          $Resource.zip_alm_pm + '/external/jquery.sticky-kit.js',
+          $Resource.zip_alm_pm + '/external/bootstrap.min.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js',
+          $Resource.zip_alm_pm + '/js/profile-templates.js',
+          $Resource.zip_alm_pm + '/js/common/profiles.js'
+       )}"
+    afterScriptsLoaded="{!c.init}"
+  />
+
+  <aura:registerEvent name="CompDocProfileApply" type="c:CompDocProfileApply"/>
+
+  <div style="display: none;" id="permissions-modal"
+    class="permissions-modal alm-modal">
+    <a class="close-modal-btn"><img src="/s.gif"></img></a>
+    <div class="page-block permissions-banner vertical-center">
+      <div class="title overflow-ellipses">
+        PROFILE: <span class="profile-name"></span>
+      </div>
+
+      <span class="onoffswitch-container" id="onoffswitch-container">
+        <span class="onoffswitch"> <input type="checkbox"
+          class="onoffswitch-checkbox" id="auto-include-permissions" /> <label
+          class="onoffswitch-label" for="switch-checkbox"> <span
+            class="onoffswitch-inner"></span> <span class="onoffswitch-switch"></span>
+        </label>
+      </span> <span class="onoffswitch-text">Automatically include
+          permissions for any documented components</span>
+      </span> <span class=""> <input id="select-all-permissions"
+        class="fancy-checkbox" type="checkbox" /> <label
+        class="checkbox select-all-checkbox" for="select-all-permissions"><span></span>All</label>
+      </span> <span class="button-container">
+        <button id="profile-apply-btn" type="button" onclick="{!c.apply}" class="important-btn2">apply</button>
+      </span>
+    </div>
+
+    <div id="permissions-modal-body" class="container-fluid"></div>
+  </div>
+
+  <div style="display: none;" id="cancel-profile-modal"
+    class="alm-modal vertical-center">
+    <div class="page-block clearfix vertical-center">
+      <img class="warning-sign" src="/s.gif"></img><b>Warning:</b> <br />
+      <br />
+
+      <div class="modal-body">
+        <div id="modal-text">There are profile changes that have not
+          been applied. Are you sure you want to close without applying these
+          changes?</div>
+        <br />
+        <br />
+        <button type="button" class="subtle-btn close-no-save-btn">Yes</button>
+        <button type="button" class="important-btn alm-btn continue-btn">No</button>
+      </div>
+    </div>
+  </div>
+</aura:component>

@@ -1,0 +1,18 @@
+<aura:component>
+  <aura:attribute name="objectName" type="String" description="the label of the object" required="true" />
+  <aura:attribute name="apiName" type="String" description="the api name of the object" required="true" />
+  <aura:attribute name="count" type="Integer" required="true" />
+  <div class="object-tile slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-5 card-margins slds-col">
+	  <span class="name overflow-ellipses" title="{!v.objectName}">
+	    {!v.objectName}
+	  </span>
+	  <br class="br-first-break" />
+	  <span class="api-name overflow-ellipses" title="{!v.apiName}">
+	    {!v.apiName}
+	  </span>
+	  <br class="br-second-break" />
+	  <span class="count">
+	    {!v.count}
+	  </span>
+ </div>
+</aura:component>

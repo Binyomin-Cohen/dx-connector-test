@@ -1,0 +1,6 @@
+<aura:event type="COMPONENT" description="">
+  <aura:attribute name="component" type="Aura.Component" />
+  <aura:attribute name="selectAll" type="Boolean" />
+  <aura:attribute name="rowId" type="String" />
+  <aura:attribute name="isMultiSelect" type="Boolean" />
+</aura:event>

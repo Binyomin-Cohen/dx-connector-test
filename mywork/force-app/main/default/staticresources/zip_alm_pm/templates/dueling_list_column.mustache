@@ -1,0 +1,15 @@
+
+<div class="slds-dueling-list__column">
+  <span class="slds-form-element__label">{{title}}</span>
+    <div class="slds-dueling-list__options" role="application">
+      <ul aria-multiselectable="true"
+          class="slds-listbox slds-listbox_vertical"
+          role="listbox">
+
+          {{#items}}
+              {{> dueling_list_item_row}}
+          {{/items}}
+
+      </ul>
+    </div>
+</div>

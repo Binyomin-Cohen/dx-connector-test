@@ -1,0 +1,143 @@
+<aura:component controller="AdminVersionControlController">
+
+  <ltng:require styles="{!join(',',
+      $Resource.zip_alm_pm + '/css/component_search2.css',
+      $Resource.zip_alm_pm + '/css/alm_common.css'
+    )}"
+    scripts="{!join(',',
+      $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+      $Resource.zip_alm_pm + '/external/jquery.sticky-kit.js',
+      $Resource.zip_alm_pm + '/external/moment/moment.js',
+      $Resource.zip_alm_pm + '/external/moment/moment-timezone.js',
+      $Resource.zip_alm_pm + '/js/api_builder.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+      $Resource.zip_alm_pm + '/js/js_alm_common.js'
+    )}"
+    afterScriptsLoaded="{!c.doInit}"
+  />
+
+  <!-- Components Attributes -->
+  <aura:attribute name="editMode" type="Boolean"/>
+  <aura:attribute name="hasActiveJob" type="Boolean" default="false" />
+  <aura:attribute name="vcRepositories" type="VCRepository[]" />
+  <aura:attribute name="selectedRepo" type="VCRepository" default="{}" />
+  <aura:attribute name="hosts" type="Object[]" default="[]" />
+  <aura:attribute name="nameHelpText" type="String" default="my-repository" />
+  <aura:attribute name="repoHelpText" type="String" default="git@github.com:bluewolf/my-repository.git" />
+  <aura:attribute name="orgNameHelpText" type="String" default="bluewolf" />
+  <aura:attribute name="defaultHostPlaceholder" type="String" default="-- Select a host --" />
+  <aura:attribute name="recordId"
+                  description="Id of the related record" type="String" required="false"/>
+  <aura:attribute name="recordName"
+                  description="Name of the related record" type="String" required="false"/>
+  <aura:attribute name="namespace"
+                  description="Namespace of managed package" type="String" required="false"/>
+  <aura:attribute name="helpText" type="String"
+    default='The SSH URL of the version control system repository. This URL may explicitly specify the "ssh://" protocol or, as in the case of some VC services (e.g. GitHub), the URL may have its own unique syntax.' />
+  <aura:attribute name="sourceFormatOptions" type="String[]"/>
+  <aura:attribute name="sourceFormat" type="String"/>
+  <aura:handler event="c:buttonEvent" name="buttonEvent" action="{!c.handleButtonClick}" />
+    
+  <div id="version-control-container">
+    <div id="repo-save-container">
+      <aura:if isTrue="{!v.editMode}">
+        <c:pageLayout >
+            <aura:set attribute="header">
+                <c:VCRepositoryManagementHeader title="{! (v.selectedRepo.id) ? v.recordName : 'Create New Repository'}" homeUrl="/apex/AdminVersionControl" homeLinkTitle="Repositories"/>
+            </aura:set>
+          <div class="edit-mode-content">
+            <div class="vc-edit-mode top-grid slds-grid slds-gutters">
+    
+              <div class="slds-col slds-size_1-of-2">
+                <div class="vc-name-input">
+                  <div class="vc-label">Name</div>
+                  <ui:inputText aura:id='vc-name' class="name-input required" placeholder="{#v.nameHelpText}" 
+                                value="{!v.selectedRepo.name}" keyup="{!c.setUnsavedChanges}" updateOn="keyup"/>
+                </div>
+
+                <div class="vc-meta-path-input">
+                  <div class="vc-label">Repository Salesforce Folder<img src="/s.gif" class="info-icon" title="Please provide the folder location where the Salesforce metadata files will be committed to and pulled from." /></div>
+
+                  <ui:inputText aura:id='sfdc-metadata-path' class="meta-path-input" placeholder="main/app/src"
+                                    value="{!v.selectedRepo.metadataPath}" keyup="{!c.setUnsavedChanges}" updateOn="keyup"/>                
+                </div>
+              </div>
+              <div class="slds-col slds-size_1-of-2">
+                <div class="vc-url-input">
+                  <div class="vc-label">Repository URL <img src="/s.gif" class="info-icon" title="{#v.helpText}" /></div>
+                  <ui:inputText aura:id='vc-url' class="repo-input required" placeholder="{#v.repoHelpText}"
+                                value="{!v.selectedRepo.repositoryUrl}" keyup="{!c.setUnsavedChanges}" updateOn="keyup"/>
+                </div>
+                <div>
+                  <div class="vc-label">Source Format<img src="/s.gif" class="info-icon" title="This setting controls how the metadata is stored in your repository. If you're building with Salesforce DX scratch orgs, then select 'Salesforce DX.' If you're building in any other standard Salesforce org, select 'Metadata API' format." /></div>
+                  <lightning:select aura:id="sourceFormatOptions" value="{!v.selectedRepo.sourceFormat}" class="source-format-dropdown" onchange="{!c.updateSourceFormat}">
+                      <aura:iteration items="{!v.sourceFormatOptions}" var="formatOption">
+                          <option value="{!foramtOption}">{!formatOption}</option>
+                        </aura:iteration>
+                  </lightning:select>
+                </div>
+            </div>
+          </div>
+          <div class="vc-edit-mode bottom-grid">
+            <div class="">
+              <div class="enable-external-commit-checkbox">
+                <input type="checkbox" checked="{!v.selectedRepo.enableExternalCommitLink}" class="fancy-checkbox" 
+                    id="enable-external-commit" onclick="{!c.handleEnableExternalCommitClick}" />
+                <label class="checkbox" for="enable-external-commit"><span></span></label>
+                <span class="external-commit-label-text">Enable External Commit Link</span>
+              </div>
+              <div class="slds-grid slds-wrap slds-grid slds-gutters">
+                <div class="vc-host-select slds-col slds-size_1-of-2" data-selected="{!v.selectedRepo.host}" >
+                  <div class="vc-label">Host</div>
+                  <lightning:select class="{! (v.selectedRepo.enableExternalCommitLink) ? 'vc-host-dropdown required' : 'vc-host-dropdown'}"
+                      name="select-host" value="{!v.selectedRepo.host}" disabled="{! !v.selectedRepo.enableExternalCommitLink}" onchange="{!c.setUnsavedChanges}">
+                    <aura:iteration items="{!v.hosts}" var="host">
+                      <option value="{!host.apiName}" text="{!host.label}" selected="{!host.selected}"/>
+                    </aura:iteration>
+                  </lightning:select>
+                </div>
+    
+                <div class="vc-org-name-input slds-col slds-size_1-of-2">
+                  <div class="vc-label">Host Organization Name</div>
+                    <ui:inputText aura:id='vc-org-name' class="{! (v.selectedRepo.enableExternalCommitLink) ? 'org-input required' : 'org-input'}"
+                        placeholder="{#v.orgNameHelpText}" value="{!v.selectedRepo.orgName}"
+                        disabled="{! !v.selectedRepo.enableExternalCommitLink}" keyup="{!c.setUnsavedChanges}" updateOn="keyup"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span aura:id="schedule-panel" id="schedule-panel">
+              <aura:if isTrue="{!not(empty(v.selectedRepo.job))}">
+                  <c:ToolConfiguration job="{!v.selectedRepo.job}" label="Sync Scheduler" componentId="sync-details-container" isActivated="{!v.hasActiveJob}" syncDate="{!v.selectedRepo.syncDate}"/>
+                  <input type="hidden" id="initial-schedule-state" value="{!v.hasActiveJob}"/>
+              </aura:if>
+            </span>
+          </div>
+        </c:pageLayout>
+        <aura:set attribute="else">
+         <aura:if isTrue="{!and(not(v.editMode),empty(v.recordId))}">
+           <div class="non-edit-mode-content">
+             <c:button aura:id="create-repository-button"
+                    actionType="handleCreateNewRepo"
+                    buttonStyle="very-important"
+                    styleClass="vc-create-button"
+                    label="CREATE NEW REPOSITORY"
+                    text="CREATE NEW REPOSITORY"
+                    icon="new-icon"
+                    iconPosition="left"/>
+             <hr />
+            <span class="vc-label">Saved Repositories:</span>
+            <div id="vc-repository-list" aura:id="vc-repository-list">
+              <aura:iteration items="{!v.vcRepositories}" var="repository">
+                <c:VCRepositoryCard aura:id="repo-block-{!repository.id}" vcRepository="{!repository}" namespace="{!v.namespace}"/>
+              </aura:iteration>
+            </div>
+           </div>
+         </aura:if>
+      </aura:set>
+      </aura:if>
+
+    </div>
+  </div>
+  <c:GoogleAnalyticsTracker pageTitle="VC-Repo_Management" applicationName="PM - VC-Repo_Management"/>
+</aura:component>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>ALM_Job__c.Tool__c</field>
+    </columns>
+    <columns>
+        <field>ALM_Job__c.Status__c</field>
+    </columns>
+    <columns>
+        <field>ALM_Job__c.Last_Run_Time__c</field>
+    </columns>
+    <columns>
+        <field>ALM_Job__c.Last_Successful_Run__c</field>
+    </columns>
+    <columns>
+        <field>ALM_Job__c.Last_Failure__c</field>
+    </columns>
+    <columns>
+        <field>ALM_Job__c.Errors__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>ALM_Job__c.Tool__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Snapshot</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Sprint Burndown Job</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$ALM_Job__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>ALM_Job__c.Last_Failure__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,39 @@
+<apex:component layout="none">
+  <apex:attribute name="title" description="The title of the ribbon" type="String" required="true"/>
+  <apex:attribute name="subtitle" description="The subtitle of the ribbon" type="String" required="false"/>
+  <apex:attribute name="settingsUrl" description="The url for the settings page" type="String" required="false"/>
+  <apex:attribute name="homeUrl"
+                  description="The url to take you back to where you came from" type="String" required="false"/>
+  <apex:attribute name="homeLinkTitle"
+                  description="The name of the link to display to take the user back to the home url"
+                  type="String" required="false"/>
+  <apex:attribute name="useHomeIcon"
+                  description="Display an icon to link user back to home page"
+                  type="String" required="false"/>
+  <div class="ribbon-wrap">
+    <div class="ribbon">
+      <div class="ribbon-body">
+        <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(subtitle))}"><h3 class="page-type">{!subtitle}</h3></apex:outputPanel>
+        <h1>
+          {!title}
+          <div class="ribbon-action-container">
+            <div class="button-container">
+              <apex:componentBody />
+            </div>
+          </div>
+          <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(useHomeIcon)), 'true' = LOWER(useHomeIcon))}">
+            <apex:outputLink  styleClass="home-icon" value="{!homeUrl}" title="Go to List Views"></apex:outputLink>
+          </apex:outputPanel>
+          <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(settingsUrl))}">
+            <apex:outputLink  styleClass="settings" value="{!settingsURL}" title="Settings"></apex:outputLink>
+          </apex:outputPanel>
+          <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(homeUrl)), OR(ISBLANK(useHomeIcon), 'false' = LOWER(useHomeIcon)))}">
+            <div class="home-url">&lt;&lt; Back to: <apex:outputLink value="{!homeUrl}" title="{!homeLinkTitle}">{!homeLinkTitle}</apex:outputLink></div>
+          </apex:outputPanel>
+        </h1>
+      </div>
+    </div>
+    <div class="ribbbon-corner-left"></div>
+    <div class="ribbbon-corner-right"></div>
+  </div><!--ribbonWrap-->
+</apex:component>

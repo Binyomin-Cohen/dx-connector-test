@@ -1,0 +1,249 @@
+<aura:component >
+  <ltng:require styles="{!join(',',
+      $Resource.zip_alm_pm + '/external/css/jquery-ui.css',
+      $Resource.zip_alm_pm + '/css/bootstrap.css',
+      $Resource.zip_alm_pm + '/css/admin_console/instances.css'
+    )}"
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-ui.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery.block-ui.js',
+          $Resource.zip_alm_pm + '/external/moment/moment.js',
+          $Resource.zip_alm_pm + '/external/moment/moment-timezone.js',
+          $Resource.zip_alm_pm + '/external/hogan/hogan.js',
+          $Resource.zip_alm_pm + '/js/alm_selectmenu.js',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js',
+          $Resource.zip_alm_pm + '/js/instance-templates.js',
+          $Resource.zip_alm_pm + '/js/admin_console/lightning_admin_repos.js'
+       )}"/>
+  
+  <aura:attribute name="componentId" description="The tool Id." type="String" required="true"/>
+  <aura:attribute name="label" description="The tool label." type="String" required="true"/>
+  <aura:attribute name="job" description="The tool job model." type="Object" required="true"/>
+  <aura:attribute name="isActivated" description="Whether or not the tool is activated." type="Boolean" required="true"/>
+  <aura:attribute name="isDeactivationPending" description="Whether or not the tool is pending deactivation." type="Boolean" required="true"/>
+  <aura:attribute name="applicationResults" description="The tool's application results." type="ALMApplicationResultModel[]" required="true"/>
+  <aura:attribute name="syncDate" description="The date from which commits will be retrieved." type="Date" required="false"/>
+  <aura:attribute name="syncDateHelpText" type="String"
+    default='Select the inclusive date from which commits should be synced from version control.' />
+    
+  <input id="user-timezone" type="hidden" value="{!$Locale.timezone}"/>
+  <div id="{!v.componentId}">
+	  <span id="repo-instance-panel">
+		  <div class="tool-configuration simple-accordion clearfix">
+		    <div class="simple-accordion-header">
+		      <h3 class="simple-accordion-handle">
+		        <img class="tools-icon" src="/s.gif"></img>
+		        <img class="simple-accordion-caret" src="/s.gif"></img>
+		        <span class="tool-title">{!v.label}</span>
+		      </h3>
+		      <span class="onoffswitch-container">
+		        <span class="onoffswitch">
+		          <input type="checkbox" class="onoffswitch-checkbox is-tool-activated" checked="{!v.isActivated}" />
+		          <label class="onoffswitch-label" for="switch-checkbox">
+		            <span class="onoffswitch-inner"></span>
+		            <span class="onoffswitch-switch"></span>
+		          </label>
+		        </span>
+		      </span>
+		      <input type="hidden" value="{!v.isDeactivationPending}"/>
+		    </div>
+		    <div class="simple-accordion-body">
+		      <div class="configure-container">
+		        <div class="configure-header-container col-md-12">
+		          <img class="settings" src="/s.gif"></img>Configure
+		        </div>
+		
+		        <div class="row-fluid">
+		          <div id="email-container" class="email-container col-md-6">
+		            <div class="email-label">Send error notifications to</div>
+		              <input id="mailTo" size="20" maxlength="80" type="text" class="email-input alm-input" placeholder="Email" value="{!v.job.mailTo}"/>
+		          </div>
+		        </div>
+		        <aura:if isTrue="{!v.componentId == 'sync-details-container'}" >
+			        <div class="row-fluid">
+			          <div id="sync-date-container" class="sync-date-container col-md-4">
+			              <div class="vc-label">Sync From Date <img src="/s.gif" class="info-icon" title="{!v.syncDateHelpText}" /></div>
+			              <ui:inputText class="sync-date required" aura:id="mySelectedDate"
+			                            value="{!v.syncDate}" keyup="{!c.setUnsavedChanges}" placeholder="YYYY-MM-DD"/>
+			          </div>
+			        </div>
+		        </aura:if>
+		      </div>
+		    <div class="schedule-container">
+		        <div class="status-container row-fluid clearfix">
+		          <div class="col-md-12">
+		            <img class="calendar-icon" src="/s.gif" />Schedule
+		            <div class="status-section menu-opener">
+		              <input type="hidden" class="status-property" id="status" value="{!v.job.status}"/>
+		              <span class="status-label menu-opener">Status:</span><span class="status-output menu-opener">{!v.job.status}</span><img class="status-arrow menu-opener" src="/s.gif" />
+		              <div class="flyout-menu">
+		                <ul>
+		                  <li class="" data-page-persistence="click"><span>On Hold</span></li>
+		                  <li class="" data-page-persistence="click"><span>Scheduled</span></li>
+		                </ul>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="frequency-label">
+	                How frequently should <span class="tool-title">{!v.label}</span> run?
+	            </div>
+		        <div class="frequency-days row-fluid clearfix">
+		          <!-- Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday -->
+		          <div class="col-md-12">
+		            <!-- Monday, Tuesday -->
+		            <div class="col-md-3">
+		              <!-- Monday -->
+		              <div class="col-md-6">
+		                <span class="{!v.job.scheduledOnMonday == true ? 'clickable-tile selected' : 'clickable-tile'}" data-page-persistence="click">
+		                  <span class="name">Mon</span>
+		                  <input id="scheduledOnMonday" type="hidden" class="day-property" value="{!v.job.scheduledOnMonday}" />
+		                </span>
+		              </div>
+		              <!-- Tuesday -->
+		              <div class="col-md-6">
+		                <span class="{!v.job.scheduledOnTuesday == true ? 'clickable-tile selected' : 'clickable-tile'}" data-page-persistence="click">
+		                  <span class="name">Tue</span>
+		                  <input id="scheduledOnTuesday" type="hidden" class="day-property" value="{!v.job.scheduledOnTuesday}" />
+		                </span>
+		              </div>
+		            </div>
+		            <!-- Wednesday, Thursday -->
+		            <div class="col-md-3">
+		              <!-- Wednesday -->
+		              <div class="col-md-6">
+		                <span class="{!v.job.scheduledOnWednesday == true ? 'clickable-tile selected' : 'clickable-tile'}" data-page-persistence="click">
+		                  <span class="name">Wed</span>
+		                  <input id="scheduledOnWednesday" type="hidden" class="day-property" value="{!v.job.scheduledOnWednesday}" />
+		                </span>
+		              </div>
+		              <!-- Thursday -->
+		              <div class="col-md-6">
+		                <span class="{!v.job.scheduledOnThursday == true ? 'clickable-tile selected' : 'clickable-tile'}" data-page-persistence="click">
+		                  <span class="name">Thu</span>
+		                  <input id="scheduledOnThursday" type="hidden" class="day-property" value="{!v.job.scheduledOnThursday}" />
+		                </span>
+		              </div>
+		            </div>
+		            <!-- Friday, Saturday -->
+		            <div class="col-md-3">
+		              <!-- Friday -->
+		              <div class="col-md-6">
+		                <span class="{!v.job.scheduledOnFriday == true ? 'clickable-tile selected' : 'clickable-tile'}" data-page-persistence="click">
+		                  <span class="name">Fri</span>
+		                  <input id="scheduledOnFriday" type="hidden" class="day-property" value="{!v.job.scheduledOnFriday}" />
+		                </span>
+		              </div>
+		              <!-- Saturday -->
+		              <div class="col-md-6">
+		                <span class="{!v.job.scheduledOnSaturday == true ? 'clickable-tile selected' : 'clickable-tile'}" data-page-persistence="click">
+		                  <span class="name">Sat</span>
+		                  <input id="scheduledOnSaturday" type="hidden" class="day-property" value="{!v.job.scheduledOnSaturday}" />
+		                </span>
+		              </div>
+		            </div>
+		            <!-- Sunday -->
+		            <div class="col-md-3">
+		              <!-- Sunday -->
+		              <div class="col-md-6">
+		                <span class="{!v.job.scheduledOnSunday  == true ? 'clickable-tile selected' : 'clickable-tile'}" data-page-persistence="click">
+		                  <span class="name">Sun</span>
+		                  <input id="scheduledOnSunday" type="hidden" class="day-property" value="{!v.job.scheduledOnSunday}" />
+		                </span>
+		              </div>
+		            </div>
+		          </div>
+		        </div><!-- End date tiles section -->
+		        <div class="frequency-time row-fluid clearfix">
+		          <span class="frequency-time-hours-container col-md-4">
+		            <div class="time-label-container">
+		              <span class="time-label">Attempt to run</span>
+		            </div>
+		            <div class="time-control-container">
+		              <select class="interval">
+		                <option text="Every 1/2 hour" value="0"/>
+		                <option text="Every 2 hours" value="2"/>
+		                <option text="Every 4 hours" value="4"/>
+		                <option text="Every 8 hours" value="8"/>
+		              </select>
+		              <input type="hidden" id="interval" value="{!v.job.interval}" class="interval-property" />
+		            </div>
+		          </span>
+		          <span class="frequency-time-start-container col-md-4">
+		            <div class="time-label-container">
+		              <span class="time-label">Between</span>
+		            </div>
+		            <div class="time-control-container">
+		              <select class="start-time">
+		              </select>
+		              <input id="scheduledStartTime" type="hidden" value="{!v.job.scheduledStartTime}" class="interval-property"/>
+		            </div>
+		          </span>
+		          <span class="frequency-time-end-container col-md-4">
+		            <div class="time-label-container">
+		              <span class="time-label">And</span>
+		            </div>
+		            <div class="time-control-container">
+		              <select class="end-time">
+		              </select>
+		              <input id="scheduledEndTime" type="hidden" value="{!v.job.scheduledEndTime}" class="interval-property"/>
+		            </div>
+		          </span>
+	            </div>
+	            <span id="resultsContainer" class="results-container">
+		          <div class="results-header-container">
+		            <img class="results-header-icon" src="/s.gif"></img><span>Results</span>
+		          </div>
+		          <div class="table-container">
+		            <table class="alm-table zebra">
+		              <thead>
+		                <tr>
+		                  <th class="column-header-bordered" width="25%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Date</span></th>
+		                  <th class="column-header-bordered" width="25%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Result</span></th>
+		                  <th class="column-header-bordered" width="25%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Error Code</span></th>
+		                  <th width="25%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Duration (mins)</span></th>
+		                </tr>
+		              </thead>
+		
+		              <tbody>
+		                <aura:iteration items="{!v.job.applicationResults}" var="model">
+		                  <tr>
+		                    <td><ui:outputText value="{! if(empty(model.endTime), model.startTime, model.endTime) }"/></td>
+		                    <td>
+		                      <aura:if isTrue="{!model.isSuccess}">
+			                      <a href="{!'/'+model.id}" class="results-success-icon overflow-ellipses table-cell" target="_blank" title="{!model.result}">
+			                        <span class="result-text">{!model.result}</span>
+			                      </a>
+		                      </aura:if>
+		                      <aura:if isTrue="{!model.isWarnings}">
+			                      <a href="{!'/'+model.id}" class="results-warnings-icon overflow-ellipses table-cell" target="_blank" title="{!model.result}">
+			                        <span class="result-text">{!model.result}</span>
+			                      </a>
+		                      </aura:if>
+		                      <aura:if isTrue="{!model.isFailure}">
+			                      <a href="{!'/'+model.id}" class="results-failure-icon overflow-ellipses table-cell" target="_blank" title="{!model.result}">
+			                        <span class="result-text">{!model.result}</span>
+			                      </a>
+		                      </aura:if>
+		                      <aura:if isTrue="{!model.isInProgress}">
+			                      <a href="{!'/'+model.id}" class="overflow-ellipses table-cell" target="_blank" title="{!model.result}">
+			                        <span class="result-text">{!model.result}</span>
+			                      </a>
+		                      </aura:if>
+		                    </td>
+		                    <td class="overflow-ellipses table-cell"><ui:outputText value="{!model.errorCode}" title="{!model.errorCode}"/></td>
+		                    <td><ui:outputText value="{!model.duration}"/></td>
+		                  </tr>
+		                </aura:iteration>
+		              </tbody>
+		            </table>
+		          </div>
+		        </span>
+		      </div>
+		    </div>
+	    </div>
+	 </span>
+  </div>
+</aura:component>

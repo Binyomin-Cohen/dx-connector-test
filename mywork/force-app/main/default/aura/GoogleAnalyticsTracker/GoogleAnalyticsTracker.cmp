@@ -1,0 +1,18 @@
+<aura:component controller="GoogleAnalyticsTrackerController">
+  <ltng:require
+    scripts="{!join(',',
+      $Resource.zip_alm_pm + '/js/api_builder.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+    )}"
+    afterScriptsLoaded="{!c.doInit}" />
+
+  <aura:attribute name="pageTitle" type="String" default=""/>
+  <aura:attribute name="applicationName" type="String" default=""/>
+  <aura:attribute name="vfDomain" type="String" default=""/>
+  <aura:handler event="c:GoogleAnalyticsTrackingEvent" action="{!c.handleTrackingEvent}" />
+
+
+  <!--TODO: verify url from a packaged context -->
+  <iframe id="ga-frame" aura:id="ga-frame" src="{!'/apex/GAEvent?appName=' + v.applicationName + '&amp;pageTitle=' + v.pageTitle}" height="0" width="0"/>
+  
+</aura:component>

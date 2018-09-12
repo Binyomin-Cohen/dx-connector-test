@@ -1,0 +1,62 @@
+<aura:component controller="OAuthLightningController">
+  <ltng:require styles="{!join(',',
+      $Resource.zip_alm_pm + '/css/oauth.css'
+   )}"
+   scripts="{!join(',',
+      $Resource.zip_alm_pm + '/js/api_builder.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+   )}"
+   afterScriptsLoaded="{!c.doInit}"
+  />
+
+  <aura:attribute name="popupId" description="unique name for creating the popup" type="String" required="false" default="" />
+  <aura:attribute name="authorizeText" description="authorize prompt" type="String" required="false" default="Click to authorize" />
+  <aura:attribute name="authorizedUser" description="username of the authorized user" type="String" required="false" default="" />
+  <aura:attribute name="instanceId" description="the id of the instance to authorize" type="String" required="false" />
+  <aura:attribute name="disable" description="True if this widget should be disabled" type="Boolean" required="false" />
+  <aura:attribute name="isRequired" description="Will show the red left border if this is required" type="Boolean" required="false" />
+  <aura:attribute name="isAuthorized" description="True if the instance is authorized" type="Boolean" required="false" />
+  <aura:attribute name="isChangingAuth" description="True if the user is changing their authorization"
+                  type="Boolean" required="false" default="false"/>
+  <aura:attribute name="isForTools" description="True if the authorization will be used for system tools like SCAN"
+                  type="Boolean" required="false" default="true"/>
+  <aura:attribute name="authPollIntervalMs" type="Integer" default="2000"
+                  description="Inverval (in milliseconds) between checks to the auth cache" />
+  <aura:attribute name="authPollId" type="String" description="unique id to internally track polling request" />
+  <aura:handler name="change" value="{!v.instanceId}" action="{!c.getAuthStatus}"/>
+  <aura:handler name="change" value="{!v.disable}" action="{!c.handleToggleDisable}"/>
+
+  <aura:registerEvent name="authChangeEvent" type="c:AuthChangeEvent"/>
+
+  <aura:registerEvent name="authInitEvent" type="c:AuthInitEvent" />
+
+  <div class="oauth-container lightning unauthorized"
+       aura:id="oauth-container"
+       data-instance-id="{!v.instanceId}"
+       data-required="{!v.isRequired}"
+       onclick="{!c.changeAuthorizedCredentials}" >
+
+    <aura:if isTrue="{!v.isChangingAuth}">
+      <!-- changing auth -->
+      <a onclick="{!c.authorizeInstanceClick}" class="unauthorized-text">Change Authorized Credentials</a>
+      <div onclick="{!c.cancelChangeAuth}" class="oauth-user-cancel lightning" title="Cancel"/>
+
+      <!-- not changing auth -->
+      <aura:set attribute="else">
+        <!-- authorized -->
+        <aura:if isTrue="{!v.isAuthorized}">
+          <div class="authorized-user overflow-ellipses" title="{!v.authorizedUser}">{!v.authorizedUser}</div>
+          <div class="oauth-user-edit" />
+          <div class="authorized-icon" title=""></div>
+        </aura:if>
+
+        <!-- unauthorized -->
+        <aura:if isTrue="{!not(v.isAuthorized)}">
+          <a onclick="{!c.authorizeInstanceClick}" class="unauthorized-text">{!v.authorizeText}</a>
+          <div onclick="{!c.authorizeInstanceClick}" class="unauthorized-icon" title="{!v.authorizeText}"></div>
+        </aura:if>
+      </aura:set>
+    </aura:if>
+
+  </div>
+</aura:component>

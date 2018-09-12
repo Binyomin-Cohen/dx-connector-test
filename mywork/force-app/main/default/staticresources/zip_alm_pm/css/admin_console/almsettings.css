@@ -1,0 +1,119 @@
+.alm-container-body .container-fluid * {
+  box-sizing: border-box;
+}
+
+/* Override message positioning */
+#alm-container .admin-console #main-content .msg-panel .message {
+  margin-top: -20px;
+  overflow: auto;
+}
+
+#alm-container [id$='almsettings-msgs'] .message:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Override bootstrap header styles */
+#alm-container h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+#alm-container input[type="text"].alm-input {
+  /* Need height due to border-box sizing */
+  height: 30px;
+  box-shadow: none;
+}
+
+#alm-container #oauth-container {
+  height: inherit;
+  width: 100%;
+  padding-bottom: 15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+#main-content > form > [id$="instance-details"] > .container-fluid > .row {
+  margin-bottom: 20px;
+}
+
+#alm-settings-title {
+  background: url("../../img/png_alm_sprite1.png") no-repeat top left;
+  background-position: -759px -1832px;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 5px;
+  width: 194px;
+  height: 37px;
+  text-align: center;
+  margin: auto;
+}
+
+#alm-settings-title-highlight {
+  color: #3599d8;
+}
+
+#alm-settings-description {
+  width: 315px;
+  margin: auto;
+  color: #B0B0B2;
+}
+
+span#alm-settings-type-select-button {
+  /* Need important to override inline styles */
+  width: 100% !important;
+  height: 28px;
+}
+
+#alm-container .alm-settings .authorized-user {
+  width: 85%;
+  padding-right: 1em;
+}
+
+#alm-container [id$='almsettings-msgs'] .message {
+  margin: -20px 15px 25px 0px;
+}
+
+#alm-container [id$='almsettings-msgs'] .warning-sign,
+#alm-container [id$='almsettings-msgs'] .msgIcon {
+  float: left;
+  padding-right: 5px;
+}
+
+#alm-container [id$='almsettings-msgs'] .message > span {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  padding-left: 0;
+}
+
+#instance-type-container .ui-selectmenu-button:active,
+#instance-type-container .ui-selectmenu-button:focus,
+#instance-type-container .ui-selectmenu-button:hover {
+  background-color: #FFFFFF;
+  color: #000000;
+  border-color: #c5c5c5;
+  border-left: 3px solid #ff0000;
+}
+
+#alm-settings-type-select-menu .ui-menu-item .ui-menu-item-wrapper {
+  padding: 10px 10px 10px 17px;
+  margin: -10px -10px -10px -17px;
+  border: none;
+}
+
+#alm-settings-type-select-menu .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+  background: #0C7FBE;
+  color: #FFFFFF;
+}
+
+#alm-settings-type-select-button .ui-selectmenu-icon.ui-icon {
+  margin: -8px 0 0 0;
+  height: 28px;
+}

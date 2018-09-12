@@ -1,0 +1,25 @@
+<aura:component>
+  <aura:attribute name="step" description="Current step in the upload process, zero-based index" type="Integer" required="false" default="-1" />
+  <aura:attribute name="enableNextButton" description="Boolean that when set will enable or disable the next button" type="Boolean" required="false" default="false" />
+  <aura:attribute name="parsedUploadFile" description="Model of the uploaded file" type="Map" required="false" />
+  <aura:attribute name="objectToPendingRecordCount" type="List" description="The total number of records to be created for each object type" />
+  <aura:attribute name="objectLabelToApiName" type="Map" description="The api name of the object based on the label" />
+  <aura:attribute name="emptyBlocks" type="String[]" description="The remaining empty blocks to iterate over" />
+  <aura:attribute name="mappingConfigData" type="BacklogItemUploadMappingConfig" description="List of models for each field mapping." />
+  <aura:handler name="change" value="{!v.step}" action="{!c.populateObjectToPendingRecordCount}" />
+  <c:BacklogItemUploadStepSummary
+    stepHeaderInstructions="Review the records that will be created below"
+    stepSummaryTopRow="{!v.parsedUploadFile.filename}"
+    stepSummaryBottomRow="{!v.parsedUploadFile.rows.length + ' Backlog Item Record(s)'}" />
+
+
+  <div class="slds-grid slds-wrap">
+  <aura:iteration items="{!v.objectToPendingRecordCount}" var="objectDetails">
+    <c:BacklogItemUploadObjectSummaryCard objectName="{!objectDetails.objectName}" apiName="{!objectDetails.apiName}" count="{!objectDetails.count}" />
+  </aura:iteration>
+  <aura:iteration items="{!v.emptyBlocks}" var="emptyObjectDetails">
+    <div class="slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-5 empty-card slds-col">
+    </div>
+  </aura:iteration>
+ </div>
+</aura:component>

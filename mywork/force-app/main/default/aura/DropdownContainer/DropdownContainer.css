@@ -1,0 +1,43 @@
+.THIS .dropdown-input {
+  height:auto;
+}
+
+.THIS .body-container {
+  position: absolute;
+  /* TODO: Fix. top displays differently on different pages.  */
+  top: 26px;
+  z-index: 1000;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.176) 0px 6px 12px 0px;
+  border-radius: 0px;
+  border: 1px solid #cccccc;
+  display: table;
+
+}
+
+.THIS .closed {
+  display: none;
+}
+
+.THIS .dropdown-text-container {
+  display: inline-block;
+  width: 100%;
+}
+
+.THIS input.selected-value {
+  text-overflow: ellipsis;
+  width: 100%;
+  height: 27px;
+}
+
+.THIS.alm-combobox input.selected-value[disabled] {
+  cursor: pointer;
+  padding-right: 24px;
+}
+
+.THIS .expander-container {
+  width: 24px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}

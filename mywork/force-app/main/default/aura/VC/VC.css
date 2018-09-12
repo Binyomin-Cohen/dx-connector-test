@@ -1,0 +1,70 @@
+.THIS#alm-container {
+  background-color: #FFFFFF;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  margin-bottom: -20px;
+}
+
+.THIS .public-key .slds-textarea {
+  height: 133px;
+}
+.THIS .heading-small-black {
+  color: #000000;
+  font-size: 20px;
+  line-height: 1;
+  font-family: Arial;
+  padding-right:10px;
+}
+
+.THIS .header-padding {
+  padding-top:20px;
+  padding-bottom:15px;
+}
+
+.THIS .body-default {
+  font-size: 14px;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+  margin-right:10px;
+}
+
+.THIS#alm-container .button-elongated {
+  padding-top: 10px;
+  padding-bottom: 11px;
+  width: 157px;
+  height: 35px;
+}
+
+.THIS .custom-underline {
+  border-bottom: 1px solid #000000;
+  padding-bottom: 3px;
+  margin-left:10px;
+}
+
+.THIS .page-section {
+  padding-bottom: 20px;
+}
+
+.THIS#alm-container > #vc-body{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.THIS .invisible, .THIS .public-key > label {
+  display: none;
+}
+.THIS .public-key,
+.THIS .repo-section {
+  margin-top: 20px;
+}
+
+.THIS .repo-section {
+  padding-bottom: 40px;
+}
+
+.THIS .section-disabled {
+  opacity: 0.2;
+}
+.THIS .repo-table {
+  width: 100%;
+  margin-top: 10px;
+}

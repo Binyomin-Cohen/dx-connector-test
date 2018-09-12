@@ -1,0 +1,37 @@
+<aura:component >
+
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/alm_common.css'
+     )}"
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js'
+       )}"/>
+
+  <aura:attribute name="rows" type="String[]"/>
+  <aura:attribute name="sfObject" type="String"/>
+  <aura:attribute name="isError" type="Boolean"/>
+
+  <div style="display:none;" class="alm-modal">
+    <div class="page-block clearfix">
+      <div class="{!v.isError ? 'results-error' : 'results-warning'}">
+        <a class="close-modal-btn" onclick="{!c.hideModal}"><img src="/s.gif"></img></a>
+        <div class="results-modal-header">
+          <h2 class="results-modal-header-text header-warning">{!v.rows.length} values do not exist in the {!v.sfObject} object</h2>
+          <h2 class="results-modal-header-text header-error">{!v.rows.length} values can not be created in your target org.</h2>
+          <button type="button" class="important-btn2 apply inactive" onclick="{!c.hideModal}">OK</button>
+        </div>
+        <div class="alm-table-container">
+          <table class="alm-table zebra">
+            <aura:iteration items="{!v.rows}" var="lookupValue">
+              <tr>
+                <td class="lookup-value">{!lookupValue}</td>
+              </tr>
+            </aura:iteration>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</aura:component>

@@ -1,0 +1,84 @@
+.THIS {
+  margin-bottom: 30px;
+}
+
+.THIS .spinner-row .slds-spinner {
+    position: relative;
+}
+
+.THIS .sorting {
+    background-image:none;
+}
+
+.THIS#comp-search-res-wrapper .componentPaging {
+  display: inline-block;
+  height: 14px;
+}
+
+.THIS#comp-search-res-wrapper .componentPaging > ul {
+  list-style: none;
+  display: table;
+  margin: auto;
+  padding-left: 40px;
+}
+
+.THIS#comp-search-res-wrapper .componentPaging > ul > li {
+  display: table-cell;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.THIS#comp-search-res-wrapper .componentPaging.top-paging {
+  margin-bottom: 10px;
+}
+
+.THIS#comp-search-res-wrapper .componentPaging.bottom-paging {
+  margin-top: 10px;
+}
+
+.THIS#comp-search-res-wrapper .selected-options > span {
+  line-height: 25px;
+}
+
+.THIS#comp-search-res-wrapper #component-search-table th {
+  width: 16%;
+}
+
+.THIS#comp-search-res-wrapper #component-search-table th.select-all {
+  width: 3%;
+  padding-left: 6px;
+}
+
+.THIS#comp-search-res-wrapper #component-search-table th img {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.THIS div.selected-options {
+  padding: 20px 20px 0px 20px;
+}
+
+.THIS div.selected-options label {
+  padding-right: 3px;
+}
+
+.THIS div.selected-options .valign {
+  margin-top: 12px;
+}
+
+.THIS .alm-table td, .THIS .alm-table th {
+  box-sizing: content-box;
+}
+
+.THIS#comp-search-res-wrapper input.notes {
+  width: 25%;
+}
+
+.THIS .add-btn {
+  margin-bottom: 10px;
+  float:right;
+}
+
+.THIS td.selected-comp-cb {
+  text-align: center;
+}

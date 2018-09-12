@@ -1,0 +1,38 @@
+<aura:component controller="DXController">
+  <ltng:require styles="{!join(',',
+      $Resource.zip_alm_pm + '/css/alm_common.css'
+    )}"
+    scripts="{!join(',',
+        $Resource.zip_alm_pm + '/js/api_builder.js',
+        $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+        $Resource.zip_alm_pm + '/js/js_alm_common.js'
+    )}"
+    afterScriptsLoaded="{!c.init}" />
+
+  <aura:attribute name="definitionOptions" type="Object[]" required="false"
+    description="The scratch org definitions to use as combobox options. Each element should have a label and value attribute" />
+
+  <aura:attribute name="selectedScratchOrgDefId" type="String" required="false" description="" />
+  <aura:attribute name="showTemplateLink" type="Boolean" required="false" default="false" description="show a link to the template if true" />
+  <aura:attribute name="templateLinkUrl" type="String" required="false"  description="" access="private" />
+
+  <aura:handler name="comboboxChangeEvent" event="c:comboboxChangeEvent" action="{!c.handleComboBoxChanges}" />
+
+  <lightning:navigation aura:id="nav-service"/>
+  <div class="slds-grid slds-wrap">
+    <div class="available-templates slds-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium">
+      <div class="template-select-label">Scratch Org Definition</div>
+      <c:combobox aura:id="scratch-def-select" inputId="scratch-def-select"
+          comboboxId="scratch-def-combobox"
+          isRequired="true"
+          disabled="false"
+          options="{!v.definitionOptions}" />
+    </div>
+
+    <div class="slds-col open-template-col slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-horizontal_medium">
+        <aura:if  isTrue="{!and( v.showTemplateLink, !empty(v.selectedScratchOrgDefId)) }">
+            <lightning:formattedUrl  value="{!v.templateLinkUrl}" label="Open selected template" target="_blank" />
+        </aura:if>
+    </div>
+  </div>
+</aura:component>	

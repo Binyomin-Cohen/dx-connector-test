@@ -1,0 +1,24 @@
+{{#mainClass}}
+  <div class="sp-card-wrap-error alm-warning {{mainClass}}">
+{{/mainClass}}
+{{^mainClass}}
+  <div class="sp-card-wrap-error alm-warning">
+{{/mainClass}}
+  <p>
+    <img class="warning-sign" src="/s.gif" ><strong>Warning:</strong>
+  </p>
+  <p>{{messagePart1}}
+    <br /><br />
+      <strong>{{url}}</strong>
+    <br /><br />
+    {{messagePart2}}
+    <br /><strong class="underline">{{underlineEnding}}</strong></p>
+  <div class="warning-buttons">
+    {{#continueButtonClass}}
+      <button class="subtle-btn {{continueButtonClass}}" type="button">ok</button>
+    {{/continueButtonClass}}
+    {{^continueButtonClass}}
+      <button class="subtle-btn continue-btn" type="button">ok</button>
+    {{/continueButtonClass}}
+  </div>
+</div>

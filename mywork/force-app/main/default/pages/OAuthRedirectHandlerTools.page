@@ -1,0 +1,10 @@
+<apex:page docType="html-5.0" title="OAuth for Tools Redirect Handler"  controller="OAuthRedirectToolsController" action="{!handleRedirect}" sidebar="false">
+    <script src="{!URLFOR($Resource.zip_alm_pm, 'external/jquery/jquery-3.2.1.js')}" ></script>
+    <script src="{!URLFOR($Resource.zip_alm_pm, 'js/js_alm_common.js')}" ></script>
+    <apex:pageMessages id="oauthRedirectHandlerMessages" />
+    <script>
+       if(!BW.AlmCommon.pageMessagesPopulated("{!$Component.oauthRedirectHandlerMessages}")){
+            window.close();
+        }
+    </script>
+</apex:page>

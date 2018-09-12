@@ -1,0 +1,30 @@
+.THIS .banner {
+  background: #F1F1F1;
+  font-size: 14px;
+  color: #222222;
+  border-bottom: 1px solid #DDDDDD;
+  margin-bottom: 0px;
+}
+
+.THIS .banner {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.THIS .banner .banner-body .home-url {
+  padding-top: 5px;
+  font-size: 11px;
+}
+
+.THIS .banner .banner-body .title-section {
+  margin-top: 10px;
+}
+
+.THIS.banner-wrap {
+  padding-bottom: 10px;
+  min-height: 60px;
+}
+
+.THIS #save-btn-container {
+   margin-top: 10px;
+}

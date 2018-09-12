@@ -1,0 +1,42 @@
+.THIS .name-container {
+  position: relative;
+  padding-right: 20px;
+}
+
+.THIS .component-deleted-icon {
+  position: absolute;
+  right: 0px;
+  top: -3px;
+}
+
+.THIS td.comp-doc-table-element {
+  height: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.THIS .component-note-value.notes-output {
+  width: auto;
+  display: block;
+}
+
+.THIS.saved-component[data-is-deleted="true"] td,
+.THIS.saved-component[data-is-deleted="true"] a {
+  color: #FF0000;
+}
+
+.THIS.saved-component[data-is-unsupported="true"] td,
+.THIS.saved-component[data-is-unsupported="true"] a {
+  color: #FF9210;
+}
+
+.THIS.saved-component[data-is-deleted="true"] .component-deleted-icon {
+  visibility: visible;
+}
+
+.THIS.saved-component .component-deleted-icon {
+  display: inline-block;
+  margin-left: 3px;
+  cursor: pointer;
+  visibility: hidden;
+}

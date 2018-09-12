@@ -1,0 +1,97 @@
+<aura:component controller="BacklogItemUploadController">
+  <ltng:require styles="{!join(',',
+      $Resource.zip_alm_pm + '/css/alm_common.css'
+    )}"
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+       )}" />
+  <aura:attribute name="step" description="Current step in the upload process, zero-based index" type="Integer" required="false" /> 
+
+  <aura:attribute name="parsedUploadFile"
+                     description="Model of the uploaded file" type="Map" required="false"/>
+  <aura:handler name="comboboxChangeEvent" event="c:comboboxChangeEvent" action="{!c.handleComboBoxChanges}" />
+  <aura:handler name="change" value="{!v.parsedUploadFile}" action="{!c.initMappingConfigurations}"/>
+  <aura:handler name="change" value="{!v.step}" action="{!c.handleStepChange}"/>
+
+  <aura:attribute name="mappingConfigData" type="BacklogItemUploadMappingConfig"
+    description="List of models for each field mapping." />
+  <aura:attribute name="hasUnmappedRequiredFields" type="Boolean" default="true"
+    description="Show/hide the non-required fields section." />
+  <aura:attribute name="showLoadingFieldsSpinner" type="Boolean" default="false"
+    description="Show/hide the loading more fields spinner."/>
+  <aura:attribute name="enableNextButton" type="Boolean"
+    description="Boolean that when set will enable or disable the next button" required="false"/>
+
+  <div class="upload-field-mapping-wrapper">
+    <c:BacklogItemUploadStepSummary
+        stepHeaderInstructions="Map your fields"
+        stepSubheaderInstructions="Your file has been auto-mapped to existing Salesforce fields, but you can edit the mappings if you wish.
+        Unmapped fields will not be imported when the new records are created."
+        stepSummaryTopRow="{!v.parsedUploadFile.filename}"
+        stepSummaryBottomRow="{!v.parsedUploadFile.rows.length + ' Backlog Item Record(s)'}"/>
+    <table class="alm-table">
+      <thead>
+        <tr>
+          <th class="notification-column"></th>
+          <th class="field-column"></th>
+          <th class="notification-column">Map</th>
+          <th class="field-column"></th>
+          <th class="sample-column"></th>
+          <th class="lookup-results"></th>
+        </tr>
+        <tr>
+          <th class="light-table-header-cell notification-column"></th>
+          <th class="light-table-header-cell field-column">Source Fields</th>
+          <th class="light-table-header-cell empty-column">To</th>
+          <th class="light-table-header-cell field-column">Backlog Item Fields</th>
+          <th class="sample-column">Sample</th>
+          <th class="lookup-results">Lookup Results</th>
+        </tr>
+      </thead>
+      <tbody>
+        <aura:iteration items="{!v.mappingConfigData.requiredMappingConfigurations}" var="requiredFieldMapping" indexVar="rowIndex">
+          <c:BacklogItemUploadFieldMappingConfig config="{!requiredFieldMapping}" uniqueIdentifier="{!'r' + rowIndex}"
+             allSalesforceFields="{!v.mappingConfigData.allBacklogItemFields}"
+             uploadedColumns="{!v.mappingConfigData.uploadedColumnNames}"
+             dataRows="{!v.parsedUploadFile.rows}"
+             unmappedSalesforceFields="{!v.mappingConfigData.unmappedFields}"
+             lookupFieldApiNames="{!v.mappingConfigData.lookupFieldApiNames}" />
+        </aura:iteration>
+        <aura:if isTrue="{!v.showLoadingFieldsSpinner}">
+          <tr class="slds spinner-row">
+            <td colspan="6" class="spinner-row-cell">
+              <div class="slds-spinner slds-spinner--brand slds-spinner--small" aria-hidden="false">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+              </div>
+            </td>
+          </tr>
+        </aura:if>
+        <aura:if isTrue="{!and(!v.showLoadingFieldsSpinner, v.hasUnmappedRequiredFields)}">
+          <tr class="info-message-unmapped-required-fields-row">
+            <td colspan="6">
+              <span class="info-message-container">
+                <img class="info-icon" src="/s.gif" />
+                After you map your required fields above, you will be able to map your remaining fields below.
+              </span>
+            </td>
+          </tr>
+        </aura:if>
+        <aura:if isTrue="{!!v.hasUnmappedRequiredFields}">
+          <!-- Workaround/Possible Lightning Bug: If the body of the aura:if component is an iteration, and the iteration is changed or not populated.
+                rerender threw an error in 'markup://aura:if' [Cannot read property 'childNodes' of null] Failing descriptor: {markup://aura:if} -->
+          <tr style="display: none;"></tr> 
+          <aura:iteration items="{!v.mappingConfigData.mappingConfigurations}" var="fieldMapping" indexVar="rowIndex">
+            <c:BacklogItemUploadFieldMappingConfig config="{!fieldMapping}" uniqueIdentifier="{!'u' + rowIndex}"
+              uploadedColumns="{!v.mappingConfigData.uploadedColumnNames}"
+              dataRows="{!v.parsedUploadFile.rows}"
+              allSalesforceFields="{!v.mappingConfigData.allBacklogItemFields}"
+              unmappedSalesforceFields="{!v.mappingConfigData.unmappedFields}"
+              lookupFieldApiNames="{!v.mappingConfigData.lookupFieldApiNames}" />
+          </aura:iteration>
+        </aura:if>
+      </tbody>
+    </table>
+  </div>
+</aura:component>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuraDefinitionBundle xmlns="urn:metadata.tooling.soap.sforce.com" fqn="DropdownContainer">
+    <apiVersion>42.0</apiVersion>
+    <description>
+      A container for a dropdown menu. Contains the styling for the text input and adjacent expander button.
+      Renders the provided body in a dropdown panel. See InstancesMultiSelect for example usage. 
+    </description>
+</AuraDefinitionBundle>

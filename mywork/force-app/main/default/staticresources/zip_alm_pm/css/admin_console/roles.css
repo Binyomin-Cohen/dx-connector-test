@@ -1,0 +1,212 @@
+#new-panel {
+  position: relative;
+  height: 32px;
+}
+
+#new-btn-container {
+  position: absolute;
+  z-index: 100;
+  top: -1px;
+  left: 0;
+  width: 100%;
+}
+#new-btn-container .new-btn {
+  height: 31px;
+  width: 180px;
+}
+
+#new-input-container {
+  display: none;
+  position: relative;
+}
+#new-input-container button.add-btn {
+  position: absolute;
+  width: 41px;
+  height: 31px;
+  top: -1px;
+  margin-left: -2px;
+  padding: 3px 13px;
+}
+
+#new-input {
+  width: 118px;
+  color: black;
+  padding: 7px 10px;
+  margin-top: 0px;
+}
+
+@-moz-document url-prefix() {
+  #new-input {
+    width: 118px;
+    color: black;
+    padding: 5.5px 10px;
+    margin-top: 0px;
+  }
+}
+#role-panel {
+  overflow: auto;
+}
+
+#action-panel {
+  height: 34px;
+}
+
+.role-tile {
+  border: 1px solid #DDDDDD;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  width: 140px;
+  background-color: #F1F1F1;
+  padding: 15px 20px;
+  float: left;
+  margin: 10px 20px 10px 0px;
+  position: relative;
+}
+.role-tile span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 140px;
+  display: inline-block;
+}
+.role-tile .delete-icon {
+  position: absolute;
+  background: url("../../img/png_alm_sprite1.png") no-repeat top left;
+  background-position: -84px -292px;
+  left: 0px;
+  top: 0px;
+  z-index: 10;
+  display: none;
+  width: 18px;
+  height: 18px;
+}
+.role-tile input {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 4px 15px;
+  height: 36px;
+  width: 147px;
+  z-index: 100;
+}
+.role-tile:hover {
+  cursor: pointer;
+  background-color: #E5E4E4;
+}
+.role-tile:hover .delete-icon {
+  display: inline;
+}
+.role-tile:hover img.edit-icon {
+  display: inline;
+}
+.role-tile img.edit-icon {
+  background: url("../../img/png_list_edit_icon.png") no-repeat;
+  background-position: 0 0;
+  width: 21px;
+  height: 21px;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  display: none;
+}
+
+.sprint-item-warning {
+  width: 211px;
+  height: 79px;
+  padding: 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #DDE9F7;
+  -webkit-box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.18);
+  -moz-box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.18);
+  box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.18);
+  border: solid 1px #50B0EC;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 102;
+  display: none;
+}
+.sprint-item-warning > div {
+  text-align: center;
+  margin: 5px 0 -8px 0;
+}
+.sprint-item-warning > div > strong {
+  vertical-align: middle;
+}
+.sprint-item-warning p {
+  text-align: center;
+  line-height: 18px;
+}
+
+img.oops-close {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll -84px -1513px rgba(0, 0, 0, 0);
+  cursor: pointer;
+  float: right;
+  height: 20px;
+  margin: 0;
+  width: 20px;
+}
+img.oops-close:hover {
+  background: url("../../img/png_alm_sprite1.png") no-repeat;
+  background-position: -84px -1583px;
+}
+
+.sp-card-wrap-error {
+  width: 221px;
+  height: 171px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #FEAE1B;
+  border: solid 1px #E66C09;
+  color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 100;
+}
+.sp-card-wrap-error p {
+  line-height: 15px;
+  padding: 0 5px;
+  text-align: center;
+}
+.sp-card-wrap-error p span {
+  background: url("../../img/png_alm_sprite1.png") no-repeat 0 -1943;
+  height: 20px;
+  width: 20px;
+}
+
+img.close-sprint {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll 0 -1601px;
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+}
+img.close-sprint:hover {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll 0 -1671px;
+  cursor: pointer;
+}
+
+.warning-buttons {
+  padding: 4px 0 0;
+  text-align: center;
+}
+
+#alm-container .warning-buttons button {
+  margin: 0px 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+img.info {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll -84px -919px rgba(0, 0, 0, 0);
+  height: 20px;
+  margin: 0 4px 0 0;
+  width: 20px;
+  vertical-align: middle;
+}

@@ -1,0 +1,32 @@
+<aura:component>
+  <ltng:require styles="{!join(',', $Resource.zip_alm_pm + '/css/alm_common.css' )}"/>
+
+  <aura:attribute name="inputDisplayText" type="String" required="false" default="default value!"
+                  description="Text to display in the input"/>
+  <aura:attribute name="userTextInputDisabled" type="Boolean" required="false" default="false"
+                  description="Disable text input from user"/>
+  <aura:attribute name="openDropdown" type="Boolean" default="false"/>
+
+  <aura:method name="close" action="{!c.close}" access="PUBLIC"></aura:method>
+  <aura:method name="open" action="{!c.open}" access="PUBLIC"></aura:method>
+  <aura:method name="toggleOpenClose" action="{!c.toggleOpenClose}" access="PUBLIC"></aura:method>
+  <aura:method name="disableUserTextInput" action="{!c.disableUserTextInput}" access="PUBLIC"></aura:method>
+  <aura:method name="enableUserTextInput" action="{!c.enableUserTextInput}" access="PUBLIC"></aura:method>
+
+  <aura:handler name="render" value="{!this}" action="{!c.onPostRender}"/>
+
+  <div class="alm-combobox" onkeydown="{!c.handleKeydown}">
+    <div class="dropdown-text-container" onclick="{!c.handleInputTextClick}">
+      <input class="selected-value" type="text" placeholder="{!v.inputDisplayText}" aura:id="dropdown-input" />
+    </div>
+    <div class="expander-container">
+      <a class="expander" onclick="{!c.toggleOpenClose}"></a>
+    </div>
+
+    <div class="{! v.openDropdown ? 'body-container' : 'body-container closed'}" aura:id="body-container">
+      {!v.body}
+    </div>
+
+  </div>
+
+</aura:component>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Active_Jobs</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>Last_Failure__c</columns>
+    <columns>Last_Run_Time__c</columns>
+    <columns>Last_Successful_Run__c</columns>
+    <columns>Login_Error__c</columns>
+    <columns>Mail_To__c</columns>
+    <columns>Warnings__c</columns>
+    <columns>Errors__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Scheduled,Running</value>
+    </filters>
+    <label>All Active Jobs</label>
+</ListView>

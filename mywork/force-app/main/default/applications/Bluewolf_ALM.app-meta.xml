@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <formFactors>Large</formFactors>
+    <label>Bluewolf Sightline</label>
+    <tab>standard-Dashboard</tab>
+    <tab>standard-report</tab>
+    <tab>Business_Objective__c</tab>
+    <tab>Project__c</tab>
+    <tab>Backlog__c</tab>
+    <tab>Sprints</tab>
+    <tab>Release__c</tab>
+    <tab>ALM_Admin_Console</tab>
+</CustomApplication>

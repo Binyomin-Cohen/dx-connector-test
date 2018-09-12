@@ -1,0 +1,25 @@
+<aura:component controller="AdminVersionControlController">
+  <aura:attribute name="vcRepository" description="VC Repository record"
+                  type="VCRepository" />
+  <aura:attribute name="selected" description="Whether or not this block is selected."
+                  type="Boolean" default="false" />
+  <aura:attribute name="disabled" description="If true, display card as disabled and removing all handlers on the button"
+                  type="Boolean" default="false" />
+  <aura:attribute name="namespace"
+                  description="Namespace of managed package" type="String" required="false"/>
+
+  <div class="vc-repo-block"
+       data-is-disabled="{!v.disabled}"
+       data-is-selected="{!v.selected}"
+       onclick="{!c.handleSelectBlock}"
+       title="{!v.vcRepository.name}" >
+
+    <span class="repo-name">
+        {!v.vcRepository.name}
+        <lightning:icon iconName="utility:overflow" size="small" alternativeText="repository"/>
+    </span>
+
+  </div>
+
+</aura:component>
+

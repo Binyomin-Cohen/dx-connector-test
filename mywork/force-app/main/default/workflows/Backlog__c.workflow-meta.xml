@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Capture_Closed_Date</fullName>
+        <field>Closed_Date__c</field>
+        <formula>NOW()</formula>
+        <name>Capture Closed Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Resolved_Date</fullName>
+        <field>Resolved_Date__c</field>
+        <formula>NOW()</formula>
+        <name>Set Resolved Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Capture Closed Date</fullName>
+        <actions>
+            <name>Capture_Closed_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Backlog__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </criteriaItems>
+        <description>Date/Time should be set when defect's status is changed to Closed</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Capture Resolved Date</fullName>
+        <actions>
+            <name>Set_Resolved_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Backlog__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Resolved</value>
+        </criteriaItems>
+        <description>Date/Time should be set when defect's status is changed to Resolved</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

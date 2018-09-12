@@ -1,0 +1,19 @@
+  <table class="alm-table">
+   <thead>
+     <tr>
+       <th style="width: 10%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Key</span></th>
+       <th style="width: 15%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Component Name</span></th>
+       <th style="width: 10%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Type</span></th>
+       <th style="width: 24%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Problem</span></th>
+       <th style="width: 10%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Problem Type</span></th>
+       <th style="width: 8%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Changed</span></th>
+       <th style="width: 8%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Deleted</span></th>
+       <th style="width: 14%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Error Location</span></th>
+     </tr>
+   </thead>
+   <tbody>
+     {{#errors}}
+       {{> deployment_error_component}}
+     {{/errors}}
+   </tbody>
+  </table>

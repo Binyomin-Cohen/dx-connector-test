@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Admin_Console_Description</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Admin Console Description</shortDescription>
+        <value>In this section of Bluewolf Sightline you will find every resource you need to configure your Sightline settings. You can customize the columns that you see in the backlog management, create roles for your team, and much more.</value>
+    </labels>
+    <labels>
+        <fullName>Admin_Console_Gear_Description</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Admin Console Gear Description</shortDescription>
+        <value>The gear icon appears on pages that have Sightline settings. By clicking the gear you will be sent straight to the page where you can configure the settings for that specific feature.</value>
+    </labels>
+    <labels>
+        <fullName>Admin_Console_Gear_Icon</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Admin Console Gear Icon</shortDescription>
+        <value>Gear icon</value>
+    </labels>
+    <labels>
+        <fullName>Admin_Console_OAuth_Wrong_Org</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Admin_Console_OAuth_Wrong_Org</shortDescription>
+        <value>The user account provided for Sightline authorization does not match this instance's org id. You MUST authorize with a user account that is from this instance.</value>
+    </labels>
+    <labels>
+        <fullName>Admin_Console_Subtitle</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Admin Console Subtitle</shortDescription>
+        <value>Administration Console</value>
+    </labels>
+    <labels>
+        <fullName>Admin_Console_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Admin Console Title</shortDescription>
+        <value>Sightline</value>
+    </labels>
+    <labels>
+        <fullName>Automated_Testing_Login_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Automated Testing login error.</shortDescription>
+        <value>Automated Testing is unable to log in to the instance.</value>
+    </labels>
+    <labels>
+        <fullName>Automated_Testing_No_Tests_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Automated Testing missing tests error.</shortDescription>
+        <value>Automated Testing is unable to find qualifying unit tests within the test organization.</value>
+    </labels>
+    <labels>
+        <fullName>Automated_Testing_Tests_In_Progress_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Automated Testing tests in-progress error.</shortDescription>
+        <value>A previous job ({0}) was still running which prevented the current job from executing.</value>
+    </labels>
+    <labels>
+        <fullName>Org_Tests_In_Progress_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Automated Testing tests in-progress error.</shortDescription>
+        <value>Tests were already running in the instance which prevented the current job from executing.</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Component_Environment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Component Environment</shortDescription>
+        <value>Instance</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Component_Last_Modified_By</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Component Last Modified By</shortDescription>
+        <value>Last Modified By</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Component_Last_Modified_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Component Last Modified Date</shortDescription>
+        <value>Last Modified Date</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Component_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Component Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Component_Notes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Component Notes</shortDescription>
+        <value>Notes</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Component_Parent_Component</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Component Parent Component</shortDescription>
+        <value>Parent Component</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Component_Profile</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Component Profile</shortDescription>
+        <value>Profile</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Component_Profile_Permission</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Component Profile Permission</shortDescription>
+        <value>Profile Permission</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Component_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Component Type</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Default_Name</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Backlog Default Name</shortDescription>
+        <value>Backlog</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_User_Mgmt_Role_Required</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Backlog User Mgmt Role Required</shortDescription>
+        <value>&lt;span class="subject">Required Assignment:&lt;/span> You must assign a ROLE to a USER to save your changes</value>
+    </labels>
+    <labels>
+        <fullName>Component_Field_Unavailable</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Component Field Unavailable</shortDescription>
+        <value>Not Available</value>
+    </labels>
+    <labels>
+        <fullName>Generic_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Generic Error</shortDescription>
+        <value>An error occurred. Please try again or contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Grooming_Conflict</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Conflict during backlog grooming</shortDescription>
+        <value>There are multiple users grooming this backlog. {0} has edited this record.</value>
+    </labels>
+    <labels>
+        <fullName>HTTP_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>HTTP Error</shortDescription>
+        <value>An error occurred while making an HTTP request. Please contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>HTTP_Invalid_Request</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>An invalid HTTP request was attempted.</shortDescription>
+        <value>An invalid HTTP request was attempted.</value>
+    </labels>
+    <labels>
+        <fullName>Instance_Add_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Instance Add Error</shortDescription>
+        <value>Error adding a new instance:</value>
+    </labels>
+    <labels>
+        <fullName>Instance_Undelete_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Instance Undelete Error</shortDescription>
+        <value>Error undeleting an existing instance:</value>
+    </labels>
+    <labels>
+        <fullName>Instance_Auth_Invalid</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>The instance authorization is invalid.</shortDescription>
+        <value>The instance authorization is invalid.</value>
+    </labels>
+    <labels>
+        <fullName>Jenkins_Build_Status_URL</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Jenkins Build Status URL</shortDescription>
+        <value>api/xml?depth=1&amp;tree=builds[number,result,actions[parameters[name,value]]]&amp;xpath=//build[action/parameter[name='buildId'][value='</value>
+    </labels>
+    <labels>
+        <fullName>Jenkins_Build_Assembler_Failure_Errors_Not_Ignored</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>The Jenkins Build failed because of unignored errors</shortDescription>
+        <value>There were errors during the build stage that need to be resolved.</value>
+    </labels>
+    <labels>
+        <fullName>Jenkins_Build_Error_No_Repo_Or_Reused_Build</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Jenkins Job needs either a repo or a build to reuse</shortDescription>
+        <value>Please specifiy either a Version Control Repository or select a Build to reuse.</value>
+    </labels>
+    <labels>
+        <fullName>Jenkins_Build_Assembler_Warning_Errors_Ignored</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>The Jenkins Build succeeded and errors were ignored</shortDescription>
+        <value>Warning: There were build errors that need to be reviewed.</value>
+    </labels>
+    <labels>
+        <fullName>More_Filtering_Required</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>More Filtering Required</shortDescription>
+        <value>Too Many Results. Please filter your search to be more specific.</value>
+    </labels>
+    <labels>
+        <fullName>Permissions_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Permissions Error</shortDescription>
+        <value>You do not have the proper permissions to use this feature. Contact your administrator to enable access.</value>
+    </labels>
+    <labels>
+        <fullName>SSH_Management_Key_Creation_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SSH management key creation error.</shortDescription>
+        <value>Failure creating SSH management key.</value>
+    </labels>
+    <labels>
+        <fullName>SSH_Management_Key_Retrieval_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SSH management key retrieval error.</shortDescription>
+        <value>Failure retrieving SSH management key.</value>
+    </labels>
+    <labels>
+        <fullName>SSH_User_Key_Generation_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SSH user key generation error.</shortDescription>
+        <value>Failure generating SSH user key.</value>
+    </labels>
+    <labels>
+        <fullName>SSH_User_Key_Invalid_Field_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SSH user key invalid field error.</shortDescription>
+        <value>Invalid SSH user key field specified.</value>
+    </labels>
+    <labels>
+        <fullName>SSH_User_Key_Retrieval_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SSH user key retrieval error.</shortDescription>
+        <value>Failure retrieving SSH user key.</value>
+    </labels>
+    <labels>
+        <fullName>SSH_User_Key_Storage_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SSH user key storage error.</shortDescription>
+        <value>Failure storing SSH user key.</value>
+    </labels>
+    <labels>
+        <fullName>Scan_ALM_Settings_error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SCAN - Sightline Settings Error</shortDescription>
+        <value>In order to use SCAN, Sightline must be configured.</value>
+    </labels>
+    <labels>
+        <fullName>Sightline_Instance_Does_Not_Exist</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Sightline Instance does not exist.</shortDescription>
+        <value>Sightline Instance does not exist.</value>
+    </labels>
+    <labels>
+        <fullName>Sightline_Instance_Not_Authorized</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>The Sightline instance is not authorized.</shortDescription>
+        <value>To validate or deploy you must authorize the Sightline instance.</value>
+    </labels>
+    <labels>
+        <fullName>Sightline_Instance_Not_Authorized_For_Assembler</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Sightline Instance Not Authorized For Assembler</shortDescription>
+        <value>The current running user does not have sufficient privileges to deploy to the target instance. Please authorize this instance in Slingshot.</value>
+    </labels>
+    <labels>
+        <fullName>Slingshot_cancel_error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Slingshot - unable to cancel</shortDescription>
+        <value>This validation/deployment could not be canceled: the operation has already completed</value>
+    </labels>
+    <labels>
+        <fullName>Sprint_Item_Cannot_Add_To_Completed_Sprint</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Sprint Item - Cannot add to a completed sprint.</shortDescription>
+        <value>Cannot add a backlog item to a completed sprint.</value>
+    </labels>
+    <labels>
+        <fullName>Sprint_Item_Open_Sprint_Item_Exists</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Sprint Item - An open sprint item exists.</shortDescription>
+        <value>There is an open sprint item for this backlog item.</value>
+    </labels>
+    <labels>
+        <fullName>Tool_Connection_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Sightline Tool Connection Error</shortDescription>
+        <value>{0} cannot run because of a connection error to the &lt;b>{1}&lt;/b> instance.</value>
+    </labels>
+    <labels>
+        <fullName>Unauthorized_Endpoint_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unauthorized_Endpoint_Error</shortDescription>
+        <value>Using Custom Domains or Automated Testing in Sightline requires the domain of the instance added to the Remote Site Settings in the Salesforce org where Sightline is installed.
+
+Error:</value>
+    </labels>
+    <labels>
+        <fullName>VC_Connection_Validation_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>VC connection validation error.</shortDescription>
+        <value>Failure validating VC connection.</value>
+    </labels>
+    <labels>
+        <fullName>VC_Keypair_Retrieval_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>VC keypair retrieval error.</shortDescription>
+        <value>An SSH key pair is required. Please visit the key pair management page to generate a key pair.</value>
+    </labels>
+    <labels>
+        <fullName>VC_Repository_Retrieval_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>VC repository retrieval error.</shortDescription>
+        <value>Failure retrieving VC repository.</value>
+    </labels>
+    <labels>
+        <fullName>Validation_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Validation Message</shortDescription>
+        <value>Update Failed. One or more records you are attempting to update caused a validation rule to fail:</value>
+    </labels>
+    <labels>
+        <fullName>VC_Validation_Creation_Attempt_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>VC Validation Creation Attempt Error</shortDescription>
+        <value>Failure creating a validation attempt record.</value>
+    </labels>
+    <labels>
+        <fullName>Error_Report_Format</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Report format error.</shortDescription>
+        <value>Invalid or unsupported report format.</value>
+    </labels>
+    <labels>
+        <fullName>Snapshot_Report_Data_Conversion_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Snapshot Report Data Conversion Error</shortDescription>
+        <value>An error has occurred while converting the data in the report :</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_ID_Determination_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog ID Determination Error</shortDescription>
+        <value>Error determining the backlog ID.</value>
+    </labels>
+    <labels>
+        <fullName>Backlog_Auto_Prioritization_Custom_Setting_Upsert_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Backlog Auto-Prioritization Custom Setting Upsert Error</shortDescription>
+        <value>Error updating the backlog auto-prioritization setting.</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Jenkins_Job_Path_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Jenkins Job has an invalid path</shortDescription>
+        <value>The path provided is invalid. Please check that the value is correct.</value>
+    </labels>
+    <labels>
+        <fullName>Jenkins_Job_No_Previous_Successful_Package_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Build Package found for Build object</shortDescription>
+        <value>No Build Package was found for the selected build. Please select a different build.</value>
+    </labels>
+    <labels>
+        <fullName>Jenkins_Job_Error_Invalid_Reused_Build</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Jenkins Job Error Invalid Reused Build</shortDescription>
+        <value>The build selected for reuse is no longer valid. Please select a different build.</value>
+    </labels>
+    <labels>
+        <fullName>Jenkins_Job_Missing_Resource_Location_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Source Repository Location was configured on the Jenkins Job.</shortDescription>
+        <value>No Source Repository branch or tag was specified.</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Jenkins_Job_Token_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Jenkins Job has an invalid token</shortDescription>
+        <value>The Jenkins job Authentication token provided is invalid. Please check that the value is correct.</value>
+    </labels>
+    <labels>
+        <fullName>Failure_Starting_Jenkins_Job</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Jenkins Job failed to start</shortDescription>
+        <value>Failure starting Jenkins job.</value>
+    </labels>
+    <labels>
+        <fullName>Jenkins_Failing_Build_Rule_Msg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Unable to start build. One or more build rules have not been met.</shortDescription>
+        <value>Unable to start build. One or more build rules have not been met.</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Repo_Name_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Duplicate Repo Name Error</shortDescription>
+        <value>A repository already exists with that name.</value>
+    </labels>
+    <labels>
+        <fullName>Parse_Package_Apex_Tests_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Parse Package Apex Tests Error</shortDescription>
+        <value>Could not load Apex Test Classes related to the uploaded build package.</value>
+    </labels>
+    <labels>
+        <fullName>Parse_Manual_Package_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Parse Manual Package Error</shortDescription>
+        <value>An error has occurred trying to parse a manually uploaded build package.</value>
+    </labels>
+    <labels>
+        <fullName>DML_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>DMLError</shortDescription>
+        <value>An error occurred while saving the record(s).</value>
+    </labels>
+    <labels>
+        <fullName>CURRENTLY_IN_PROGRESS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Currently in progress</shortDescription>
+        <value>This deployment is currently in progress and a new request cannot be started until the current operation completes. Please reload the deployment to see the current status.</value>
+    </labels>
+    <labels>
+        <fullName>Unable_To_Connect_To_Sightline_Server_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cannot connect to salesforce server.</shortDescription>
+        <value>Sightline is unable to connect to its server. Please contact Sightline support.</value>
+    </labels>
+    <labels>
+        <fullName>Custom_Validation_Rule_Error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>A validation rule exception</shortDescription>
+        <value>A validation rule has prevented this record from saving: </value>
+    </labels>
+</CustomLabels>

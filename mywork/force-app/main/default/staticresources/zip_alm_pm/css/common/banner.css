@@ -1,0 +1,103 @@
+.banner-wrap {
+  width: 100%;
+  display: inline-block;
+  z-index: 11;
+  min-height: 82px;
+}
+
+.banner {
+  background-color: #555;
+  padding: 10px 0px 10px 0px;
+  position: relative;
+  margin-bottom: 28px;
+  color: #fffefe;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.banner .home-url {
+  font-size: 10px;
+  color: #a6a6a6;
+}
+
+.banner-body {
+  padding-left: 10px;
+  min-height: 31px;
+}
+
+.banner-body .button-container {
+  height: inherit;
+}
+
+.banner-body .button-container {
+  height: inherit;
+}
+
+.banner-action-container {
+  position: static;
+  right: 15px;
+  top: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#banner-sub-menu {
+  width: 100%;
+  bottom: -24px;
+  top: inherit;
+  position: absolute;
+}
+
+#banner-sub-menu a.action,
+#banner-sub-menu span.action {
+  float: right;
+  display: inline-block;
+  position: relative;
+  margin-right: 5px;
+  background-color: #8C8C8C;
+  border: 1px solid #8C8C8C;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  width: 22px;
+  height: 22px;
+}
+
+#banner-sub-menu span.action:hover {
+  cursor: pointer;
+}
+
+#banner-sub-menu a.action img,
+#banner-sub-menu span.action img {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#alm-container .help-btn {
+  display: block;
+  background-color: #009DDC;
+  color: #FFFFFF;
+  font-family: Arial,sans-serif;
+  font-size: 12px;
+  margin: 0px 0px 0 5px;
+  padding: 3px 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  height: 15px;
+  width: 54px;
+  float: left;
+}
+
+#alm-container img.help {
+  position: static;
+  background: url("../../img/png_alm_sprite1.png") no-repeat top left;
+  background-position: -1098px -657px;
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
+  margin-left: 5px;
+  margin-top: -2px;
+}

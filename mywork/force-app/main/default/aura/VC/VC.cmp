@@ -1,0 +1,75 @@
+<aura:component controller="VCControllerExt">
+
+  <ltng:require styles="{! join(',',
+      $Resource.zip_alm_pm + '/css/common/lightning-vf.css',
+      $Resource.zip_alm_pm + '/css/alm_common.css'
+    ) }"
+    scripts="{! join(',',
+      $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+      $Resource.zip_alm_pm + '/js/api_builder.js',
+      $Resource.zip_alm_pm + '/js/js_alm_common.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+    ) }"
+    afterScriptsLoaded="{!c.init}"
+  />
+
+  <aura:attribute name="userHasExistingKeypair" description="Whether or not the user has an existing keypair." type="Boolean" required="true" default="false" />
+  <aura:attribute name="publicKey" description="The public key found for this user" type="String" required="false" default="" />
+  <aura:attribute name="VCRepos" description="The repositories and user validations. An array of type VCRepository" type="Object[]" required="false"/>
+  <aura:attribute name="backlogId" description="The backlog Id from which the user navigated from" type="String" />
+  <aura:attribute name="existingKeyLabel" description="Show/Hide button label" type="String" default="SHOW KEY" />
+
+  <aura:registerEvent name="pageMessageAdd" type="c:pageMessageAdd" />
+  <aura:registerEvent name="pageMessagesClear" type="c:pageMessagesClear" />
+
+  <aura:handler event="c:buttonEvent" name="buttonEvent" action="{!c.handleButtonClick}"/>
+
+  <div id="alm-container">
+    <c:Header title="Repository Authentication"
+              homeLinkTitle="Version Control"
+              homeUrl="{! '/apex/gitCommit?scontrolCaching=1&amp;id=' + v.backlogId}" />
+
+    <div id="vc-body">
+      <div class="page-section custom-underline">
+        <!-- View public key -->
+        <ui:outputText class="body-default" value="SSH Key:" />
+        <aura:if aura:id="button-container" isTrue="{!v.userHasExistingKeypair}">
+          <c:button aura:id="existing-key-button"
+                    label="{!v.existingKeyLabel}"
+                    text="{!v.existingKeyLabel}"
+                    buttonStyle="very-important"
+                    styleClass="button-elongated"
+                    actionType="showPublicKey" />
+          <ui:outputText aura:id="template-key" class="body-default custom-underline" value="XXX-XXX-XXXX-XXX-XXXX-XXX-XXXX-XXX-XXXX-XXX-XXXX" />
+          <div aura:id="message-container">
+            <lightning:textarea aura:id="public-key" name="public-key" class="public-key invisible" value="{!v.publicKey}" readonly="true"/>
+            <c:button aura:id="copy-to-clipboard-link"
+                      label="Copy Key"
+                      text="Copy Key"
+                      buttonStyle="very-important"
+                      styleClass="invisible"
+                      actionType="copyToClipboard" />
+          </div>
+          <aura:set attribute="else">
+            <!-- Generate public key -->
+            <c:button aura:id="generate-key-button"
+                      label="GENERATE KEY"
+                      text="GENERATE KEY"
+                      buttonStyle="very-important"
+                      styleClass="button-elongated"
+                      actionType="generateKeys" />
+          </aura:set>
+        </aura:if>
+      </div>
+      <div aura:id="repo-section" class="page-section repo-section">
+        <ui:outputText class="heading-small-black" value="Repositories" />
+        <table class="repo-table slds-grid--vertical zebra">
+          <aura:iteration items="{!v.VCRepos}" var="VCRepo">
+            <c:VCRepositoryValidation repo="{!VCRepo}" userHasExistingKeypair="{!v.userHasExistingKeypair}"/>
+          </aura:iteration>
+        </table>
+      </div>
+    </div>
+  </div>
+  <c:GoogleAnalyticsTracker pageTitle="VC-Repo_Authorization" applicationName="PM - VC-Repo_Authorization"/>
+</aura:component>

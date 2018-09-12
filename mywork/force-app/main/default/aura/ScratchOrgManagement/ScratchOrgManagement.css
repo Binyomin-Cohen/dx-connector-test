@@ -1,0 +1,80 @@
+.THIS#alm-container {
+  background-color: white;
+  
+}
+
+.THIS #container-body {
+  padding: 15px;
+}
+
+.THIS #container-body[data-current-page="create-scratch-org"] #create-scratch-org-container,
+.THIS #container-body[data-current-page="scratch-org-commit"] #scratch-org-commit-container {
+  display: block;
+}
+
+.THIS #container-body > div {
+  display: none;
+}
+
+
+.THIS h2 {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}  
+
+.THIS .instance-oauth {
+  height: 40px;
+}
+
+.THIS .slds-card, .THIS #create-scratch-org, .THIS #scratch-org-list{
+  padding: 15px;
+}
+
+.THIS .slds-p-horizontal_medium {
+  padding-right: 46px;
+}
+
+.THIS .combobox-wrapper {
+  margin-bottom: 10px;
+}
+
+.THIS .combobox-wrapper .expander {
+  height: 30px;
+}
+
+.THIS .alm-combobox input {
+  height: 30px;
+  width: 100%;
+}
+
+.THIS#alm-container .oauth-container.lightning {
+  width: 100%;
+}
+
+.THIS #scratch-org-list li button {
+  min-width: 250px;
+  margin-top: 10px;
+}
+
+.THIS #create-scratch-org button,
+.THIS #scratch-org-list button {
+  background: #009ddc;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.THIS .slds-button[disabled] {
+  opacity: .5;
+  cursor: default;
+}
+
+.THIS .required {
+  /*TODO: sightline or lds style?*/
+}
+
+.THIS .duration-days {
+  margin-bottom: 10px;
+}

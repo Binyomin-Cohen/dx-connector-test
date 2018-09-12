@@ -1,0 +1,19 @@
+.THIS#related-components-filter-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 50px;
+  top: 5px;
+  width: 300px;
+}
+
+.THIS #related-components-filter-label {
+  position: relative;
+  top: 5px;
+  float: left;
+  padding-right: 10px;
+}
+
+.THIS select.filter-values {
+  display: inline-block;
+}
+

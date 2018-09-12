@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enable_Custom_Backlogs__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Controls accessibility to custom backlogs</description>
+    <externalId>false</externalId>
+    <label>Enable Custom Backlogs</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

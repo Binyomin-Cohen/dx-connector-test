@@ -1,0 +1,77 @@
+<aura:component >
+
+  <aura:attribute name="componentRecord" type="ComponentSearchWrapper" description=""/>
+
+  <aura:registerEvent name="rowSelectEvent" type="c:rowSelectEvent"/>
+
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/alm_common.css'
+      )}"
+      scripts="{!join(',',
+        $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js'
+      )}"
+      afterScriptsLoaded="{!c.init}"
+  />
+
+  <tr class="{!v.componentRecord.existsOnCurrentBacklog ? 'checked disabled' : ''}" data-is-deleted="{!v.componentRecord.isDeleted}" data-is-unsupported="{!v.componentRecord.isUnsupportedType}">
+    <td class="selected-comp-cb">
+      <input type="checkbox" checked="{!v.componentRecord.checked || v.componentRecord.existsOnCurrentBacklog}" class="fancy-checkbox"
+        data-key="{!v.componentRecord.key}" id="{!'select-cb-' + v.componentRecord.key}"
+        disabled="{!v.componentRecord.existsOnCurrentBacklog}"/>
+      <label class="checkbox" for="{!'select-cb-' + v.componentRecord.key}" ><span></span></label>
+    </td>
+    <td>
+      <div class="overflow-ellipses" title="{!v.componentRecord.environment}">
+        {!v.componentRecord.environment}
+      </div>
+    </td>
+    <td class="component-name">
+      <div class="name-container">
+        <div class="overflow-ellipses">
+            <ui:outputURL value="{!'/' + v.componentRecord.component.Id}"
+                        label="{!v.componentRecord.componentName}" target="_blank" 
+                        title="{!v.componentRecord.componentName}"/>
+        </div>
+        <aura:if isTrue="{!v.componentRecord.isDeleted}">
+          <div class="component-deleted-icon" title="This deleted component does not currently exist in the source instance."><img class="deleted-icon" src="/s.gif"></img></div>
+        </aura:if>
+      </div>
+    </td>
+    <td>
+      <div class="overflow-ellipses" title="{!v.componentRecord.componentType}">
+        {!v.componentRecord.componentType}
+    </div>
+    </td>
+    <td>
+      <div class="overflow-ellipses">
+        <ui:outputURL value="{!'/' + v.componentRecord.parentComponentId}" 
+                      label="{!v.componentRecord.parentComponentName}" 
+                      title="{!v.componentRecord.parentComponentName}" 
+                      target="_blank"/>
+      </div>
+    </td>
+    <td>
+      <div class="overflow-ellipses">
+
+      <aura:if isTrue="{!not(empty(v.componentRecord.lastModifiedDate))}">
+        <ui:outputDateTime value="{!v.componentRecord.lastModifiedDate}" timezone="{!$Locale.timezone}"
+                           format="l LT"
+                           langLocale="{!$Locale.userLocaleLang + '_' +  $Locale.userLocaleCountry}" />
+        <aura:set attribute="else">
+          {!$Label.c.Component_Field_Unavailable}
+        </aura:set>
+      </aura:if>
+      </div>
+    </td>
+    <td>
+      <div class="overflow-ellipses">
+        <aura:if isTrue="{!not(empty(v.componentRecord.lastModifiedBy))}">
+          {!v.componentRecord.lastModifiedBy}
+          <aura:set attribute="else">
+            {!$Label.c.Component_Field_Unavailable}
+          </aura:set>
+        </aura:if>
+      </div>
+    </td>
+  </tr>
+</aura:component>

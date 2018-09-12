@@ -1,0 +1,28 @@
+<aura:component extends="c:Header">
+  <c:GoogleAnalyticsTracker pageTitle="Backlog Items Bulk Import" applicationName="PM - Backglog Items Bulk Import"/>
+  <aura:attribute name="step"
+                     description="Current step in the upload process, zero-based index" type="Integer" required="false"/>
+  <aura:attribute name="stepComponentList"
+                  description="Holds the list of components, in order of the wizard"
+                  required="false"
+                  type="String[]"
+                  default="['BacklogItemUploadFileUpload', 'BacklogItemUploadFieldMapping', 'BacklogItemUploadFileUpload2']" />
+  <aura:attribute name="enableNextButton"
+                  description="Boolean that when set will enable or disable the next button" type="Boolean" required="false"/>
+  <aura:method name="adjustNextAndPrevButtons" action="{!c.adjustButtons}" access="PUBLIC" />
+  <aura:method name="toggleNextButton" action="{!c.toggleNextButton}" access="PUBLIC" />
+  <aura:attribute name="namespace"
+                  description="Namespace of managed package" type="String" required="false"/>
+
+  <div class="slds-button-group" role="group">
+    <ui:button aura:id="prevButton" class="slds-button header-direction-button header-direction-button-previous" press="{!c.previous}">PREVIOUS</ui:button>
+    <ui:button aura:id="nextButton" class="slds-button header-direction-button header-direction-button-next" press="{!c.next}">
+      <aura:if isTrue="{!lessthan(v.step, v.stepComponentList.length - 1)}">
+        NEXT
+        <aura:set attribute="else">
+            FINISH
+        </aura:set>
+      </aura:if>
+    </ui:button>
+  </div>
+</aura:component>

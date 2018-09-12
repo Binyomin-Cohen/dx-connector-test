@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minimum_Interval</fullName>
+    <active>true</active>
+    <description>Restricts the minimum interval that can be set</description>
+    <errorConditionFormula>AND( Interval__c &lt; 2, NOT( ISPICKVAL( Tool__c, 'Repo_Sync' ) ) )</errorConditionFormula>
+    <errorMessage>The minimum interval time is every 2 hours</errorMessage>
+</ValidationRule>

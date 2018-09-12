@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="">
+  <aura:attribute name="messageId" type="String" description="The Id of the message to be deleted"/>
+</aura:event>

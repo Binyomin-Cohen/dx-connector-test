@@ -1,0 +1,79 @@
+<apex:component layout="none">
+  <apex:attribute name="title" description="The title of the ribbon" type="String" required="false"/>
+  <apex:attribute name="subtitle" description="The subtitle of the ribbon" type="String" required="false"/>
+  <apex:attribute name="showTitleSection" description="Display title section" type="Boolean" default="true" required="false"/>
+  <apex:attribute name="settingsUrl" description="The url for the settings page" type="String" required="false"/>
+  <apex:attribute name="showCancelLink"
+                  description="Show the cancel link in the banner sub menu" type="Boolean" required="false" default="false"/>
+  <apex:attribute name="showHelpLink"
+                  description="Show the help link in the banner sub menu" type="Boolean" required="false" default="false"/>
+  <apex:attribute name="showSearchLink"
+                  description="Show the search link in the banner sub menu" type="Boolean" required="false" default="false"/>
+  <apex:attribute name="helpUrl"
+                  description="The url for the help link" type="String" required="false"/>
+  <apex:attribute name="homeUrl"
+                  description="The url to take you back to where you came from" type="String" required="false"/>
+  <apex:attribute name="homeLinkTitle"
+                  description="The name of the link to display to take the user back to the home url"
+                  type="String" required="false"/>
+  <apex:attribute name="useHomeIcon"
+                  description="Display an icon to link user back to home page" type="Boolean" required="false" default="false"/>
+  <apex:attribute name="useBackToLink"
+                  description="Display the back to link regardless of useHomeIcon value" type="Boolean" required="false" default="false"/>
+  <apex:attribute name="customBackToLink"
+                  description="The url for the back to link shown under the title" type="String" required="false"/>
+  <apex:attribute name="pageMessages"
+                  description="List of PageMessage records to display" type="PageMessage[]" required="false"/>
+  <apex:attribute name="enablePageMessages"
+                  description="Toggle render of page messages component" type="Boolean" required="false"/>
+  <apex:attribute name="uploadLink"
+                  description="The link for mass upload of records" type="String" required="false"/>
+
+  <div class="banner-wrap">
+    <div class="banner">
+      <div class="banner-body">
+        <c:PageMessages messages="{!pageMessages}" id="msgs" rendered="{!enablePageMessages}"/>
+        <apex:outputPanel layout="block" styleClass="title-section" rendered="{!AND(showTitleSection, NOT(AND(ISBLANK(subtitle), ISBLANK(title))))}">
+          <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(subtitle))}"><h3 class="page-type">{!subtitle}</h3></apex:outputPanel>
+          <apex:outputText value="{!title}" rendered="{!NOT(ISBLANK(title))}"/>
+          <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(homeUrl)), OR(NOT(useHomeIcon), useBackToLink))}">
+            <div class="home-url">&lt;&lt; Back to: <apex:outputLink value="{!IF(ISBLANK(customBackToLink), homeUrl, customBackToLink)}" title="{!homeLinkTitle}">{!homeLinkTitle}</apex:outputLink></div>
+          </apex:outputPanel>
+        </apex:outputPanel>
+        <div class="banner-action-container">
+          <div class="button-container">
+            <apex:componentBody />
+           </div>
+        </div>
+      </div>
+      <div id="banner-sub-menu" class="clearfix">
+
+        <apex:outputPanel layout="none" rendered="{!showHelpLink}">
+          <apex:outputLink styleClass="help-btn" value="{!helpUrl}" target="_blank">help <img class="help" src="/s.gif"></img></apex:outputLink>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="none" rendered="{!showCancelLink}">
+          <span class="action cancel-btn cancel-icon"  title="Cancel">
+            <img class="cancel-icon" src="/s.gif"/>
+          </span>
+        </apex:outputPanel>
+        <apex:outputPanel layout="none" rendered="{!NOT(settingsUrl == '')}">
+          <apex:outputLink styleClass="action" value="{!settingsURL}" title="Settings"><img class="settings2" src="/s.gif"/></apex:outputLink>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="none" rendered="{!showSearchLink}">
+          <span class="action search" title="search"><img class="banner-search" src="/s.gif"/></span>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="none" rendered="{!useHomeIcon}">
+          <apex:outputLink styleClass="action home-icon" value="{!homeUrl}" title="Go to List Views"><img class="home-icon" src="/s.gif"/></apex:outputLink>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="none" rendered="{!NOT(uploadLink == '')}">
+          <apex:outputLink styleClass="upload-action bulk-upload-icon heading-small" value="{!uploadLink}" title="Upload Items in bulk"><span class="heading-small">Upload Items in bulk</span><img class="bulk-upload-icon" src="{!URLFOR($Asset.SLDS,'/assets/icons/action/upload_120.png')}"/></apex:outputLink>
+        </apex:outputPanel>
+
+      </div>
+    </div>
+  </div>
+</apex:component>

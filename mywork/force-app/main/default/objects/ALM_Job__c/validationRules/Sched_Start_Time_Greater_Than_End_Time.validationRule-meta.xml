@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sched_Start_Time_Greater_Than_End_Time</fullName>
+    <active>false</active>
+    <description>Checks that the scheduled start time is greater than the scheduled end time. For details on parsing hour from a formula see: https://help.salesforce.com/HTViewHelpDoc?id=formula_examples_dates.htm&amp;language=en_US#getting-hms-from-datetime</description>
+    <errorConditionFormula>AND(
+NOT(ISBLANK(Scheduled_Start_Time__c)),
+NOT(ISBLANK(Scheduled_End_Time__c)),
+Scheduled_Start_Time__c > Scheduled_End_Time__c
+)</errorConditionFormula>
+    <errorMessage>The scheduled end time must be after the scheduled start time.</errorMessage>
+</ValidationRule>

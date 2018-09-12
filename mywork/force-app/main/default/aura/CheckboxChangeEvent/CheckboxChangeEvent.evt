@@ -1,0 +1,5 @@
+<aura:event type="Component" description="Emitted when a checkbox value changes">
+  <aura:attribute name="component" type="Aura.Component" description="The checkbox that changed"/>
+  <aura:attribute name="newCheckboxValue" type="Boolean" />
+  <aura:attribute name="isMultiSelect" type="Boolean" />
+</aura:event>

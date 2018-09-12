@@ -1,0 +1,5 @@
+<aura:documentation>
+	<aura:description>
+			<p>A <code>c:ScratchOrgDefinitionSelection</code> component allows you to select a predefined scratch org definition.</p>
+	</aura:description>
+</aura:documentation>

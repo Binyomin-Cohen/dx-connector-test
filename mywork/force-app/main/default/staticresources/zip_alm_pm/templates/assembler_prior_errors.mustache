@@ -1,0 +1,30 @@
+<div class="prior-errors-panel">
+  <div class="page-block-panel">
+    <h3>
+      <img class="sign" src="/s.gif"  alt="errors" /> 
+      <span class="error-label-panel">
+        <span class="error-total">{{numberOfErrors}}</span>
+        
+        {{#buildErrorsTable}}
+           Build Package Error{{#usePluralLabel}}s{{/usePluralLabel}}
+        {{/buildErrorsTable}}
+        
+        {{^buildErrorsTable}}
+          {{deploymentType}} Error{{#usePluralLabel}}s{{/usePluralLabel}} From {{deploymentName}}
+        {{/buildErrorsTable}}
+      </span>
+      <img src="/s.gif" class="arrow-open" alt="show/hide error details" />
+    </h3>
+  </div>
+  
+  <div class="page-block-panel-body">
+
+  {{> build_errors}}
+
+  {{> deployment_errors_apex}}
+
+  {{> deployment_errors_component}}
+  
+  </div>
+
+</div>

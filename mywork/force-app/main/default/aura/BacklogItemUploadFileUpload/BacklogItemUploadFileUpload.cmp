@@ -1,0 +1,59 @@
+<aura:component >
+        <ltng:require scripts="{!join(',',
+                               $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery.block-ui.js',
+          $Resource.zip_alm_pm + '/external/moment/moment.js',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery.csv.min.js',
+          $Resource.zip_alm_pm + '/external/xlsx/xlsx.core.min.js'
+       )}"
+
+       styles="{!join(',',
+          $Resource.zip_alm_pm + '/external/css/jquery-ui.css',
+          $Resource.zip_alm_pm + '/css/bootstrap-override.css',
+          $Resource.zip_alm_pm + '/css/alm_common.css'
+       )}"
+                      afterScriptsLoaded="{!c.init}" />
+
+  <aura:attribute name="step"
+                 description="Id of the related record" type="Integer" required="false"/>
+
+  <aura:attribute name="allowedFileExtensions"
+                 description="Valid file extensions to check for" type="String[]" required="false" default="['csv']"/>
+
+  <aura:attribute name="parsedUploadFile"
+                 description="Rows from the uploaded file" type="Map" required="false"/>
+
+  <aura:registerEvent name="pageMessageAdd" type="c:pageMessageAdd"/>
+  <aura:registerEvent name="pageMessagesClear" type="c:pageMessagesClear"/>
+
+  <div id="manual-upload-form">
+    <div class="upload-drag-helper" ondragover="{!c.fileDragHover}" ondragleave="{!c.fileDragHover}" ondrop="{!c.fileDropHandler}">
+      <div class="upload-a-package">
+        <p class="upload-text-large">Drop file here</p>
+        <p class="upload-text-small">or</p>
+        <div id="file-upload-button" class="subtle-btn upload-btn" ondrop="{!c.fileDropHandler}">
+           Select File
+          <input aura:id="file" type="file" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="file-input" onchange="{!c.fileDropHandler}" ondrop="{!c.fileDropHandler}"></input>
+        </div>
+        <p class="upload-text-small">CSV, XLS or XLSX</p>
+      </div>
+      <span id="spreadsheet-template-container">
+        <span id="spreadsheet-template-text">Download Spreadsheet Template</span>
+        <a href="https://s3.amazonaws.com/bw-alm/docs/backlog-item-upload/v1/backlog_upload_template.csv">
+          <lightning:icon iconName="utility:download" size="x-small" alternativeText="download" />
+        </a>
+      </span>
+    </div>
+    <div class="manual-upload-details">
+      <div>
+        <div class="upload-folder-display">
+          <span class="manual-file-name overflow-ellipses"></span>
+        </div>
+        <img alt="loading" class="barber-loader" src="/s.gif" />
+      </div>
+    </div>
+  </div>
+</aura:component>

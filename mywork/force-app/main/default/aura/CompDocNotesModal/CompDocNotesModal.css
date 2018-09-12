@@ -1,0 +1,67 @@
+.THIS#notes-modal,
+.THIS#notes-modal .page-block {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.THIS#notes-modal * {
+  box-sizing: border-box;
+}
+
+.THIS#notes-modal .page-block-content {
+  padding: 20px 20px 5px 20px;
+  width: 100%;
+  height: 87%;
+  overflow: hidden;
+}
+
+.THIS#notes-modal #notes-modal-header {
+  height: 50px;
+}
+
+.THIS#notes-modal #notes-modal-header-text {
+  background: #E8E9EB;
+  color: #009DDC;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.THIS#notes-modal .note-value,
+.THIS#notes-modal .note-value * {
+  width: 100%;
+  height: 100%;
+}
+
+.THIS#notes-modal .note-value label {
+  display: none;
+}
+
+.THIS#notes-modal .close-modal-btn {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+}
+
+.THIS#notes-modal .close-modal-btn img {
+  background-position: -759px -981px;
+}
+
+.THIS#notes-modal #note-apply {
+  margin: 10px 20px 0 0;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.THIS#notes-modal #note-length-notification {
+  float: right;
+  margin: 5px 20px 5px 0;
+  color: #CCCCCC;
+}
+
+.THIS#notes-modal .inactive {
+  opacity: 0.5;
+  cursor: default;
+}

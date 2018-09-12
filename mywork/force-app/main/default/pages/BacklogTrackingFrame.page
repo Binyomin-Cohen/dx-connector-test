@@ -1,0 +1,29 @@
+<apex:page sidebar="false" showHeader="false" standardController="Backlog__c" extensions="TrackingFrameController">
+    <c:Tracking title="Backlog Detail" appName="PM - Backlog Detail" />
+    <script>
+       window.onload = function() {
+           Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.TrackingFrameController.getTrackingData}',
+                '{!JSENCODE(actionTarget)}',
+                function(result, event) {
+                    if (event.status) {
+
+                        if (result.length != 0) {
+
+                            for (var i=0; i<result.length; i++) {
+                                ga('send', {
+                                      'hitType': 'event',
+                                      'eventCategory': result[i].eventCategory,
+                                      'eventAction': result[i].eventAction,
+                                      'eventLabel' : result[i].eventAction + ' - ' + result[i].eventCategory,
+                                      'eventValue': result[i].eventValue
+                                    });
+                            }
+                        }
+                    }
+                },
+                {escape: true}
+            );
+        }
+   </script>
+</apex:page>

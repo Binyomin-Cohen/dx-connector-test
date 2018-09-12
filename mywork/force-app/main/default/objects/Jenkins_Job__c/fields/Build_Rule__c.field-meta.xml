@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Build_Rule__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Build Rule</label>
+    <referenceTo>Build_Rule__c</referenceTo>
+    <relationshipLabel>Jenkins Jobs</relationshipLabel>
+    <relationshipName>Jenkins_Jobs</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

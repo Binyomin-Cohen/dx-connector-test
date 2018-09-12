@@ -1,0 +1,76 @@
+<aura:component >
+  <aura:attribute name="sectionTitle" description="The title"
+                  type="String" required="true"/>
+  <aura:attribute name="sectionInfoData" description="Data attribute on the section header"
+                  type="String" required="false"/>
+  <aura:attribute name="isExpanded" description="show the body on render"
+                  type="Boolean" required="false" default="false"/>
+
+  <aura:attribute name="showPagination" description="show the body on render"
+                  type="Boolean" required="false" default="false"/>
+  <aura:attribute name="pagingNavigationMessage" description="message displayed next to paging buttons"
+                  type="String" required="false" />
+
+  <aura:attribute name="enablePagingPrevious" description="is the previous page button enabled?"
+                  type="Boolean" default="false"/>
+  <aura:attribute name="enablePagingNext" description="is the next page button enabled?"
+                  type="Boolean" default="false"/>
+
+  <aura:attribute name="helperText" description="Helper text when user reaches the end of component search results."
+                  type="String" default=""/>
+
+  <aura:attribute name="enableActionButton" description="enable the button on the right"
+                  type="Boolean" default="false"/>
+  <aura:attribute name="showActionButton" description="enable the button on the right"
+                  type="Boolean" default="false"/>
+  <aura:attribute name="actionButtonText" description="text for the header right button"
+                  type="String" default=""/>
+
+  <aura:attribute name="applyHeaderFilter" description="Add filter-applied class to the section header div"
+                  type="Boolean" default="false"/>
+  
+  <aura:attribute name="applyRelatedComponentsFilter" description="Add picklist filter to related components panel section"
+                  type="Boolean" default="false"/>
+                  
+  <aura:registerEvent name="pagingRequestEvent" type="c:pagingRequestEvent"/>
+  <aura:registerEvent name="componentSaveEvent" type="c:componentSaveEvent"/>
+
+  <ltng:require
+    scripts="{!join(',',
+               $Resource.zip_alm_pm + '/js/api_builder.js',
+               $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+             )}" />
+
+  <div class="{!'page-block-panel-section' + (v.isExpanded == true ? ' expanded' : '')}">
+    <div class="{! 'page-block-panel-section-header ' + (v.applyHeaderFilter ? 'filter-applied' : '')}" data-info="{!v.sectionInfoData}">
+      <div class="header-section">
+        <a class="section-title"><span data-title="{!v.sectionTitle}">{!v.sectionTitle}</span> <img src="/s.gif"></img></a>
+        <span class="section-close-btn-container"><a class="section-close-btn"><img src="/s.gif"></img></a></span>
+      </div>
+      <div class="{!v.showPagination == true ? 'header-section header-message-button-container' : 'hidden'}">
+        <div class="paging-navigation-message">
+          {!v.pagingNavigationMessage}
+        </div>
+        <div class="{! 'paging-button prev ' + (v.enablePagingPrevious == true ? 'active' : 'inactive')}"
+             onclick="{!c.firePrevPageRequestEvent}" />
+        <div class="{! 'paging-button next ' + (v.enablePagingNext == true ? 'active' : 'inactive')}"
+             title="{! (not(v.enablePagingNext) ? v.helperText : '')}"
+             onclick="{!c.fireNextPageRequestEvent}" />
+      </div>
+      
+      <aura:if isTrue="{!v.applyRelatedComponentsFilter}">
+          <c:RelatedComponentsPageBlockPanelSectionFilter aura:id="RelatedComponentsFilter"/>
+      </aura:if>
+      
+      <div class="{!v.showActionButton == true ? 'right-button-container' : 'hidden'}">
+        <button type="button" class="{!'header-right-button ' + (v.enableActionButton ? 'active' : 'inactive-btn')}"
+                disabled="{!not(v.enableActionButton)}" onclick="{!c.handleActionButtonClick}">
+          {!v.actionButtonText}
+        </button>
+      </div>
+    </div>
+    <div class="page-block-panel-section-body" >
+      {!v.body}
+    </div>
+  </div>
+</aura:component>

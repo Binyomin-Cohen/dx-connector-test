@@ -1,0 +1,50 @@
+.THIS .frequency-days {
+	margin-bottom: 30px;
+}
+.THIS .alm-selectmenu {
+    height: 32px;
+}
+.THIS .alm-selectmenu span.ui-icon.ui-icon-triangle-1-s {
+    width: 27px;
+    height: 32px;
+}
+.THIS .alm-selectmenu{
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.THIS .settings {
+  padding-right: 7px;
+  width: 23px;
+}
+.THIS #email-container input[type="text"].email-input {
+  width: 65%;
+  height: 32px;
+  box-shadow: 2px 2px 3px -3px #DDDBDB inset;
+  padding: 5.5px 10px;
+  border-width: 2px;
+  border-style: inset;
+  border-color: initial;
+  border-image: initial;
+}
+.THIS .result-text {
+  padding-left: 30px;
+}
+
+.THIS .vc-label {
+  width: 130px;
+}
+
+.THIS .info-icon {
+  float:right;
+}
+
+.THIS #repo-instance-panel input[type=text].sync-date {
+   width: 130px;
+}
+
+/** Chrome - x placeholder color **/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .THIS #email-container ::placeholder {
+    color: #54698B;
+  }
+}

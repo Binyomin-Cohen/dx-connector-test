@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>External_Link__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK( $Setup.Jenkins_Config__c.Endpoint__c + "/" + Jenkins_Job__r.Path__c + "/" + Jenkins_Job_Id__c, "Open in Jenkins")</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>The link to the build in Jenkins</inlineHelpText>
+    <label>External Link</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

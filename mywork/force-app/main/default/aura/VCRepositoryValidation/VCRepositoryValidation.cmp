@@ -1,0 +1,68 @@
+<aura:component controller="VCControllerExt">
+  <ltng:require
+    scripts="{! join(',',
+      $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+      $Resource.zip_alm_pm + '/js/api_builder.js',
+      $Resource.zip_alm_pm + '/js/js_alm_common.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+    )}"
+    afterScriptsLoaded="{!c.init}"
+  />
+  <aura:attribute name="repo" description="The repository and user validation. An object of type VCRepository" type="Object" required="true"/>
+  <aura:attribute name="userHasExistingKeypair" description="Whether or not the user has an existing keypair." type="Boolean" required="true" default="false" />
+  <aura:attribute name="disableTestButton" type="Boolean" default="false" />
+  <aura:handler name="change" value="{!v.userHasExistingKeypair}" action="{!c.refreshButtonDisabledState}"/>
+  <aura:handler event="c:buttonEvent" name="buttonEvent" action="{!c.handleButtonClick}"/>
+
+  <tr>
+    <td class="slds-col slds-size--5-of-12">
+      <ui:outputText class="repo-name-label body-default" value="{!v.repo.name}" />
+    </td>
+    <td class="slds-col slds-size--2-of-12">
+      <c:button aura:id="test-connection-button"
+                buttonStyle="very-important"
+                styleClass="repo-test-button"
+                label="TEST"
+                text="TEST"
+                disabled="{!v.disableTestButton}"
+                actionType="validateGitConnectionHandler" />
+    </td>
+    <td class="slds-col slds-size--1-of-12">
+      <aura:if isTrue="{!empty(v.repo.validation)}">
+        <img src="/s.gif" class="canceled"></img>
+        <aura:set attribute="else">
+          <aura:if isTrue="{!v.repo.validation.isSuccessful}">
+            <img src="/s.gif" class="green-check"></img>
+            <aura:set attribute="else">
+              <img src="/s.gif" class="canceled"></img>
+            </aura:set>
+          </aura:if>
+        </aura:set>
+      </aura:if>
+    </td>
+    <td class="slds-col slds-size--2-of-12">
+      <aura:if isTrue="{!!empty(v.repo.validation)}">
+        <div class="repo-test-info">
+          <div class="repo-test-info-time">
+            <ui:outputText class="body-default" value="Tested:" />
+            <ui:outputDateTime class="body-default" value="{!v.repo.validation.validationDate}" format="MMM. dd, h:mm:ss a"/>
+          </div>
+          <div class="repo-test-info-status">
+            <ui:outputText class="body-default" value="Status:" />
+            <aura:if isTrue="{!v.repo.validation.isSuccessful}">
+              <ui:outputText class="body-default" value="Connected"/>
+              <aura:set attribute="else">
+                <ui:outputText class="body-default" value="Failed"/>
+              </aura:set>
+            </aura:if>
+          </div>
+        </div>
+      </aura:if>
+    </td>
+    <td class="slds-col slds-size--2-of-12 repo-validation-error">
+      <aura:if isTrue="{!and( !empty(v.repo.validation), !v.repo.validation.isSuccessful )}">
+        <ui:outputText class="body-default" value="{!v.repo.validation.error}"/>
+      </aura:if>
+    </td>
+  </tr>
+</aura:component>

@@ -1,0 +1,704 @@
+#alm-container {
+  min-width: 1226px;
+  overflow: visible;
+}
+
+.alm-container-body {
+  overflow: visible;
+}
+
+#alm-container .page-block-content {
+  overflow: visible;
+}
+
+#alm-container .src-panel {
+    width: 49%;
+    float: left;
+}
+
+#alm-container .tgt-panel {
+    width: 49%;
+    float: right;
+}
+
+#alm-container ul.instance-select {
+    height: 159px;
+    /* width: 178px; */
+    width: 20%;
+    overflow-y: auto;
+    margin: 0 20px 0px 0px;
+    padding: 0;
+    border: 1px solid #cccccc;
+    display: inline-block;
+    vertical-align: top;
+}
+
+ #alm-container ul.instance-select li {
+    margin: 0;
+    list-style-type: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+#alm-container ul.instance-select li:hover {
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+}
+
+#alm-container .selected,
+#alm-container .selected:hover {
+    background: #0081c2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#01a4f5), to(#0081c2));
+    background: -webkit-linear-gradient(top, #01a4f5, #0081c2);
+    background: -moz-linear-gradient(top, #01a4f5, #0081c2);
+    background: -ms-linear-gradient(top, #01a4f5, #0081c2);
+    background: -o-linear-gradient(top, #01a4f5, #0081c2);
+}
+
+#alm-container .instance-strip {
+    background: url("../img/png_assembler_sprite1.png") no-repeat top left;
+    background-position: -80px -7px;
+    height: 16px;
+    line-height: 11px;
+    padding: 14px 20px 10px 15px;
+    color: #ffffff;
+    width: 144px;
+    float: left;
+}
+
+#alm-container .instance-strip.active {
+    background: url("../img/png_assembler_sprite1.png") no-repeat top left;
+    background-position: -80px -114px;
+    text-shadow: 2px 2px 2px #005681;
+}
+
+#alm-container .instance-strip.active + span {
+    border-left-color: #0081c2;
+}
+
+#alm-container li.subtle-btn {
+    padding:0;
+}
+
+#alm-container ul.instance-select li a {
+    display: block;
+    height: 16px;
+    padding: 7.5px 15px;
+    color: #333333;
+    font-size: 13px;
+    font-family: Helvetica, Arial, Sans-Serif;
+    font-weight: normal;
+}
+
+#alm-container ul.instance-select li a {
+    text-decoration: none;
+}
+
+#alm-container ul.instance-select li.selected a {
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #005681;
+}
+
+#alm-container ul.instance-select li:first-child {
+    border-top: none;
+}
+
+#alm-container .info-strip {
+    margin-top: 20px;
+    font-weight: bold;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    width: 100%;
+}
+
+#alm-container .snapshot-strip.active {
+    color: #333333;
+    background-color: #fbff9e;
+}
+
+#alm-container .snapshot-strip {
+    height: 20px;
+    line-height: 19px;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #959595;
+    padding-left: 20%;
+}
+
+#alm-container .snapshot-strip td {
+    padding-right: 30px;
+}
+
+#alm-container .snapshots {
+    display: inline-block;
+    width: 75%;
+    height: 159px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#manifest-detail-panel {
+    margin-bottom: 15px;
+}
+
+#manifest-detail-panel,
+#manifest-excluded-panel {
+    width: 100%;
+}
+
+#refine-manifest-panel {
+    margin-right:15px;
+    width: 265px;
+    vertical-align: top;
+    display: table-cell;
+}
+
+#refine-manifest-panel .backlog-menu > li:hover {
+    background-color: #f6e4e4;
+}
+
+.backlog-menu {
+   display: table;
+   margin: -10px;
+   padding: 0;
+   max-height: 270px;
+   overflow-y:auto;
+}
+
+.backlog-menu > li {
+    margin: 0px;
+    height: 30px;
+    display: table-row-group;
+    list-style-type: none;
+}
+
+
+.backlog-menu > li:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.backlog-menu > li:nth-child(even) {
+    background-color: #e8e9eb;
+}
+
+.backlog-menu > li > a:hover {
+    text-decoration:none;
+}
+
+.backlog-menu > li > a > label.checkbox {
+     color: #333333;
+     width: 130px;
+     border-right: 1px dotted #cccccc;
+     margin-right: 5px;
+     padding: 5px;
+     display: table-cell;
+}
+
+.backlog-menu > li input {
+     margin-right: 10px;
+}
+
+.backlog-menu > li > a > span {
+   display: table-cell;
+   color: #9D9D9D;
+   padding: 0px 10px;
+   width: 105px;
+}
+
+#alm-container .snapshots .alm-table tr:hover td {
+    background-color: #fbff9e;
+    cursor: pointer;
+}
+
+#alm-container .snapshots .alm-table tr.selected td {
+    background-color: #fbff9e;
+    color: #a8a8a8;
+}
+
+#alm-container img.undocumented {
+    background: url("../img/png_alm_sprite1.png") no-repeat top left;
+    background-position: -84px -714px;
+    width: 23px;
+    height: 19px;
+}
+
+.component-overflow {
+    width: 125px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ribbon-action-container {
+    display: inline-block;
+    width: 90%;
+}
+
+.ribbon .button-container {
+    width: 85px;
+    margin: 0 auto;
+}
+
+#alm-container .search-btn {
+    padding: 20px 56px 20px 80px;
+    font-size: 16px;
+}
+
+#clear-filters {
+  cursor: pointer;
+}
+
+#alm-container input[type="text"] {
+    height: 14px;
+    padding: 5.5px 10px;
+    -webkit-box-shadow: inset 2px 2px 3px -3px #DDDBDB;
+    -moz-box-shadow: inset 2px 2px 3px -3px #DDDBDB;
+    box-shadow: inset 2px 2px 3px -3px #DDDBDB;
+}
+
+#search-form input {
+    width: 210px;
+}
+
+input#instance-search-filter {
+    width: 185px;
+}
+
+#refine-manifest-panel ul.ui-autocomplete {
+    width: 219px;
+    max-height: 150px;
+    overflow: auto;
+}
+
+#refine-manifest-panel ul.ui-autocomplete a.ui-state-active,
+#refine-manifest-panel ul.ui-autocomplete .ui-menu-item a {
+  padding: 5px 5px 5px 17px;
+  word-wrap: break-word;
+}
+
+.ui-autocomplete-loading {
+    height:16px;
+    width: 16px;
+}
+
+.switch-container {
+    padding: 0px 0px 10px 5px;
+}
+
+.switch-label {
+    margin-right: 20px;
+}
+
+.onoffswitch {
+    position: relative;
+    width: 50px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+}
+.onoffswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 16px;
+    padding: 0;
+    line-height: 16px;
+    font-size: 8px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "OFF";
+    padding-left: 3px;
+    background-color: #333333;
+    color: #ccc;
+}
+.onoffswitch-inner:after {
+    content: "ON";
+    padding-right: 5px;
+    background-color: #0085C8;
+    color: #fff;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block;
+    width: 26px;
+    margin: 0px;
+    background: #E8E6E6;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 22px;
+    -moz-transition: all 0.3s ease-in 0s;
+    -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+    background-color: #E8E6E6;
+}
+
+#alm-container #search-panel {
+    display: none;
+    margin: 10px 0;
+}
+
+#search-panel .page-block-panel-body {
+    padding: 20px 5px 20px 20px;
+}
+
+#search-panel .add-btn {
+    float: right;
+    margin: 20px 10px 0px 20px;
+}
+
+#alm-container .remove-btn,
+#alm-container .reapply-btn {
+  float: right;
+  margin-top: 20px;
+}
+
+#search-form input{
+    margin-bottom: 20px;
+}
+
+#search-panel .search-panel-table,
+#manifest-display {
+    display: table;
+    width: 100%;
+}
+
+#manifest-all-components-panel {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 15px;
+}
+
+#search-panel #search-form {
+    display: table-cell;
+    width: 273px;
+    vertical-align: top;
+}
+
+#search-panel .search-results {
+    display: table-cell;
+    padding-right: 10px;
+}
+
+#search-panel .search-results > div {
+    overflow-y: auto;
+    height: 265px
+}
+
+.alm-table tr.undocumented-component:nth-child(odd) td {
+    background-color: #e4f1d1;
+    border-bottom: 0px solid #FFF;
+}
+
+.alm-table tr.undocumented-component:nth-child(even) td {
+    background-color: #d3dec1;
+    border-bottom: 0px solid #FFF;
+}
+
+.alm-table tr.undocumented-component.animate-undocumented td {
+    border-bottom: 5px solid #BFBEC3;
+}
+
+img.static-loading {
+    background: url("../img/png_alm_sprite1.png") no-repeat top left;
+    background-position: -84px -783px;
+    width: 20px;
+    height: 20px;
+}
+
+img.success {
+    background: url("../img/png_alm_sprite1.png") no-repeat top left;
+    background-position: -84px -853px;
+    width: 15px;
+    height: 16px;
+}
+
+img.failure {
+    background: url("../img/png_alm_sprite1.png") no-repeat top left;
+    background-position: -84px 0;
+    width: 24px;
+    height: 20px;
+}
+
+.page-actions {
+    width: 265px;
+    margin: 0 auto;
+}
+
+.page-actions button,
+.page-actions input,
+.page-actions a {
+    margin-left: 15px;
+}
+
+#alm-container .post-build-actions {
+    width: 340px;
+}
+
+#alm-container button.build-btn {
+    text-shadow: #577800 2px 2px 2px;
+}
+
+
+.profile-manifest {
+  margin-top: 15px;
+}
+
+.profile-manifest .page-block-panel-section-header {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.profile-manifest .page-block-panel-section-body {
+  min-height: 70px;
+  padding-left: 35px;
+  position: relative;
+  display: block;
+}
+
+#profile-edit-handle {
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+#profile-edit-handle img {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -534px -523px;;
+  width: 17px;
+  height: 16px;
+  opacity: .5;
+}
+
+#profile-edit-handle img:hover {
+  opacity: 1;
+  width: 29px;
+}
+
+#profile-edit-handle.close img {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -534px -457px;
+  opacity: .5;
+  width: 17px;
+  height: 16px;
+}
+
+#profile-edit-handle.close img:hover {
+  opacity: 1;
+  width: 29px;
+}
+
+#profile-edit-pane {
+  display: none;
+  top: 20px;
+  left: -1px;
+  height: 640px;
+  width: 97%;
+  overflow: auto;
+  border-left: 1px solid #cccccc;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+#profile-edit-pane .select-all-options {
+  position: absolute;
+  left: 5px;
+  bottom: 10px;
+  color: #019cea;
+}
+
+#profile-edit-pane .select-all-options label {
+  margin-left: 5px;
+}
+
+#profile-edit-pane .select-all-options img {
+  margin-left: 5px;
+}
+
+#profile-edit-details  {
+  padding: 20px 30px 30px 35px;
+  height: 500px;
+  overflow: auto;
+}
+
+#profile-edit-details h3 {
+  width:100%;
+  text-align:left;
+  border-bottom: 2px solid #DCDCDC;
+  line-height:4px;
+  margin: 20px 0;
+  display: block;
+}
+
+#profile-edit-details h3 span {
+  background:#FFF;
+  padding-right: 10px;
+  font-size: 14px;
+  font-weight:normal;
+}
+
+
+#profile-edit-details .profile-tile:hover {
+  cursor: pointer;
+  border: 1px solid #009DDC;
+}
+
+#profile-edit-details .profile-tile {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+#profile-edit-details .profile-tile.selected:hover {
+  border: 1px solid #19446E;
+}
+
+
+#profile-edit-details .profile-tile.selected {
+  background: none;
+  background-color: #009DDC;
+  border: 1px solid #009DDC;
+  color: #FFF;
+}
+
+.profile-tile {
+  background-color: #F1F1F1;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  padding: 15px 20px;
+  margin: 10px 20px 10px 0px;
+  width: 140px;
+  float: left;
+  font-size: 14px;
+  position: relative;
+}
+
+.profile-tile img {
+  display: none;
+}
+.profile-tile.undocumented {
+  background-color: #e4f1d1;
+}
+
+.profile-tile.undocumented img {
+  display: block;
+  position: absolute;
+  left: 7px;
+  top: 14px;
+}
+
+.profile-tile .name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 140px;
+  display: inline-block;
+}
+
+.profile-tile.undocumented .name {
+  padding-left: 15px;
+}
+
+#build-results-panel-container {
+    display:none;
+}
+.build-results-panel .page-block-panel {
+    margin-bottom: 20px;
+}
+
+#manifest-all-components-panel .page-block-panel-body > div,
+.build-results-panel .page-block-panel-body > div{
+    min-height: 120px;
+    max-height: 303px;
+    overflow: auto;
+}
+
+#manifest-all-components-panel .page-block-panel-body > div.manifest-detail,
+.build-results-panel .page-block-panel-body > div.manifest-detail {
+    max-height: 553px;
+}
+
+.prior-errors-panel .page-block-panel h3 {
+    cursor: pointer;
+}
+.prior-errors-panel .page-block-panel h3 img {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -309px -1916px;
+  margin-left: 8px;
+  width: 6px;
+  height: 6px;
+}
+
+.prior-errors-panel .page-block-panel h3 img.arrow-open {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -534px 0px;
+  margin-left: 8px;
+  width: 6px;
+  height: 6px;
+}
+
+.prior-errors-panel .page-block-panel h3 img.sign {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px 0;
+  width:24px;
+  height:20px;
+  float: left;
+}
+
+.prior-errors-panel .page-block-panel-body {
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+}
+
+.error-label-panel {
+  margin-left: 5px;
+  vertical-align: sub;
+  text-transform: capitalize;
+}
+
+.error-total {
+  color: #F00;
+  font-weight: bold;
+}
+
+.prior-errors-panel {
+  margin: 20px;
+}
+
+/* Assembler sprites
+.sprite-instanceStrip_default{ background-position: 0 0; width: 250px; height: 57px; }
+.sprite-instanceStrip_selected{ background-position: 0 -107px; width: 250px; height: 57px; }
+*/

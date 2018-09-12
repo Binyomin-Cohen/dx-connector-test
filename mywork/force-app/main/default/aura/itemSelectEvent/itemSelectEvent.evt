@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="">
+    <aura:attribute name="selectedItem" type="Object" default="{}" />
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+</aura:event>

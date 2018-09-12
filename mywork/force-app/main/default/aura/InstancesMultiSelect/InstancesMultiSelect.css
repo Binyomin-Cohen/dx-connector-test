@@ -1,0 +1,15 @@
+.THIS .combobox-body-container {
+  width: 489px;
+}
+
+.THIS .dropdown-menu > div:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.THIS .dropdown-menu > div:nth-child(even) {
+  background-color: #e8e9eb;
+}
+
+.THIS .dropdown-menu > div:hover {
+  background-color: #dfecf9;
+}

@@ -1,0 +1,2 @@
+<aura:event type="COMPONENT" description="Indicates an initialization of the authorization flow." >
+</aura:event>

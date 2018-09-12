@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Goal__c</fullName>
+    <description>This tells what the user wants to do.  What is their goal?  This is not for capturing WHY - that is in another field</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This tells what the user wants to do.  What is their goal?  This is not for capturing WHY - that is in another field</inlineHelpText>
+    <label>I need</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

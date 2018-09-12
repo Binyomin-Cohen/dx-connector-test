@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Relational__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Used to indicate that a field mapping is for a relational field in JIRA</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Used to indicate that a field mapping is for a relational field in JIRA</inlineHelpText>
+    <label>Is Relational</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

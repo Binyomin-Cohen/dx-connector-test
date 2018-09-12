@@ -1,0 +1,14 @@
+<aura:component >
+  <ltng:require scripts="{!join(',',
+      $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+      $Resource.zip_alm_pm + '/external/jquery.sticky-kit.js'
+    )}"
+    afterScriptsLoaded="{!c.init}"
+  />
+  <aura:attribute name="header" type="Aura.Component[]"/>
+  <div id="alm-container">
+    <div class="header">{!v.header}</div>
+    <div class="spacer"></div>
+    <div class="body">{!v.body}</div>
+  </div>
+</aura:component>

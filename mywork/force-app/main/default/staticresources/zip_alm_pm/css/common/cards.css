@@ -1,0 +1,113 @@
+#alm-container .flyout-menu {
+  left: -16px;
+  top: 40px;
+}
+
+#alm-container .cbklg-card-wrap-hotspot.default .flyout-menu {
+  background-color:#0c7fbe;
+}
+
+#alm-container .cbklg-card-wrap-hotspot.default .flyout-menu ul li {
+  color:#fff;
+}
+
+#alm-container .cbklg-card-wrap-hotspot.default .flyout-menu ul li:hover {
+  background-color:#fff;
+  color: #848484;
+}
+
+img.edit-card-icon  {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -989px rgba(0, 0, 0, 0);
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  visibility: hidden;
+  cursor: pointer;
+  margin-bottom: -6px;
+}
+
+img.edit-card-icon:hover{
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll -84px
+    -1052px rgba(0, 0, 0, 0);
+}
+
+.cbklg-card-wrap-hotspot.default img.edit-card-icon {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll -1098px -1058px;
+  opacity: .5;
+}
+
+.cbklg-card-wrap-hotspot.default img.edit-card-icon:hover {
+  opacity: 1;
+}
+
+img.close-card-icon {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll 0 -1601px;
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+}
+
+img.close-card-icon:hover {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll 0 -1671px;
+  cursor: pointer;
+}
+
+img.vertical-ellipsis {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll -1098px -918px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  opacity: .5
+}
+
+.backlog-options-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 7px 5px;
+}
+
+.cbklg-card-wrap-hotspot.default img.vertical-ellipsis {
+  background: url("../../img/png_alm_sprite1.png") no-repeat scroll -1098px -988px;
+}
+
+img.vertical-ellipsis:hover,
+img.vertical-ellipsis.default:hover {
+  opacity: 1;
+}
+
+#new-input-container {
+  display:none;
+  position: relative;
+}
+
+#new-input {
+  color: #000;
+  padding: 4px 10px 4px 10px;
+  margin-top: 0px;
+  box-sizing: border-box;
+  height: 31px;
+}
+
+.card-wrap .edit-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display:none;
+  z-index: 100;
+}
+
+.card-wrap .edit-container input{
+  padding: 7px 10px 7px 10px;
+  height: 35px;
+  width: 186px;
+  box-sizing: border-box;
+}
+
+.card-wrap .edit-container .alm-btn {
+  height: 35px;
+  width: 72px;
+  margin: -2px 0 0 -4px;
+}
+

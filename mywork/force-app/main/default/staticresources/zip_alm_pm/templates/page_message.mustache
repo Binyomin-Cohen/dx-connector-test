@@ -1,0 +1,64 @@
+{{#showErrorContainer}}
+<div class="message message-js errorM3">
+    <img alt="error" class="msgIcon message-icon" src="/s.gif" title="ERROR" />
+    <span class="message-text">
+        <span class="subject">Error:</span>
+        <span >{{message}}</span>
+    </span>
+    {{#showCloseButton}}
+    <div class="close-btn-container">
+        <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel">
+            <img alt="close" class="error-close" src="/s.gif" title="close" />
+        </a>
+    </div>
+    {{/showCloseButton}}
+</div>
+{{/showErrorContainer}}
+{{#showSuccessContainer}}
+<div class="message message-js successM3">
+    <img alt="success" class="success-icon message-icon" src="/s.gif" title="SUCCESS" />
+    <span class="message-text">
+        <span class="subject">Success:</span>
+        <span >{{message}}</span>
+    </span>
+    {{#showCloseButton}}
+    <div class="close-btn-container">
+        <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel">
+            <img alt="close" class="success-close" src="/s.gif" title="close" />
+        </a>
+    </div>
+    {{/showCloseButton}}
+</div>
+{{/showSuccessContainer}}
+{{#showInfoContainer}}
+<div class="message message-js infoM3">
+    <img alt="info" class="info-icon message-icon" src="/s.gif" title="INFO" />
+    <span class="message-text">
+        <span class="subject">Information:</span>
+        <span>{{message}}</span>
+    </span>
+    {{#showCloseButton}}
+    <div class="close-btn-container">
+        <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel">
+            <img alt="close" class="info-close" src="/s.gif" title="close" />
+        </a>
+    </div>
+    {{/showCloseButton}}
+</div>
+{{/showInfoContainer}}
+{{#showWarningContainer}}
+<div class="message message-js warningM3">
+    <img alt="warning" class="warning-sign message-icon" src="/s.gif" title="WARNING" />
+    <span class="message-text">
+        <span class="subject">Warning:</span>
+        <span>{{message}}</span>
+    </span>
+    {{#showCloseButton}}
+    <div class="close-btn-container">
+        <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel">
+            <img alt="close" class="warning-close" src="/s.gif" title="close" />
+        </a>
+    </div>
+    {{/showCloseButton}}
+</div>
+{{/showWarningContainer}}

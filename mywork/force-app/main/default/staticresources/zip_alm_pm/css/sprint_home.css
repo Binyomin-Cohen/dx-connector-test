@@ -1,0 +1,582 @@
+@import url("common/cards.css");
+
+/** CSS reset stuff **/
+
+body {
+  line-height: 1;
+}
+
+/** end reset **/
+
+#sprint-layout {
+    display: table;
+    width: 100%;
+    padding-top: 10px;
+}
+#sprint-layout > div{
+    display: table-cell;
+    padding: 10px;
+    vertical-align: top;
+}
+
+#backlog-panel {
+    width: 284px;
+    height: 100%;
+}
+
+#sprint-panel > div {
+    overflow: auto;
+}
+
+.sprint-card {
+    margin: 0px 20px 44px 20px;
+    color: #F0F0F0;
+    border: 1px dotted green;
+    width: 257px;
+    height: 180px;
+    float: left;
+}
+
+#new-panel {
+    position: relative;
+    height: 32px;
+}
+
+#new-btn-container {
+    position: absolute;
+    z-index: 100;
+    top: -2px;
+    left: 0;
+    width: 100%;
+}
+
+#new-input-container button.add-btn {
+    position: absolute;
+    width: 41px;
+    height: 31px;
+    top: -1px;
+    margin-left: -2px;
+    padding: 3px 13px;
+}
+
+#new-input {
+  width: 222px;
+}
+
+/** Different padding needed for Firefox **/
+@-moz-document url-prefix() {
+   #new-input {
+    width: 242px;
+  }
+}
+
+
+#backlog-list-panel > div {
+    overflow: auto;
+}
+
+#backlog-list-panel .page-block-content {
+    padding: 10px;
+}
+#backlog-list-panel h2 {
+    background-color: #0b6196;
+    color: #ffffff;
+    display: block;
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 10px 0 10px 10px;
+}
+
+.new-btn {
+    width: 100%;
+    margin-top: 2px;
+    height: 31px;
+}
+
+.sp-card-wrap-hotspot.sp-card-default .sp-card-wrap {
+    background-color: #f0f0f0;
+    border-color: #cccccc;
+    border-radius: 3px;
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.sp-card-wrap-hotspot {
+    width: 258px;
+    height: 182px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: solid 3px #fff;
+    float: left;
+    margin: 0 34px 34px 0;
+    position: relative;
+    text-decoration: none;
+}
+
+.sp-card-wrap-hotspot.completed {
+    opacity: 0.6;
+}
+
+.drag-src-placeholder {
+    background-color: #CCC;
+    width: 235px;
+    height: 71px;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.drag-hover .sp-card-wrap {
+    opacity: .8;
+}
+
+.sp-card-wrap {
+    width: 256px;
+    height: 180px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+    border: solid 1px #ccc;
+}
+
+.sp-card-wrap-error p span {
+    background: url("../img/png_alm_sprite1.png") no-repeat 0 -1943;
+    height: 20px;
+    width: 20px;
+}
+
+.sprint-name:hover img.edit-card-icon {
+  visibility: visible;
+}
+
+.sp-card-wrap .sprint-name {
+    background-color: #0b6196;
+    margin: 0;
+    padding: 7px 0 7px 10px;
+
+}
+
+#alm-container .sp-card-wrap .sprint-name > a {
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 15px;
+    vertical-align: middle;
+    width: 190px;
+    text-decoration: none;
+}
+
+#alm-container .sp-card-wrap .sprint-name > a:hover {
+    color: #BBB;
+}
+
+.sp-card-third {
+    height: 35px;
+    text-align: center;
+    padding: 16px 0 0;
+}
+
+.sp-card-third-progress {
+    height: 35px;
+    text-align: center;
+    padding: 0px 20px;
+}
+
+.sp-card-third-metrics {
+    height: 35px;
+    text-align: center;
+    margin: 0 0 0 -1px;
+    padding: 1px 0 0;
+}
+
+.sp-card-date-default {
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.sp-card-date-entered {
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0b6196;
+}
+
+.sp-card-date-default-middle {
+    padding: 0px 10px;
+    color: #000;
+    font-size: 14px;
+}
+
+/* ----- Slider ----- */
+.slider-container {
+  width: 215px;
+  height: 30px;
+  margin: 0 20px 0 0;
+  position: relative;
+}
+
+.slider {
+  background: #9a9a9a;
+  height: 5px;
+  width: 215px;
+  -webkit-box-shadow: inset -2px 3px 3px #5f5f5f;
+  -moz-box-shadow: inset -2px 3px 3px #5f5f5f;
+  box-shadow: inset -2px 3px 3px #5f5f5f;
+}
+
+.slider .ui-slider-range {
+  background: #0082c4;
+}
+
+.slider .ui-slider-track {
+  border-radius: 0px;
+}
+
+#alm-container .slider.ui-state-disabled {
+  opacity: 1;
+}
+
+.ui-corner-all {
+  border-radius: 0px;
+}
+
+.ui-slider-legend {
+  position: absolute;
+  max-width: 215px;
+  font-size: 10px;
+  line-height: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* ----- End Slider ----- */
+.progress {
+    font-size: 9px;
+    color: #6c6c6c;
+    text-align: left;
+}
+
+.previous-progress {
+    font-size: 9px;
+    color: #cccccc;
+    text-align: left;
+    margin: 0px 32px 0px 0px;
+}
+
+.sp-card-metrics {
+    width: 80px;
+    height: 55px;
+    padding: 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
+    border-radius: 3px 3px 0 0;
+    background-color: #fff;
+    border: solid 1px #ccc;
+    float: left;
+    margin: 0 0 0 5px;
+}
+
+.sp-card-metrics.first {
+     margin: 0 1px 0 0;
+}
+
+.sp-card-metrics.last {
+    margin: 0 -1px 0 6px;
+    position: relative;
+}
+
+#completed-sprints .unestimated-total {
+  display: none;
+}
+
+.sp-card-metrics.last .unestimated-total {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -309px -128px;
+  width: 24px;
+  height: 18px;
+  color: #FFF;
+  text-align: center;
+  padding-top: 6px;
+}
+
+.sp-card-metrics.last .unestimated-total:hover {
+    background: url("../img/png_alm_sprite1.png") no-repeat scroll -309px -202px;
+    cursor: pointer;
+}
+
+.sp-card-wrap .sp-card-metrics.drag-src-placeholder {
+    background-color: #CCC;
+}
+
+.completed.has-items-for-reassignment {
+    opacity: 1;
+}
+
+.completed.has-items-for-reassignment .sp-card-metrics.incomplete,
+.sp-card-metrics.incomplete.ui-draggable-dragging {
+    border: 1px solid #E66C09;
+    background-color: #feae1b;
+    position: relative;
+    cursor: move;
+    text-align: center;
+}
+.completed.has-items-for-reassignment .sp-card-metrics.incomplete p,
+.sp-card-metrics.incomplete.ui-draggable-dragging p {
+    color: #FFF;
+    margin-right: 7px;
+}
+.has-items-for-reassignment .sp-card-metrics.incomplete span
+.has-items-for-reassignment .sp-card-metrics.incomplete.ui-draggable-dragging span {
+    color: #000;
+}
+.sp-card-metrics-incomplete:hover {
+    cursor: pointer;
+}
+
+.sp-card-metrics-incomplete p {
+    font-size: 10px;
+    color: #fff;
+    line-height: 4px;
+    margin-right: 7px;
+    margin-top: 1px;
+}
+
+.sp-card-metrics-incomplete p span {
+    font-size: 14px;
+    color: #000;
+}
+
+.sp-card-metrics p {
+    font-size: 10px;
+    color: #019cea;
+    line-height: 4px;
+}
+
+.sp-card-metrics p span {
+    font-size: 14px;
+    color: #000;
+}
+
+.completed .sp-card-metrics p {
+    font-size: 10px;
+    color: #cccccc;
+    line-height: 4px;
+}
+
+.items-added {
+    font-size: 14px;
+    color: #000;
+}
+
+#alm-container .light-gray-text {
+  color: #CCC;
+}
+
+.sp-card-metrics-handle {
+    display:none;
+    background:
+        url("../img/01_handle_tiny_orange.png")
+        repeat-y 0 0;
+    height: 85%;
+    margin: 0 0 0 4px;
+    padding-top: 3px;
+    width: 6px;
+    float: left;
+    opacity: 0.5;
+}
+
+.has-items-for-reassignment .sp-card-metrics-handle,
+.ui-draggable-dragging .sp-card-metrics-handle {
+    display:block;
+}
+
+.sp-card-metrics-handle:hover {
+    opacity: 1;
+}
+
+.sp-card-metrics-undo {
+    background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px
+        -1361px;
+    height: 20px;
+    width: 20px;
+    opacity: 0.5;
+    display: none;
+    bottom: 3px;
+    right: 3px;
+    position: absolute;
+}
+
+.has-items-for-reassignment .sp-card-metrics-undo,
+.ui-draggable-dragging .sp-card-metrics-undo {
+    display: block;
+}
+
+.sp-card-metrics-undo:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+/*backlog item cards----------------------------------------------------------------*/
+.bklg-item-card-wrap {
+    width: 233px;
+    height: 69px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #d1d1d1;
+    border: solid 1px #ccc;
+    background-image: -webkit-linear-gradient(bottom, #dddbdb, #f7f4f4);
+    background-image: -moz-linear-gradient(bottom, #dddbdb, #f7f4f4);
+    background-image: -o-linear-gradient(bottom, #dddbdb, #f7f4f4);
+    background-image: linear-gradient(to top, #dddbdb, #f7f4f4);
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.bklg-item-card-wrap:hover {
+    cursor: move;
+}
+
+.unassigned {
+    background-color: #d3e1ef;
+    border: solid 1px #ccc;
+    background-image: -webkit-linear-gradient(bottom, #d3e1ef, #d3e1ef);
+    background-image: -moz-linear-gradient(bottom, #d3e1ef, #d3e1ef);
+    background-image: -o-linear-gradient(bottom, #d3e1ef, #d3e1ef);
+    background-image: linear-gradient(to top, #d3e1ef, #d3e1ef);
+}
+
+.bklg-item-card-wrap h3 {
+    color: #333;
+    float: left;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 5px 0 0 16px;
+    width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*
+.bklg-item-card-wrap h2:before{
+    border: 1px solid #dddcdc;
+    bottom: -3px;
+    content: "";
+    display: block;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+}
+*/
+hr {
+    background-color: #dddcdc;
+    border: 0 none;
+    float: right;
+    margin: -43px 6px 0 0;
+    width: 91%;
+}
+
+hr::after {
+    background-color: #ffffff;
+    content: "";
+    display: block;
+    height: 1px;;
+}
+
+.bklg-item-handle {
+    background: url("../img/png_handle_tiny.png") repeat-y top left;
+    height: 91%;
+    margin: 4px 0 0;
+    width: 6px;
+    opacity: 0.5;
+}
+
+.bklg-item-handle:hover {
+    opacity: 1;
+}
+
+.bklg-item-details {
+    float: right;
+    margin-top: -36px;
+    width: 219px;
+}
+
+.bklg-item-card-wrap span {
+    float: left;
+    margin: 0px 4px;
+}
+
+.bklg-item-card-wrap span.status {
+    font-size: 10px;
+    color: #333;
+    width: 135px;
+}
+
+.metric {
+    font-size: 10px;
+    font-weight: bold;
+    color: #333;
+    padding-bottom: 5px;
+    width: 30px;
+}
+
+.key {
+    font-size: 12px;
+    color: #019cea;
+    overflow: hidden;
+    padding-top: 3px;
+    width: 85px;
+}
+
+.type {
+    font-size: 12px;
+    color: #333;
+    padding-top: 3px;
+    width: 42px;
+}
+
+.mvalue {
+    background-color: #818181;
+    color: #fffffe;
+    font-size: 14px;
+    font-weight: bold;
+    height: 16px;
+    padding-top: 1px;
+    text-align: center;
+    width: 29px;
+}
+
+.title-key {
+    float: left;
+    overflow: hidden;
+}
+
+/** Firefox specific styles**/
+@-moz-document url-prefix() {
+   #new-input {
+    padding: 5px 10px 5px 10px;
+  }
+
+  .sp-card-wrap .edit-container input{
+    width: 188px;
+  }
+
+  #alm-container .edit-container .alm-btn{
+    width: 70px;
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scratch_Org_Definition__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The scratch org definition used to create this scratch org</description>
+    <externalId>false</externalId>
+    <label>Scratch Org Definition</label>
+    <referenceTo>Scratch_Org_Definition__c</referenceTo>
+    <relationshipLabel>Scratch Orgs</relationshipLabel>
+    <relationshipName>Scratch_Orgs</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

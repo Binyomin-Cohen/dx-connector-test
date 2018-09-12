@@ -1,0 +1,1 @@
+public class SnapshotException extends Exception {}

@@ -1,0 +1,7 @@
+<aura:event type="APPLICATION" description="">
+  <aura:attribute name="componentName" type="String" description="Name of the component to search for"/>
+  <aura:attribute name="componentType" type="String" description="Type of the component to search for"/>
+  <aura:attribute name="componentParentName" type="String" description="Parent Name of the component to search for"/>
+  <aura:attribute name="selectedUsers" type="String[]" description="Users to search for"/>
+  <aura:attribute name="selectedInstances" type="String[]" description="Instances to search through"/>
+</aura:event>

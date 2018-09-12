@@ -1,0 +1,12 @@
+<apex:page showHeader="false" sidebar="false" controller="GoogleAnalyticsTrackerController">
+  <c:Tracking title="{!pageTitle}" appName="{!appName}" logPageView="false"/>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'js/analytics.js')}" ></script>
+  <script type="text/javascript">
+    try {
+      BW.Analytics.addPostMessageListener();
+    } catch(e) {
+      console.error(e);
+    }
+  </script>
+
+</apex:page>

@@ -1,0 +1,15 @@
+Hello Bluewolf Sightline Administrator,<br/>
+<br/>
+A scheduled job failed to run. Please review the details below: <br/>
+<br/>
+Job: {!ALM_Application_Result__c.Tool__c}<br/>
+Result: {!ALM_Application_Result__c.Result__c}<br/>
+Instance: {!ALM_Application_Result__c.Instance__c}<br/>
+Start Date/Time: {!ALM_Application_Result__c.Start_Time__c}<br/>
+End Date/Time: {!ALM_Application_Result__c.Run_Time__c}<br/>
+Error Code: {!ALM_Application_Result__c.Error_Code__c}<br/>
+Job Result Link: {!ALM_Application_Result__c.Link}<br/>
+<br/>
+<br/>
+Error Details:<br/>
+{!ALM_Application_Result__c.Error_Message__c}

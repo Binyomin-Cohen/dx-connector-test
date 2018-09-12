@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Target_Field_Api_Name__c</fullName>
+    <description>The target field or fields in which the matching source field data should be stored, when using multiple targets, please separate via commas.</description>
+    <externalId>false</externalId>
+    <label>Target Field Api Name</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

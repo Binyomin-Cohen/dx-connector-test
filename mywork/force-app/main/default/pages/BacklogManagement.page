@@ -1,0 +1,290 @@
+<apex:page standardController="Backlog__c" sidebar="false" recordSetVar="" tabStyle="Backlog__c" extensions="BacklogManagementExt" docType="html-5.0"
+             action="{!backlogPageRedirect}">
+  <c:Tracking title="Backlog Management" appName="PM - Backlog Management"/>
+
+  <apex:stylesheet value="{!URLFOR($Resource.zip_alm_pm, 'external/css/jquery-ui.css')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.zip_alm_pm, 'css/alm_common.css')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.zip_alm_pm, 'css/backlog_management/backlog_management.css')}" />
+
+  <c:RequireJS initScript="backlog_management/backlog_management_main.js" />
+
+<!--<script src="{!$Resource.js_colResizable}"></script> -->
+  <script src="{!$Resource.js_hogan}"></script>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'js/templates.js')}" ></script>
+
+  <script type="text/javascript">
+
+  function startSubscription(topicName) {
+    var cometd = jQuery.cometd;
+    cometd.unregisterTransport("websocket");
+    cometd.init({
+      url: window.location.protocol+'//'+window.location.hostname+'/cometd/39.0/',
+      requestHeaders: { Authorization: 'OAuth {!$Api.Session_ID}'},
+      appendMessageTypeToURL: false
+    }, function() {
+      cometd.subscribe('/topic/' + topicName, BW.backlog.handleStreamingUpdate);
+    });
+  }
+
+  function remoteGetFieldTypes( callback ) {
+    Visualforce.remoting.Manager.invokeAction(
+      '{!$RemoteAction.BacklogManagementExt.getFieldTypes}',
+      callback,
+      {escape: true}
+    );
+  }
+
+  function getPushTopic( callback ) {
+    Visualforce.remoting.Manager.invokeAction(
+      '{!$RemoteAction.BacklogManagementExt.getPushTopic}',
+      {!viewingCustomBacklog},
+      callback,
+      {escape: true}
+    );
+  }
+
+  function remoteUpdatePriorities( backlogItems, callback ) {
+    Visualforce.remoting.Manager.invokeAction(
+      '{!$RemoteAction.BacklogManagementExt.updatePriorities}',
+      backlogItems,
+      {!viewingCustomBacklog},
+      callback,
+      {escape: true}
+    );
+  }
+
+  function updateStatuses( backlogItems, status, callback ) {
+    Visualforce.remoting.Manager.invokeAction(
+      '{!$RemoteAction.BacklogManagementExt.updateStatuses}',
+      backlogItems,
+  status,
+      callback,
+      {escape: true}
+    );
+  }
+
+  function remoteGetReferenceResults( fieldname, query, callback ) {
+    Visualforce.remoting.Manager.invokeAction(
+      '{!$RemoteAction.BacklogManagementExt.getReferenceResults}',
+      fieldname,
+      query,
+      callback,
+      {escape: true}
+    );
+  }
+
+  function remoteGetInactiveStatuses(callback) {
+    Visualforce.remoting.Manager.invokeAction(
+      '{!$RemoteAction.BacklogManagementExt.getInactiveStatuses}',
+      callback,
+      {escape: true}
+    );
+  }
+
+  //override salesforce's setFocusOnLoad function to ignore this behavior
+  function setFocusOnLoad() {}
+
+</script>
+
+<div id="alm-container" class="permission-level-{! permissionLevel }">
+  <input id="user-timezone" type="hidden" value="{!userTimeZone}"/>
+  <input id="user-locale" type="hidden" value="{!userLocale}"/>
+  <input id="viewing-custom-backlog" type="hidden" value="{!viewingCustomBacklog}"/>
+  <input id="permission-level" type="hidden" value="{!permissionLevel}"/>
+
+  <apex:form >
+    <apex:actionFunction name="afLoadAdditionalBacklogItems" action="{!loadAdditionalItems}" oncomplete="BW.backlog.finishAdditionalItemLoad()" rerender="additional-backlog-item-table-block, msgs"/>
+    <apex:actionFunction name="afLoadAllRemainingItems" action="{!loadAllRemainingItems}" oncomplete="BW.backlog.finishAdditionalItemLoad()" rerender="additional-backlog-item-table-block, msgs"/>
+
+    <apex:actionFunction name="afLoadBacklogItems" action="{!loadBacklogItems}" oncomplete="BW.backlog.finishLoadingBacklog();" rerender="backlog-items, msgs"/>
+    <apex:actionFunction name="afLoadSpecificItems" action="{!loadSpecificItems}" rerender="additional-backlog-item-table-block, msgs" oncomplete="BW.backlog.finishSpecificItemLoad()">
+      <apex:param name="recordsToLoad" value="" assignTo="{!recordsToLoad}"/>
+    </apex:actionFunction>
+    <apex:actionFunction name="afUnloadBacklogItems" action="{!unloadBacklogItems}"  rerender="msgs">
+      <apex:param name="recordsToUnload" value="" assignTo="{!recordsToUnload}"/>
+    </apex:actionFunction>
+    <!-- <apex:actionFunction name="afSetBacklogAutoPrioritizationBehavior" action="{!setBacklogAutoPrioritizationBehavior}" rerender="msgs" /> -->
+
+    <c:HeaderBanner showTitleSection="{!isCustomBacklogEnabled}" title="{!customBacklogTitle}" homeLinkTitle="Backlogs"
+                    useBackToLink="true" useHomeIcon="true" customBackToLink="/apex/BacklogManagementHome"
+                    settingsUrl="{! IF(permissionLevel > 1, '/apex/AdminBacklogPrioritizeColumns', '') }" homeUrl="{!BACKLOG_ITEM_HOME_URL}"
+                    pageMessages="{!pageMsgs.messages}" enablePageMessages="true"
+                    uploadLink="{! IF(OR(permissionLevel <= 1, viewingCustomBacklog), '', '/apex/BacklogItemUpload') }">
+
+        <apex:outputPanel rendered="{! permissionLevel > 1 }">
+          <a href="{!SUBSTITUTE(URLFOR($Action.Backlog__c.New), LEFT(URLFOR($Action.Backlog__c.New),FIND('/',SUBSTITUTE(URLFOR($Action.Backlog__c.New),'//','*'))),'')}" class="alm-action-btn alm-btn new-btn ">
+            <span class="new-icon-no-shadow"></span>New Backlog Item
+          </a>
+
+          <div id="bulk-actions">
+            <button type="button" id="actions-btn"
+              class="alm-action-btn alm-btn">
+              Actions<img src="/s.gif" />
+            </button>
+            <div class="bulkflyout flyout-menu">
+              <ul>
+                <li class="no-hover parent top-item"><span>Prioritize <img class="nav-arrow-down" src="/s.gif"/></span></li>
+                <li id="send-to-top-option" class="child">Send to the top</li>
+                <li id="send-to-bottom-option" class="child">Send to the bottom</li>
+                <li id="change-status-option" class="parent bottom-item"><span>Change Status <img class="nav-arrow-right" src="/s.gif"/></span></li>
+              </ul>
+            </div>
+            <!--bulkflyout-->
+
+            <div class="alm-combobox">
+              <input id="backlog-status" type="text"
+                placeholder="Change Status To" /> <a class="expander"></a>
+              <apex:selectList styleClass="filter-values">
+                <apex:selectOptions value="{!statusFilters}" />
+              </apex:selectList>
+            </div>
+            <span class="status-confirm">
+              <div>
+                Are you sure? <a class="cancel">Cancel</a>
+              </div>
+              <button type="button" class="alm-action-btn alm-btn bulk-continue">Yes</button>
+            </span>
+          </div> <!-- end #bulk-actions -->
+
+          <!-- <div id="auto-prioritization-container">
+            <div id="auto-prioritization-info-container">
+              <span id="auto-prioritization-title">Auto-Prioritize</span>
+              <img id="auto-prioritization-help-icon" class="info-icon" title="To have your NEW items auto-prioritize to the top or the bottom of the backlog, please select below. Current unprioritized items will not be affected." src="/s.gif"/>
+            </div>
+            <br/>
+            <div id="auto-prioritization-button-container">
+              <button type="button" data-behavior="OFF">Off</button>
+              <button type="button" data-behavior="TOP">Top</button>
+              <button type="button" data-behavior="BOTTOM">Bottom</button>
+            </div>
+            <apex:inputHidden id="auto-prioritization-behavior" value="{!autoPrioritizationBehavior}" />
+          </div> -->
+        </apex:outputPanel>
+
+      <div id="saving-container">
+        <div>Saving</div>
+      </div>
+
+    </c:HeaderBanner>
+
+    <div class="alm-container-body">
+      <div id="backlog-mgmt-display">
+        <div id="backlog-filter-container">
+          <div id="filter-pane-handle" class="tray-handle">
+            <img alt="show filters" class="filter-icon" src="/s.gif" title="Toggle filters" />
+          </div>
+          <div id="filter-panel-container" class="sliding-tray">
+            <c:pageBlockPanel panelTitle="Filter Backlog Items" sectionId="backlog-filter-panel" >
+
+              <apex:repeat value="{!columns}" var="col">
+                 <c:pageBlockPanelSection sectionTitle="{!col.label}"
+                    sectionInfoData="{!col.apiName}"
+                    rendered="{!col.isFilterable}">
+                    <div class="alm-combobox">
+                      <input id="{!col.apiName}-filter"
+                        data-fieldname="{!col.apiName}"
+                        data-is-picklist="{!col.isPicklist}"
+                        data-is-userinput="{!col.isUserInput}"
+                        data-is-reference="{!col.isReferenceLookup}"
+                        class="{!IF(OR(col.isReferenceLookup, col.isUserInput), 'apply-selection', '')}"
+                        type="text" placeholder="Enter a value"/>
+
+                      <apex:outputPanel rendered="{!col.isPicklist}">
+                        <a class="expander"></a>
+                        <apex:selectList styleClass="filter-values" multiselect="true">
+                            <apex:selectOptions value="{!col.picklistOptions}" />
+                        </apex:selectList>
+                      </apex:outputPanel>
+                      <apex:outputPanel rendered="{!OR(col.isUserInput, col.isReferenceLookup)}">
+                        <a class="apply-input"><span class="vertical-center apply-input-text">APPLY</span></a>
+                      </apex:outputPanel>
+                   </div>
+                  <ul class="combobox-selection" ></ul>
+                </c:pageBlockPanelSection>
+              </apex:repeat>
+
+              <div id="filtered-items-only-container">
+                <input type="checkbox" id="filtered-items-only" class="fancy-checkbox" checked="checked" />
+                <label class="checkbox" for="filtered-items-only">
+                  <span></span>
+                  Show filtered items only
+                </label>
+              </div>
+              <a id="clear-filters">Clear Filters &gt;</a>
+            </c:pageBlockPanel>
+          </div>
+        </div>
+        <div class="sticky-spacer" />
+        <div id="backlog-display-panel">
+          <div id="alm-table-panel">
+            <apex:outputPanel layout="block" id="backlog-items" styleClass="backlog-items-panel" rendered="{! permissionLevel > 0 }">
+              <div>
+                <table id="backlog-table" class="alm-table">
+                  <colgroup>
+                    <col class="no-resize" style="width: 1%" />
+                    <col class="no-resize" style="width: 2%" />
+                    <col class="no-resize" style="width: 6%" />
+                    <apex:repeat value="{!columns}" var="column">
+                      <col style="width: {!column.width}%" />
+                    </apex:repeat>
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th class="handle-col no-resize" style="width: 1%"></th>
+                      <th class="select-all no-resize" style="width: 2%">
+                        <input type="checkbox" id="row-select-all" class="fancy-checkbox select-all-checkbox" />
+                        <label class="checkbox" for="row-select-all"> <span></span></label>
+                      </th>
+                      <th class="no-resize" style="width: 6%"><apex:outputLabel value="{!$ObjectType.Backlog__c.fields.Priority__c.label}" /></th>
+                      <apex:repeat value="{!columns}" var="column">
+                        <th data-fieldname="{!column.apiName}" style="width: {!column.width}%">{!column.label}</th>
+                      </apex:repeat>
+                    </tr>
+                  </thead>
+                  <tbody id="unprioritized-section">
+                    <tr id="unprioritized-header">
+                      <td colSpan="{!columnCount}">
+                        <img src="/s.gif" class="accordion-icon" />
+                        <span class="title">Un-prioritized Items</span>
+                        <span class="stats"><span class="showing">Showing</span> <span class="count">0</span> Item(s)</span>
+                      </td>
+                    </tr>
+                    <apex:repeat value="{!unprioritizedBacklogItems}" var="bklg">
+                      <c:BacklogItemRow rowClass="unprioritized" bklg="{!bklg}" columns="{!columns}" isPrioritized="false" />
+                    </apex:repeat>
+                  </tbody>
+                  <tbody id="prioritized-section">
+                    <apex:repeat value="{!backlogItems}" var="bklg">
+                      <c:BacklogItemRow rowClass="prioritized" bklg="{!bklg}" columns="{!columns}" isPrioritized="true" />
+                    </apex:repeat>
+                  </tbody>
+                </table>
+
+                <apex:outputPanel id="additional-backlog-item-table-block">
+                  <table id="additional-backlog-item-table" >
+                    <apex:repeat value="{!additionalBacklogItems}" var="bklg">
+                      <c:BacklogItemRow rowClass="prioritized" bklg="{!bklg}" columns="{!columns}" isPrioritized="true" />
+                    </apex:repeat>
+                    <apex:outputPanel layout="none" rendered="{!hasMoreRecords}">
+                      <tr id="load-more-row">
+                        <td colSpan="{!columnCount}">
+                          <div class="subtle-btn load-more-btn" >
+                            <span>Load the Next 200 of {!totalPrioritizedItemsDisplay} Records &#8250;</span>
+                          </div>
+                        </td>
+                      </tr>
+                    </apex:outputPanel>
+                  </table>
+                </apex:outputPanel>
+              </div>
+            </apex:outputPanel>
+          </div> <!-- alm-table-panel -->
+        </div>
+      </div>
+    </div> <!-- alm-container-body -->
+
+    <c:UserVoice ></c:UserVoice>
+
+    </apex:form>
+  </div> <!-- alm-container -->
+</apex:page>

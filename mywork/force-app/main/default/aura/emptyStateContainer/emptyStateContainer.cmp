@@ -1,0 +1,11 @@
+<aura:component >
+
+  <div>
+    <div class="content-container">
+      <div class="empty-state-message vertical-center">
+        {!v.body}
+      </div>
+    </div>
+  </div>
+
+</aura:component>

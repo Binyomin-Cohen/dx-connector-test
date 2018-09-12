@@ -1,0 +1,18 @@
+<apex:component layout="none">
+  <apex:attribute required="true" name="initScript" description="The name of the RequireJS init script i.e. 'backlog_management/backlog_management_main.js'" type="String" />
+
+  <script type="text/javascript">
+    // Used in require main
+    var baseRequireURL = "{!URLFOR($Resource.zip_alm_pm, 'js')}";
+  </script>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'require.js')}" data-main="{!URLFOR($Resource.zip_alm_pm, 'js/require-init-scripts/' + initScript)}"></script>
+  <script>
+    requirejs.onError = function (err) {
+      if (console !== undefined && typeof console.error === "function") {
+        console.error("RequireJS: " + err);
+        //console.error(err.requireType);
+        //console.error('modules: ' + err.requireModules);
+      }
+    };
+  </script>
+</apex:component>

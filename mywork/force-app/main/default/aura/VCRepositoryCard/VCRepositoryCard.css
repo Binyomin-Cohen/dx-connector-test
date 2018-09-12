@@ -1,0 +1,47 @@
+.THIS.vc-repo-block {
+  background-color: #F1F1F1;
+  width: 185px;
+  height: 55px;
+  border: solid 1px #DDDDDD;
+  margin: 10px 20px 10px 0;
+  padding: 17px 15px 5px 20px;
+  float: left;
+  border-radius: 3px;
+  position: relative;
+}
+
+.THIS.vc-repo-block:hover {
+  border: solid 1px #50b0ec;
+  cursor: pointer;
+}
+
+.THIS.vc-repo-block[data-is-selected="true"] {
+  background-color: #DDE9F7;
+  border-color: #003767;
+  cursor: default;
+}
+
+.THIS.vc-repo-block .repo-name {
+  display: inline-block;
+  width: 120px;
+  height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.THIS.vc-repo-block[data-is-disabled="true"] {
+  opacity: .5;
+  cursor: default;
+}
+
+.THIS.vc-repo-block[data-is-disabled="true"]:hover {
+  border: solid 1px #DDDDDD;
+}
+
+.THIS .slds-icon_small,
+.THIS .slds-icon--small {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}

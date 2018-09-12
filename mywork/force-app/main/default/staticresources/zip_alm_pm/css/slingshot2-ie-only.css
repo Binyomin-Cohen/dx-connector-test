@@ -1,0 +1,5 @@
+#alm-container .ss-col-three #action-button-overlay {
+  /* Need to use explicit height here (not 100%) */
+  /* This height should match height of parent ss-col-three */
+  height: 273px;
+}

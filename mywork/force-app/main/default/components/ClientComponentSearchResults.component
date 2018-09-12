@@ -1,0 +1,64 @@
+<apex:component controller="ClientComponentSearchController">
+
+  <apex:attribute name="pagingLocation"
+                    type="String"
+                    default="both"
+                    description="Location of the paging controls. Valid values are: top, bottom, both, none"/>
+
+  <apex:attribute name="showpagesizecontrol" type="Boolean" default="true"
+                    description="Controls if the page size controls are displayed"/>
+
+  <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.zip_alm_pm, 'css/client_comp_search_results.css')}" />
+
+  <div id="comp-search-res-wrapper" data-bklg-items-remote-action="{!$RemoteAction.ClientComponentSearchController.getSearchResults}">
+    <!-- Current user's timezone -->
+    <input id="user-timezone" type="hidden" value="{!userTimeZone}"/>
+    <!-- Current user's locale -->
+    <input id="user-locale" type="hidden" value="{!userLocale}"/>
+    <div class="componentPaging top-paging" style="display: {!IF(pagingLocation == 'top' || pagingLocation == 'both', 'block', 'none')};"></div>
+    <table id="component-search-table" class="alm-table zebra">
+      <thead>
+        <tr>
+          <th class="select-all" data-sort="selected">
+            <input class="fancy-checkbox result-select select-all-checkbox" id="selectAllCheckbox" type="checkbox" />
+            <label class="checkbox" for="selectAllCheckbox"><span></span></label>
+          </th>
+          <th data-sort="instance"><img src="/s.gif" alt="sort" />Instance</th>
+          <th data-sort="name"><img src="/s.gif" alt="sort" />Name</th>
+          <th data-sort="type"><img src="/s.gif" alt="sort" />Type</th>
+          <th data-sort="parentComponent"><img src="/s.gif" alt="sort" />Parent Component</th>
+          <th data-sort="sortableLastModifiedDate"><img src="/s.gif" alt="sort" />Last Modified Date</th>
+          <th data-sort="lastModifiedBy"><img src="/s.gif" alt="sort" />Last Modified By</th>
+        </tr>
+      </thead>
+      <tbody>
+          <!-- Left blank as it is populated by remote action -->
+      </tbody>
+    </table>
+    <div class="componentPaging bottom-paging" style="display: {!IF(pagingLocation == 'bottom' || pagingLocation == 'both', 'block', 'none')};"></div>
+    <apex:outputPanel styleClass="selected-options clearfix" layout="block" rendered="{!showPageSizeControl}">
+      <span>Viewing&nbsp;</span>
+      <apex:selectList value="{!defaultPageSize}" size="1" styleClass="selected-page-size" html-data-page-size="{!userRequestedPageSize}">
+        <apex:selectOption itemValue="10" itemLabel="10" />
+        <apex:selectOption itemValue="25" itemLabel="25" />
+        <apex:selectOption itemValue="50" itemLabel="50" />
+        <apex:selectOption itemValue="100" itemLabel="100" />
+        <apex:selectOption itemValue="200" itemLabel="200" />
+      </apex:selectList>
+      <span>&nbsp;of <span id="pagesize-count"></span>&nbsp;Records</span>
+      <div class="componentPaging" style="display: {!IF(pagingLocation == 'inline', 'inline-block', 'none')};"></div>
+    </apex:outputPanel>
+    <apex:componentBody />
+  </div> <!-- End comp search wrapper -->
+  
+  <script>
+    function remoteUpdateUserPreferences(requestedPageSize, callback) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.ClientComponentSearchController.updateUserPreferences}',
+            requestedPageSize,
+            callback,
+            {escape: true}
+        );
+    }
+  </script>
+</apex:component>

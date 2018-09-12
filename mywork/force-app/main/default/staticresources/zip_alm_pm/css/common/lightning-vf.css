@@ -1,0 +1,38 @@
+/**override std sfdc styles*/
+.bodyDiv .outerNoSidebar {
+    padding-bottom: 0;
+}
+
+.slds-scope, sld-scope.noSidebarCell  {
+  padding: 0;
+}
+
+.block-overlay  {
+  width: 32px;
+  height: 32px;
+ }
+
+#loader .slds-spinner_container {
+  background: none;
+}
+#loader .slds-spinner_container .slds-spinner__dot-b:after,
+#loader .slds-spinner_container .slds-spinner__dot-b:before,
+#loader .slds-spinner_container .slds-spinner__dot-a:after,
+#loader .slds-spinner_container .slds-spinner__dot-a:before,
+#loader .slds-spinner_container .slds-spinner:before,
+#loader .slds-spinner_container .slds-spinner:after {
+  background-color: #FFF;
+}
+
+#loader {
+  display: none;
+}
+
+#loader.dark-background {
+  background: #000;
+  opacity: 0.6;
+  display: block;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}

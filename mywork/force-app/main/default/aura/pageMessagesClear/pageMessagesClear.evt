@@ -1,0 +1,1 @@
+<aura:event type="APPLICATION" description="clear page messages component of all messages" />

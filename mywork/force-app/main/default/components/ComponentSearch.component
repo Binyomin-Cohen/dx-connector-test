@@ -1,0 +1,306 @@
+<apex:component controller="ComponentSearchController">
+<!-- --------------------------------------- DEPRECATED ---------------------------------------
+    <apex:attribute name="saveActionToInvoke" type="ApexPages.Action" assignTo="{!saveAction}" description="The method to invoke to save member records." required="true"/>
+    <apex:attribute name="deleteActionToInvoke" type="ApexPages.Action" assignTo="{!deleteAction}" description="The method to invoke to delete member records." required="true"/>
+    <apex:attribute name="existingComponents" type="ComponentSearchWrapper[]" assignTo="{!existingSavedMembers}" description="The list of existing member records." required="true"/>
+    <apex:attribute name="vfpageController" type="AssetControllerExtension" assignTo="{!pageController}" description="The controller for the vf page." required="true"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+       function checkForEnterKey(e){
+           if(window.event){
+               key = window.event.keyCode;     //IE
+           }
+           else{
+               key = e.which;     //firefox
+           }
+
+           if(key == 13) {
+                // Return/Enter Key
+                search(document.getElementById('name').value, document.getElementById('type').value, document.getElementById('parentName').value, document.getElementById('deletedCheckbox').checked);
+                return false;
+           }
+       }
+
+	   function validate() {
+	       var containsUnsupportedType = false;
+
+	       // itterate through all the selected checkboxes in the results table
+	       $( ".results-table input:checked" ).each(function() {
+	           var isChecked = $(this).closest('td').find("input[id$='hiddenUnsupportedType']").val();
+	           if (isChecked == 'true') {
+	               containsUnsupportedType = true;
+
+	               // break out of loop
+	               return false;
+	           }
+	       }) ;
+
+	       if (containsUnsupportedType) {
+		       var message = 'At least one component selected is a manual deployment.\nPlease be sure to add any addtional information in the Notes field that is relevant.\n\n';
+	               message += 'Click OK to add the components as is or click Cancel to go back and add additional notes.';
+
+	           var result = confirm(message);
+
+	           if (result == true) {
+	               return true;
+	           } else {
+	               return false;
+	           }
+	       } else {
+	           return true;
+	       }
+	   }
+	</script>
+
+
+
+    <table>
+        <tr>
+            <td width="200" valign="top">
+                <apex:pageBlock title="Search Parameters" mode="edit" id="parameters">
+                    <apex:actionFunction name="search" action="{!doSearch}" rerender="results,debug,errors">
+                        <apex:param name="name" value="" />
+                        <apex:param name="type" value="" />
+                        <apex:param name="parentName" value="" />
+                        <apex:param name="includeDeleted" value="" />
+                    </apex:actionFunction>
+
+                    <table cellpadding="1" cellspacing="1" width="100%">
+                        <tr>
+                            <td class="search-label">Name<br/>
+                                <input type="text" id="name" onkeypress="return checkForEnterKey(event)"/>
+                            </td>
+
+                            <td class="search-label">Type<br/>
+                                <input type="text" id="type" onkeypress="return checkForEnterKey(event)"/>
+                            </td>
+
+                            <td class="search-label">Parent Component<br/>
+                                <input type="text" id="parentName" onkeypress="return checkForEnterKey(event)"/>
+                            </td>
+
+                            <td class="search-label">Source Instance<br/>
+                                <apex:selectList id="instances" value="{!selectedInstances}" multiselect="true">
+                                    <apex:selectOptions value="{!instances}"/>
+                                </apex:selectList>
+                            </td>
+
+                            <td class="search-label">Include Deleted Components<br/>
+                                <input type="checkbox" id="deletedCheckbox"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input type="button" value="Search" onclick="search(document.getElementById('name').value, document.getElementById('type').value, document.getElementById('parentName').value, document.getElementById('deletedCheckbox').checked)"/>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:pageBlock>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+
+                <apex:pageBlock title="Results: {!recordCount} records" mode="edit" id="results">
+
+                    <div class="button-div">
+                        <apex:commandButton action="{!saveActionToInvoke}" onclick="return validate()" value="Add" styleClass="big-button"/>
+                    </div>
+
+                    <apex:actionFunction name="updateCheckboxes" action="{!updateSearchResultsCheckboxes}" rerender="searchResultsCheckboxes">
+                        <apex:param name="selectAll" value="" />
+                    </apex:actionFunction>
+
+                    <apex:outputPanel layout="block" styleClass="results-panel" >
+                    <apex:pageBlockTable styleClass="results-table" value="{!searchResultsWrapper}" var="c">
+                        <apex:column width="25px">
+                            <apex:facet name="header">
+                                <input type="checkbox" id="selectAllCheckbox" onclick="updateCheckboxes(document.getElementById('selectAllCheckbox').checked)"/>
+                            </apex:facet>
+
+                            <apex:inputCheckbox value="{!c.checked}" id="searchResultsCheckboxes" />
+
+                            <apex:inputHidden value="{!c.isUnsupportedType}" id="hiddenUnsupportedType"/>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:outputLabel value="{!$Label.Backlog_Component_Environment}"/>
+                            </apex:facet>
+
+                            <apex:outputText value="{!c.environment}"/>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:commandLink value="{!$Label.Backlog_Component_Name}" action="{!toggleSort}" rerender="results,debug">
+                                    <apex:param name="sortField" value="Name" assignTo="{!sortField}"/>
+                                </apex:commandLink>
+                            </apex:facet>
+
+                            <span class="deleted-component">
+                                <apex:outputField value="{!c.component.Name}" rendered="{!c.component.Deleted__c}"/>
+                            </span>
+
+                            <span class="manual-component">
+                                <apex:outputField value="{!c.component.Name}" rendered="{!c.isUnsupportedType}"/>
+                            </span>
+
+                            <span class="normal-component">
+                                <apex:outputField value="{!c.component.Name}" rendered="{!IF(!c.component.Deleted__c && !c.isUnsupportedType, true, false)}"/>
+                            </span>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:commandLink value="{!$Label.Backlog_Component_Type}" action="{!toggleSort}" rerender="results,debug">
+                                    <apex:param name="sortField" value="Type__c" assignTo="{!sortField}"/>
+                                </apex:commandLink>
+                            </apex:facet>
+
+                            <apex:outputField value="{!c.component.Type__c}"/>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:commandLink value="{!$Label.Backlog_Component_Parent_Component}" action="{!toggleSort}" rerender="results,debug">
+                                    <apex:param name="sortField" value="Parent_Component__r.Name" assignTo="{!sortField}"/>
+                                </apex:commandLink>
+                            </apex:facet>
+
+                            <apex:outputField value="{!c.component.Parent_Component__r.Name}"/>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:outputLabel value="{!$Label.Backlog_Component_Last_Modified_Date}"/>
+                            </apex:facet>
+
+                            <apex:outputText value="{0,date,MM/dd/yyyy hh:mm a}">
+                                <apex:param value="{!c.lastModifiedDate}" />
+                            </apex:outputText>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:outputLabel value="{!$Label.Backlog_Component_Last_Modified_By}"/>
+                            </apex:facet>
+
+                            <apex:outputText value="{!c.lastModifiedBy}"/>
+                        </apex:column>
+
+                    </apex:pageBlockTable>
+                    </apex:outputPanel>
+                </apex:pageBlock>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <apex:pageBlock title="Saved Components" id="selected">
+                    <div class="center">
+                        <apex:commandButton action="{!deleteActionToInvoke}" value="Delete" styleClass="standard-button"/>
+                    </div>
+
+			        <apex:actionFunction name="updateSelectedCheckboxes" action="{!updateSavedComponentsCheckboxes}" rerender="selectedCheckboxes">
+			            <apex:param name="selectAll" value="" />
+			        </apex:actionFunction>
+
+			        <apex:outputPanel layout="block" styleClass="saved-panel" >
+			        <apex:pageBlockTable value="{!existingSavedMembers}" var="c">
+			            <apex:column width="50px">
+			                <apex:facet name="header">
+			                    <input type="checkbox" id="selectAllCheckboxDelete" onclick="updateSelectedCheckboxes(document.getElementById('selectAllCheckboxDelete').checked)"/>
+			                </apex:facet>
+
+			                <apex:inputCheckbox value="{!c.checked}" id="selectedCheckboxes"/>
+			            </apex:column>
+
+			            <apex:column >
+                            <apex:facet name="header">
+                                <apex:outputLabel value="{!$Label.Backlog_Component_Environment}"/>
+                            </apex:facet>
+
+                            <apex:outputText value="{!c.environment}"/>
+                        </apex:column>
+
+			            <apex:column >
+			                <apex:facet name="header">
+			                    <apex:outputLabel value="{!$Label.Backlog_Component_Name}" />
+			                </apex:facet>
+                            <span class="deleted-component">
+                                <apex:outputField value="{!c.component.Name}" rendered="{!c.component.Deleted__c}"/>
+                            </span>
+
+                            <span class="manual-component">
+                                <apex:outputField value="{!c.component.Name}" rendered="{!c.isUnsupportedType}"/>
+                            </span>
+
+                            <span class="normal-component">
+                                <apex:outputField value="{!c.component.Name}" rendered="{!IF(!c.component.Deleted__c && !c.isUnsupportedType, true, false)}"/>
+                            </span>
+			            </apex:column>
+
+			            <apex:column >
+			                <apex:facet name="header">
+			                    <apex:outputLabel value="{!$Label.Backlog_Component_Type}" />
+			                </apex:facet>
+			                <apex:outputField value="{!c.component.Type__c}"/>
+			            </apex:column>
+
+			            <apex:column >
+			                <apex:facet name="header">
+			                    <apex:outputLabel value="{!$Label.Backlog_Component_Parent_Component}" />
+			                </apex:facet>
+			                <apex:outputField value="{!c.component.Parent_Component__c}"/>
+			            </apex:column>
+
+			            <apex:column >
+                            <apex:facet name="header">
+                                <apex:outputLabel value="{!$Label.Backlog_Component_Last_Modified_Date}" />
+                            </apex:facet>
+
+                            <apex:outputText value="{0,date,MM/dd/yyyy hh:mm a}">
+                                <apex:param value="{!c.lastModifiedDate}" />
+                            </apex:outputText>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:outputLabel value="{!$Label.Backlog_Component_Last_Modified_By}" />
+                            </apex:facet>
+
+                            <apex:outputText value="{!c.lastModifiedBy}"/>
+                        </apex:column>
+
+			            <apex:column >
+                            <apex:facet name="header">
+                                <apex:outputLabel value="{!$Label.Backlog_Component_Notes}" />
+                            </apex:facet>
+                            <apex:outputLabel value="{!c.notes}"/>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:outputLabel value="{!$Label.Backlog_Component_Profile_Permission}" />
+                            </apex:facet>
+                            <apex:outputLabel value="{!c.isProfilePermission}"/>
+                        </apex:column>
+
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:outputLabel value="{!$Label.Backlog_Component_Profile}" />
+                            </apex:facet>
+                            <apex:outputLabel value="{!c.profileLookup.Name}"/>
+                        </apex:column>
+                     </apex:pageBlockTable>
+			         </apex:outputPanel>
+			    </apex:pageBlock>
+            </td>
+        </tr>
+    </table>
+    -->
+</apex:component>

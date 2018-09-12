@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Defects</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <columns>Business_Value__c</columns>
+    <columns>Dev_Effort__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Backlog__c.Defect</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Completed - No Sprint,Accepted,Rejected</value>
+    </filters>
+    <label>Defects</label>
+</ListView>

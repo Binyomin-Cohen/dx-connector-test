@@ -1,0 +1,231 @@
+<apex:component id="toolConfiguration" layout="block">
+  <apex:attribute name="label" description="The tool label." type="String" required="true"/>
+  <apex:attribute name="job" description="The tool job model." type="ALM_Job__c" required="true"/>
+  <apex:attribute name="isActivated" description="Whether or not the tool is activated." type="Boolean" required="true"/>
+  <apex:attribute name="isDeactivationPending" description="Whether or not the tool is pending deactivation." type="Boolean" required="true"/>
+  <apex:attribute name="scheduledStartTime" description="The beginning of the tool's schedule interval." type="Long" required="true"/>
+  <apex:attribute name="scheduledEndTime" description="The end of the tool's schedule interval." type="Long" required="true"/>
+  <apex:attribute name="applicationResults" description="The tool's application results." type="ALMApplicationResultModel[]" required="true"/>
+
+  <div class="tool-configuration simple-accordion clearfix">
+    <div class="simple-accordion-header">
+      <h3 class="simple-accordion-handle">
+        <img class="tools-icon" src="/s.gif"></img>
+        <img class="simple-accordion-caret" src="/s.gif"></img>
+        <span class="tool-title">{!label}</span>
+      </h3>
+      <span class="onoffswitch-container">
+        <span class="onoffswitch">
+          <apex:inputCheckbox styleClass="onoffswitch-checkbox is-tool-activated" html-data-page-persistence="change" value="{!isActivated}"/>
+          <label class="onoffswitch-label" for="switch-checkbox">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+          </label>
+        </span>
+      </span>
+      <apex:inputHidden value="{!isDeactivationPending}"/>
+    </div>
+
+    <div class="simple-accordion-body">
+      <div class="configure-container">
+        <div class="configure-header-container col-md-12">
+          <img class="settings" src="/s.gif"></img>Configure
+        </div>
+
+        <div class="row-fluid">
+          <div class="email-container col-md-4">
+            <div class="email-label">Send error notifications to</div>
+            <apex:inputField styleClass="email-input alm-input" html-placeholder="Email" html-data-page-persistence="input" value="{!job.Mail_To__c}"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-container">
+        <div class="status-container row-fluid">
+          <div class="col-md-12">
+            <img class="calendar-icon" src="/s.gif" />Schedule
+            <div class="status-section menu-opener">
+              <apex:inputHidden id="jobStatus" value="{!job.Status__c}"/>
+              <span class="status-label menu-opener">Status:</span><span class="status-output menu-opener">{!job.Status__c}</span><img class="status-arrow menu-opener" src="/s.gif" />
+              <div class="flyout-menu">
+                <ul>
+                  <li class="" data-page-persistence="click"><span>On Hold</span></li>
+                  <li class="" data-page-persistence="click"><span>Scheduled</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frequency-label">
+          How frequently should <span class="tool-title">{!label}</span> run?
+        </div>
+
+        <div class="frequency-days row-fluid clearfix">
+          <!-- Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday -->
+          <div class="col-md-12">
+            <!-- Monday, Tuesday -->
+            <div class="col-md-3">
+              <!-- Monday -->
+              <div class="col-md-6">
+                <span class="clickable-tile {!IF(job.Scheduled_On_Monday__c,'selected','')}" data-page-persistence="click">
+                  <span class="name">Mon</span>
+                  <apex:inputHidden value="{!job.Scheduled_On_Monday__c}" />
+                </span>
+              </div>
+              <!-- Tuesday -->
+              <div class="col-md-6">
+                <span class="clickable-tile {!IF(job.Scheduled_On_Tuesday__c,'selected','')}" data-page-persistence="click">
+                  <span class="name">Tue</span>
+                  <apex:inputHidden value="{!job.Scheduled_On_Tuesday__c}" />
+                </span>
+              </div>
+            </div>
+            <!-- Wednesday, Thursday -->
+            <div class="col-md-3">
+              <!-- Wednesday -->
+              <div class="col-md-6">
+                <span class="clickable-tile {!IF(job.Scheduled_On_Wednesday__c,'selected','')}" data-page-persistence="click">
+                  <span class="name">Wed</span>
+                  <apex:inputHidden value="{!job.Scheduled_On_Wednesday__c}" />
+                </span>
+              </div>
+              <!-- Thursday -->
+              <div class="col-md-6">
+                <span class="clickable-tile {!IF(job.Scheduled_On_Thursday__c,'selected','')}" data-page-persistence="click">
+                  <span class="name">Thu</span>
+                  <apex:inputHidden value="{!job.Scheduled_On_Thursday__c}" />
+                </span>
+              </div>
+            </div>
+            <!-- Friday, Saturday -->
+            <div class="col-md-3">
+              <!-- Friday -->
+              <div class="col-md-6">
+                <span class="clickable-tile {!IF(job.Scheduled_On_Friday__c,'selected','')}" data-page-persistence="click">
+                  <span class="name">Fri</span>
+                  <apex:inputHidden value="{!job.Scheduled_On_Friday__c}" />
+                </span>
+              </div>
+              <!-- Saturday -->
+              <div class="col-md-6">
+                <span class="clickable-tile {!IF(job.Scheduled_On_Saturday__c,'selected','')}" data-page-persistence="click">
+                  <span class="name">Sat</span>
+                  <apex:inputHidden value="{!job.Scheduled_On_Saturday__c}" />
+                </span>
+              </div>
+            </div>
+            <!-- Sunday -->
+            <div class="col-md-3">
+              <!-- Sunday -->
+              <div class="col-md-6">
+                <span class="clickable-tile {!IF(job.Scheduled_On_Sunday__c,'selected','')}" data-page-persistence="click">
+                  <span class="name">Sun</span>
+                  <apex:inputHidden value="{!job.Scheduled_On_Sunday__c}" />
+                </span>
+              </div>
+            </div>
+          </div>
+          <span class="on-demand-container scheduled">
+            <button type="button" class="on-demand-btn alm-btn important-btn2 pull-right">
+              <span class="scheduled">Run Now</span>
+              <span class="queued">Queued...</span>
+              <span class="running">
+                <img class="spinner-icon" src="{!URLFOR($Resource.zip_alm_pm, 'img/whiteSpinner.GIF')}" />
+                <span class="running-text">&nbsp;Running</span>
+              </span>
+            </button>
+          </span>
+        </div><!-- End date tiles section -->
+
+        <div class="frequency-time row-fluid clearfix">
+          <span class="frequency-time-hours-container col-md-4">
+            <div class="time-label-container">
+              <span class="time-label">Attempt to run</span>
+            </div>
+            <div class="time-control-container">
+              <select class="interval">
+                <option value="2">Every 2 hours</option>
+                <option value="4">Every 4 hours</option>
+                <option value="8">Every 8 hours</option>
+              </select>
+              <apex:inputHidden html-data-page-persistence="input" value="{!job.Interval__c}" />
+            </div>
+          </span>
+          <span class="frequency-time-start-container col-md-4">
+            <div class="time-label-container">
+              <span class="time-label">Between</span>
+            </div>
+            <div class="time-control-container">
+              <select class="start-time">
+              </select>
+              <apex:inputHidden html-data-page-persistence="input" value="{!scheduledStartTime}" />
+            </div>
+          </span>
+          <span class="frequency-time-end-container col-md-4">
+            <div class="time-label-container">
+              <span class="time-label">And</span>
+            </div>
+            <div class="time-control-container">
+              <select class="end-time">
+              </select>
+              <apex:inputHidden html-data-page-persistence="input" value="{!scheduledEndTime}" />
+            </div>
+          </span>
+        </div>
+
+        <apex:outputPanel id="resultsContainer" styleClass="results-container">
+          <div class="results-header-container">
+            <img class="results-header-icon" src="/s.gif"></img><span>Results</span>
+          </div>
+
+          <div class="table-container">
+            <table class="alm-table zebra">
+              <thead>
+                <tr>
+                  <th class="column-header-bordered" width="25%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Date</span></th>
+                  <th class="column-header-bordered" width="25%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">{!$ObjectType.ALM_Application_Result__c.Fields.Result__c.Label}</span></th>
+                  <th class="column-header-bordered" width="25%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">{!$ObjectType.ALM_Application_Result__c.Fields.Error_Code__c.Label}</span></th>
+                  <th width="25%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">{!$ObjectType.ALM_Application_Result__c.Fields.Duration__c.Label}</span></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <apex:repeat value="{!applicationResults}" var="model">
+                  <tr>
+                    <td><apex:outputText value="{! IF(ISBLANK(model.endTime), model.startTime, model.endTime) }"/></td>
+                    <td>
+                      <apex:outputPanel rendered="{!model.isSuccess}">
+                        <a href="/{!model.id}" class="results-success-icon overflow-ellipses table-cell" target="_blank" title="{!model.result}">
+                          <span class="result-text">{!model.result}</span>
+                        </a>
+                      </apex:outputPanel>  
+                      <apex:outputPanel rendered="{!model.isWarnings}">
+                        <a href="/{!model.id}" class="results-warnings-icon overflow-ellipses table-cell" target="_blank" title="{!model.result}">
+                          <span class="result-text">{!model.result}</span>
+                        </a>
+                      </apex:outputPanel> 
+                      <apex:outputPanel rendered="{!model.isFailure}"> 
+                        <a href="/{!model.id}" class="results-failure-icon overflow-ellipses table-cell" target="_blank" title="{!model.result}">
+                          <span class="result-text">{!model.result}</span>
+                        </a>
+                      </apex:outputPanel> 
+                      <apex:outputPanel rendered="{!model.isInProgress}">  
+                        <a href="/{!model.id}" class="overflow-ellipses table-cell" target="_blank" title="{!model.result}">
+                          <span class="result-text">{!model.result}</span>
+                        </a>
+                      </apex:outputPanel>  
+                    </td>
+                    <td class="overflow-ellipses table-cell"><apex:outputText value="{!model.errorCode}" title="{!model.errorCode}"/></td>
+                    <td><apex:outputText value="{!model.duration}"/></td>
+                  </tr>
+                </apex:repeat>
+              </tbody>
+            </table>
+          </div>
+        </apex:outputPanel>
+
+      </div>
+    </div>
+  </div>
+</apex:component>

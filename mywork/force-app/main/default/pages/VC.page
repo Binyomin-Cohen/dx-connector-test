@@ -1,0 +1,30 @@
+<apex:page standardController="VC_Repository__c" extensions="VCControllerExt" sidebar="false" docType="html-5.0">
+
+  <apex:includeLightning />
+  <apex:slds />
+
+  <div id="lightning-container">
+    <div id="lightning"></div>
+  </div>
+
+  <apex:outputPanel rendered="{! userHasPermission }" layout="none">
+    <script>
+      (function() {
+        $Lightning.use("c:VCApplication", function() {
+          $Lightning.createComponent(
+            "c:VC", {
+              userHasExistingKeypair : "{!userHasExistingKeypair}",
+              backlogId : "{!JSENCODE(backlogItemId)}"
+            }, "lightning",
+            function() {}
+          );
+        });
+      })();
+    </script>
+  </apex:outputPanel>
+  <apex:outputPanel rendered="{! NOT(userHasPermission) }">
+    {!$Label.Permissions_Error}
+  </apex:outputPanel>
+  
+  <c:Tracking title="Repo_Authorization" appName="VC-Repo_Authorization" />
+</apex:page>

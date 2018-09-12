@@ -1,0 +1,23 @@
+<aura:component extensible="true" abstract="true">
+  <aura:registerEvent name="rowSelectEvent" type="c:rowSelectEvent"/>
+  <aura:registerEvent name="VirtualDOMEvent" type="c:VirtualDOMEvent"/>
+
+  <aura:method name="getId" action="{!c.getId}" access="PUBLIC"></aura:method>
+  <aura:method name="isSelected" action="{!c.isSelected}" access="PUBLIC"></aura:method>
+
+  <aura:method name="setSelected" action="{!c.setSelected}" access="PUBLIC">
+    <aura:attribute name="isSelected" type="Boolean" />
+  </aura:method>
+
+  <aura:method name="toggleSelected" action="{!c.toggleSelected}" access="PUBLIC"></aura:method>
+  <aura:method name="handleKeydown" action="{!c.handleKeydown}" access="PUBLIC"></aura:method>
+  <aura:method name="focus" action="{!c.focus}" access="PUBLIC"></aura:method>
+
+  <aura:method name="notifyParentOfSelect" action="{!c.notifyParentOfSelect}" access="PUBLIC">
+    <aura:attribute name="isMultiSelect" type="Boolean" />
+  </aura:method>
+
+
+  {!v.body}
+
+</aura:component>

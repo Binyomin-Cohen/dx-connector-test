@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The status should indicate the stage in the life of a backlog item from inception to completion.</inlineHelpText>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New</fullName>
+                <default>true</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Open</fullName>
+                <default>false</default>
+                <label>Open</label>
+            </value>
+            <value>
+                <fullName>Needs Requirements</fullName>
+                <default>false</default>
+                <label>Needs Requirements</label>
+            </value>
+            <value>
+                <fullName>Needs Solution</fullName>
+                <default>false</default>
+                <label>Needs Solution</label>
+            </value>
+            <value>
+                <fullName>Dev Ready</fullName>
+                <default>false</default>
+                <label>Dev Ready</label>
+            </value>
+            <value>
+                <fullName>In-Progress</fullName>
+                <default>false</default>
+                <label>In-Progress</label>
+            </value>
+            <value>
+                <fullName>Dev Complete</fullName>
+                <default>false</default>
+                <label>Dev Complete</label>
+            </value>
+            <value>
+                <fullName>Build Ready</fullName>
+                <default>false</default>
+                <label>Build Ready</label>
+            </value>
+            <value>
+                <fullName>QA Ready</fullName>
+                <default>false</default>
+                <label>QA Ready</label>
+            </value>
+            <value>
+                <fullName>QA Accepted</fullName>
+                <default>false</default>
+                <label>QA Accepted</label>
+            </value>
+            <value>
+                <fullName>Reopened</fullName>
+                <default>false</default>
+                <label>Reopened</label>
+            </value>
+            <value>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <label>Rejected</label>
+            </value>
+            <value>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+                <label>Deferred</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <value>
+                <fullName>Defect Resolution</fullName>
+                <default>false</default>
+                <label>Defect Resolution</label>
+            </value>
+            <value>
+                <fullName>UAT Accepted</fullName>
+                <default>false</default>
+                <label>UAT Accepted</label>
+            </value>
+            <value>
+                <fullName>Released</fullName>
+                <default>false</default>
+                <label>Released</label>
+            </value>
+            <value>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+                <label>Resolved</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

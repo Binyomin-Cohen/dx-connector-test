@@ -1,0 +1,63 @@
+<apex:component layout="block" >
+  <apex:attribute name="messages" description="the messages to display" type="PageMessage[]" required="true"/>
+  <div class="page-messages">
+    <apex:pageMessages escape="false" id="apex-messages" />
+    <apex:outputPanel id="custom-messages" styleClass="msg-panel" layout="block">
+      <apex:repeat value="{!messages}" var="pageMessage">
+      
+        <apex:outputPanel layout="block" styleClass="message errorM3" html-data-message-id="{!pageMessage.messageId}" rendered="{!pageMessage.messageType == 'error'}">
+          <img alt="error" class="msgIcon message-icon" src="/s.gif" title="ERROR" />
+          <span class="message-text">
+              <span class="subject">Error: </span> 
+              <apex:outputText escape="false" value="{!pageMessage.message}" />
+          </span>
+          <apex:outputPanel layout="block" rendered="{!pageMessage.showCloseButton}" styleClass="close-btn-container">
+            <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel">
+              <img alt="close" class="error-close" src="/s.gif" title="close" />
+            </a>
+          </apex:outputPanel>
+        </apex:outputPanel>
+        
+        <apex:outputPanel layout="block" styleClass="message successM3" html-data-message-id="{!pageMessage.messageId}" rendered="{!pageMessage.messageType == 'success'}">
+          <img alt="success" class="success-icon message-icon" src="/s.gif" title="SUCCESS" />
+          <span class="message-text">
+              <span class="subject">Success: </span> 
+              <apex:outputText escape="false" value="{!pageMessage.message}" />
+          </span>
+          <apex:outputPanel layout="block" rendered="{!pageMessage.showCloseButton}" styleClass="close-btn-container">
+            <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel">
+              <img alt="close" class="success-close" src="/s.gif" title="close" />
+            </a>
+          </apex:outputPanel>
+        </apex:outputPanel>
+        
+        <apex:outputPanel layout="block" styleClass="message infoM3" html-data-message-id="{!pageMessage.messageId}" rendered="{!pageMessage.messageType == 'info'}">
+          <img alt="info" class="info-icon message-icon" src="/s.gif" title="INFO" />
+          <span class="message-text">
+              <span class="subject">Information: </span> 
+              <apex:outputText escape="false" value="{!pageMessage.message}" />
+          </span>
+          <apex:outputPanel layout="block" rendered="{!pageMessage.showCloseButton}" styleClass="close-btn-container">
+            <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel">
+              <img alt="close" class="info-close" src="/s.gif" title="close" />
+            </a>
+          </apex:outputPanel>
+        </apex:outputPanel>
+        
+        <apex:outputPanel layout="block" styleClass="message warningM3" html-data-message-id="{!pageMessage.messageId}" rendered="{!pageMessage.messageType == 'warning'}">
+          <img alt="warning" class="warning-sign message-icon" src="/s.gif" title="WARNING" />
+          <span class="message-text">
+              <span class="subject">Warning: </span> 
+              <apex:outputText escape="false" value="{!pageMessage.message}" />
+          </span>
+          <apex:outputPanel layout="block" rendered="{!pageMessage.showCloseButton}" styleClass="close-btn-container">
+            <a class="cancel-btn cancel-icon" href="javascript:void(0);" title="Cancel">
+              <img alt="close" class="warning-close" src="/s.gif" title="close" />
+            </a>
+          </apex:outputPanel>
+        </apex:outputPanel>
+        
+      </apex:repeat>
+    </apex:outputPanel>
+  </div>
+</apex:component>

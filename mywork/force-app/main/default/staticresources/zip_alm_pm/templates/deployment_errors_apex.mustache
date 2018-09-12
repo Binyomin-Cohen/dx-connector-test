@@ -1,0 +1,17 @@
+<table class="alm-table">
+   <thead>
+     <tr>
+       <th style="width: 10%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Key</span></th>
+       <th style="width: 10%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Duration</span></th>
+       <th style="width: 20%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Class</span></th>
+       <th style="width: 20%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Method</span></th>
+       <th style="width: 20%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Error Message</span></th>
+       <th style="width: 20%"><img class="sortable" src="/s.gif"></img><span class="sortable-text">Stack Trace</span></th>
+     </tr>
+   </thead>
+   <tbody>
+     {{#errors}}
+       {{> deployment_error_apex}}
+     {{/errors}}
+   </tbody>
+</table>

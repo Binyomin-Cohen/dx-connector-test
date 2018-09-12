@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>37.0</apiVersion>
+    <description>An SLDS spinner with an associated UI message.</description>
+    <label>MessageSpinner</label>
+</ApexComponent>

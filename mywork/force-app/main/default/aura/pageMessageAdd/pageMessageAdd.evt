@@ -1,0 +1,8 @@
+<aura:event type="APPLICATION" description="">
+  <aura:attribute name="message" type="String" description="The message to be displayed"/>
+  <aura:attribute name="type" type="String" description="The type of the message"/>
+  <aura:attribute name="urlValue" type="String" description="The value for the outputURL component"/>
+  <aura:attribute name="urlTitle" type="String" description="The title for the outputURL component"/>
+  <aura:attribute name="urlLabel" type="String" description="The label for the outputURL component. The text that is clickable"/>
+  <aura:attribute name="urlAdditionalText" type="String" description="Additional text that is not clickable"/>
+</aura:event>

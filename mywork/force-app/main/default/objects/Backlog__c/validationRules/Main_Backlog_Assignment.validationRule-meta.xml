@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Main_Backlog_Assignment</fullName>
+    <active>true</active>
+    <description>Restricts the user from assigning items to the main backlog</description>
+    <errorConditionFormula>Custom_Backlog__r.Universal__c = true</errorConditionFormula>
+    <errorMessage>Please select a different backlog, all items are already assigned to the main backlog</errorMessage>
+</ValidationRule>

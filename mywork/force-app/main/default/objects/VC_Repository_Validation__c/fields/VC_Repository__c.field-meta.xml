@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VC_Repository__c</fullName>
+    <description>The repository for which this validation was attempted</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The repository for which this validation was attempted</inlineHelpText>
+    <label>VC Repository</label>
+    <referenceTo>VC_Repository__c</referenceTo>
+    <relationshipLabel>VC Repository Validations</relationshipLabel>
+    <relationshipName>VC_Repository_Validations</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

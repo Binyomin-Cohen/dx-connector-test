@@ -1,0 +1,27 @@
+.THIS {
+  padding-bottom: 20px;
+}
+
+.THIS .slds-transition-show {
+    transition: .6s transform ease-in-out,.6s opacity ease-in-out;
+}
+
+.THIS .slds-transition-hide-exit-left {
+    transition: .6s transform ease-in-out,.6s opacity ease-in-out;
+    transform: translate3d(-25%, 0, 0);
+    opacity:0;
+}
+
+.THIS .slds-transition-hide {
+    transition: .6s transform ease-in-out,.6s opacity ease-in-out;
+    transform: translate3d(25%, 0, 0);
+}
+.THIS .inactive-slide{
+  display: none;
+}
+
+.THIS .upload-field-mapping-wrapper .alm-table thead.is_stuck {
+  z-index: 1;
+  display: table;
+  table-layout: fixed;
+}

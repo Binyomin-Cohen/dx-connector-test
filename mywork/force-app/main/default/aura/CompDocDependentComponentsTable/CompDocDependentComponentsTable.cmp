@@ -1,0 +1,12 @@
+<aura:component extends="c:pageBlockTable" controller="ComponentDocController">
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+  <aura:set attribute="tableId" value="dependent-components-table" />
+  <aura:set attribute="tableSelectAllCheckboxId" value="select-all-checkbox-dependent" />
+  <aura:set attribute="tableBodyClass" value="dependent-components-table-content" />
+
+  <aura:iteration items="{!v.currentPageDependentComponents}" var="component">
+    <!--workaround to get around lightning issue:  Cannot read property 'childNodes' of null-->
+    <tr style="display:none;" /><tr style="display:none;" />
+    <c:CompDocDependentTableRow componentRecord="{!component}"/>
+  </aura:iteration>
+</aura:component>

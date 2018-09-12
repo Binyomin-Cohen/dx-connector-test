@@ -1,0 +1,64 @@
+<aura:component controller="GitController">
+  <aura:attribute name="selectedRepositoryId" type="String" description="the id of the selected repository"/>
+  <aura:attribute name="selectedBranch" type="String" description="the selected branch"/>
+  <aura:attribute name="repositories" type="Object[]" description="list of repositories"/>
+  <aura:attribute name="repositoryMapping" type="Object" description="map of repository id to the repo url"/>
+  <aura:attribute name="branches" type="String[]" description="list of branches for the selected repo"/>
+  <aura:attribute name="branchesData" type="Map" description="Map of repo Id to list of branches" default="{}"/>
+  <aura:attribute name="disabled" type="Boolean" description="set to True to disable this component " default="false"/>
+  <aura:attribute name="commitInProgress" type="Boolean" description="set to True to when commit is in progress" default="false"/>
+  <aura:attribute name="savedBranch" type="String" description="The saved branch to restore."/>
+  <aura:attribute name="repositoryHoverText" type="String" description="Displays the currently selected repo url"/>
+
+  <aura:attribute name="repoSelectComboboxId" type="String" default="repo-select"/>
+  <aura:attribute name="branchSelectComboboxId" type="String" default="branch-select"/>
+
+
+  <aura:handler name="comboboxChangeEvent" event="c:comboboxChangeEvent" action="{!c.handleComboBoxChanges}" />
+
+  <aura:method name="getState" action="{! c.getState }">
+    <aura:attribute name="state" type="Map" />
+  </aura:method>
+  <aura:method name="setState" action="{! c.setState }">
+    <aura:attribute name="state" type="Map" />
+  </aura:method>
+  <aura:method name="selectRepo" action="{! c.selectRepo }">
+    <aura:attribute name="repoId" type="String" />
+  </aura:method>
+
+  <aura:registerEvent name="unsavedPageEvent" type="c:unsavedPageEvent"/>
+
+  <ltng:require scripts="{!join(',',
+      $Resource.zip_alm_pm + '/js/api_builder.js',
+      $Resource.zip_alm_pm + '/js/js_alm_common.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+   )}"
+    afterScriptsLoaded="{!c.doInit}"
+  />
+
+  <div class="slds-col slds-medium-size--1-of-2 slds-large-size--1-of-4 slds-p-horizontal_medium">
+    <div class="git-option-label">Repositories Available</div>
+    <c:combobox aura:id="repo-select"
+          inputId="{# v.repoSelectComboboxId}"
+          comboboxId="{# v.repoSelectComboboxId + '-combobox'}"
+          isRequired="true"
+          disabled="{!v.commitInProgress}"
+          selectedValue="{!v.selectedRepositoryId}"
+          options="{!v.repositories}"
+          comboboxPlaceholder="Select a repository"
+          hoverText="{!v.repositoryHoverText}"/>
+  </div>
+
+  <div class="slds-col slds-medium-size--1-of-2 slds-large-size--1-of-4 slds-p-horizontal_medium">
+      <div class="git-option-label">Branches Available</div>
+      <c:combobox aura:id="branch-select"
+          inputId="{#v.branchSelectComboboxId}"
+          comboboxId="{# v.branchSelectComboboxId + '-combobox'}"
+          disabled="{! or(v.commitInProgress, empty(v.branches))}"
+          isRequired="true"
+          selectedValue="{!v.selectedBranch}"
+          selectedLabel="{!v.selectedBranch}"
+          options="{!v.branches}"
+          comboboxPlaceholder="Select a branch" />
+  </div>
+</aura:component>

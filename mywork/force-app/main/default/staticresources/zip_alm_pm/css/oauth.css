@@ -1,0 +1,147 @@
+#alm-container .oauth-container {
+  position: relative;
+  padding-left: 15px;
+  padding-top: 15px;
+  width: 203px;
+  height: 14px;
+  border-radius: 3px;
+  background-color: #dde9f7;
+  border: solid 1px #50b0ec;
+  font-size: 13px;
+  color: #019cea;
+  text-align: center;
+  float: left;
+}
+
+#alm-container .oauth-container.lightning {
+  width: 324px;
+}
+
+#alm-container .oauth-container.authorized {
+  cursor: pointer;
+}
+
+#alm-container .oauth-container.disabled {
+  background-color: #E8E9EB;
+  color: #A6A6A8;
+  border-color: #A6A6A8;
+  cursor: auto;
+}
+
+#alm-container .oauth-container > a:hover {
+  cursor: pointer;
+}
+
+#alm-container .oauth-container[data-required] {
+  border-left: 4px solid #FF0000;
+  border-top-left-radius: 0;
+  border-bottom-left-radius:0;
+}
+
+#alm-container .unauthorized-text,
+#alm-container .authorized-text,
+#alm-container .authorized-user {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+}
+
+#alm-container .authorized-text {
+  color: #019cea;
+}
+
+#alm-container .authorized-user {
+  width: 73%;
+  padding-left: 2px;
+}
+
+#alm-container .authorized-icon,
+#alm-container .unauthorized-icon {
+  height: 17px;
+  width: 19px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+
+#alm-container .authorized-icon {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -534px -747px;
+}
+
+#alm-container .oauth-container.disabled .authorized-icon {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -534px -747px;
+  cursor: auto;
+}
+
+#alm-container .unauthorized .authorized-text,
+#alm-container .unauthorized .authorized-user,
+#alm-container .unauthorized .authorized-icon,
+#alm-container .authorized .unauthorized-text,
+#alm-container .authorized .unauthorized-icon {
+  display: none;
+}
+
+#alm-container .oauth-container.disabled .authorized-text,
+#alm-container .oauth-container.disabled .unauthorized-text {
+  color: inherit;
+  text-decoration: none;
+  cursor: auto;
+}
+
+#alm-container .oauth-container.disabled .unauthorized-text {
+  cursor: text;
+}
+
+#alm-container .unauthorized-icon {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -534px -814px;
+  display: block;
+  cursor: pointer;
+}
+
+#alm-container .oauth-container.disabled .unauthorized-icon,
+#alm-container .oauth-container.disabled .authorized-icon {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -1095px 0px;
+  cursor: auto;
+  width: 23px;
+}
+
+#alm-container .oauth-container .oauth-user-edit {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px -989px;
+  height: 13px;
+  width: 13px;
+  display: none;
+  cursor: pointer;
+  right: 35px;
+}
+
+#alm-container .oauth-container .oauth-user-cancel {
+  background: url("../img/png_alm_sprite1.png") no-repeat scroll -84px -1513px;
+  height: 20px;
+  width: 20px;
+  display: none;
+  cursor: pointer;
+  right: 10px;
+}
+
+#alm-container .oauth-container .oauth-user-cancel.lightning {
+  display: block;
+}
+
+#alm-container .oauth-container .oauth-user-edit,
+#alm-container .oauth-container .authorized-icon,
+#alm-container .oauth-container .unauthorized-icon,
+#alm-container .oauth-container .oauth-user-cancel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#alm-container .oauth-container.authorized:hover .oauth-user-edit {
+  display: block;
+}
+
+#alm-container .oauth-container.authorized.disabled:hover .oauth-user-edit {
+  display: none;
+}

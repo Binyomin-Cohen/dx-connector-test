@@ -1,0 +1,51 @@
+<apex:page docType="html-5.0" title="Admin Console - User Management" controller="AdminConsoleController" sidebar="false" >
+  <c:Tracking title="Admin Console - Roles" appName="PM - Admin Console - Roles"/>
+  <apex:composition template="AdminTemplate">
+    <apex:define name="includes">
+      <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'css/admin_console/roles.css')}" />
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/js_alm_common.js')}" ></script>
+      <script src="{!$Resource.js_hogan}"></script>
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/templates.js')}" ></script>
+      <script src="{!$Resource.js_jquery_blockui}" ></script>
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/admin_console/roles.js')}" ></script>
+    </apex:define>
+    <apex:define name="content">
+      <apex:outputPanel layout="none" rendered="{!hasPermissions}">
+        <div id="role-mgmt-config">
+          <div id="new-panel">
+            <div id="new-btn-container">
+              <button type="button" class="really-important-btn alm-btn new-btn" ><span class="new-icon"></span>New Role</button>
+            </div>
+            <div id="new-input-container">
+              <input type="text" id="new-input"  placeholder="Name Your Role" />
+              <button type="button" class="really-important-btn alm-btn add-btn" ><span class="new-icon"></span></button>
+            </div>
+          </div>
+          <div id="role-panel" class="clearfix"></div>
+        </div><!-- role-mgmt-config -->
+        <div id="action-panel">
+            <button type="button" class="important-btn alm-btn save-btn" >Save</button>
+        </div>
+      </apex:outputPanel>
+    </apex:define>
+  </apex:composition>
+  <script>
+    function getAllRoles( callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminConsoleController.getAllRoles}',
+            callback,
+            {escape: true}
+        );
+    }
+
+    function saveRoles( rolesToUpsert, roleIdsToDelete, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminConsoleController.saveRoles}',
+            rolesToUpsert,
+            roleIdsToDelete,
+            callback,
+            {escape: true}
+        );
+    }
+  </script>
+</apex:page>

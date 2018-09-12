@@ -1,0 +1,110 @@
+<aura:component controller="ClientComponentSearchController" >
+
+  <aura:attribute name="backlogItemId" description="Backlog Item record Id" type="String" required="true"/>
+  <aura:attribute name="NUM_PAGES_TO_BUFFER" type="Integer" default="3"
+                  description="Number of component pages to buffer past the current page"/>
+  <aura:attribute name="currentSearchCompleted" description="have all rows been fetched?"
+                  type="Boolean" required="false" default="false"/>
+
+  <aura:attribute name="searchParams" type="Object" description=""/>
+  <aura:attribute name="pagesFetched" type="Integer" default="0" description=""/>
+  <aura:attribute name="fetchInProgress" type="Boolean" description="" default="false"/>
+  <aura:attribute name="searchResultsVersion" type="Integer" default="0"
+                  description="The version of the search results. Used to differentiate result sets"/>
+
+  <!-- Result Sets -->
+  <aura:attribute name="seenResults" type="ComponentSearchWrapper[]" description=""/>
+  <aura:attribute name="currentPageResults" type="ComponentSearchWrapper[]" description=""/>
+  <aura:attribute name="unseenResults" type="ComponentSearchWrapper[]" description=""/>
+  <aura:attribute name="existingComponentKeys" type="String[]" description="" default="[]"/>
+  <aura:attribute name="numComponentsPerQuery" type="Integer" default="25"/>
+  <aura:attribute name="MAX_RETRIEVABLE_COMPONENTS" type="Integer" default="2000"/>
+  <aura:attribute name="reachedMaxOffsetMessage" type="String" default=""/>
+
+  <!-- attributes for display in table  -->
+  <aura:attribute name="COMPONENT_STATES" description="The different states of the component"
+                  type="Object" required="false" default="{}"/>
+  <aura:attribute name="componentState" description="the state options for the component"
+                  type="String" required="false" default=""/>
+  <aura:attribute name="selectAll" type="Boolean" description="" default="false"/>
+  <aura:attribute name="upperLimitForDisplay"
+                  description="Number of rows before we display 'of many' instead of actual retrieved rows"
+                  type="Integer" required="false" default="1000"/>
+  <aura:attribute name="pagingNavigationMessage" description="message displayed next to paging buttons in header"
+                  type="String" required="false" default=""/>
+  <aura:attribute name="currentPage" type="Integer" default="1"
+                  description="The current page of results"/>
+  <aura:attribute name="pageSize" type="Integer" default="25"
+                  description="The number of rows in currentPageResults to display"/>
+  <aura:attribute name="hasSelectedComponents" type="Boolean" default="false"
+                  description="are any child rows of the component selected?"/>
+  <aura:attribute name="hasNextResults" description="Are there more results to page through?"
+                  type="Boolean" default="true"/>
+  <aura:attribute name="hasPreviousResults" description="Are there previous results to page back through?"
+                  type="Boolean" default="false"/>
+  <aura:attribute name="componentsExistInOrg" description="Are there any components in the org?"
+                  type="Boolean" default="true"/>
+  <aura:attribute name="namespace" description="Namespace of the managed package."
+                  type="String"/>
+
+  <!-- events -->
+  <aura:registerEvent name="asyncSaveEvent" type="c:asyncSaveEvent"/>
+  <aura:handler event="c:asyncSaveEvent" action="{!c.refreshComponents}"/>
+  <aura:handler event="c:asyncSearchEvent" action="{!c.handleSearchEvent}" includeFacets="true"/>
+  <aura:handler event="c:asyncLoadEvent" action="{!c.handleAsyncLoadEvent}"/>
+  <aura:handler event="c:componentSaveEvent" name="componentSaveEvent" action="{!c.handleSearchResultsSaveEvent}"/>
+  <aura:handler event="c:pagingRequestEvent" name="pagingRequestEvent" action="{!c.handlePagingRequest}"/>
+  <aura:handler event="c:rowSelectEvent" name="rowSelectEvent" action="{!c.handleChildRowSelect}"/>
+
+  <ltng:require scripts="{!join(',',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery.block-ui.js',
+          $Resource.zip_alm_pm + '/external/moment/moment.js',
+          $Resource.zip_alm_pm + '/external/moment/moment-timezone.js',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+       )}"
+      afterScriptsLoaded="{!c.init}" />
+  <div id="comp-search-res-wrapper">
+    <c:pageBlockPanelSection sectionTitle="Available Components" isExpanded="true" showPagination="true"
+                             pagingNavigationMessage="{!v.pagingNavigationMessage}"
+                             enablePagingPrevious="{!v.hasPreviousResults}"
+                             enablePagingNext="{!or(v.hasNextResults, not(v.currentSearchCompleted))}"
+                             helperText="{!v.reachedMaxOffsetMessage}"
+                             showActionButton="true" enableActionButton="{!v.hasSelectedComponents}" actionButtonText="ADD">
+
+      <aura:if isTrue="{!v.componentState == v.COMPONENT_STATES.RESULTS_TABLE ||
+                        v.componentState == v.COMPONENT_STATES.RESULTS_TABLE_WAITING}">
+        <c:CompDocSearchResultsTable currentPageResults="{!v.currentPageResults}" selectAll="{!v.selectAll}"/>
+      </aura:if>
+
+      <aura:if isTrue="{!v.componentState == v.COMPONENT_STATES.LOADING || v.componentState == ''}">
+        <c:emptyStateContainer>
+          <div class="slds spinner-row">
+            <div class="spinner-row-cell">
+              <div class="slds-spinner slds-spinner--brand slds-spinner--small" aria-hidden="false">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+              </div>
+            </div>
+          </div>
+        </c:emptyStateContainer>
+      </aura:if>
+
+      <aura:if isTrue="{!v.componentState == v.COMPONENT_STATES.NO_RESULTS_FOR_SEARCH}">
+        <c:emptyStateContainer>
+          Your search returned zero results.<br/>Try changing your filter criteria to be less specific.
+        </c:emptyStateContainer>
+      </aura:if>
+
+      <aura:if isTrue="{!v.componentState == v.COMPONENT_STATES.NO_COMPS_IN_ORG}">
+        <c:emptyStateContainer>
+          There are no results from SCAN.<br/>
+          You may need to <c:anchor value="/apex/AdminInstanceManagement" label="Add Instances"/> or <c:anchor value="/apex/AdminInstanceManagement" label="Activate SCAN"/> on instances you have already created.
+        </c:emptyStateContainer>
+      </aura:if>
+
+    </c:pageBlockPanelSection>
+  </div>
+</aura:component>

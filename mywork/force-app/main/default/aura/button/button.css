@@ -1,0 +1,40 @@
+.THIS span.button-text {
+  vertical-align: middle;
+}
+
+/* duplication between slds-button_neutral and slds-button--neutral is due to the deprecation of the -- format. */
+.THIS.slds-button_neutral.slds-button.important,
+.THIS.slds-button--neutral.slds-button.important {
+  border: none;
+  background: #009DDC;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* duplication between slds-button_neutral and slds-button--neutral is due to the deprecation of the -- format. */
+.THIS.slds-button_neutral.slds-button.very-important,
+.THIS.slds-button--neutral.slds-button.very-important {
+  border: 1px solid #638D1F;
+  background: #77a600;
+  font-size: 13px;
+}
+
+/* duplication between slds-button_neutral and slds-button--neutral is due to the deprecation of the -- format. */
+.THIS.slds-button_neutral.slds-button.important,
+.THIS.slds-button_neutral.slds-button.very-important,
+.THIS.slds-button--neutral.slds-button.important,
+.THIS.slds-button--neutral.slds-button.very-important {
+  border-radius: 3px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+  height: 32px;
+  line-height: 1;
+  text-shadow: none;
+}
+
+.THIS.slds-button[disabled] {
+  opacity: .5;
+  cursor: default;
+}

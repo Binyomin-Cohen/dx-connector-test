@@ -1,0 +1,77 @@
+.THIS {
+  padding: 0 20px;
+}
+
+.THIS .slds-spinner.commit-progress {
+  position: relative;
+  height: 20px;
+  top: 10px;
+  float:left;
+  left: 73px;
+  display: inline-block;
+}
+
+.THIS#git-commit-details-container {
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+}
+
+.THIS#git-commit-details-container .page-block-panel-section-body {
+  padding: 0;
+}
+
+.THIS#git-commit-details-container .alm-table {
+  border: none;
+}
+
+.THIS#git-commit-details-container textarea {
+  resize: none;
+  height: 200px;
+  padding: 20px;
+}
+
+.THIS#git-commit-details-container .contains-placeholder textarea {
+  color: #CCCCCC;
+}
+
+.THIS .git-commit-section {
+  padding: 10px 0 20px 0;
+}
+
+.THIS .git-commit-section textarea {
+  margin-top: 15px;
+}
+
+.THIS #git-commit-button {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.THIS #git-commit-button button {
+  width: 200px;
+  height: 40px;
+}
+
+.THIS #git-commit-button .important-btn2[disabled] {
+  opacity: .5;
+  cursor: default;
+}
+
+.THIS #git-commit-button .cancel-button {
+  margin-left: 30px;
+  vertical-align: middle;
+}
+
+.THIS #git-commit-message label,
+.THIS #git-commit-message span {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #16325C;
+}
+
+.THIS .slds-spinner.commit-progress {
+  float: none;
+  margin-top: 10px;
+  left: 0px;
+}

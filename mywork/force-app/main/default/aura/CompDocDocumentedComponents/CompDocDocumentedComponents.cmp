@@ -1,0 +1,73 @@
+<aura:component controller="ComponentDocController">
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/alm_common.css'
+     )}"
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery.block-ui.js',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js'
+       )}"
+    afterScriptsLoaded="{!c.doInit}" />
+
+  <aura:attribute name="backlogItemId" type="String" />
+  <aura:attribute name="excludeColumns" type="Object" default="{}" />
+  <aura:attribute name="disableDeletedComponents" type="Boolean" default="false" />
+  <!-- Pagination Attributes -->
+  <aura:attribute name="enableActionButton" type="Boolean" default="false" />
+  <aura:attribute name="enablePagination" type="Boolean" default="true" />
+  <aura:attribute name="pageSize" type="Integer" default="25" />
+  <aura:attribute name="totalDocumentedComps" type="Integer" default="0" />
+  <aura:attribute name="currentPageNumber" type="Integer" default="1" />
+
+  <aura:attribute name="currentSortKey" type="String" default="componentName" />
+  <aura:attribute name="currentSortKeyType" type="String" default="string" />
+  <aura:attribute name="currentSortDirection" type="String" default="asc" />
+
+  <aura:attribute name="showActionButton" type="Boolean" default="true" />
+  <aura:attribute name="selectedBacklogComponentIds" type="List" default="[]" />
+  <aura:attribute name="allDocumentedComponents" type="ComponentSearchWrapper[]" />
+  <aura:attribute name="selectAllComponentsOnInit" type="Boolean" default="false" />
+  <aura:attribute name="firstResultSetProcessed" type="Boolean" default="false" />
+  <aura:attribute name="selectAllChecked" type="Boolean" default="false" />
+
+  <aura:handler name="change" value="{!v.currentPageNumber}" action="{!c.handleNewPageRequest}"/>
+  <aura:handler name="change" value="{!v.currentSortKey}" action="{!c.handleSortKeyChange}"/>
+  <aura:handler name="change" value="{!v.currentSortDirection}" action="{!c.handleSortKeyChange}"/>
+  <aura:handler event="c:asyncSaveEvent" action="{!c.refreshComponents}" includeFacets="true" />
+  <aura:handler event="c:componentSaveEvent" name="componentSaveEvent" action="{!c.handleUpdateComponentsEvent}"/>
+  <aura:handler event="c:modalEvent" action="{!c.handleModalEvent}" />
+  <aura:handler event="c:pagingRequestEvent" name="pagingRequestEvent" action="{!c.handlePagingRequest}"/>
+  <aura:handler event="c:rowSelectEvent" name="rowSelectEvent" action="{!c.handleRowSelectEvent}"/>
+
+  <aura:registerEvent name="unsavedPageEvent" type="c:unsavedPageEvent"/>
+
+  <aura:method name="selectAllBacklogComponents" action="{!c.handleLoadCompleteRequest}" access="PUBLIC" />
+
+  <div class="added-components">
+    <c:pageBlockPanelSection aura:id="pageBlockPanelSection"
+        sectionTitle="Backlog Item Components" isExpanded="true" showPagination="{!v.enablePagination}"
+        showActionButton="{!v.showActionButton}" enableActionButton="{!v.enableActionButton}" actionButtonText="REMOVE">
+      <aura:if isTrue="{!v.allDocumentedComponents.length > 0}">
+          <c:CompDocDocumentedComponentsTable aura:id="CompDocDocumentedComponentsTable"
+                                              currentSortKey="{!v.currentSortKey}"
+                                              currentSortKeyType="{!v.currentSortKeyType}"
+                                              currentSortDirection="{!v.currentSortDirection}"
+                                              excludeColumns="{!v.excludeColumns}"
+                                              selectAllChecked="{!v.selectAllChecked}"/>
+          <aura:set attribute="else">
+              <c:emptyStateContainer >
+                <aura:if isTrue="{!v.firstResultSetProcessed}">
+                  To document components, add them from the available components section.
+                  <aura:set attribute="else">
+                    <lightning:spinner variant="brand" size="small"/>
+                  </aura:set>
+                </aura:if>
+              </c:emptyStateContainer>
+          </aura:set>
+      </aura:if>
+      <c:CompDocNotesModal aura:id="comp-doc-notes-modal" />
+    </c:pageBlockPanelSection>
+  </div>
+</aura:component>

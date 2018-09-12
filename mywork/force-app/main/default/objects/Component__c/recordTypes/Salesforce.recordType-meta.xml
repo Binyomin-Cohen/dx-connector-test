@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Salesforce</fullName>
+    <active>true</active>
+    <description>Salesforce specific components.</description>
+    <label>Salesforce</label>
+    <picklistValues>
+        <picklist>Last_Modified_Users__c</picklist>
+        <values>
+            <fullName>Not Available</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Source_Instances__c</picklist>
+        <values>
+            <fullName>Production</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Test</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Apex Class</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Apex Trigger</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Application</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approval Process</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assignment Rule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Business Rule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Component</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Button or Link</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Object Tab</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Page Web Link</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Setting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dashboard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Document</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email Template</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Field</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Field Set</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Group</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Home Page Component</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Home Page Layout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Label</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Layout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>List View</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lookup Filter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Object</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Object Translation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Package</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Password Policy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Permission Set</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Profile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Queue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quick Action</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Record Type</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remote Site Setting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Report</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Report Type</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Role</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Search Layout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Standard Button or Link</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Static Resource</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validation Rule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visualforce Page</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visualforce Tab</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web Tab</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Workflow Default Setting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Workflow Email Alert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Workflow Field Update</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Workflow Outbound Message</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Workflow Rule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Workflow Task</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

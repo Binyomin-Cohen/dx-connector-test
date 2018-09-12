@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-sm-5 col-md-4 col-lg-3 nav-container">
+    <ul class="nav">
+      {{#sections}}
+        <li class="nav-tile" data-section="{{order}}-{{apiName}}"">
+          <a href="#{{order}}-{{apiName}}"class="vertical-center">{{label}}</a>
+          <div class="selection-count"><span></span></div>
+          <div class="active-arrow"><span class="vertical-center"></span></div>
+        </li>
+      {{/sections}}
+    </ul>
+  </div>
+  <div id="permissions-detail" class="col-sm-7 col-md-8 col-lg-9">
+    {{#sections}}
+      <div class="simple-accordion expanded profile-section" data-section-id="{{order}}-{{apiName}}" data-section-api-name="{{apiName}}" id="{{order}}-{{apiName}}">
+        <div class="simple-accordion-header">
+          <h3><img class="expand" src="/s.gif"><span class="{{#helpText}}header-info-icon{{/helpText}}">{{label}}{{#helpText}}<img class="info-icon" src="/s.gif" title="{{helpText}}"/>{{/helpText}}</span></h3>
+        </div>
+        <div class="simple-accordion-body ">
+          <div class="row">
+            <div class="permissions-option col-md-6 col-lg-4 col-xlg-3">
+              <input id="all-{{order}}-{{apiName}}" class="fancy-checkbox profile-section-all" type="checkbox">
+              <label class="checkbox" for="all-{{order}}-{{apiName}}"><span></span></label>
+              <label class="permission-label select-all" for="all-{{order}}-{{apiName}}">All</label>
+            </div>
+          </div>
+
+          {{#hasSubsections}}
+            <div class="page-block-panel-section profile-section">
+              <div class="selected-marker">&nbsp;</div>
+              <div class="page-block-panel-section-header">
+                <a class="section-title">Standard {{label}} <img src="/s.gif"></a>
+                <span class="select-all-subsection">
+                  <input id="all-sub-{{apiName}}" class="fancy-checkbox profile-section-all" type="checkbox">
+                  <label class="checkbox" for="all-sub-{{apiName}}"><span></span></label>
+                  <label class="permission-label select-all" for="all-sub-{{apiName}}">All</label>
+                </span>
+              </div>
+              <div class="page-block-panel-section-body">
+                <div class="row">
+                  {{#standardPermissions}}
+                    {{> permissions_row}}
+                  {{/standardPermissions}}
+                </div>
+              </div>
+            </div>
+            <div class="page-block-panel-section profile-section">
+              <div class="selected-marker">&nbsp;</div>
+              <div class="page-block-panel-section-header">
+                <a class="section-title">Custom {{label}} <img src="/s.gif"></a>
+                <span class="select-all-subsection">
+                  <input id="all-sub-custom-{{apiName}}" class="fancy-checkbox profile-section-all" type="checkbox">
+                  <label class="checkbox" for="all-sub-custom-{{apiName}}"><span></span></label>
+                  <label class="permission-label select-all" for="all-sub-custom-{{apiName}}">All</label>
+                </span>
+              </div>
+              <div class="page-block-panel-section-body">
+                <div class="row">
+                  {{#customPermissions}}
+                    {{> permissions_row}}
+                  {{/customPermissions}}
+                </div>
+              </div>
+            </div>
+          {{/hasSubsections}}
+          {{^hasSubsections}}
+            <div class="row">
+              {{#permissions}}
+                {{> permissions_row}}
+              {{/permissions}}
+            </div>
+          {{/hasSubsections}}
+        </div>
+      </div>
+    {{/sections}}
+  </div>
+</div>

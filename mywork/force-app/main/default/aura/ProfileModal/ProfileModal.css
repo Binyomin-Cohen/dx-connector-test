@@ -1,0 +1,271 @@
+.THIS {
+  font-family: Arial,Helvetica,sans-serif;
+  line-height: initial;
+}
+.THIS#permissions-modal .important-btn2 {
+  text-transform: uppercase;
+  color: #FFF;
+}
+.THIS#permissions-modal {
+  background-color: #E8E9EB;
+  height: 95%;
+  margin: 30px 100px;
+  border-radius: 3px 3px 0 0;
+}
+
+.THIS#permissions-modal * {
+  /*taken from bootstrap reset  to fix column layout*/
+  box-sizing: border-box;
+}
+
+.THIS#permissions-modal  .simple-accordion-header h3 span {
+  padding: 0px 10px;
+  background-color: #FFF;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.THIS#permissions-modal  .simple-accordion-header h3 span.header-info-icon {
+  padding-right: 35px;
+}
+
+.THIS#permissions-modal .simple-accordion {
+  margin-bottom: 30px;
+}
+
+.THIS#permissions-modal .page-block-panel-section-header {
+  position: relative;
+  padding: 0;
+  font-size: 12px;
+}
+
+.THIS#permissions-modal .profile-section {
+  position: relative;
+}
+
+.THIS#permissions-modal .inactive {
+  opacity: .5;
+  cursor: default;
+}
+
+.THIS .profile-section .selected-marker {
+ display: none;
+}
+
+.THIS#permissions-modal .profile-section.selected .selected-marker {
+  display: block;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  z-index: 1;
+  width: 6px;
+  height: 36px;
+  background-color: #7ca906;
+  border-radius: 3px 0 0 3px;
+}
+
+.THIS#permissions-modal .profile-section.selected.expanded .selected-marker {
+  border-radius: 3px 0 0 0;
+}
+
+.THIS#permissions-modal .select-all-subsection {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  height: 13px;
+  right: 10px;
+  color: #009DDC
+}
+
+.THIS#permissions-modal .section-title {
+  color: #009DDC;
+  text-align: left;
+}
+
+.THIS#permissions-modal .button-container {
+  position: absolute;
+  right: 10px;
+  top: 9px;
+}
+
+.THIS#permissions-modal .title {
+  color: #009DDC;
+  font-size: 20px;
+  padding: 10px 0 10px 10px;
+  text-align: left;
+  width: 39%;
+}
+
+.THIS#permissions-modal .close-modal-btn {
+  position: absolute;
+  top: 11px;
+  right: 81px;
+}
+
+.THIS#permissions-modal .close-modal-btn img{
+  background-position: -759px -981px;
+}
+.THIS#permissions-modal .page-block-panel-section-body {
+  padding: 10px;
+}
+.THIS#permissions-modal .page-block-panel-section-body {
+  display: none;
+}
+
+.THIS#permissions-modal .expanded > .page-block-panel-section-body {
+  display: block;
+}
+
+.THIS #permissions-modal-body {
+  background-color: #E8E9EB;
+  min-height: 400px;
+}
+
+.THIS .profile-section-all + label{
+  color: #009DDC;
+}
+
+.THIS div.nav-container {
+  background-color: #E8E9EB;
+  padding-left: 0;
+  padding-right:0;
+  margin-right: -1px;
+}
+
+.THIS .nav-container ul {
+  margin: 0;
+  padding: 0;
+}
+
+.THIS .nav-tile {
+  margin: 0;
+  height: 50px;
+  border-bottom: 1px dashed #3c6781;
+  text-align: left;
+  list-style: none;
+  position: relative;
+}
+
+.THIS .nav-tile:hover, .THIS .nav-tile.active, .THIS .nav-tile:hover a {
+  background-color: #3c6781;
+  color: #FFF;
+  font-weight: bold;
+}
+
+.THIS .nav-tile a {
+  text-decoration: none;
+  color: #3c6781;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 300;
+  display: block;
+  height: 50px;
+  padding-top: 18px;
+  padding-left: 15px;
+}
+
+.THIS .nav-tile a:hover, .THIS .nav-tile.active a {
+  text-decoration: none;
+  color: #FFF;
+  cursor: pointer;
+}
+
+.THIS .selection-count {
+  width: 25px;
+  height: 25px;
+  padding-top: 6px;
+  border-radius: 12px 13px 13px 12px;
+  background-color: #7ca906;
+  font-size: 11px;
+  font-weight: normal;
+  color: #fff;
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.THIS #permissions-detail {
+  background-color: #FFF;
+}
+
+.THIS .permissions-banner {
+  height: 51px;
+  background: #E8E9EB;
+  top: 25px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #DDD;
+}
+
+.THIS.alm-modal .permissions-banner.is_stuck {
+  margin-top: 25px;
+  z-index: 2;
+}
+
+.THIS #cancel-profile-modal div.page-block {
+  padding: 20px;
+  background-color: #feae1b;
+  border: 1px solid #e66c09;
+  text-align: center;
+}
+
+.THIS .permissions-option {
+  text-align: left;
+  margin-bottom: 3px;
+  height: 30px;
+  border-radius: 3px;
+  padding: 8px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.THIS .page-block-panel-section-header {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.THIS .permissions-option.documented {
+  background: #BDD482;
+}
+
+.THIS .permission-label {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.THIS #onoffswitch-container {
+  position: absolute;
+  right: 153px;
+  top: 15px;
+}
+
+.THIS .onoffswitch-text {
+  padding-left: 10px;
+  color: #7CA904;
+}
+
+.THIS .permissions-banner .select-all-checkbox {
+  color: #009DDC;
+  position: absolute;
+  right: 92px;
+  top: 17px;
+}
+
+.THIS#permissions-modal img.info-icon {
+  background: url("../../img/png_alm_sprite1.png") no-repeat top left;
+  margin-left: 6px;
+  top: -7px;
+  background-position: -84px -919px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  cursor: default;
+}

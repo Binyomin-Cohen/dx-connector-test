@@ -1,0 +1,63 @@
+.THIS .slds-button-group {
+  padding-right: 10px;
+}
+
+.THIS div.banner-action-container {
+  float: right;
+}
+
+.THIS button.header-direction-button {
+  width: 100px;
+  height: 30px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.THIS button.header-direction-button:hover,
+.THIS button.header-direction-button:focus
+.THIS button.header-direction-button[disabled],
+.THIS button.header-direction-button::selection,
+.THIS button.header-direction-button,
+.THIS button.uiButton--default:focus {
+  background: none;
+}
+
+.THIS .slds-button.header-direction-button-previous,
+.THIS .slds-button.header-direction-button-previous:focus,
+.THIS .slds-button.header-direction-button-previous:hover,
+.THIS .slds-button.header-direction-button-previous[disabled],
+.THIS .slds-button.header-direction-button-previous::selection {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-right-color: #919191;
+  background-color: #E8E9EB;
+  color: #000000;
+}
+
+.THIS .slds-button.header-direction-button-next,
+.THIS .slds-button.header-direction-button-next:focus,
+.THIS .slds-button.header-direction-button-next:hover,
+.THIS .slds-button.header-direction-button-next[disabled],
+.THIS .slds-button.header-direction-button-next::selection {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-left-color: #919191;
+  color: #FFFFFF;
+  background-color: #009DDC;
+}
+
+.THIS #banner-sub-menu{
+  bottom: -22px;
+}
+
+.THIS .hidden {
+  height: 0px;
+}
+
+.THIS .slds-button[disabled]{
+  opacity: 0.5;
+}

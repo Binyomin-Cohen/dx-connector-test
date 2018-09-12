@@ -1,0 +1,18 @@
+.THIS.delete-all {
+  float: right;
+  margin: 10px;
+  cursor: pointer;
+  color: #019cea;
+}
+
+.THIS .delete-all:hover {
+  text-decoration: underline;
+}
+
+.THIS .page-block-content .default-drag-helper {
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  padding: 25px 25px;
+  margin: 0;
+}

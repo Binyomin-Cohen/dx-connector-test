@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Complex__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Used to indicate that the mapping is not a 1:1 mapping from a field in the source object to a field in the target object</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Used to indicate that the mapping is not a 1:1 mapping from a field in the source object to a field in the target object</inlineHelpText>
+    <label>Is Complex?</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

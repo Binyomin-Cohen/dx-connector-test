@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>ALM_User_Email</fullName>
+        <field>Email__c</field>
+        <formula>User__r.Email</formula>
+        <name>ALM User Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Copy_ALM_User_Name</fullName>
+        <field>Name</field>
+        <formula>User__r.FirstName + " " + User__r.LastName</formula>
+        <name>Copy ALM User Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Copy User Fields</fullName>
+        <actions>
+            <name>ALM_User_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Copy_ALM_User_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>!ISBLANK(User__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

@@ -1,0 +1,97 @@
+<aura:component controller="DXController" implements="force:hasRecordId">
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/alm_common.css'
+     )}"
+    scripts="{!join(',',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js'
+       )}"
+    afterScriptsLoaded="{!c.init}" />
+
+  <aura:attribute name="commitRequest" type="Map" default="{}"/>
+  <aura:attribute name="recordId" type="String" required="true" />
+  <aura:attribute name="recordName" type="String" />
+  <aura:attribute name="dxGitDiffResponse" type="Map" default="{}"/>
+  <aura:attribute name="commitMessage" type="String" default=""/>
+  <aura:attribute name="isFindingModifiedComps" type="Boolean" default="false"/>
+  <aura:attribute name="isCommittingModifiedComps" type="Boolean" default="false"/>
+  <aura:attribute name="changesAreCommittable" type="Boolean" default="false"/>
+
+  <aura:attribute name="SCRATCH_ORG_EVENT_NAME" type="String" default="Scratch_Org_Event__e"/>
+  <aura:attribute name="SCRATCH_ORG_EVENT_SUBS" type="String[]" default="['Scratch_Org_Event__e']"/>
+  <aura:attribute name="DX_GIT_DIFF_EVENT_TYPE" type="String" default="dxGitDiff"/>
+  <aura:attribute name="DIFF_COMPLETE_EVENT_TYPE" type="String" default="dx git diff complete"/>
+  <aura:attribute name="COMMIT_COMPLETE_EVENT_TYPE" type="String" default="Scratch org commit complete"/>
+  <aura:attribute name="FIND_MODIFIED_COMPONENTS_ACTION_TYPE" type="String" default="findModifiedComponents"/>
+  <aura:attribute name="COMMIT_MODIFIED_COMPONENTS_ACTION_TYPE" type="String" default="commitModifiedComponents"/>
+
+  <aura:attribute name="repoSelectComboboxId" type="String" default="commit-poc-repo-select"/>
+  <aura:attribute name="branchSelectComboboxId" type="String" default="commit-poc-branch-select"/>
+
+  <aura:handler name="comboboxChangeEvent" event="c:comboboxChangeEvent" action="{!c.handleComboBoxChanges}" />
+  <aura:handler name="authInitEvent" event="c:AuthInitEvent" action="{!c.handleAuthInitEvent}" />
+  <aura:handler event="c:buttonEvent" name="buttonEvent" action="{!c.handleButtonClick}"/>
+  <aura:handler name="CheckboxChangeEvent" event="c:CheckboxChangeEvent" action="{!c.checkIfChangesAreCommitable}"/>
+  <aura:handler name="change" value="{!v.recordId}" action="{!c.recordIdChange}"/>
+
+
+  <aura:handler event="c:PlatformEventStreamUpdate" action="{!c.handlePlatformEvents}"/>
+  <aura:registerEvent name="pageMessageAdd" type="c:pageMessageAdd" />
+  <aura:registerEvent name="pageMessagesClear" type="c:pageMessagesClear" />
+
+  <div>
+    <lightning:card title="View and Commit Changes For Scratch Org">
+      <div id="git-container">
+        <div id="git-options-container" class="slds-grid slds-wrap slds-grid_pull-padded-medium">
+          <c:GitCommitRepoSelect aura:id="commit-repo-select" 
+                                 repoSelectComboboxId="{# v.repoSelectComboboxId }"
+                                 branchSelectComboboxId="{# v.branchSelectComboboxId }" />
+        </div>
+        <c:button aura:id="findChangesButton" disabled="{!v.isFindingModifiedComps}" label="Find Modified Components"
+                  text="Find Modified Components" buttonStyle="important"
+                  actionType="{!v.FIND_MODIFIED_COMPONENTS_ACTION_TYPE}" />
+      </div>
+
+      <div class="modified-comps-table-container">
+        <table class="alm-table zebra">
+          <tr>
+            <th>commit</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Path</th>
+            <th>Change Type</th>
+          </tr>
+          <aura:iteration items="{!v.dxGitDiffResponse.diffs}" var="diff">
+            <tr>
+              <td data-selected-path="{!diff.filePath}"><c:Checkbox aura:id="diff-checkboxes"/></td>
+              <td>{!diff.fullName}</td>
+              <td>{!diff.type}</td>
+              <td>{!diff.filePath}</td>
+              <td>{!diff.state}</td>
+            </tr>
+          </aura:iteration>
+        </table>
+        <aura:if isTrue="{! !(v.dxGitDiffResponse.diffs.length > 0)}">
+          <!-- If there are table rows, don't display empty state container. If search is underway, show spinner -->
+          <c:emptyStateContainer>
+            <aura:if isTrue="{!v.isFindingModifiedComps}">
+              <lightning:spinner variant="brand" size="small"/>
+              <aura:set attribute="else">
+                Click to Find Modified Components
+              </aura:set>
+            </aura:if>
+          </c:emptyStateContainer>
+        </aura:if>
+      </div>
+
+      <div id="git-commit-message" class="">
+        <lightning:textarea aura:id="CommitTextArea" label="Commit Message" onchange="{!c.checkIfChangesAreCommitable}"
+                            disabled="" value="{!v.commitMessage}" onfocus="" onblur="" maxlength="32000"/>
+      </div>
+      <c:button aura:id="commitSelectedComponents" disabled="{! !v.changesAreCommittable || v.isCommittingModifiedComps}"
+                label="Commit Selected Components" text="Commit Selected Components" buttonStyle="important"
+                actionType="{!v.COMMIT_MODIFIED_COMPONENTS_ACTION_TYPE}" />
+    </lightning:card>
+  </div>
+</aura:component>

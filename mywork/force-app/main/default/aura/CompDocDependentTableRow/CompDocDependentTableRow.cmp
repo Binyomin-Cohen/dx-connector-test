@@ -1,0 +1,88 @@
+<aura:component controller="ComponentDocController" extends="c:pageBlockTableRow">
+
+  <aura:attribute name="componentRecordNotes" type="String" default="Apply notes to this component"/>
+
+  <tr class="dependent-component dependent-row" data-backlog-component-id="{!v.componentRecord.component.Id}"
+      data-is-deleted="{!v.componentRecord.isDeleted}" data-is-unsupported="{!v.componentRecord.isUnsupportedType}"
+      data-dependency-type="{!v.componentRecord.dependencyType}">
+    <td class="select-cb">
+      <input type="checkbox" checked="{!v.componentRecord.checked}" class="fancy-checkbox select-cb-add-dependent"
+             data-backlog-component-id="{!v.componentRecord.component.Id}"
+             data-component-key="{!v.componentRecord.key}"
+             id="{!'select-cb-add-dependent-' + v.componentRecord.component.Id}" />
+      <label onclick="{!c.handleRowSelect}" class="checkbox" for="{!'select-cb-add-dependent-' + v.componentRecord.component.Id}"><span></span></label>
+    </td>
+
+    <td class="comp-doc-table-element">
+      <div class="overflow-ellipses" title="{!v.componentRecord.environment}">
+        {!v.componentRecord.environment}
+      </div>
+    </td>
+
+    <td class="comp-doc-table-element component-name">
+      <div class="name-container">
+        <div class="overflow-ellipses">
+          <ui:outputURL value="{!'/' + v.componentRecord.component.Id}"
+                        label="{!v.componentRecord.componentName}" target="_blank"
+                        title="{!v.componentRecord.componentName}"/>
+        </div>
+        <aura:if isTrue="{!v.componentRecord.isDeleted}">
+          <div class="component-deleted-icon" title="This deleted component does not currently exist in the source instance."><img class="deleted-icon" src="/s.gif"></img></div>
+        </aura:if>
+      </div>
+    </td>
+
+    <td class="comp-doc-table-element">
+      <div class="overflow-ellipses" title="{!v.componentRecord.componentType}">
+        {!v.componentRecord.componentType}
+      </div>
+    </td>
+
+    <td class="comp-doc-table-element">
+      <!--  force:outputField is not working in Lightning -->
+      <div class="overflow-ellipses">
+        <ui:outputURL value="{!'/' + v.componentRecord.parentComponentId}"
+                      label="{!v.componentRecord.parentComponentName}"
+                      title="{!v.componentRecord.parentComponentName}"
+                      target="_blank"/>
+      </div>
+    </td>
+
+    <td class="comp-doc-table-element">
+      <div class="overflow-ellipses">
+        <aura:if isTrue="{!not(empty(v.componentRecord.lastModifiedDate))}">
+          <ui:outputDateTime value="{!v.componentRecord.lastModifiedDate}" timezone="{!$Locale.timezone}"
+                             format="l LT"
+                             langLocale="{!$Locale.userLocaleLang + '_' +  $Locale.userLocaleCountry}" />
+          <aura:set attribute="else">
+            {!$Label.c.Component_Field_Unavailable}
+          </aura:set>
+        </aura:if>
+      </div>
+    </td>
+
+    <td class="comp-doc-table-element">
+      <div class="overflow-ellipses">
+        <aura:if isTrue="{!not(empty(v.componentRecord.lastModifiedBy))}">
+          {!v.componentRecord.lastModifiedBy}
+          <aura:set attribute="else">
+            {!$Label.c.Component_Field_Unavailable}
+          </aura:set>
+        </aura:if>
+      </div>
+    </td>
+
+    <td class="comp-doc-table-element">
+      <aura:if isTrue="{!not(empty(v.componentRecord.dependencyList))}">
+        <aura:iteration items="{!v.componentRecord.dependencyList}" var="dependency">
+          <div class="dependency-name overflow-ellipses" title="{!dependency.Name}">
+            <ui:outputURL value="{!'/' + dependency.Id}" label="{!dependency.Name}" target="_blank"/>
+          </div>
+        </aura:iteration>
+        <aura:set attribute="else">
+          {!$Label.c.Component_Field_Unavailable}
+        </aura:set>
+      </aura:if>
+    </td>
+  </tr>
+</aura:component>

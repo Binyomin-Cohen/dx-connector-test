@@ -1,0 +1,90 @@
+.THIS {
+  padding-top: 5px;
+}
+
+.THIS *, .THIS th {
+  font-family: 'Arial', sans-serif;
+}
+
+.THIS .alm-table th {
+  text-align: center;
+}
+
+.THIS .alm-table th.light-table-header-cell {
+  background: #555;
+}
+
+.THIS .alm-table .notification-column {
+  width: 40px;
+}
+
+.THIS .alm-table .empty-column {
+  width: 5px;
+}
+
+.THIS .alm-table .field-column {
+  width: 270px;
+}
+.THIS .alm-table .sample-column {
+  width: 210px;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.THIS .alm-table th.lookup-results {
+  text-align: left;
+  width: 430px;
+}
+
+.THIS.upload-field-mapping-wrapper {
+  fill: #7CA906;
+}
+
+.THIS .spinner-row .slds-spinner {
+  position: relative;
+}
+
+.THIS .spinner-row .spinner-row-cell {
+  height: 45px;
+  vertical-align: top;
+}
+
+
+.THIS .info-message-unmapped-required-fields-row {
+  height: 45px;
+}
+
+.THIS .info-message-unmapped-required-fields-row .info-message-container {
+  padding-left: 20px;
+}
+
+.THIS .info-message-unmapped-required-fields-row img.info-icon {
+  margin-right: 10px;
+  cursor: default;
+
+}
+
+.THIS input[type="text"] {
+  width: 92%;
+}
+
+.THIS input[type="text"],
+.THIS textarea,
+.THIS #notes-modal textarea {
+  background-color: #FFFFFF;
+  border: 1px solid #cccccc;
+
+  /* -moz-box-shadow:   inset 1px 1px 3px rgba(221,219,219,1); */
+  /* -webkit-box-shadow:  inset 1px 1px 3px rgba(221,219,219,1); */
+
+  /* box-shadow: inset 1px 1px 3px rgba(221,219,219,1); */
+  color: #000;
+  margin:0 0; /*edit as needed*/
+  padding:7px;
+  height: 30px;
+}
+
+.THIS .alm-combobox input[type="text"] {
+  width: 100%;
+  padding-right: 32px;
+}

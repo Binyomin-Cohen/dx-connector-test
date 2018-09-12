@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Target_Field_Type__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The type of field in the target. Types supported are "string", "object", and "array" Blank types will be treated as strings.</inlineHelpText>
+    <label>Target Field Type</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

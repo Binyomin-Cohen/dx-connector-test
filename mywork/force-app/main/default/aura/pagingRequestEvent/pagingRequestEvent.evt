@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Event template" >
+  <aura:attribute name="pagingDirection" type="String" />
+  <aura:attribute name="pageNumber" type="Integer" />
+</aura:event>

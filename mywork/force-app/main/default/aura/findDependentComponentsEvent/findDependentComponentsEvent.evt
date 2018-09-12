@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="">
+  <aura:attribute name="documentedComponents" type="ComponentSearchWrapper[]" description="The currently documented component wrappers"/>
+  <aura:attribute name="relatedComponentsFilterChoice" type="String" 
+      description="Either All, Dependent, or Reference" required="false"/>
+</aura:event>

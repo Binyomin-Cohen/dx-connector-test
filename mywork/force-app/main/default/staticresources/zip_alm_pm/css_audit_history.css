@@ -1,0 +1,42 @@
+.alm-table th.unsorted img.sortable{
+    background: url("img/png_alm_sprite1.png") no-repeat top left;
+    background-position: 0 -436px; width: 10px; height: 18px;
+    vertical-align: middle;
+}
+.alm-table th.asc img.sortable{
+    background: url("img/png_alm_sprite1.png") no-repeat top left;
+    background-position: 0 -58px; width: 10px; height: 18px;
+
+}
+.alm-table th.desc img.sortable{
+    background: url("img/png_alm_sprite1.png") no-repeat top left;
+    background-position: 0 -562px; width: 10px; height: 18px;
+}
+
+.alm-table th {
+    font-family: Helvetica, Arial, Sans-Serif;
+    font-size: 14px;
+    vertical-align: middle;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.alm-table th.asc,
+.alm-table th.desc {
+    background-color: #4F4F4F;
+}
+
+.alm-table tr:nth-child(odd) td {
+    background-color: #FFF;
+}
+.alm-table tr:nth-child(even) td {
+    background-color:#e8e9eb;
+}
+
+.alm-table td {
+    padding-left: 1.5%;
+}
+.page-layout-scroll {
+    height:175px; 
+    overflow:auto;
+}

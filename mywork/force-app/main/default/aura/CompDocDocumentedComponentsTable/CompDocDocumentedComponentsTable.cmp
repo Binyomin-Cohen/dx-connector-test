@@ -1,0 +1,14 @@
+<aura:component extends="c:pageBlockTable" controller="ComponentDocController">
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+  <aura:set attribute="tableId" value="documented-components-table" />
+  <aura:set attribute="tableSelectAllCheckboxId" value="select-all-checkbox-delete" />
+  <aura:set attribute="tableBodyClass" value="documented-components-table-content" />
+  <aura:attribute name="currentPageDocumentedComponents" type="ComponentSearchWrapper[]" />
+  <aura:attribute name="excludeColumns" type="Object" default="{}" />
+
+  <aura:iteration items="{!v.currentPageDocumentedComponents}" var="component">
+    <!--workaround to get around lightning issue:  Cannot read property 'childNodes' of null-->
+    <tr style="display:none;" /><tr style="display:none;" />
+    <c:CompDocResultsTableRow componentRecord="{!component}" excludeColumns="{!v.excludeColumns}"/>
+  </aura:iteration>
+</aura:component>

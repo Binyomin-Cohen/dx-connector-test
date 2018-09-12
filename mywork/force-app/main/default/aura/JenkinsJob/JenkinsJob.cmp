@@ -1,0 +1,62 @@
+<aura:component controller="JenkinsJobExt">
+  <ltng:require scripts="{!join(',',
+      $Resource.zip_alm_pm + '/js/api_builder.js',
+      $Resource.zip_alm_pm + '/js/combobox.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+    )}"
+    afterScriptsLoaded="{!c.doInit}"
+  />
+
+
+  <aura:attribute name="jenkinsJobId" type="String" />
+  <aura:attribute name="releaseId" type="String" />
+  <aura:attribute name="buildRuleCriteria" type="Object[]" description="An array of JenkinsJobExt.BuildRuleCriterion objects" />
+  <aura:attribute name="isBuildRuleSatisfied" type="Boolean" default="false" />
+  <aura:attribute name="jobInProgress" type="Boolean" default="false" />
+
+  <!-- Previously Successful Builds Attributes-->
+  <aura:attribute name="successfulBuildPickListOptions" type="Object[]" />
+  <aura:attribute name="selectedPreviousBuildId" type="String" />
+
+  <aura:handler name="comboboxChangeEvent" event="c:comboboxChangeEvent" action="{!c.handleComboBoxChanges}" />
+
+  <div id="alm-container">
+    <c:Header title="Jenkins Integration"
+        showCancelLink="false"
+        showHelpLink="false"
+        showSearchLink="false"
+        homeUrl="{!'/' + v.jenkinsJobId}"
+        homeLinkTitle="Jenkins Job"
+         />
+
+    <div class="body">
+      <div class="build-rule-criteria">
+        <span>All rules must be met to start a job:</span>
+
+        <ul class="combobox-selection">
+          <aura:iteration items="{!v.buildRuleCriteria}" var="criterion" >
+            <li >{!criterion.label}<img src="/s.gif" class="{!criterion.value ? 'green-check' : 'canceled'}"></img></li>
+          </aura:iteration>
+        </ul>
+
+        <aura:if isTrue="{!empty(v.buildRuleCriteria)}">
+          <div class="no-rules-msg">No build rules have been defined.</div>
+        </aura:if>
+      </div>
+
+      <div class="successful-build-container">
+        <span class="successful-build-label">(Optional) Select a successful build to use: </span>
+        <c:combobox aura:id="successful-build-select"
+                       inputId="successful-build-select"
+                       comboboxId="successful-build-select-combobox"
+                       options="{!v.successfulBuildPickListOptions}" />
+      </div>
+
+      <lightning:button class="important-btn2"
+                        label="Start Jenkins Job"
+                        onclick="{!c.startJenkinsJob}"
+                        disabled="{! or( not( v.isBuildRuleSatisfied), v.jobInProgress ) }"/>
+    </div>
+  </div>
+  <c:GoogleAnalyticsTracker pageTitle="Jenkins_Job" applicationName="PM - Jenkins_Job"/>
+</aura:component>

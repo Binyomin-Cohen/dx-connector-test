@@ -1,0 +1,95 @@
+<aura:component controller="ComponentDocController" >
+    <ltng:require styles="{!join(',',
+          $Resource.zip_alm_pm + '/css/alm_common.css',
+          $Resource.zip_alm_pm + '/css/bootstrap-override.css',
+          $Resource.zip_alm_pm + '/external/css/jquery-ui.css'
+       )}"
+        scripts="{!join(',',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+          $Resource.zip_alm_pm + '/external/jquery/jquery-ui.js',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/js_alm_common.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+          $Resource.zip_alm_pm + '/js/alm_autocomplete.js',
+          $Resource.zip_alm_pm + '/js/combobox.js',
+          $Resource.zip_alm_pm + '/js/component_doc/filter.js'
+       )}"
+        afterScriptsLoaded="{!c.init}"
+      />
+    <aura:attribute name="supportedMetadataTypes" type="String[]"/>
+    <aura:attribute name="instances" type="String[]"/>
+    <aura:attribute name="runTimes" type="Map"/>
+    <aura:attribute name="availableUsers" type="String[]"/>
+    <aura:attribute name="scriptsLoaded" type="Boolean" default="false"/>
+    <aura:attribute name="instancesInitialized" type="Boolean" default="false"/>
+    <aura:attribute name="disableSearch" type="Boolean" default="false" />
+    <aura:attribute name="filterByUsers" type="Object[]" default="[]" />
+    <aura:attribute name="filterByUsersLabel" type="String" default="Enter a value" />
+    <aura:registerEvent name="appEvent" type="c:asyncSearchEvent"/>
+    <aura:handler event="aura:doneRendering" action="{!c.instancesInit}"/>
+    <aura:handler event="c:asyncLoadEvent" action="{!c.handleEnableParamChange}"/>
+
+    <aura:handler name="change" value="{!v.filterByUsers}" action="{!c.handleUsersFilters}" />
+
+    <div id="search-container">
+    <div class="container-fluid">
+        <div class="page-block-content-component-search" id="search-form" onkeyup="{!c.formKeyPress}">
+          <div class="col-md-6 col-lg-3 col-xlg-2">
+            <div class="alm-settings-label">Name</div>
+            <input type="text" aura:id="name" id="name" class="name" placeholder="Enter a value"
+                   onchange="{!c.handleEnableParamChange}"/>
+          </div>
+
+          <div class="col-md-6 col-lg-3 col-xlg-2">
+            <div class="alm-settings-label">Type</div>
+            <div class="alm-combobox">
+              <input aura:id='ctype' id="ctype" class="ctype" type="text" html-data-typed-value=""
+                 placeholder="Enter a value" onchange="{!c.handleEnableParamChange}" /> <a class="expander"></a>
+              <select class="filter-values">
+                <aura:iteration items="{!v.supportedMetadataTypes}" var="metadataType">
+                    <option value="{!metadataType}">{!metadataType}</option>
+                 </aura:iteration>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 col-xlg-2">
+            <div class="alm-settings-label">Parent Component</div>
+            <input aura:id='parent-name' type="text" id="parentName" class="parent-name"
+                   placeholder="Enter a value" onchange="{!c.handleEnableParamChange}" />
+          </div>
+
+          <div class="col-md-6 col-lg-3 col-xlg-2">
+            <div class="alm-settings-label">Select Instance(s)</div>
+            <input type="hidden" name="selectedInstances" id="selectedInstances" />
+            <c:InstancesMultiSelect aura:id="instances-multi-select" instances="[]"></c:InstancesMultiSelect>
+          </div>
+
+          <div class="col-md-6 col-lg-3 col-xlg-2" id="last-modified-by-sectionv2">
+            <div class="alm-settings-label">{!$Label.c.Backlog_Component_Last_Modified_By}</div>
+            <c:pageBlockPanelSection sectionTitle="{!v.filterByUsersLabel}" applyHeaderFilter="{! v.filterByUsers.length > 0}">
+              <c:combobox aura:id="avail-users-combobox"
+                          inputId="avail-users-list"
+                          isMultiSelect="true"
+                          comboboxId="avail-users-list-filter"
+                          selectedOptions="{!v.filterByUsers}"
+                          options="{!v.availableUsers}" />
+            </c:pageBlockPanelSection>
+          </div>
+
+          <div class="col-md-6 col-lg-3 col-xlg-2 pull-right">
+            <div class="alm-settings-label"></div>
+            <!-- <button onclick="{!c.doSearch}" type="button" aura:id="search-btn" class="important-btn search-btn clearfix alm-btn" >Search<span class="search-icon"></span></button> -->
+            <button aura:id="search-btn"
+                    type="button"
+                    class="important-btn2 search-btn clearfix alm-btn"
+                    disabled="{!v.disableSearch}">
+                Search
+                <span class="search-icon"></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</aura:component>

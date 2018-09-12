@@ -1,0 +1,5 @@
+Component: {!IF(Component__c.Full_Name__c = "", Component__c.Name, Component__c.Full_Name__c)}
+Type: {!Component__c.Type__c}
+Modified by: {!Component__c.LastModifiedBy}
+Modified date: {!Component__c.LastModifiedDate}
+Record Link: {!Component__c.Link}

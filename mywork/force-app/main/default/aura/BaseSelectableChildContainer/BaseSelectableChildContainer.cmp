@@ -1,0 +1,17 @@
+<aura:component extensible="true" abstract="true">
+
+  <aura:attribute name="children" type="Aura.Component[]"/>
+  <aura:attribute name="focusedChildIndex" type="Integer" default="0"/>
+  <aura:attribute name="mostRecentlySelectedChild" type="Aura.Component"/>
+
+  <aura:handler event="c:rowSelectEvent" name="rowSelectEvent" action="{!c.handleChildSelect}"/>
+  <aura:handler event="c:VirtualDOMEvent" name="VirtualDOMEvent" action="{!c.handleChildVirtualDOMEvent}"/>
+
+  <aura:method name="getSelectedChildren" action="{!c.getSelectedChildren}" access="PUBLIC"></aura:method>
+  <aura:method name="focusNext" action="{!c.focusNext}" access="PUBLIC"></aura:method>
+  <aura:method name="focusPrevious" action="{!c.focusPrevious}" access="PUBLIC"></aura:method>
+  <aura:method name="handleKeydown" action="{!c.handleKeydown}" access="PUBLIC"></aura:method>
+
+  {!v.body}
+
+</aura:component>

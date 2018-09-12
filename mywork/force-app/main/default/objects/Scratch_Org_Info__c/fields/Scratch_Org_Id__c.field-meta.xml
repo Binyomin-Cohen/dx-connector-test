@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scratch_Org_Id__c</fullName>
+    <description></description>
+    <externalId>false</externalId>
+    <inlineHelpText></inlineHelpText>
+    <label>Scratch Org Id</label>
+    <length>255</length>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+</CustomField>

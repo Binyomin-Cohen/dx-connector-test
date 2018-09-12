@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Manual_Package_Parsed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Tracks if a manually uploaded package has been parsed.</description>
+    <externalId>false</externalId>
+    <label>Is Manual Package Parsed</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

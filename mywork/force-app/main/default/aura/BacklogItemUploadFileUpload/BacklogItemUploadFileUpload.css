@@ -1,0 +1,102 @@
+.THIS {
+  height: 245px;
+  width: 100%;
+  top: 0;
+}
+
+.THIS #file-upload-button.subtle-btn,
+.THIS #file-upload-button.subtle-btn:hover {
+  margin: 0 auto;
+  position: relative;
+  cursor:pointer;
+  background: #e8e9eb;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #CCC;
+  border-radius: 3px;
+  color: black;
+  font-size: 13px;
+  font-family: "Arial";
+  font-weight: bold;
+  height: 32px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  top: 6.5px;
+  width: 135px;
+}
+
+.THIS #file-upload-button input.file-input {
+  width:135px;
+  position: absolute;
+  height: 30px;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.THIS .upload-drag-helper {
+  border-radius: 3px;
+  border: 3px dashed #A6A6A6;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: 6px;
+  color: #A6A6A6;
+  font-size: 14px;
+  white-space: normal;
+  padding: 0px 25px;
+  position: relative;
+  margin: 0 10px;
+}
+
+.THIS .upload-drag-helper.drag-hover {
+  border: 3px dashed #0b6196;
+}
+
+.THIS .upload-a-package {
+  vertical-align: middle;
+  text-align: center;
+  font-size: 14px;
+  color: #CCC;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  height: 130px;
+}
+
+.THIS .upload-text-large {
+  font-size: 18px;
+  font-weight: bold;
+  color: #AAA;
+}
+
+.THIS .upload-text-small {
+  font-size: 14px;
+  color: #BBB;
+}
+
+.THIS #spreadsheet-template-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.THIS #spreadsheet-template-text {
+  font-size: 12px;
+}
+
+.THIS #spreadsheet-template-container .slds-icon_container {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.THIS #spreadsheet-template-container .slds-icon {
+  fill: #009DDC;
+}

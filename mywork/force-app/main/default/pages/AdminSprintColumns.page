@@ -1,0 +1,32 @@
+<apex:page docType="html-5.0" controller="AdminSprintLanesController" title="Admin Console - Sprint Columns" sidebar="false" >
+  <c:Tracking title="Admin Console - Sprint Lanes" appName="PM - Admin Console -Sprint Lanes"/>
+  <apex:composition template="AdminTemplate">
+    <apex:define name="includes">
+      <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'css/admin_console/column_config.css')}" />
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/js_alm_common.js')}" ></script>
+      <script src="{!$Resource.js_hogan}"></script>
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/templates.js')}" ></script>
+      <script src="{!$Resource.js_jquery_blockui}" ></script>
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/admin_console/column_config.js')}" ></script>
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/admin_console/sprint_lanes.js')}" ></script>
+    </apex:define>
+    <apex:define name="content">
+      <apex:outputPanel layout="none" rendered="{!hasPermissions}">
+        <c:ColumnConfig columnConfig="{!columnConfig}"
+                      primaryColumnTitle="Backlog Item Statuses"
+                      secondaryColumnTitle="Sprint Columns Configuration"
+                      placeholderText="Drag statuses here to create and organize columns for the sprint life cycle."/>
+      </apex:outputPanel>
+    </apex:define>
+  </apex:composition>
+  <script>
+   function saveColumns( fieldNames, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminSprintLanesController.saveColumns}',
+            fieldNames,
+            callback,
+            {escape: true}
+        );
+    }
+  </script>
+</apex:page>

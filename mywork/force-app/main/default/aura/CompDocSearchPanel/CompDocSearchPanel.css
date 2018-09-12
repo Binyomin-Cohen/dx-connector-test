@@ -1,0 +1,184 @@
+.THIS .multiselect-container a{
+  text-decoration : none;
+}
+
+.THIS#search-container .container-fluid {
+  padding: 0;
+}
+
+.THIS #search-form {
+  min-height: 65px;
+}
+
+.THIS#search-container .important-btn2.search-btn {
+  float: right;
+  padding: 7px 15px 6px 15px;
+  margin-top: 15px;
+  height: 33px;
+  text-shadow: none;
+}
+
+.THIS#search-container .important-btn2.search-btn[disabled] {
+  opacity: .5;
+  cursor: default;
+}
+
+.THIS .search-icon {
+  bottom: 1px;
+  padding: 0;
+  position: relative;
+}
+
+.THIS  .btn-group > .btn {
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 0;
+  float: left;
+  padding: 0px 0px 0px 8px;
+  position: relative;
+  color: #999999;
+  font-family: Arial;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.THIS .btn-group > .btn:active {
+  border: 1px solid #cccccc;
+}
+
+.THIS .btn-group.open > .dropdown-toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.THIS .open > .dropdown-menu {
+  border-radius: 0px;
+  border: 1px solid #cccccc;
+  display: table;
+  margin-top: -2px;
+}
+
+.THIS .dropdown-menu > li {
+  margin: 0px;
+  height: 30px;
+  display: table-row-group;
+}
+
+.THIS .dropdown-menu > li:hover > a {
+  background-color: #dfecf9;
+}
+
+.THIS .dropdown-menu > li:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.THIS .dropdown-menu > li:nth-child(even) {
+  background-color: #e8e9eb;
+}
+
+.THIS .dropdown-menu > li > a {
+  height: 22px;
+  padding: 4px;
+  display: table-row;
+  text-decoration: none;
+}
+
+.THIS .dropdown-menu .border-padding {
+  margin: 7px 0 7px 0;
+  border-right: 1px dotted #cccccc;
+}
+
+.THIS .dropdown-menu > li > a > div > label.checkbox {
+  color: #333333;
+  min-width: 75px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  display: table-cell
+}
+
+.THIS .dropdown-menu > li > a > span {
+  display: table-cell;
+  color: #333333;
+  padding: 0px 10px;
+}
+
+.THIS .dropdown-menu .tool-name {
+  color: #019cea;
+}
+
+.THIS .dropdown-menu .date {
+  color: #77a600;
+}
+
+.THIS .dropdown-menu > li.active > a,
+.THIS .dropdown-menu > li.active > a:hover {
+  background-color: inherit;
+}
+
+.THIS .alm-combobox a {
+  right: 0;
+  height: 30px;
+}
+
+.THIS .alm-combobox input {
+  width: 218px;
+  height: 13px;
+}
+
+.THIS .alm-settings-label {
+  font-size: 12px;
+  font-family: Arial;
+  color: rgb(85,85,85);
+  padding: 10px 0;
+}
+
+.THIS#search-container {
+  padding-bottom: 10px;
+}
+
+.THIS .btn-group {
+  width: 100%;
+}
+
+.THIS .btn-group > button.btn{
+  width: 100%;
+  height: 30px;
+  text-align: left;
+  position: relative;
+}
+
+.THIS .alm-combobox a.expander {
+  border: 1px solid #CCCCCC;
+}
+
+.THIS #last-modified-by-section {
+  z-index: 2;
+}
+
+.THIS #last-modified-by-section .section-title {
+  padding: 8px;
+}
+
+.THIS #last-modified-by-section .page-block-panel-section {
+  position: absolute;
+  width: 90%;
+}
+
+.THIS #last-modified-by-section .page-block-panel-section-body {
+  max-height: 180px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.THIS .page-block-panel-section-header.filter-applied a.section-close-btn {
+  display: inline-block;
+  position: absolute;
+  padding: 0px;
+  right: 10px;
+  top: -25px;
+}
+
+.THIS .page-block-panel-section-header.filter-applied a.section-title {
+  width: 77%;
+}

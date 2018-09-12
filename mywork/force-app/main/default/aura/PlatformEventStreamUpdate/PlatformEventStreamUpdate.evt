@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Data update from the Platform Event Streaming API">
+  <aura:attribute name="eventType" type="String" />
+  <aura:attribute name="data" type="Object" />
+</aura:event>

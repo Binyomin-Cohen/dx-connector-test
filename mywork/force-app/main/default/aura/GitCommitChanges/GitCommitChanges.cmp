@@ -1,0 +1,80 @@
+<aura:component controller="GitController">
+  <ltng:require afterScriptsLoaded="{!c.doInit}" />
+
+    <!-- Components Attributes -->
+    <aura:attribute name="commitRequest" type="Map" default="{}" />
+    <aura:attribute name="backlogItemId" type="String" required="true" />
+    <aura:attribute name="excludeColumns" type="Object" default="{}" />
+    <aura:attribute name="documentedComponents" type="ComponentSearchWrapper[]" />
+    <aura:attribute name="selectedBacklogComponentIds" type="List" default="[]" />
+    <aura:attribute name="commitMessage" type="String" />
+    <aura:attribute name="isAuthorized" type="Boolean" default="false" />
+
+    <!-- Commit Message / Commit Button Attributes -->
+    <aura:attribute name="disableCommitButton" type="Boolean" default="true" />
+    <aura:attribute name="enableActionButton" type="Boolean" default="true" />
+    <aura:attribute name="commitInProgress" type="Boolean" default="false" />
+    <aura:attribute name="containsPlaceholder" type="String" default="contains-placeholder" />
+    <aura:attribute name="commitMessagePlaceHolder" type="String" default="" />
+
+    <aura:handler event="c:buttonEvent" name="buttonEvent" action="{!c.handleCommitButtonClick}"/>
+    <aura:handler name="change" value="{!v.commitRequest}" action="{!c.handleCommitButtonToggle}" />
+    <aura:handler name="change" value="{!v.selectedBacklogComponentIds}"
+                  action="{!c.handleSelectedBacklogComponentIdsChange}" />
+
+    <aura:registerEvent name="analyticsTrackingEvent" type="c:GoogleAnalyticsTrackingEvent"/>
+    <aura:registerEvent name="unsavedPageEvent" type="c:unsavedPageEvent"/>
+
+    <aura:method name="getState" action="{! c.getState }">
+      <aura:attribute name="state" type="Map" />
+    </aura:method>
+    <aura:method name="setState" action="{! c.setState }">
+      <aura:attribute name="state" type="Map" />
+    </aura:method>
+
+    <div id="git-commit-details-container">
+      <c:CompDocDocumentedComponents aura:id="compDocDocumentedComponents"
+                                     backlogItemId="{!v.backlogItemId}"
+                                     enablePagination="true"
+                                     enableActionButton="{!v.enableActionButton}"
+                                     showActionButton="false"
+                                     allDocumentedComponents="{!v.documentedComponents}"
+                                     selectAllComponentsOnInit="true"
+                                     selectedBacklogComponentIds="{!v.selectedBacklogComponentIds}"
+                                     disableDeletedComponents="false"
+                                     excludeColumns="{!v.excludeColumns}"/>
+
+      <div class="git-commit-section" >
+        <div id="git-commit-message" class="{!v.containsPlaceholder}">
+          <lightning:textarea aura:id="CommitTextArea"
+                              label="Commit Message"
+                              onchange="{!c.handleCommitMessage}"
+                              disabled="{!v.commitInProgress}"
+                              value="{!v.commitMessage}"
+                              onfocus="{!c.handleCommitMessagePlaceholder}"
+                              onblur="{!c.handleCommitMessagePlaceholder}"
+                              maxlength="32000"/>
+        </div>
+
+        <div id="git-commit-button">
+          <aura:if isTrue="{!v.commitInProgress}">
+            <div class="slds-spinner slds-spinner--brand slds-spinner--small commit-progress" aria-hidden="false">
+              <div class="slds-spinner__dot-a"></div>
+              <div class="slds-spinner__dot-b"></div>
+            </div>
+            <aura:set attribute="else">
+              <c:button aura:id="CommitButton"
+                        disabled="{!or(v.disableCommitButton, not(v.isAuthorized))}"
+                        label="COMMIT"
+                        text="COMMIT"
+                        buttonStyle="important"
+                        actionType="handleCommitButtonClick" />
+              <ui:outputURL class="cancel-button" value="{! '/' + v.backlogItemId }" label="Cancel" />
+            </aura:set>
+          </aura:if>
+
+        </div>
+      </div>
+    </div>
+
+</aura:component>

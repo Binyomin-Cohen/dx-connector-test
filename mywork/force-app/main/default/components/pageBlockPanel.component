@@ -1,0 +1,15 @@
+<apex:component layout="none">
+<apex:attribute name="panelTitle" description="The title of the panel" type="String" required="true"/>
+<apex:attribute name="sectionId" description="ID used on the container of the panel " type="String" required="false"/>
+<apex:attribute name="iconClass" description="class to uss for the icon in the header" type="String" required="false"/>
+<apex:attribute name="showInfoTooltip" description="Show the info tooltip" type="Boolean" default="false" required="false"/>
+<apex:attribute name="infoTooltipText" description="The text for the info tooltip" type="String" required="false"/>
+<apex:attribute name="showBody" description="Show the panel body" type="Boolean" default="true" required="false"/>
+
+<div class="page-block-panel" id="{!sectionId}">
+    <h3><img src="/s.gif" class="{!iconClass} icon" ></img>{!panelTitle}<apex:image title="{!infoTooltipText}" rendered="{!showInfoTooltip}" url="/s.gif" styleClass="info-icon" /></h3>
+    <apex:outputPanel rendered="{!showBody}" layout="block" styleClass="page-block-panel-body" >
+      <apex:componentBody />
+    </apex:outputPanel>
+</div>
+</apex:component>

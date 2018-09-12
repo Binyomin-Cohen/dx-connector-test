@@ -1,0 +1,43 @@
+<aura:component controller="BuildRuleExt">
+  <ltng:require scripts="{!join(',',
+          $Resource.zip_alm_pm + '/js/api_builder.js',
+          $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+       )}"
+       afterScriptsLoaded="{!c.init}"
+    />
+
+  <aura:attribute name="jenkinsJobId" type="String" />
+  <aura:attribute name="availableOptions" type="Object[]" description="An array of BuildRuleExt.Option objects" />
+  <aura:attribute name="selectedOptions" type="Object[]" />
+
+  <aura:handler name="comboboxChangeEvent" event="c:comboboxChangeEvent" action="{!c.handleComboboxChanges}" />
+  <aura:handler name="comboboxDeleteEvent" event="c:comboboxDeleteEvent" action="{!c.handleComboboxDelete}" />
+
+  <div id="alm-container">
+    <c:Header title="Configure Build Rule"
+        showCancelLink="false"
+        showHelpLink="false"
+        showSearchLink="false"
+        homeUrl="{!'/' + v.jenkinsJobId}"
+        homeLinkTitle="Jenkins Job"
+         />
+
+    <div id="criteria-container">
+      <span>Please select the criteria that needs to be met in order for this build rule to evaluate to TRUE</span>
+      <div>
+        <span class="field-prompt">Available fields</span>
+        <aura:if isTrue="{!not(empty(v.availableOptions))}" >
+          <c:combobox inputId="rules-select"
+              comboboxId="rules-select-combobox"
+              selectedValue=""
+              isMultiSelect="true"
+              options="{!v.availableOptions}"
+              selectedOptions="{!v.selectedOptions}"
+              comboboxPlaceholder="Select Criteria" />
+        </aura:if>
+      </div>
+    </div>
+  </div>
+
+  <c:GoogleAnalyticsTracker pageTitle="Jenkins-Build_Rules" applicationName="PM - Jenkins-Build_Rules"/>
+</aura:component>

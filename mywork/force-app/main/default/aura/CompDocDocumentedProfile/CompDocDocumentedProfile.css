@@ -1,0 +1,39 @@
+.THIS.profile-tile {
+  background-color: #F1F1F1;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  padding: 10px 15px 5px 20px;
+  margin: 0px 20px 20px 0px;
+  width: 175px;
+  height: 48px;
+  float: left;
+  position: relative;
+  cursor: pointer;
+}
+
+.THIS.profile-tile .name {
+  font-size: 14px;
+  width: 140px;
+  display: inline-block;
+}
+
+.THIS.profile-tile .instance {
+  color: #7ca906;
+  font-size: 10px;
+  width: 140px;
+  overflow:hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.THIS .delete-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.THIS.profile-tile:hover img {
+  cursor: pointer;
+  visibility: visible;
+}

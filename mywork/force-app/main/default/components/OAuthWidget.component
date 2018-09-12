@@ -1,0 +1,20 @@
+<apex:component layout="none">
+<apex:attribute name="authorizeText" description="authorize prompt" type="String"
+    required="false"
+    default="Click to authorize" />
+<apex:attribute name="instanceId" description="the id of the instance to authorize" type="String"
+    required="false" />
+<apex:attribute name="disable" description="True if this widget should be disabled" type="Boolean"
+    required="false" />
+    
+  <div id="oauth-container" data-instance-id="{!instanceId}" class="oauth-container unauthorized {!IF(disable, 'disabled', '')}">
+    <div class="authorized-user overflow-ellipses"></div>
+    <div class="authorized-icon" title=""></div>
+
+    <a class="unauthorized-text">{!authorizeText}</a>
+    <div class="unauthorized-icon" title="{!authorizeText}"></div>
+
+    <div class="oauth-user-edit" />
+    <div class="oauth-user-cancel" title="Cancel"/>
+  </div>
+</apex:component>

@@ -1,0 +1,75 @@
+<aura:component controller="BacklogItemUploadController">
+  <ltng:require
+    scripts="{!join(',',
+             $Resource.zip_alm_pm + '/js/common/lightning-common.js'
+             )}"
+    styles="{!join(',',
+            $Resource.zip_alm_pm + '/css/alm_common.css'
+            )}" />
+  <aura:attribute name="step"
+                   description="Current step in the upload process, zero-based index" type="Integer" required="false" default="-1"/>
+  <aura:attribute name="enableNextButton"
+                   description="Boolean that when set will enable or disable the next button" type="Boolean" required="false" default="false"/>
+  <aura:attribute name="mappingConfigData"
+                  description="The model for the field mapping data" type="BacklogItemUploadMappingConfig"/>
+  <aura:attribute name="parsedUploadFile"
+                   description="Model of the uploaded file" type="Map" required="false"/>
+  <aura:attribute name="lookupRecordCount"
+                   description="number of lookup records to be created" type="Integer" required="false"/>
+  <aura:attribute name="uploadResult"
+                   description="upload results" type="BacklogItemUploadResult" required="false"/>
+
+  <aura:handler name="change" value="{!v.step}" action="{!c.populateLookupRecordCount}" />
+  <div>
+    <c:BacklogItemUploadStepSummary stepHeaderInstructions="Import your choices"
+          stepSummaryTopRow="{!v.parsedUploadFile.filename}"
+          stepSummaryBottomRow="{!v.parsedUploadFile.rows.length + ' Backlog Item Record(s)'}"/>
+
+    <div class="progress-summary" aura:id="progress-summary">
+
+      <div class="waiting-to-complete">
+        <div class="info-msg">
+          Inserting {!v.parsedUploadFile.rows.length} Backlog Item(s), {!v.lookupRecordCount} lookup records...
+        </div>
+        <div class="loading-progress-bar">
+          <!-- TODO: Figure out referencing static resource images in CSS for background-image property or apply with JS
+          <img alt="loading" class="barber-loader" src="/s.gif" /> -->
+          <img alt="loading" src="{!$Resource.zip_alm_pm + '/img/blueBarberPole.GIF'}" />
+        </div>
+      </div>
+      <div class="complete-results">
+        <div class="two-cell-card">
+          <div>
+            <span class="success-icon">
+             <lightning:icon iconName="utility:check" size="medium" />
+           </span>
+           <div class="result-detail">
+             <span>Records Created</span>
+             <span class="result-count">{!v.uploadResult.numOfRecordsCreated}</span>
+           </div>
+           <div class="download-detail">
+             <span class="download-results">Download Success Results</span>
+             <a href="{!'/servlet/servlet.FileDownload?file=' + v.uploadResult.successCsvId}">
+               <lightning:icon iconName="utility:download" size="x-small" alternativeText="download" />
+             </a>
+           </div>
+         </div>
+         <div class="vline"></div>
+         <div>
+           <img class="error-icon-large" src="/s.gif" />
+           <div class="result-detail">
+             <span>Errors</span>
+             <span class="result-count">{!v.uploadResult.numOfErrors}</span>
+           </div>
+           <div class="download-detail">
+             <span class="download-results">Download Error Results</span>
+             <a href="{!'/servlet/servlet.FileDownload?file=' + v.uploadResult.failureCsvId}">
+              <lightning:icon iconName="utility:download" size="x-small" alternativeText="download" />
+             </a>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</aura:component>

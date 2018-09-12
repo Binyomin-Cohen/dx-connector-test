@@ -1,0 +1,116 @@
+<aura:component controller="ComponentDocController">
+
+  <aura:attribute name="componentRecord" type="ComponentSearchWrapper" />
+  <aura:attribute name="componentRecordNotes" type="String" default="Apply notes to this component"/>
+  <aura:attribute name="excludeColumns" type="Object" default="{}"/>
+
+  <aura:registerEvent name="rowSelectEvent" type="c:rowSelectEvent"/>
+
+  <aura:handler name="init" value="{!this}" action="{!c.init}" />
+  <tr class="saved-component" data-backlog-component-id="{!v.componentRecord.backlogComponent.Id}"
+      data-is-deleted="{!v.componentRecord.isDeleted}" data-is-unsupported="{!v.componentRecord.isUnsupportedType}">
+    <td class="select-cb">
+      <input type="checkbox" checked="{!v.componentRecord.checked}" class="fancy-checkbox select-cb-delete"
+             data-backlog-component-id="{!v.componentRecord.backlogComponent.Id}"
+             data-component-key="{!v.componentRecord.key}"
+             onclick="{!c.handleCheckboxClick}"
+             id="{!'select-cb-delete-' + v.componentRecord.backlogComponent.Id}"/>
+      <label class="checkbox" for="{!'select-cb-delete-' + v.componentRecord.backlogComponent.Id}"><span></span></label>
+    </td>
+
+    <aura:if isTrue="{!not(v.excludeColumns.instance)}">
+      <td class="comp-doc-table-element">
+        <div class="overflow-ellipses" title="{!v.componentRecord.environment}">
+          {!v.componentRecord.environment}
+        </div>
+      </td>
+    </aura:if>
+
+    <aura:if isTrue="{!not(v.excludeColumns.name)}">
+      <td class="comp-doc-table-element component-name">
+        <div class="name-container">
+          <div class="overflow-ellipses">
+            <ui:outputURL value="{!'/' + v.componentRecord.component.Id}"
+                        label="{!v.componentRecord.componentName}" target="_blank" 
+                        title="{!v.componentRecord.componentName}"/>
+          </div>
+          <aura:if isTrue="{!v.componentRecord.isDeleted}">
+            <div class="component-deleted-icon" title="This deleted component does not currently exist in the source instance."><img class="deleted-icon" src="/s.gif"></img></div>
+          </aura:if>
+        </div>
+      </td>
+    </aura:if>
+
+    <aura:if isTrue="{!not(v.excludeColumns.type)}">
+      <td class="comp-doc-table-element">
+        <div class="overflow-ellipses" title="{!v.componentRecord.componentType}">
+          {!v.componentRecord.componentType}
+        </div>
+      </td>
+    </aura:if>
+
+    <aura:if isTrue="{!not(v.excludeColumns.parentComponent)}">
+      <td class="comp-doc-table-element">
+        <!--  force:outputField is not working in Lightning -->
+        <div class="overflow-ellipses">
+          <ui:outputURL value="{!'/' + v.componentRecord.parentComponentId}"
+                        label="{!v.componentRecord.parentComponentName}" 
+                        title="{!v.componentRecord.parentComponentName}" 
+                        target="_blank"/>
+        </div>
+      </td>
+    </aura:if>
+
+    <aura:if isTrue="{!not(v.excludeColumns.lastModifiedDate)}">
+      <td class="comp-doc-table-element">
+        <div class="overflow-ellipses">
+          <aura:if isTrue="{!not(empty(v.componentRecord.lastModifiedDate))}">
+            <ui:outputDateTime value="{!v.componentRecord.lastModifiedDate}" timezone="{!$Locale.timezone}"
+                               format="l LT"
+                               langLocale="{!$Locale.userLocaleLang + '_' +  $Locale.userLocaleCountry}" />
+            <aura:set attribute="else">
+              {!$Label.c.Component_Field_Unavailable}
+            </aura:set>
+          </aura:if>
+        </div>
+      </td>
+    </aura:if>
+
+    <aura:if isTrue="{!not(v.excludeColumns.lastModifiedBy)}">
+      <td class="comp-doc-table-element">
+        <div class="overflow-ellipses">
+          <aura:if isTrue="{!not(empty(v.componentRecord.lastModifiedBy))}">
+            {!v.componentRecord.lastModifiedBy}
+            <aura:set attribute="else">
+              {!$Label.c.Component_Field_Unavailable}
+            </aura:set>
+          </aura:if>
+        </div>
+      </td>
+    </aura:if>
+
+    <aura:if isTrue="{!not(v.excludeColumns.notes)}">
+      <td class="component-note comp-doc-table-element" title="{!v.componentRecordNotes}" onclick="{!c.handleDisplayNoteModal}">
+        <div class="component-note-value overflow-ellipses notes-output">
+          <div class="overflow-ellipses">
+            {!v.componentRecord.notes}
+          </div>
+          <div class="icon">
+            <img src="/s.gif"></img>
+          </div>
+        </div>
+      </td>
+    </aura:if>
+
+    <aura:if isTrue="{!not(v.excludeColumns.deployManually)}">
+      <td class="comp-doc-table-element">
+        <input type="checkbox" checked="{!v.componentRecord.deployManually}" class="fancy-checkbox"
+               id="{!'select-cb-deploy-manually-' + v.componentRecord.backlogComponent.Id}" onclick="{!c.handleDeployManuallyChange}"
+               disabled="{!v.componentRecord.isUnsupportedType}"/>
+        <label title="Deploy this component manually" class="checkbox"
+               for="{!'select-cb-deploy-manually-' + v.componentRecord.backlogComponent.Id}"><span></span></label>
+      </td>
+    </aura:if>
+
+  </tr>
+</aura:component>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unit_Test_Summary__c</fullName>
+    <description>The summary record that this test error result is a part of.</description>
+    <externalId>false</externalId>
+    <label>Unit Test Summary</label>
+    <referenceTo>Unit_Test_Summary__c</referenceTo>
+    <relationshipLabel>Unit Test Failures</relationshipLabel>
+    <relationshipName>Unit_Test_Failures</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

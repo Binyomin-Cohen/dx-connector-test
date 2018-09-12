@@ -1,0 +1,60 @@
+<apex:page docType="html-5.0" title="Admin Console - Inactive Statuses" controller="AdminBacklogStatusController" sidebar="false" >
+  <c:Tracking title="Admin Console - Backlog Status" appName="PM - Admin Console - Backlog Status"/>
+  <apex:composition template="AdminTemplate">
+    <apex:define name="includes">
+      <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'css/admin_console/backlog_status.css')}" />
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/js_alm_common.js')}" ></script>
+      <script src="{!$Resource.js_hogan}"></script>
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/templates.js')}" ></script>
+      <script src="{!$Resource.js_jquery_blockui}" ></script>
+      <script src="{!URLFOR($Resource.zip_alm_pm, 'js/admin_console/backlog_status.js')}" ></script>
+    </apex:define>
+    <apex:define name="content">
+      <apex:outputPanel layout="none" rendered="{!hasPermissions}">
+        <div id="backlog-status-config" class="two-col-layout">
+          <div class="col1">
+            <div class="primary-column">
+              <div class="title">Backlog Item Statuses</div>
+              <div id="active-statuses-content" class="primary-column-content">
+                <apex:repeat var="status" value="{!activeStatuses}">
+                  <div class="item-tile">
+                    <div class="handle"></div>
+                    <span title="{!status}">{!status}</span>
+                    <img class="remove" src="/s.gif" title="Remove inactive status" />
+                  </div>
+                </apex:repeat>
+              </div>
+            </div>
+          </div>
+          <div class="col2">
+            <div id="inactive-statuses" class="secondary-column">
+              <div class="title clearfix">Inactive Statuses</div>
+              <div id="inactive-statuses-content" class="secondary-column-content clearfix">
+                <apex:repeat var="status" value="{!inactiveStatuses}">
+                  <div class="item-tile">
+                    <div class="handle"></div>
+                    <span title="{!status}">{!status}</span>
+                    <img class="remove" src="/s.gif" title="Remove inactive status" />
+                  </div>
+                </apex:repeat>
+              </div>
+            </div>
+            <div id="action-panel">
+              <button type="button" class="important-btn alm-btn save-btn" >Save</button>
+            </div>
+          </div>
+        </div><!-- backlog-status-config -->
+      </apex:outputPanel>
+    </apex:define>
+  </apex:composition>
+  <script>
+   function saveInactiveStatuses( inactiveStatuses, callback ) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AdminBacklogStatusController.saveInactiveStatuses}',
+            inactiveStatuses,
+            callback,
+            {escape: true}
+        );
+    }
+  </script>
+</apex:page>

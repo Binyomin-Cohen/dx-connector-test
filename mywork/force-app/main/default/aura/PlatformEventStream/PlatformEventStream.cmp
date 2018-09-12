@@ -1,0 +1,29 @@
+<aura:component controller="PlatformEventController">
+
+  <aura:attribute name="sessionId" type="String" default=""/>
+  <aura:attribute name="cometdInited" type="Boolean" default="false"/>
+  <aura:attribute name="cometd" type="Object" />
+  <aura:attribute name="cometdSubscriptions" type="Object[]" default=""/>
+  <aura:attribute name="initialSubscriptionEventTypes" type="String[]" default="[]" />
+
+  <aura:attribute name="namespace" type="String" />
+  <aura:attribute name="handleNamespacing" type="Boolean" default="false"
+                  description="Makes namespace invisible. Implementors do not need to namespace qualify
+                               platform event object on setup, or on field names on the emitted PlatformEventStreamUpdate."/>
+
+  <aura:registerEvent name="PlatformEventStreamUpdate" type="c:PlatformEventStreamUpdate" />
+
+  <aura:method name="addEventSubscription" action="{!c.addEventSubscription}" >
+    <aura:attribute name="eventName" type="String" />
+  </aura:method>
+
+  <ltng:require
+    scripts="{!join(',',
+      $Resource.zip_alm_pm + '/js/api_builder.js',
+      $Resource.zip_alm_pm + '/js/common/lightning-common.js',
+      $Resource.zip_alm_pm + '/external/cometd/cometd.js'
+    )}"
+    afterScriptsLoaded="{!c.init}"
+  />
+
+</aura:component>

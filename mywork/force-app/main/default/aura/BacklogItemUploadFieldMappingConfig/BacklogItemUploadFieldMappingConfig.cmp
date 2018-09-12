@@ -1,0 +1,97 @@
+<aura:component controller="BacklogItemUploadController">
+  <aura:attribute name="config" description="The model for the field mapping data"
+                  type="BacklogItemUploadFieldMappingConfig" required="true"/>
+  <aura:attribute name="radioButtonsSelectedValue" type="String" default="Create new values" />
+  <aura:attribute name="uploadedColumns" type="String[]" />
+  <aura:attribute name="uploadedColumnComboboxOptions" type="Map[]" access="private"/>
+  <aura:attribute name="allSalesforceFields" type="String[]" />
+  <aura:attribute name="lookupFieldApiNames" type="String[]" />
+  <aura:attribute name="unmappedSalesforceFields" type="String[]" />
+  <aura:attribute name="unmappedSalesforceFieldsComboboxOptions" type="Map[]" access="private"/>
+  <aura:attribute name="dataRows" type="List" />
+
+  <aura:attribute name="uniqueIdentifier" type="String" required="true" />
+  <aura:handler name="comboboxChangeEvent" event="c:comboboxChangeEvent" action="{!c.comboBoxChangeEventHandler}" />
+  <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+  <aura:handler name="change" value="{!v.radioButtonsSelectedValue}" action="{!c.handleRadioButtonsValueChange}"/>
+
+  <aura:handler name="change" value="{!v.unmappedSalesforceFields}" action="{!c.updateUnmappedSalesforceFieldsComboboxOptions}"/>
+  <aura:handler name="change" value="{!v.uploadedColumns}" action="{!c.updateUploadedColumnComboboxOptions}"/>
+
+  <tr>
+    <td class="notification-icon notification-column">
+      <aura:if isTrue="{!and(!v.config.isMapped, !v.config.isRequired)}">
+        <img class="warning-icon-white" src="/s.gif" title="Not mapped" />
+      </aura:if>
+    </td>
+    <td class="field-column">
+      <aura:if isTrue="{!v.config.isRequired}">
+        <c:combobox inputId="{!'uploadedColumnInputValue' + v.uniqueIdentifier}"
+          comboboxId="{!'uploadedColumn' + v.uniqueIdentifier}"
+          selectedValue="{!v.config.columnName}"
+          selectedLabel="{!v.config.columnName}"
+          isRequired="{!v.config.isRequired}"
+          options="{!v.uploadedColumnComboboxOptions}" />
+        <aura:set attribute="else">
+            {!v.config.columnName}
+        </aura:set>
+      </aura:if>
+    </td>
+    <td class="notification-column"></td>
+    <td class="field-column">
+      <aura:if isTrue="{!v.config.isRequired}">
+        <span class="is-required">
+            {!v.config.salesforceFieldName}
+        </span>
+        <aura:set attribute="else">
+          <c:combobox inputId="{!'salesforceFieldColumnInputValue' + v.uniqueIdentifier}"
+            comboboxId="{!'salesforceFieldColumn' + v.uniqueIdentifier}"
+            isRequired="{!v.config.isRequired}"
+            selectedValue="{!v.config.salesforceFieldName}"
+            selectedLabel="{!v.config.salesforceFieldName}"
+            options="{!v.unmappedSalesforceFieldsComboboxOptions}" />
+        </aura:set>
+      </aura:if>
+    </td>
+    <td class="sample-column sample-data-cell ">
+      <div class="sample-data overflow-ellipses">
+        {!v.config.sampleUploadedData}
+      </div>
+    </td>
+    <td class="lookup-results" aura:id="lookup-results">
+      <div class="slds-spinner slds-spinner--brand slds-spinner--small" aria-hidden="false">
+        <div class="slds-spinner__dot-a"></div>
+        <div class="slds-spinner__dot-b"></div>
+      </div>
+      <aura:if isTrue="{!and(v.config.isLookup, v.config.isMapped)}">
+        <div class="{!empty(v.config.lookupDetail.newRelatedRecords) ? 'lookup-summary success' : 'lookup-summary warning'}">
+          <aura:if isTrue="{!and(v.config.lookupDetail.hasLookupError, !empty(v.config.lookupDetail.newRelatedRecords))}">
+            <img class="error-icon-medium" src="/s.gif"></img>
+            <aura:set attribute="else">
+              <lightning:icon iconName="utility:check" size="medium" />
+            </aura:set>
+          </aura:if>
+          <div class="lookup-result-options">
+            <div>
+              <c:BacklogItemUploadLookupResultsModal rows="{!v.config.lookupDetail.newRelatedRecords}" sfObject="{!v.config.lookupDetail.lookupTargetObjectName}" isError="{!v.config.lookupDetail.hasLookupError}" />
+              <aura:if isTrue="{!and(v.config.lookupDetail.hasLookupError, !empty(v.config.lookupDetail.newRelatedRecords))}">
+                <span class="error-msg"><a href="javascript:void(0);" onclick="{!c.initModal}" >{!v.config.lookupDetail.newRelatedRecords.length}&nbsp;{!v.config.lookupDetail.lookupTargetObjectName}</a> values do not exist in your target org and can not be created for this unsupported object</span>
+                <img class="info-icon" src="/s.gif" title="Record Type and User objects are not supported. To resolve... 1) Fix the values in the source file if they are incorrect 2) Create the record yourself if they are correct."></img>
+                <aura:set attribute="else">
+                  <span class="success-msg">All lookup values map to existing {!v.config.lookupDetail.lookupTargetObjectName} records</span>
+                  <span class="warning-msg"><a href="javascript:void(0);" onclick="{!c.initModal}" >{!v.config.lookupDetail.newRelatedRecords.length}&nbsp;{!v.config.lookupDetail.lookupTargetObjectName}</a> values do not exist in your target org</span>
+                </aura:set>
+              </aura:if>
+            </div>
+            <aura:if isTrue="{!not(v.config.lookupDetail.hasLookupError)}">
+              <div class="warning-options">
+                <c:radioButtons prompt="Do you want to: " radioButtonsSelectedValue="{!v.radioButtonsSelectedValue}"
+                                options="['Create new values', 'Ignore values']"/>
+              </div>
+            </aura:if>
+          </div>
+        </div>
+      </aura:if>
+    </td>
+  </tr>
+</aura:component>

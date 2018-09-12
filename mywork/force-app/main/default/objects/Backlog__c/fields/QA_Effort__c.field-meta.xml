@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QA_Effort__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>This is used to measure the QA effort needed to test the solution to implement the user story or to resolve the defect.</inlineHelpText>
+    <label>QA Effort</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

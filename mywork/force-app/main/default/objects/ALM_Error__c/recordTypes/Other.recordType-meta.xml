@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Other</fullName>
+    <active>true</active>
+    <label>Other</label>
+    <picklistValues>
+        <picklist>Error_Cause__c</picklist>
+        <values>
+            <fullName>Component Name Changed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Component Not Found</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Missing Related Component</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unsupported Component Type</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resolved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unassigned</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tool__c</picklist>
+        <values>
+            <fullName>Assembler</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Warning</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

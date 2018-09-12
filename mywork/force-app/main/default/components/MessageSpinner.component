@@ -1,0 +1,14 @@
+<apex:component layout="none">
+  <apex:attribute name="message" description="The action message to display" type="String" />
+  <apex:attribute name="size" description="The size of the spinner, corresponding to an SLDS spinner size." type="String" default="medium" />
+
+  <div class="message-spinner-container">
+    <span class="message-spinner-text">{!message}</span>
+    <div class="slds slds-scope slds-spinner_container">
+      <div class="slds-spinner--brand slds-spinner slds-spinner--{!size}" aria-hidden="false" role="alert">
+        <div class="slds-spinner__dot-a"></div>
+        <div class="slds-spinner__dot-b"></div>
+      </div>
+    </div>
+  </div>
+</apex:component>

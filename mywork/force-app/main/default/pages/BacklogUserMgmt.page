@@ -1,0 +1,96 @@
+<apex:page standardController="Backlog__c" extensions="BacklogUserMgmtContExt" docType="html-5.0" sidebar="false" showHeader="false">
+  <c:Tracking title="Backlog Detail" appName="PM - Backlog User Management"/>
+  <link rel="stylesheet" href="{!URLFOR($Resource.zip_alm_pm, 'external/css/jquery-ui.css')}" />
+  <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.zip_alm_pm, 'css/alm_common.css')}" />
+  <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.zip_alm_pm, 'css_backlog_user_mgmt.css')}" />
+  <script src="{!$Resource.js_hogan}"></script>
+  <script src="{!URLFOR($Resource.zip_alm_pm, 'js/templates.js')}" ></script>
+  <c:RequireJS initScript="backlog_user_mgmt/backlog_user_mgmt_main.js" />
+  <script type="text/javascript">
+    function getUsers(callback) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.BacklogUserMgmtContExt.getALMUsers}',
+            callback,
+            {escape: true}
+        );
+    }
+
+    function getRoles(callback) {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.BacklogUserMgmtContExt.getUserRoles}',
+            callback,
+            {escape: true}
+        );
+    }
+  </script>
+
+
+  <div id="alm-container">
+    <div id="alm-detail">
+      <apex:form id="form" >
+          <apex:actionFunction name="addUser" action="{!addUser}" rerender="msgs,user-panel" oncomplete="BW.userMgmt.finishModifyUsers()">
+            <apex:param name="almUserIdToAdd" value="" assignTo="{!selectedAlmUserId}"/>
+          </apex:actionFunction>
+          <apex:actionFunction name="deleteUser" action="{!deleteUser}" rerender="msgs,user-panel" oncomplete="BW.userMgmt.finishModifyUsers()">
+            <apex:param name="selectedAlmUserId" value="" assignTo="{!selectedAlmUserId}"/>
+          </apex:actionFunction>
+          <apex:actionFunction name="save" action="{!save}" rerender="msgs, user-panel" oncomplete="BW.userMgmt.finishSave()"/>
+          <apex:actionFunction name="loadBacklogUsers" action="{!loadBacklogUsers}" rerender="user-panel" oncomplete="BW.userMgmt.finishLoad()"/>
+
+          <div class="pbSubheader brandTertiaryBgr tertiaryPalette">
+              <h3>Assigned Users</h3>
+          </div>
+          <div id="detail-body" class="pbSubsection">
+            <apex:outputpanel id="msgs" >
+              <apex:pageMessages escape="false" />
+            </apex:outputpanel>
+            <apex:outputPanel rendered="{! permissionLevel > 1 }">
+              <span id="control-panel">
+                <input type="hidden" id="initial-user-count" />
+              
+                <span id="edit-panel">
+                  <div id="edit-btn-container">
+                      <button type="button" class="really-important-btn alm-btn edit-btn" >Edit Assignments</button>
+                  </div>
+                  <div id="edit-input-container">
+                    <span>Find Users to Add Below</span>
+                    <input type="text" id="search-input" class="user-search"  placeholder="Add Users" />
+                  </div>
+                </span>
+                <span id="action-panel">
+                  <apex:outputPanel layout="none">
+                    <a href="#" id="cancel-assigned-users" value="Cancel">Cancel</a>
+                    <button type="button" class="important-btn save-btn alm-btn" >Save Assignments</button>
+                  </apex:outputPanel>
+                </span>
+              </span>
+            </apex:outputPanel>
+            <apex:outputPanel layout="block" id="user-panel" styleClass="user-panel clearfix">
+              <apex:repeat value="{!backlogUsers}" var="user">
+                <div class="user-tile clearfix" data-userid="{!user.almUserId}">
+                  <img src="/s.gif" class="delete-icon"></img>
+                  <div class="user-section" >
+                    <img src="{!user.photoURL}" />
+                    <a target="_blank" href="/{!user.almUserId}">{!user.name}</a>
+                  </div>
+                  <div class="role-section">
+                    <input type="text" class="user-search-roles" placeholder="Assign Role" value="{!user.roleName}"/>
+                    <a class="assign-role">
+                        <img class="edit-icon" src="/s.gif"></img>
+                        <span class="role-label {!IF(AND(hasErrors,user.role == ''), 'error', '')}">{!user.roleDisplay}</span>
+                        <apex:inputHidden id="role-val" value="{!user.role}" />
+                        <apex:inputHidden id="role-label" value="{!user.roleDisplay}" />
+                    </a>
+
+                    <a class="clear-invalid-role-icon">
+                      <img  src="/s.gif"></img>
+                    </a>
+                  </div>
+                </div>
+              </apex:repeat>
+            </apex:outputPanel>
+          </div>
+      </apex:form>
+    </div>
+  </div>
+</apex:page>

@@ -1,0 +1,189 @@
+#active-columns .draggable-column,
+#active-columns .static-column {
+  display: inline-block;
+  background-color: #f7f7f7;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  height: 100%;
+  width: 178px;
+  margin-right: 10px;
+  vertical-align: top;
+}
+
+#active-columns .draggable-column.complete-column {
+  border-color: #7ca2b9;
+}
+
+#active-columns .default-drag-helper {
+  width: 126px;
+}
+
+.default-drag-helper span {
+  width: 126px;
+  height: 65px;
+}
+
+#sprint-complete-help {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  height: 65px;
+  width: 126px;
+  text-align: center;
+}
+#sprint-complete-help {
+  padding: 0 25px;
+  color: #A6A6A6;
+}
+
+#active-columns .draggable-column {
+  cursor: move;
+}
+
+#active-columns .static-column {
+  cursor:auto;
+}
+#active-columns .static-column .handle {
+  display: none;
+}
+
+#active-columns .draggable-column .item-tile,
+#active-columns .static-column .item-tile {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+#active-columns .static-column .item-tile {
+  background: none;
+  background-color: #f1f1f1;
+  width: 158px;
+  font-weight: normal;
+  cursor: auto;
+}
+
+#active-columns .complete-column {
+  font-size: 14px;
+  white-space: normal;
+  position: relative;
+}
+#active-columns .complete-column .item-tile {
+    background: none;
+    background-color: #7ca2b9;
+    color: #fff;
+}
+
+#active-columns .item-tile {
+  margin-right: 13px;
+  padding-left: 10px;
+  width: 158px;
+}
+
+#active-columns .default .item-tile .remove {
+  display: none;
+}
+
+#active-columns .remove {
+  background: url("../../img/png_alm_sprite1.png") no-repeat top left;
+  display: inline;
+  opacity: .5;
+  background-position: -84px -1838px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: auto;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+}
+
+#active-columns .item-tile .remove:hover {
+  opacity: 1;
+  cursor:pointer;
+  -webkit-transition: all linear .25s;
+  transition: all linear .25s;
+}
+
+#active-columns .complete-column .remove {
+   background-position: -309px -412px;
+}
+
+#active-columns-content {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  cursor: auto;
+}
+
+#alm-container .drop-placeholder {
+  border: 2px dashed #0b6196;
+  background-color: #f7f7f7;
+  width: 176px;
+  height:100%;
+  display:inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+#main-content {
+  padding-right: 20px;
+}
+
+.secondary-column {
+  background-color: #FFF;
+}
+
+#reset-columns {
+  margin-top: 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.help-table {
+  display: table;
+}
+
+.help-table > div{
+  display: table-row;
+}
+
+.help-table span {
+  display: table-cell;
+  padding: 5px 10px;
+  white-space: normal;
+  width: 175px;
+}
+
+.help-table img.help-1 {
+  background: url("../../img/ALMadm_colDragInfo_left.png") no-repeat top left;
+  height: 127px;
+  width: 175px;
+}
+
+.help-table img.help-2 {
+  background: url("../../img/ALMadm_colDragInfo_right.png") no-repeat top left;
+  height: 127px;
+  width: 175px;
+}
+
+.ui-tooltip {
+    padding: 8px;
+    position: absolute;
+    z-index: 9999;
+    -webkit-box-shadow: 0 0 5px #aaa;
+    box-shadow: 0 0 5px #aaa;
+    background-color: #FFF;
+}
+body .ui-tooltip {
+    border-width: 2px;
+}
+
+#backlog-columns-config .save-btn {
+  float: right;
+  position: relative;
+  top: 20px;
+  right: 0px;
+}

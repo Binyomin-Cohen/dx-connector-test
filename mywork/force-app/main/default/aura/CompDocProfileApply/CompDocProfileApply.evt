@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="indicates the profile permissions are ready to be applied">
+  <aura:attribute name="data" type="Object"/>
+</aura:event>

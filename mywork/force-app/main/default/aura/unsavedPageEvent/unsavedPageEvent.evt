@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="" >
+  <aura:attribute name="isPageUpdated" type="Boolean" default="false"/>
+</aura:event>

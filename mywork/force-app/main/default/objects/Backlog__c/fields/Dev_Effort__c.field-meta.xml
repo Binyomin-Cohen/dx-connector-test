@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dev_Effort__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>This is used to measure the development effort required to implement a story.  Represents a mix of technical complexity, work time, and even uncertainty bound to a story.  1 point represents a basic configuration change like creating a new field.</inlineHelpText>
+    <label>Dev Effort</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

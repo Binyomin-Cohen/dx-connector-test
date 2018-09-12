@@ -1,0 +1,66 @@
+<aura:component >
+  <ltng:require styles="{!join(',',
+        $Resource.zip_alm_pm + '/css/backlog_upload.css'
+      )}"
+      scripts="{!join(',',
+        $Resource.zip_alm_pm + '/external/jquery/jquery-3.2.1.js',
+        $Resource.zip_alm_pm + '/external/jquery.sticky-kit.js',
+        $Resource.zip_alm_pm + '/js/js_alm_common.js'
+       )}"
+      afterScriptsLoaded="{!c.init}"
+  />
+  <aura:attribute name="fadeTimeout" type="Integer" default="1000"/>
+  <aura:attribute name="stepComponentList"
+                  description="Holds the list of components, in order of the wizard"
+                  required="false"
+                  type="String[]"
+                  default="['BacklogItemUploadFileUpload',
+                            'BacklogItemUploadFieldMapping',
+                            'BacklogItemUploadPendingImport',
+                            'BacklogItemUploadCreateRecords']" />
+
+  <aura:attribute name="step"
+                  description="Current step in the upload process, zero-based index" type="Integer" required="false" default="-1"/>
+  <aura:attribute name="parsedUploadFile"
+                  description="Rows from the uploaded file" type="Map" required="false"/>
+  <aura:attribute name="enableNextButton"
+                  description="Boolean that when set will enable or disable the next button" type="Boolean" required="false" default="false"/>
+  <aura:attribute name="mappingConfigData" type="BacklogItemUploadMappingConfig"
+                  description="List of models for each field mapping." />
+  <aura:attribute name="namespace"
+                  description="Namespace of managed package" type="String" required="false"/>
+
+  <aura:handler name="change" value="{!v.step}" action="{!c.handleStepChange}"/>
+  <aura:handler name="change" value="{!v.enableNextButton}" action="{!c.toggleNextButton}"/>
+  
+
+  <c:pageLayout >
+    <aura:set attribute="header">
+        <c:BacklogItemUploadHeader aura:id="BacklogItemUploadHeader" title="Upload Items In Bulk"
+                               homeUrl="/apex/BacklogManagement "
+                               homeLinkTitle="Backlog"
+                               showCancelLink="true"
+                               showHelpLink="false"
+                               showSearchLink="false"
+                               step="{!v.step}"
+                               stepComponentList="{!v.stepComponentList}"
+                               enableNextButton="{!v.enableNextButton}"
+                               namespace="{!v.namespace}" />
+    </aura:set>
+    <div aura:id="BacklogItemUploadFileUpload" class="slds-transition-hide inactive-slide">
+      <c:BacklogItemUploadFileUpload step="{!v.step}" parsedUploadFile="{!v.parsedUploadFile}"/>
+    </div>
+    <div aura:id="BacklogItemUploadFieldMapping" class="slds-transition-hide inactive-slide">
+        <c:BacklogItemUploadFieldMapping step="{!v.step}" enableNextButton="{!v.enableNextButton}"
+          parsedUploadFile="{!v.parsedUploadFile}" mappingConfigData="{!v.mappingConfigData}"/>
+    </div>
+    <div aura:id="BacklogItemUploadPendingImport" class="slds-transition-hide inactive-slide">
+      <c:BacklogItemUploadPendingImport step="{!v.step}" enableNextButton="{!v.enableNextButton}"
+        parsedUploadFile="{!v.parsedUploadFile}" mappingConfigData="{!v.mappingConfigData}"/>
+    </div>
+    <div aura:id="BacklogItemUploadCreateRecords" class="slds-transition-hide inactive-slide">
+      <c:BacklogItemUploadCreateRecords step="{!v.step}" enableNextButton="{!v.enableNextButton}"
+        parsedUploadFile="{!v.parsedUploadFile}" mappingConfigData="{!v.mappingConfigData}"/>
+    </div>
+  </c:pageLayout>
+</aura:component>
